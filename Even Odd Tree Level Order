@@ -1,0 +1,52 @@
+
+from collections import deque
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
+        """
+        1069. Even Odd tree
+        this is implementation based problem with slight modification
+        in the level order traversal
+        there is extraa check if 
+        at even level
+            no should be odd
+            and previous no should be less than curr node
+        at odd level
+            no should be even
+            and previous no should be greater than curr node
+        tc = O(n)
+        sc = O(n) since no node will be enqueued twice so it will give us immediate upper bound of O(n)
+        worst case is if tree is degenerated linked list
+        """
+        if root is None:
+            return False
+        q = deque()
+        q.append(root)
+        evenLevel = True
+        while q:
+            levelSize = len(q)
+            #taking previous is trick here cant be recalled at place
+            prev = -math.inf if evenLevel else math.inf
+            for i in range(levelSize):
+                top = q.popleft()
+                if evenLevel and (top.val % 2 == 0 or top.val <= prev):
+                    return False
+                elif not evenLevel and (top.val % 2 != 0 or top.val >= prev):
+                    return False
+                #I was missing to update hence it failed that much time
+                prev = top.val
+                if top.left:
+                    q.append(top.left)
+                if top.right:
+                    q.append(top.right)
+            evenLevel = not evenLevel
+        return True
+                
+                    
+                    
+                

@@ -1,0 +1,28 @@
+ def allPathsSourceTarget(self, graph: List[List[int]]) -> List[List[int]]:
+        """
+        797. All paths from source to target
+        this is ideal backtracking prblem which can be solved using backtracking template
+        our base case if our source is equal to target then append the curr path
+        else
+        graze over nei of source
+        apppend nei to path and recure
+        then pop the nei again
+        tc = O(2 ^ n) as each node has two choices either it will be choosed or not choosed
+        sc = not sure
+        """
+        def backtrack(source,target,currPath,ansList,graph):
+            if source == target:
+                ansList.append(currPath[:])
+            else:
+                for nei in graph[source]:
+                    currPath.append(nei)
+                    backtrack(nei,target,currPath,ansList,graph)
+                    currPath.pop()
+
+        source = 0
+        target = len(graph) - 1
+        currPath = []
+        ansList = []
+        currPath.append(source)
+        backtrack(source,target,currPath,ansList,graph)
+        return ansList

@@ -1,0 +1,42 @@
+class Solution:
+    
+    #Function to find a Mother Vertex in the Graph.
+	def findMotherVertex(self, V, adj):
+		"""
+    https://www.linkedin.com/pulse/mother-vertex-graph-ankit-agarwal/
+		brute force is do dfs for every vertex and 
+		see if we have visited all the vertices
+		tc = O(V(V + E)
+		sc = O(h) = O(V) in worst case
+		
+		In dfs said to be finished if all recursive call from that 
+		vertices are completed
+		If mother vertex exists it will take max time among all nodes
+		so it will finish last in dfs
+		that is why we need to keep track of last finished vertex
+		
+		and again do dfs from that vertex and see if all nodes are visited or not
+		if yes then return it else return -1
+		tc = O(V + E)
+		sc = O(V)
+		"""
+		
+		def dfs(source,graph,visited):
+		    visited.add(source)
+		    for nei in graph[source]:
+		        if nei not in visited:
+		            dfs(nei,graph,visited)
+		
+		visited = set()
+		candidate = -1
+		for i in range(V):
+		    if i not in visited:
+		        dfs(i,adj,visited)
+		        candidate = i
+		        
+		visited = set()
+		dfs(candidate,adj,visited)
+		for i in range(V):
+		    if i not in visited:
+		        return -1
+		return candidate

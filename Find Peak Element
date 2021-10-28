@@ -1,0 +1,45 @@
+class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        """
+        Q No. 162
+        this problem can be solved using linear search but it will take O(n) time
+        we can solve this in logn time but we have to observe array carefully
+        
+            -inf    1 2 1 3 5 6 4   -inf
+            as per question
+            if mid == 3rd idx
+            
+            then at mid we have 4 possible cases
+            
+            
+                mid         => for eg 5 6 4 here mid is above both neighbours
+         mid - 1    mid + 1     so for every other case we should look for this 
+                                structure
+            
+                    mid + 1    for eg  3 4 5
+                mid         => In this case if we go towards left
+        mid - 1                 it doesnt makes sense as we wont get peak element
+                                so get peak we should move 
+                                start ahead of mid
+        
+        mid - 1             => for eg 6 5 4
+                mid             In this case we will get mid leftwards
+                    mid + 1     so move end to mid
+                
+        mid - 1     mid + 1     => 7 6 8
+                mid                In this case we will move towards left
+                                    end to mid
+        """
+        if len(nums) == 1:
+            return 0
+        st = 0
+        end = len(nums) - 1
+        while st < end:
+            mid = (st + end) // 2
+            #print(str(st)+str(end)+str(mid))
+            if nums[mid] < nums[mid + 1]:
+                st = mid + 1
+            else:
+                end = mid
+            #print(str(st)+str(end)+str(mid))
+        return st

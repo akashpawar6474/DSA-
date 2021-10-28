@@ -1,0 +1,42 @@
+class Solution:
+    def findPeakGrid(self, mat: List[List[int]]) -> List[int]:
+        """
+        Main thing in this problem is thought process
+        brute force is to do linear search which will take O(n * m) time
+        can we reduce this problem to finidng peak element in 1d array
+        yes
+        think of like we have max element in each column into 1d array 
+        then we can apply same observations 
+        if next element is greater then move ahead
+        else back wards
+        
+        here we will be doing bs in stcol and endcol
+        we will find the midCol
+        then we will graze over that col and find out the max value and idx in that col
+        then if consider a case
+        both row neighbours are small than curr cell so we found the solution
+        else
+        if next row neightbour is big then we can derive some observations
+            then candidate in next col is greater than every element in curr col so move ahead
+        else 
+            move back
+        tc = O(nlogm)
+        sc = constant
+        """
+        stcol,endcol = 0,len(mat[0]) - 1
+        while stcol <= endcol:
+            mid = (stcol + endcol) // 2
+            maxInRow = 0
+            for i in range(len(mat)):
+                if mat[maxInRow][mid] < mat[i][mid]:
+                    maxInRow = i
+            
+            isRightRowNeiBig = mid + 1 <= endcol and mat[maxInRow][mid] < mat[maxInRow][mid + 1]
+            isLeftRowNeiBig = mid - 1 >= stcol and mat[maxInRow][mid] < mat[maxInRow][mid - 1]
+            if not isLeftRowNeiBig and not isRightRowNeiBig:
+                return [maxInRow,mid]
+            if isRightRowNeiBig:
+                stcol = mid + 1
+            else:
+                endcol = mid - 1
+        return []

@@ -1,0 +1,29 @@
+class Solution:
+    def minDeletions(self, s: str) -> int:
+        """
+        this is greddy problem involves some thought process
+        Q.what is greedy here?
+        => we will precalculate freq of each char O(n) time
+           then we will have one set to store unique frequencies
+           graze over keys
+           if freq != 0  and present in set then reduce freq by 1
+           and increment no of deleteion by 1
+           at last add unique freq to the set
+           return noOfDeletions
+           tc = O(n)
+           sc = O(n)
+        """
+        ht = {}
+        for ch in s:
+            if ch not in ht:
+                ht[ch] = 0
+            ht[ch] += 1
+        
+        seenFrequencies = set()
+        noOfDeletions = 0
+        for ch,freq in ht.items():
+            while freq != 0 and freq in seenFrequencies:
+                freq -= 1
+                noOfDeletions += 1
+            seenFrequencies.add(freq)
+        return noOfDeletions

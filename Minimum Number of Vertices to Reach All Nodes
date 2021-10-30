@@ -1,0 +1,16 @@
+class Solution:
+    def findSmallestSetOfVertices(self, n: int, edges: List[List[int]]) -> List[int]:
+        """
+        so as question guarantees that there unique solution exisits 
+        then we have to find out no of nodes which have indegree as 0
+        those nodes can be visited only by itself
+        
+        """
+        indegrees = [0] * n
+        for u,v in edges:
+            indegrees[v] += 1
+        ans = []
+        for i in range(len(indegrees)):
+            if indegrees[i] == 0:
+                ans.append(i)
+        return ans

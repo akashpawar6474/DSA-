@@ -7,3 +7,4 @@ solutions to graze over
 5.  Find peak element in 2d array => full observation based and involved thought process
 6.  Min Deletions to make char freq unique => simple greedy problem invloves map for preprocessing then set for calculating unique frequencies and remaining manipulations
 7.  Minimum Number of Vertices to Reach All Nodes => DAG problem very simple involves IN/OUT degrees with including why? as we can only visit any vertex which has indegree 0 manually
+8.  Maximum Length of a Concatenated String with Unique Characters => backtraking solution where we consider all combinations

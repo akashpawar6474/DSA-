@@ -8,3 +8,4 @@ solutions to graze over
 6.  Min Deletions to make char freq unique => simple greedy problem invloves map for preprocessing then set for calculating unique frequencies and remaining manipulations
 7.  Minimum Number of Vertices to Reach All Nodes => DAG problem very simple involves IN/OUT degrees with including why? as we can only visit any vertex which has indegree 0 manually
 8.  Maximum Length of a Concatenated String with Unique Characters => backtraking solution where we consider all combinations
+9.  Find N Unique Integers Sum up to Zero => Math and observations based problem only task is to find how to fill the array

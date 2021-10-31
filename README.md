@@ -9,3 +9,4 @@ solutions to graze over
 7.  Minimum Number of Vertices to Reach All Nodes => DAG problem very simple involves IN/OUT degrees with including why? as we can only visit any vertex which has indegree 0 manually
 8.  Maximum Length of a Concatenated String with Unique Characters => backtraking solution where we consider all combinations
 9.  Find N Unique Integers Sum up to Zero => Math and observations based problem only task is to find how to fill the array
+10. Regions Cut By Slashes => simple problem when we deduce this the number of islands problem just trick is to upscale the grid 3 times so we can easily do a dfsORBfs

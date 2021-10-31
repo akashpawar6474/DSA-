@@ -1,0 +1,25 @@
+class Solution:
+    def maxLength(self, arr: List[str]) -> int:
+        """
+        by looking at the constraints we can conclude that
+        we have to try every combination
+        
+        idea is to have a set to identify the string is unique or not
+        base case is for every incoming string check if its length
+        and set length if not same then return 0
+        
+        else
+        calculate curr lengh of incoming string
+        then graze over array from curr idx to last one
+        and recur for them one by one
+        tc = O(2 ^ n)
+        """
+        def backtrack(arr,currPath,currIdx):
+            if len(currPath) != len(set(currPath)):
+                return 0
+            maxLen = len(currPath)
+            for i in range(currIdx,len(arr)):
+                maxLen = max(maxLen,backtrack(arr,currPath+arr[i],i + 1))
+            return maxLen
+    
+        return backtrack(arr,"",0)

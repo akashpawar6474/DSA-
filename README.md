@@ -12,3 +12,4 @@ solutions to graze over
 10. Regions Cut By Slashes => simple problem when we deduce this the number of islands problem just trick is to upscale the grid 3 times so we can easily do a dfsORBfs
 11. Jump Game => recursive approach is very simple but time and space consuming Iterative is very efficient but involves thought process and neat observations
 12. Jump Game 2 => same logic just extraa calculations to know min jumps
+13. Jump Game 3 => bfs problem moving level by level and see if any idx(node) satisfy the condition

@@ -1,0 +1,46 @@
+class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        """
+        other idea which is linear in time as follows
+        we will be taking last idx as lastpos initially
+        then we will graze from second last idx to first idx
+            in case if currIdx + val at currIdx is gteq destination(lastpos)
+                then we will update destination(last pos) to curr Idx
+        at last we will check if destination has reduced to 0 if yes then return true
+        else false
+        tc = O(n)
+        sc = constant
+        """
+        destination = len(nums) - 1
+        for currIdx in range(len(nums) - 2,-1,-1):
+            #means if we can reach destination from curr idx then reduce the destination to curr idx
+            if currIdx + nums[currIdx] >= destination:
+                destination = currIdx
+        if destination == 0:
+            return True
+        else:
+            return False
+        
+    def TopDownTLE(self,nums):
+        """
+        base case is if curr idx equal to last idx then return true
+        else
+        take a loop for 1 to max jumps from curr Idx
+            and recur if any value return true return true 
+            else false
+        """
+        def canJumpTopDown(nums,currIdx,ht):
+            if currIdx >= len(nums) - 1:
+                return True
+            elif nums[currIdx] == 0:
+                ht[currIdx] = False
+                return False
+            elif currIdx in ht:
+                return ht[currIdx]
+            else:
+                ht[currIdx] = False
+                for i in range(1,nums[currIdx] + 1):
+                    if currIdx + i < len(nums) and canJumpTopDown(nums,currIdx + i,ht):
+                        ht[currIdx] = True
+            return ht[currIdx]
+        return canJumpTopDown(nums,0,{})

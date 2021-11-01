@@ -10,3 +10,4 @@ solutions to graze over
 8.  Maximum Length of a Concatenated String with Unique Characters => backtraking solution where we consider all combinations
 9.  Find N Unique Integers Sum up to Zero => Math and observations based problem only task is to find how to fill the array
 10. Regions Cut By Slashes => simple problem when we deduce this the number of islands problem just trick is to upscale the grid 3 times so we can easily do a dfsORBfs
+11. Jump Game => recursive approach is very simple but time and space consuming Iterative is very efficient but involves thought process and neat observations

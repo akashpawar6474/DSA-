@@ -13,3 +13,5 @@ solutions to graze over
 11. Jump Game => recursive approach is very simple but time and space consuming Iterative is very efficient but involves thought process and neat observations
 12. Jump Game 2 => same logic just extraa calculations to know min jumps
 13. Jump Game 3 => bfs problem moving level by level and see if any idx(node) satisfy the condition
+14. meeting room => find if person can attend all meetings simple sorting and observation to see if no interval overlap each other
+15. meeting room2 => finding min rooms for arranging all the meeting brute force is O(n ^ 2) but using minHeap we can reduce it upto O(nlogn)

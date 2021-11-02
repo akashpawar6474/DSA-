@@ -1,0 +1,28 @@
+import math
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def goodNodes(self, root: TreeNode) -> int:
+        
+        def countNode(root,maxInPath):
+            """
+            idea is to pass max node in path to childern by doing preorder traversal
+            base case is if root is None return the 0
+            if curr node is greater than max node in path then inc the count
+            and pass curr node 
+            """
+            if root is None:
+                return 0
+            count = 0
+            isCurrNodeMax = False
+            if root.val >= maxInPath:
+                isCurrNodeMax = True
+                count += 1
+            count += countNode(root.left,root.val) if isCurrNodeMax else countNode(root.left,maxInPath)
+            count += countNode(root.right,root.val) if isCurrNodeMax else countNode(root.right,maxInPath)
+            return count
+        return countNode(root,-math.inf)

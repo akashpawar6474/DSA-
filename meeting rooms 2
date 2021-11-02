@@ -1,0 +1,33 @@
+Meeting rooms 2 Too important
+Given an 2D integer array A of size N x 2 denoting time intervals of different meetings.
+Where:
+A[i][0] = start time of the ith meeting.
+A[i][1] = end time of the ith meeting.
+Find the minimum number of conference rooms required so that all meetings can be done.
+
+---------------------------------------------------------------------------
+Idea is sort the array first by starting time
+then have one rooms array which will indicate no of rooms allocated
+initially we will store first meeting endtime into rooms array means one room is allocated then we will graze over range of 1 to last idx of intervals
+for each idx graze over rooms array and see if any meeting end time is less than start time of curr meeting if yes then update the value else append new room for curr meeting 
+which will take O(n ^ 2) time 
+extraa n time to find room with smallest ending time in rooms array
+we can use minHeap here which will give room with smallest ending time in constant time
+using min Heap tc = O(nlogn)
+sc = O(n)
+---------------------------------------------------------------------
+import heapq
+class Solution:
+    # @param A : list of list of integers
+    # @return an integer
+    def solve(self, A):
+        start = 0
+        end = 1
+        A.sort(key = lambda x : x[start])
+        rooms = []
+        heapq.heappush(rooms,A[0][end])
+        for i in range(1,len(A)):
+            if A[i][start] >= rooms[0]:
+                heapq.heappop(rooms)
+            heapq.heappush(rooms,A[i][end])
+        return len(rooms)

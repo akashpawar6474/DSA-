@@ -1,0 +1,23 @@
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        """
+        brute force to do a linear search
+        rather than this we can do some observations
+        like if mid > right:
+            then we can say that we are in first half of rotated sorted array
+            so move rightwards
+        else:
+            then move leftwards
+        <= and mid +/- logic fails for this one [3,1,2] so use < and mid + 1 and only mid
+        tc = O(logn)
+        sc = constant
+        """
+        left = 0
+        right = len(nums) - 1
+        while left < right:
+            mid = (left + right) // 2
+            if nums[mid] > nums[right]:
+                left = mid + 1
+            else:
+                right = mid
+        return nums[left]

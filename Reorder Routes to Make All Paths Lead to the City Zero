@@ -1,0 +1,44 @@
+class Solution:
+    def minReorder(self, n: int, connections: List[List[int]]) -> int:
+        """
+        implementation is very simple once we understand the concept 
+        this is just simple dfs problem
+        
+        base case is for 0th node we need to discard all outgoing edges
+        and inc the count 
+        then we will do dfs for all other adj nodes and repeat the same procedure
+        
+        while doing dfs 
+            visit the node
+                then visit its adj nodes with outgoing edges and inc the count
+                then visit its adj nodes with incoming edges and dont inc the count as we dont have to reverse incoming edges
+        we will have two adj list representations
+        like outgoingList will contain node and its adj nodes with edge going from curr node to adj nodes
+        vice versa for incomingList
+        """
+        def dfs(source):
+            visited.add(source)
+            
+            for nei in outGoingList[source]:
+                if nei in visited:
+                    continue
+                self.edgesToBeReversed += 1
+                dfs(nei)
+                
+            for nei in inComingList[source]:
+                if nei in visited:
+                    continue
+                dfs(nei)
+        
+        outGoingList = [[] for x in range(n)]
+        inComingList = [[] for x in range(n)]
+        visited = set()
+        self.edgesToBeReversed = 0
+        
+        for x,y in connections:
+            outGoingList[x].append(y)
+            inComingList[y].append(x)
+            
+        dfs(0)
+        
+        return self.edgesToBeReversed

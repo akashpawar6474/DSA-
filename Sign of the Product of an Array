@@ -1,0 +1,17 @@
+class Solution:
+    def arraySign(self, nums: List[int]) -> int:
+        """
+        to avoid overflow of some languages we can do like this
+        idea is very simple we have to calculate no of -ve no
+        if it is odd then return - 1else 1
+        edge case if any ele is 0 then return 0
+        tc = O(n)
+        sc= constant
+        """
+        negatives = 0
+        for i in range(len(nums)):
+            if nums[i] == 0:
+                return 0
+            elif nums[i] < 0:
+                negatives += 1
+        return 1 if negatives & 1 == 0 else -1

@@ -17,3 +17,4 @@ solutions to graze over
 15. meeting room2 => finding min rooms for arranging all the meeting brute force is O(n ^ 2) but using minHeap we can reduce it upto O(nlogn)
 16. Count Good Nodes in Binary Tree => preorder passing value from parent to childern
 17. Sign of the Product of an Array => idea is to avoid overflow and without doing prod determine sign based on no of -ve integers
+18. Find Minimum in Rotated Sorted Array => similar to finding peak element little bit observations based using < in BS

@@ -1,0 +1,46 @@
+class Solution:
+    def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
+        """
+        whatever i understood will apply here for union find
+        first i will take parent array of nodes which will store -1
+        here we will take array length of 1001 as no of vertices is not given
+        so take limit in the constraint
+        
+        then we will design union and find fun
+        then we will graze over the edges
+            we will find abs root of both nodes in edge
+                if same then track that as answer dont do union
+                else
+                    do union
+        at last return tracked answer
+        
+        using Disjoint sets we cant find cycle in directed graph
+        this is simple union and find algorithm no rank and path compression is involved
+        this is just slight modification of cycle detection using simple union and find
+        tc = O(E * V)
+        sc = O(V)
+        see video of techdose for clear cut understanding
+        """
+        def find(node,parent):
+            if parent[node] == -1:
+                return node
+            return find(parent[node],parent)
+        
+        def union(x,y,parent):
+            absRootOfX = find(x,parent)
+            absRootOfY = find(y,parent)
+            if absRootOfX == absRootOfY:
+                return True
+            parent[absRootOfX] = absRootOfY
+            return False
+        
+        parent = [-1] * 1001
+        ans = [-1] * 2
+        for x,y in edges:
+            if find(x,parent) == find(y,parent):
+                ans[0] = x
+                ans[1] = y
+            else:
+                union(x,y,parent)
+        return ans
+            

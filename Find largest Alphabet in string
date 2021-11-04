@@ -1,0 +1,39 @@
+"""
+question is finding largest alphabet in string which has upper and lower case both
+if not then return -1
+
+s = "AbcFAC"
+ans = C
+
+s = "acbDEF"
+ans = -1
+
+idea is to use extraa space and graze over array 
+if ch is uppercase then find value with ord('A')
+else with ord('a')
+"""
+
+def largestInString(s):
+	ht = {}
+	for ch in s:
+		if ch.isupper():
+			if ord(ch) - ord('A') not in ht:
+				ht[ord(ch) - ord('A')] = 0
+			ht[ord(ch) - ord('A')] += 1
+		else:
+			if ord(ch) - ord('a') not in ht:
+				ht[ord(ch) - ord('a')] = 0
+			ht[ord(ch) - ord('a')] += 1
+	maxVal = -1
+	print(ht)
+	for key in ht.keys():
+		if ht[key] == 2:
+			maxVal = max(maxVal,key)
+	return chr(maxVal + ord('A'))
+
+print(largestInString("abcrTCA"))
+print(largestInString("abcrTWA"))
+print(largestInString("abcrTWU"))
+
+			
+			

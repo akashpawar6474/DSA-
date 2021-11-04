@@ -18,4 +18,5 @@ solutions to graze over
 16. Count Good Nodes in Binary Tree => preorder passing value from parent to childern
 17. Sign of the Product of an Array => idea is to avoid overflow and without doing prod determine sign based on no of -ve integers
 18. Find Minimum in Rotated Sorted Array => similar to finding peak element little bit observations based using < in BS
-19.  Reorder Routes to Make All Paths Lead to the City Zero => Idea is to create Adj list for both in/out degrees then do dfs and count all the edges whom are in out degree
+19.  Reorder Routes to Make All Paths Lead to the City Zero => Idea is to create Adj list for both in/out degrees then do dfs and count all the edges whom are in out degree.
+20.  Find largest Alphabet in string => simple problem can be solved using hashtable

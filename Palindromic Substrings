@@ -1,0 +1,47 @@
+class Solution:
+    def countSubstrings(self, s: str) -> int:
+        """
+        we know that we have n ^ 2 substring of string with length n
+        and checking if substring is palindrome is O(n) solution
+        so in total tc O(n ^ 3)
+        
+        Here is new concept called as even and odd palindrome
+        for eg s = aaab
+        
+        consider our left = right = 1
+        as we know both are inbound and char's are matching then expand the boundaries in both direction
+        left -- & right ++
+        
+        ** but here after expanding the boundary length becomes 3 which will further increases to 5 ,7
+        
+        Now Odd Palindrome
+        consider our left on 1 and right on 2
+        both char's are matching so expand the boundary
+        
+        ** but here after expanding the boundary length becomes 4 which will further increases to 6,8
+        
+        Hack is every time expanding we are sure that middle part is palindrome so we need to check boundaries only
+        
+        tc = O(n ^ 2)
+        sc = constant
+        """
+        def countPalindromes(s,left,right):
+            count = 0
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                count += 1
+                left -= 1
+                right += 1
+            return count
+            
+        res = 0
+        for i in range(len(s)):
+            #ODD PALINDROMES
+            left = right = i
+            res += countPalindromes(s,left,right)
+            
+            #EVEN PALINDROMES
+            left = i
+            right = i + 1
+            res += countPalindromes(s,left,right)
+        return res
+            

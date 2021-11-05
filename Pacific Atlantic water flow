@@ -1,0 +1,87 @@
+from collections import deque
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        """
+        below is bfs way to implement the same can be implemented using dfs also
+        with same logic
+        while grazing over boundaries we will do dfs from it
+        then same procedure collect cells which is flooded by the both oceans at last
+        n = no of rows
+        m = no of cols
+        tc = O(n * m)
+        sc = O(max(n,m))
+        """
+        def dfs(heights,x,y,visited):
+            if (x,y) in visited:
+                return
+            visited.add((x,y))
+            for newx,newy in [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]:
+                if 0 <= newx < len(heights) and 0 <= newy < len(heights[0]) and (newx,newy) not in visited and heights[x][y] <= heights[newx][newy]:
+                    dfs(heights,newx,newy,visited)
+            
+        pacVisited = set()
+        atlanVisited = set()
+        rows = len(heights) - 1
+        cols = len(heights[0]) - 1
+        
+        for i in range(rows + 1):
+            dfs(heights,i,0,pacVisited)
+            dfs(heights,i,cols,atlanVisited)
+        
+        for i in range(cols + 1):
+            dfs(heights,0,i,pacVisited)
+            dfs(heights,rows,i,atlanVisited)
+            
+        res = []
+        for i in range(rows + 1):
+            for j in range(cols + 1):
+                if (i,j) in pacVisited and (i,j) in atlanVisited:
+                    res.append((i,j))
+        return res
+        
+    def bfs(self,heights):
+        """
+        brute force is just graze over the matrix and do dfs from each cell 
+        it is like going from cell to ocean
+        think it in reverse way like flood from the ocean
+        we will do bfs from boundaries and at last we will see what all cells are visited from both the floods
+        we can do bfs also 
+        we will have seperate queue and visited array for both oceans
+        initially we will push specific boundaries to the specific queues
+        means top and left boundary to pacific queue and visited array
+        and bottom and right boundary to atlantic queue and visited array
+        """
+        def bfs(heights,queue,visited):
+            while queue:
+                x,y = queue.popleft()
+                #print(str(x)+" "+str(y))
+                for newx,newy in [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]:
+                    if 0 <= newx < len(heights) and 0 <= newy < len(heights[0]) and (newx,newy) not in visited and heights[x][y] <= heights[newx][newy]:
+                        queue.append((newx,newy))
+                        visited.add((newx,newy))
+        
+        pacific = deque()
+        atlantic = deque()
+        pacVisited = set()
+        atlanVisited = set()
+        
+        for i in range(len(heights)):
+            pacific.append((i,0))
+            atlantic.append((i,len(heights[0]) - 1))
+            pacVisited.add((i,0))
+            atlanVisited.add((i,len(heights[0]) - 1))
+            
+        for i in range(len(heights[0])):
+            pacific.append((0,i))
+            atlantic.append((len(heights) - 1,i))
+            pacVisited.add((0,i))
+            atlanVisited.add((len(heights) - 1,i))
+                    
+        bfs(heights,pacific,pacVisited)
+        bfs(heights,atlantic,atlanVisited)
+        res = []
+        for i in range(len(heights)):
+            for j in range(len(heights[0])):
+                if (i,j) in pacVisited and (i,j) in atlanVisited:
+                    res.append((i,j))
+        return res

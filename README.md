@@ -22,3 +22,4 @@ solutions to graze over
 20.  Find largest Alphabet in string => simple problem can be solved using hashtable
 21.  Redundant Connection => finding the edge which is causing cycle in undirected graph UNION AND FIND really good question
 22.  Pacific Atlantic water flow => simple graph bfs dfs problem with traversing from boundary of matrix flood fill algo from ocean reverse thinking involved with some neat observations.
+23. Palindromic Substrings => even and odd palindrome easy one 

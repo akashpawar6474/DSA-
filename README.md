@@ -24,3 +24,4 @@ solutions to graze over
 22.  Pacific Atlantic water flow => simple graph bfs dfs problem with traversing from boundary of matrix flood fill algo from ocean reverse thinking involved with some neat observations.
 23. Palindromic Substrings => counting no of palindrome substrings New Concept even and odd palindrome easy one 
 24. Longest Palindromic subsequece => same logic as LPSubstrig just diff is we dont look for remaing length when st and end ch matches 
+25. Number of Operations to Make network connected => use fact that in connected graph of n nodes there is n - 1 edges and simple dfs

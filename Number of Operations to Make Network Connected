@@ -1,0 +1,32 @@
+class Solution:
+    def makeConnected(self, n: int, connections: List[List[int]]) -> int:
+        """
+        In graph of n nodes if it is strongly connected
+        then that graph has minimum n - 1 edges
+        
+        based on this we can say that if edges are less than n - 1 nodes
+        then return -1 there itself
+        
+        another thing we have to find no of isolated components
+        idea is to do a simple dfs and calculate no of connected comp
+        then reduce 1 from them
+        """
+        def dfs(source,graph,visited):
+            visited.add(source)
+            for nei in graph[source]:
+                if nei not in visited:
+                    dfs(nei,graph,visited)
+        
+        if len(connections) < n - 1:
+            return -1
+        graph = [[] for x in range(n)]
+        for i,j in connections:
+            graph[i].append(j)
+            graph[j].append(i)
+        connectedNetworks = 0
+        visited = set()
+        for i in range(n):
+            if i not in visited:
+                dfs(i,graph,visited)
+                connectedNetworks += 1
+        return connectedNetworks - 1

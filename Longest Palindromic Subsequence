@@ -1,0 +1,56 @@
+class Solution:
+    def longestPalindromeSubseq(self, s: str) -> int:
+        """
+        bottom up approach is very simple
+        we can derive the formula from top down solution
+        if s[start] == s[end]:
+            dp[start][end] = 2 + dp[start + 1][end - 1]
+        else:
+            dp[start][end] = max(dp[start + 1][end],dp[start][end - 1])
+        
+        base case is if it is only one char means start and end is same then do it 1
+        tc = O(n ^ 2)
+        sc = O(n ^ 2)
+        """
+        n = len(s)
+        dp = [[0 for y in range(n)]for x in range(n)]
+        for i in range(n):
+            dp[i][i] = 1
+        
+        for st in range(n - 1,-1,-1):
+            for end in range(st + 1,n):
+                if s[st] == s[end]:
+                    dp[st][end] = 2 + dp[st + 1][end - 1]
+                else:
+                    dp[st][end] = max(dp[st + 1][end],dp[st][end - 1])
+        return dp[0][n - 1]
+    
+    def topDown(self,s):
+        """
+        this is very simple problem
+        can be solved using two ptr
+        base case if start > end then return 0
+        if start == end then return 1
+        
+        then do a lookup
+        if start and end is same
+            then inc start and dec end to recur then add 2 and return
+        else
+            inc st once and dec end once take once
+        tc = O(n ^ 2)
+        sc = O(n)
+        """
+        def topDown(start,end,s,ht):
+            if start > end:
+                return 0
+            if start == end:
+                return 1
+            if (start,end) in ht:
+                return ht[(start,end)]
+            if s[start] == s[end]:
+                ht[(start,end)] = 2 + topDown(start + 1,end - 1,s,ht)
+            else:
+                ht[(start,end)] = max(topDown(start + 1,end,s,ht),topDown(start,end - 1,s,ht))
+            return ht[(start,end)]
+        
+        return topDown(0,len(s) - 1,s,{})

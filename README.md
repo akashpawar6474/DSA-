@@ -25,3 +25,4 @@ solutions to graze over
 23. Palindromic Substrings => counting no of palindrome substrings New Concept even and odd palindrome easy one 
 24. Longest Palindromic subsequece => same logic as LPSubstrig just diff is we dont look for remaing length when st and end ch matches 
 25. Number of Operations to Make network connected => use fact that in connected graph of n nodes there is n - 1 edges and simple dfs
+26. count primes => brute => better => best Sieve of Eratosthenes

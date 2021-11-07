@@ -1,0 +1,74 @@
+import math
+class Solution:
+    def countPrimes(self, n: int) -> int:
+        """
+        there is concept called as sieve of eratoshtenes
+        it is ancient algorithm to find all prime no upto given limit
+        https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes
+        tc = O(n * log(logn))
+        """
+        if n < 3:
+            return 0
+        primes = [True for x in range(n)]
+        primes[0] = False
+        primes[1] = False
+        
+        for i in range(2,int(sqrt(n)) + 1):
+            if primes[i]:
+                for j in range(i * i,n,i):
+                    primes[j] = False
+        
+        count = 0
+        for i in range(len(primes)):
+            if primes[i]:
+                count += 1
+        return count
+    def better(self,n):
+        """
+        there can be optimization in this code of isPrime
+        for knowing if no is prime or not
+        consider a example
+        12 which has factors as follows 
+        1 * 12
+        2 * 6
+        3 * 4   since here which is less than sqrt(12) 
+                pairs start repeating themselves
+        4 * 3
+        6 * 2
+        12 * 1
+        
+        tc = O(n * sqrt(n))
+        
+        """
+        def isPrime(n):
+            if n < 2:
+                return False
+            for i in range(2,int(sqrt(n)) + 1):
+                if n % i == 0:
+                    return False
+            return True
+        ans = 0
+        for i in range(1,n):
+            if isPrime(i):
+                ans += 1
+        return ans
+        
+    def brutforce(self,n):
+        """
+        brute force is to graze over range from 2 to n - 1
+        and see if each no is prime or not if yes then add to ans else go to next no
+        tc = O(n ^ 2)
+        sc = constant
+        """
+        def isPrime(n):
+            if n < 2:
+                return False
+            for i in range(2,n):
+                if n % i == 0:
+                    return False
+            return True
+        ans = 0
+        for i in range(1,n):
+            if isPrime(i):
+                ans += 1
+        return ans

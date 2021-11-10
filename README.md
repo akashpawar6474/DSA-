@@ -28,3 +28,4 @@ solutions to graze over
 26. count primes => brute => better => best Sieve of Eratosthenes
 27. Find Elements in a Contaminated Binary Tree => simple dfs with simple math of complete binary tree and set for remembering
 28. Evaluate Division => this is undirected graph problem which includes math first task is to build graph adj lists then for every query find the path from source to target by multiplying edges.
+29. Battleships in a Board => simple problem dfs like number of islands & this can be solved by just grazing on run

@@ -27,3 +27,4 @@ solutions to graze over
 25. Number of Operations to Make network connected => use fact that in connected graph of n nodes there is n - 1 edges and simple dfs
 26. count primes => brute => better => best Sieve of Eratosthenes
 27. Find Elements in a Contaminated Binary Tree => simple dfs with simple math of complete binary tree and set for remembering
+28. Evaluate Division => this is undirected graph problem which includes math first task is to build graph adj lists then for every query find the path from source to target by multiplying edges.

@@ -1,0 +1,45 @@
+class Solution:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+        """
+        this problem can be modelled as undirected weighted graph
+        see in the first problem 
+        a --- 2.0 --- b --- 3.0 --- c
+        so a to c => 2.0 * 3.0
+        b to a = 1/2.0
+        q = no of queries
+        n = no of nodes in graph
+        tc = O(q * n)
+        sc = O(n * e)
+        """
+        def buildGraph(graph,equations,values):
+            for i in range(len(equations)):
+                x,y = equations[i]
+                weight = values[i]
+                if x not in graph:
+                    graph[x] = []
+                graph[x].append((y,weight))
+                if y not in graph:
+                    graph[y] = []
+                graph[y].append((x,1 / weight))
+            
+        def dfs(source,target,graph,seen,value):
+            if source not in graph or target not in graph or source in seen:
+                return -1
+            if source == target:
+                return value
+            seen.add(source)
+            foundPath = 0
+            for nei,wei in graph[source]:
+                foundPath = dfs(nei,target,graph,seen,wei * value)
+                if foundPath != -1:
+                    return foundPath
+            return -1
+            
+            
+        graph = {}
+        buildGraph(graph,equations,values)
+        res = []
+        for i in range(len(queries)):
+            source,target = queries[i]
+            res.append(dfs(source,target,graph,set(),1.0))
+        return res

@@ -1,0 +1,38 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class FindElements:
+
+    def __init__(self, root: Optional[TreeNode]):
+        """
+        idea is to use the fact that root node value is 0
+        then left subtree is equal to 2 * root.val + 1
+        and 2 * root.val + 2
+        we will recur the same
+        use one set to remember all value while doing traversal
+        so we wont spend much time while finding the element
+        tc = O(n)
+        sc = O(n)
+        """       
+        def dfs(root,currVal):
+            if root:
+                self.seen.add(currVal)
+                dfs(root.left,2 * currVal + 1)
+                dfs(root.right,2 * currVal + 2)
+        self.seen = set()
+        dfs(root,0)
+
+    def find(self, target: int) -> bool:
+        """
+        tc = O(1)
+        sc = O(1)
+        """
+        return target in self.seen
+
+
+# Your FindElements object will be instantiated and called as such:
+# obj = FindElements(root)
+# param_1 = obj.find(target)

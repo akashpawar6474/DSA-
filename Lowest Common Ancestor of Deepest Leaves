@@ -1,0 +1,56 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def lcaDeepestLeaves(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """
+        this is simple problem if we understood and think over it
+        every tree in its last level has either 1 node OR more than 1 node
+        In first case if it is only node then 
+            same node can be subtree with all deepest leaves
+            for eg. this is lca of deepest leaves
+        In second case 
+            think of what will be the boundary of subtree
+            left and right node of last level nodes 
+            so we need to find lca for them
+        Ideally find the deepest leaves boundaries using level order 
+        then do dfs for finding lca
+        tc = O(n + n) =>O(n)
+        sc = O(n)
+        """
+        def lca(root,p,q):
+            if root is None:
+                return root
+            if root.val == p.val or root.val == q.val:
+                return root
+            isInLeft = lca(root.left,p,q)
+            isInRight = lca(root.right,p,q)
+            
+            if isInLeft and isInRight:
+                return root
+            return isInLeft if isInLeft else isInRight
+        
+        if root is None:
+            return None
+        q = deque()
+        q.append(root)
+        leftMostInLastLevel = None
+        rightMostInLastLevel = None
+        while q:
+            size = len(q)
+            for i in range(size):
+                top = q.popleft()
+                if i == 0:
+                    leftMostInLastLevel = top
+                if i == size - 1:
+                    rightMostInLastLevel = top
+                if top.left:
+                    q.append(top.left)
+                if top.right:
+                    q.append(top.right)
+                    
+        return lca(root,leftMostInLastLevel,rightMostInLastLevel)
+                    

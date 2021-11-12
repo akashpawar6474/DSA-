@@ -31,3 +31,4 @@ solutions to graze over
 29. Battleships in a Board => simple problem dfs like number of islands & this can be solved by just grazing on run
 30. Distribute Coins in Binary Tree => this is postorder problem with lot of thought process where we will ask every child what do you want from parent
 31. Lowest Common Ancestor of Deepest Leaves => problem can be solved in two steps first find deepes level left and right boundary then find lca using dfs
+32. Delete Nodes And Return Forest => very good problem of dfs where we will graze while checking if curr node in target list or not

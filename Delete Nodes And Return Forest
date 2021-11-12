@@ -1,0 +1,46 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def delNodes(self, root: TreeNode, to_delete: List[int]) -> List[TreeNode]:
+        """
+        idea is to convert to_delete list to set to do constant lookup while traversing
+
+        basically think 
+            if root is none return None
+            if root is in deleted set
+                then recur for childern with flag as no parent
+                then return none for this
+            else
+                means root is not in deleted set
+                if it doesnt have parent 
+                    then add it to res array
+                then recur for childern
+                and return root
+        tc = O(n)
+        sc = O(n)
+        """
+        def preorder(root,isParentExists,inDeleted):
+            if root is None:
+                return None
+            if root.val in inDeleted:
+                isParentExists = False
+                root.left = preorder(root.left,isParentExists,inDeleted)
+                root.right = preorder(root.right,isParentExists,inDeleted)
+                return None
+            else:
+                if isParentExists == False:
+                    self.res.append(root)
+                isParentExists = True
+                root.left = preorder(root.left,isParentExists,inDeleted)
+                root.right = preorder(root.right,isParentExists,inDeleted)
+                return root
+        
+            
+        self.res = []
+        inDeleted = set(to_delete)
+        preorder(root,False,inDeleted)
+        return self.res

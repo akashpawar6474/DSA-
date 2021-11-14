@@ -33,3 +33,4 @@ solutions to graze over
 31. Lowest Common Ancestor of Deepest Leaves => problem can be solved in two steps first find deepes level left and right boundary then find lca using dfs
 32. Delete Nodes And Return Forest => very good problem of dfs where we will graze while checking if curr node in target list or not
 33. Reduce Array Size to The Half => first create frequency table then store frequencies in maxHeap then do the process
+34. Maximum Score From Removing Stones => this is maxHeap problem push all the ip to maxHeap then pop untill we get the result

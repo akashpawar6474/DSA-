@@ -34,3 +34,4 @@ solutions to graze over
 32. Delete Nodes And Return Forest => very good problem of dfs where we will graze while checking if curr node in target list or not
 33. Reduce Array Size to The Half => first create frequency table then store frequencies in maxHeap then do the process
 34. Maximum Score From Removing Stones => this is maxHeap problem push all the ip to maxHeap then pop untill we get the result
+35. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold => this is simple sliding window problem where we can convert avg to total then count no of subarray of size k with sum gteq total

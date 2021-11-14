@@ -1,0 +1,36 @@
+import heapq
+class Solution:
+    def maximumScore(self, a: int, b: int, c: int) -> int:
+        """
+        brute force to solve this problem is
+        insert all values in maxHeap first
+        then take a loop untill maxHeap has more than one element
+            pop top two greater elements
+            then reduce them by 1
+            increment counter
+            if they are greater than 0
+            then insert into heap again
+        return count
+        tc = O(max(a,b,c))
+        sc = constant
+        """
+        maxHeap = []
+        heapq.heappush(maxHeap,-a)
+        heapq.heappush(maxHeap,-b)
+        heapq.heappush(maxHeap,-c)
+        
+        print(maxHeap)
+        count = 0
+        while len(maxHeap) > 1:
+            firstGreater = heapq.heappop(maxHeap)
+            secondGreater = heapq.heappop(maxHeap)
+            
+            firstGreater += 1
+            secondGreater += 1
+            
+            if firstGreater < 0:
+                heapq.heappush(maxHeap,firstGreater)
+            if secondGreater < 0:
+                heapq.heappush(maxHeap,secondGreater)
+            count += 1
+        return count

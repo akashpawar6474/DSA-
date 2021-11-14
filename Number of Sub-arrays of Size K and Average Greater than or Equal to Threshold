@@ -1,0 +1,49 @@
+class Solution:
+    def numOfSubarrays(self, arr: List[int], k: int, threshold: int) -> int:
+        """
+        there is better way to do this code
+        idea is to convert avg to sum
+        avg = total / no of items
+        total = avg * no of items
+        so first cal total then find the subarray if sum greater than total
+        """
+        count = 0
+        total = threshold * k
+        windowStart = 0
+        tsum = 0
+        for windowEnd in range(len(arr)):
+            tsum += arr[windowEnd]
+            if windowEnd < k - 1:
+                continue
+            if windowEnd - windowStart + 1 > k:
+                tsum -= arr[windowStart]
+                windowStart += 1
+            if tsum >= total:
+                count += 1
+        return count
+    
+    def myTry(self,arr):
+        """
+        idea is to first push k elements into the window
+        if its avg is gteq threshold then inc the count
+        then graze from kth idx to last idx
+            first shrink the window by 1
+            then add curr ele
+            if its avg gteq to threshold then inc the count
+        tc = O(n)
+        sc = O(1)
+        """
+        count = 0
+        total = 0
+        for i in range(k):
+            total += arr[i]
+        if (total / k) >= threshold:
+            count += 1
+        windowStart = 0
+        for windowEnd in range(k,len(arr)):
+            total -= arr[windowStart]
+            windowStart += 1
+            total += arr[windowEnd]
+            if (total / k) >= threshold:
+                count += 1
+        return count

@@ -1,0 +1,53 @@
+class Solution:
+    def equationsPossible(self, equations: List[str]) -> bool:
+        """
+        idea to solve this problem is very simple
+        whenever a == b or b == c and c == a 
+        means all are nodes with same colour connected bidirectionally
+        
+        so first graze over edge 
+            if inequality case then cache them
+            else
+                create adj list from it
+        
+        then graze over inequalities cache
+        if we found target in source network then return False
+        else return true
+        
+        tc = O(n)
+        sc = O(n + e)
+        """
+        def foundTarget(source,target,visited,graph):
+            if source == target:
+                return True
+            visited.add(source)
+            if source in graph:
+                for nei in graph[source]:
+                    if nei not in visited:
+                        if foundTarget(nei,target,visited,graph):
+                            return True
+            return False
+        
+        graph = {}
+        inequalities = []
+        for st in equations:
+            sign = st[1:3]
+            if sign == "!=":
+                inequalities.append(st)
+            else:
+                u,v = st[0],st[-1]
+                if u not in graph:
+                    graph[u] = []
+                graph[u].append(v)
+                if v not in graph:
+                    graph[v] = []
+                graph[v].append(u)
+                
+        for st in inequalities:
+            u,v = st[0],st[-1]
+            if foundTarget(u,v,set(),graph):
+                return False
+        return True
+            
+                
+                

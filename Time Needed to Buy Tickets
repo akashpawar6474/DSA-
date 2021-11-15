@@ -1,0 +1,46 @@
+import math
+class Solution:
+    def timeRequiredToBuy(self, tickets: List[int], k: int) -> int:
+        """
+        this is little bit tricky problem
+        which needs some observation 
+        for eg. [5,2,3,4,2]  k = 2
+        after 1st iteration it will give [4,1,2,3,1]
+        after 2nd iteration it will give [3,0,1,2,0]
+        after 3rd iteration it will give [2,0,0,1,0]
+        
+        0th person appeared 3 times which is min(tickets[0],tickets[k or 2]) => min(4,3)
+        1st person appeared 2 times which is min(tickets[1],tickets[k or 2]) => min(2,3)
+        2nd person appeared 3 times which is min(tickets[2],tickets[k or 2]) => min(3,3)
+        3rd person appeared 3 times which is min(tickets[3],tickets[k or 2]) => min(3,4) 
+        means after 2nd iteration there is no need to calculate further for person from k + 1th idx
+        4th person appeared 2 times which is min(tickets[4],tickets[k or 2]) => min(3,2)
+        """
+        seconds = 0
+        for i in range(len(tickets)):
+            if i <= k:
+                seconds += min(tickets[i],tickets[k])
+            else:
+                seconds += min(tickets[i],tickets[k] - 1)
+        return seconds
+    def bruteForce(self,tickets):
+        """
+        brute force to solve this problem is
+        take seconds variable
+        take a loop untill that person has capacity > 0
+            take positive counters
+            then graze over the array
+                take if no is +ve
+                    reduce by 1
+                    and inc counter by 1
+            seconds += positive counter
+        """
+        seconds = 0
+        while tickets[k] > 0:
+            peopleInQueue = 0
+            for i in range(len(tickets)):
+                if tickets[i] > 0:
+                    tickets[i] -= 1
+                    peopleInQueue += 1
+            seconds += peopleInQueue
+        return seconds

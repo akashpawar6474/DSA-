@@ -36,3 +36,4 @@ solutions to graze over
 34. Maximum Score From Removing Stones => this is maxHeap problem push all the ip to maxHeap then pop untill we get the result
 35. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold => this is simple sliding window problem where we can convert avg to total then count no of subarray of size k with sum gteq total
 36. Satisfiability of Equality Equations => simple graph constructing then doing dfs to find the target in particular connected component
+37. Time Needed to Buy Tickets => simple observation based algo involves little math 

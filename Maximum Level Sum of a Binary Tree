@@ -1,0 +1,39 @@
+from collections import deque
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxLevelSum(self, root: Optional[TreeNode]) -> int:
+        """
+        idea is to do level order traversal
+        and for each level we will cal total sum of nodes
+        if it is exceeding our maxTotal variable
+            then we will assign it and cache the level
+        at last return the level
+        tc = O(n)
+        sc = O(n)
+        """
+        maxTotalAtAnyLevel = -math.inf
+        minLevel = 0
+        q = deque()
+        q.append(root)
+        currLevel = 1
+        while q:
+            size = len(q)
+            currLevelSum = 0
+            for i in range(size):
+                top = q.popleft()
+                currLevelSum += top.val
+                if top.left:
+                    q.append(top.left)
+                if top.right:
+                    q.append(top.right)
+            if currLevelSum > maxTotalAtAnyLevel:
+                maxTotalAtAnyLevel = currLevelSum
+                minLevel = currLevel
+            currLevel += 1
+        return minLevel
+                

@@ -38,3 +38,4 @@ solutions to graze over
 36. Satisfiability of Equality Equations => simple graph constructing then doing dfs to find the target in particular connected component
 37. Time Needed to Buy Tickets => simple observation based algo involves little math 
 38. Maximum Level Sum of a Binary Tree => simple level order problem
+39. Maximal Network Rank => simple observation based indegrees adj matrix problem

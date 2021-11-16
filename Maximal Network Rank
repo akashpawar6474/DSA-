@@ -1,0 +1,84 @@
+import math
+class Solution:
+    def maximalNetworkRank(self, n: int, roads: List[List[int]]) -> int:
+        """
+        same problem can be solved using constructing graph
+        and using adj matrix representation
+        
+        in adj matrix representation we can say if there is edge
+        or not in two vertices in constant time
+        
+        we can also use set for less space
+        tc = O(r + n ^ 2) => O(n ^ 2)
+        sc = O(n ^ 2)
+        """
+        
+        indegrees = [0] * n
+        graph = [set() for x in range(n)]
+        
+        for x,y in roads:
+            graph[x].add(y)
+            graph[y].add(x)
+            indegrees[x] += 1
+            indegrees[y] += 1
+            
+        maxRank = -math.inf
+        
+        for x in range(n):
+            for y in range(x + 1,n):
+                currPairNetworkRank = indegrees[x] + indegrees[y]
+                if x in graph[y]:
+                    currPairNetworkRank -= 1
+                maxRank = max(maxRank,currPairNetworkRank)
+        return maxRank
+        
+    def bruteforce(self,n,roads):
+        """
+        one thing we cant miss is 
+        we can take diff cities even though they are not adjcent
+        means for first problem
+        we can take pair of 0 and 2 also
+        
+        so brute force
+        is to graze over all combinations 
+            then for each combination graze over roads
+                and if any road has any city
+                then inc the count
+            at last keep track of maximum
+            
+        at third problem pair will be 2 and 5
+        with no overlapping edge
+        
+        r = no of roads
+        tc = O(n ^ 2 * r)
+        sc = constant
+        """
+        maxRank = - math.inf
+        for i in range(n):
+            for j in range(i + 1,n):
+                currPairNetworkRank = 0
+                for city1,city2 in roads:
+                    if city1 == i or city2 == i or city1 == j or city2 == j:
+                        currPairNetworkRank += 1
+                maxRank = max(maxRank,currPairNetworkRank)
+        return maxRank
+    def myTryDirectlyOptimizedButFailed(self,n,roads):
+        """
+        idea is to do some observation first
+        for eg in first example 
+            to get maximum network rank
+            we have to graze over edges
+            then count addition of lists of them
+            and reduce 1 and keep track with maximum
+        """
+        graph = [[] for x in range(n)]
+        
+        for x,y in roads:
+            graph[x].append(y)
+            graph[y].append(x)
+        
+        maxNetworkRank = -math.inf
+        for x,y in roads:
+            currEdgeNetworkRank = len(graph[x]) + len(graph[y]) - 1
+            maxNetworkRank = max(maxNetworkRank,currEdgeNetworkRank)
+        return maxNetworkRank

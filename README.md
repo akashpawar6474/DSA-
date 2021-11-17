@@ -39,3 +39,4 @@ solutions to graze over
 37. Time Needed to Buy Tickets => simple observation based algo involves little math 
 38. Maximum Level Sum of a Binary Tree => simple level order problem
 39. Maximal Network Rank => simple observation based indegrees adj matrix problem
+40. Course Schedule IV => simple constructing the graph then doing individual dfs to finding the target

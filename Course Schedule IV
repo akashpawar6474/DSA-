@@ -1,0 +1,29 @@
+class Solution:
+    def checkIfPrerequisite(self, numCourses: int, prerequisites: List[List[int]], queries: List[List[int]]) -> List[bool]:
+        """
+        the first way is construct graph then do dfs
+        tc = O(q * v)
+        sc = O(v)
+        """
+        def targetIsPresent(source,target,graph,visited):
+            if source == target:
+                return True
+            visited.add(source)
+            for nei in graph[source]:
+                if nei not in visited:
+                    if targetIsPresent(nei,target,graph,visited):
+                        return True
+            return False
+        
+        graph = [[] for x in range(numCourses)]
+        for x,y in prerequisites:
+            graph[x].append(y)
+            
+        res = []
+        for x,y in queries:
+            if targetIsPresent(x,y,graph,set()):
+                res.append(True)
+            else:
+                res.append(False)
+        return res
+        

@@ -1,0 +1,20 @@
+import math
+class Solution:
+    def minPairSum(self, nums: List[int]) -> int:
+        """
+        it looks like sorting first
+        then taking two pointers going towards each other
+        and calculate max sum
+        tc = O(nlogn + n / 2) => O(nlogn)
+        sc = constant
+        """
+        nums.sort()
+        head = 0
+        tail = len(nums) - 1
+        maxSum = -math.inf
+        while head < tail:
+            currPairSum = nums[head] + nums[tail]
+            maxSum = max(currPairSum,maxSum)
+            head += 1
+            tail -= 1
+        return maxSum

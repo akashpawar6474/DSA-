@@ -40,3 +40,4 @@ solutions to graze over
 38. Maximum Level Sum of a Binary Tree => simple level order problem
 39. Maximal Network Rank => simple observation based indegrees adj matrix problem
 40. Course Schedule IV => simple constructing the graph then doing individual dfs to finding the target
+41. Minimize Maximum Pair Sum in Array => sorting then two pointer moving towards each other

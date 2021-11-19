@@ -42,3 +42,4 @@ solutions to graze over
 40. Course Schedule IV => simple constructing the graph then doing individual dfs to finding the target
 41. Minimize Maximum Pair Sum in Array => sorting then two pointer moving towards each other
 42. Validate Binary Tree Nodes => tree root is child to no node so it is observation based problem doing level order with set to handle edge case where tree is graph
+43. Next Permutation => this problem is observation based where it can be solved using algorithm

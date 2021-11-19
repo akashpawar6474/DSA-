@@ -1,0 +1,59 @@
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        
+        this is very good problem
+        before starting code we should make some observations
+        
+        take a random no
+        12324      so graph is like
+                                                    .   
+                                            .
+                                        .       .   
+                                    .                   .
+                                    1   2   3   2   4   1
+                                        <... 10^2 10^1 10^0
+        to get next permutation we need to swap the last peak
+        
+       algorithm is as follows
+       graze over array from last to first
+            and see if any element is less than next eleemtn
+            we need point like this
+                        .
+                    .   
+                breaking point
+        then again graze over array from last to breaking point
+        and find the element greater than breaking point
+            then swap them
+            
+        then from next idx of breaking point to last of array reverse the numbers
+        tc = O(n)
+        sc = constant
+        """ 
+        def reverse(st,end):
+            while st < end:
+                nums[st],nums[end] = nums[end],nums[st]
+                st += 1
+                end -= 1
+        
+        breakingPoint = -1
+        for i in range(len(nums) - 2,-1,-1):
+            if nums[i] < nums[i + 1]:
+                breakingPoint = i
+                break
+        
+        if breakingPoint == -1:
+            #means slope is decreasing only 4 3 2 1
+            reverse(0,len(nums) - 1)
+            
+        else:  
+            noGreaterThanBreakingPoint = -1
+            for i in range(len(nums) - 1,breakingPoint,-1):
+                if nums[i] > nums[breakingPoint]:
+                    noGreaterThanBreakingPoint = i
+                    break
+
+            nums[breakingPoint],nums[noGreaterThanBreakingPoint] = nums[noGreaterThanBreakingPoint],nums[breakingPoint]
+        
+            reverse(breakingPoint + 1,len(nums) - 1)

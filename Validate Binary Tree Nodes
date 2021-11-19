@@ -1,0 +1,55 @@
+from collections import deque
+class Solution:
+    def validateBinaryTreeNodes(self, n: int, leftChild: List[int], rightChild: List[int]) -> bool:
+        """
+        if we think carefully this can be solved easily
+        for tree
+            we can say that if it is binary tree
+            then root is child of no one
+            so it should not be in the any left or right child array
+            
+        so first convert left and right child into set
+        then graze over n
+            if curr val is not in both
+                then consider it as root
+        now do dfs or bfs whatever you want and see if length of traversed nodes is equal to n
+        if yes return true else false
+        
+        dfs is failing if tree is graph so used bfs with visited set to avoid TLE
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        def bfs(root,leftChild,rightChild,visited,n):
+            q = deque()
+            q.append(root)
+            while q:
+                currNode = q.popleft()
+                if currNode in visited:
+                    return False
+        
+                visited.add(currNode)
+                if leftChild[currNode] != -1:
+                    q.append(leftChild[currNode])
+                if rightChild[currNode] != -1:
+                    q.append(rightChild[currNode])
+            
+            return len(visited) == n
+                
+        def dfs(root,leftChild,rightChild,visited):
+            if root != -1:
+                visited.add(root)
+                dfs(leftChild[root],leftChild,rightChild,visited)
+                dfs(rightChild[root],leftChild,rightChild,visited)
+        
+        leftChildSet = set(leftChild)
+        rightChildSet = set(rightChild)
+        root = -1
+        for i in range(n):
+            if i not in leftChildSet and i not in rightChildSet:
+                root = i
+        
+        noOfNodes = 0
+        print(root)
+        visited = set()
+        return bfs(root,leftChild,rightChild,visited,n)

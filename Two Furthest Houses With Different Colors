@@ -1,0 +1,20 @@
+class Solution:
+    def maxDistance(self, colors: List[int]) -> int:
+        """
+        idea is very simple but observation based
+        we need to involve one of the endpoint to get max distance
+        we will graze over array
+            if curr color is not same with first color
+                then keep track here as i
+            else if curr color is not same with last color
+                then keep track from last idx to i distance
+        tc= O(n)
+        sc = O(1)
+        """
+        maxDistance = -math.inf
+        for i in range(len(colors)):
+            if colors[i] != colors[0]:
+                maxDistance = max(maxDistance,i)
+            if colors[i] != colors[len(colors) - 1]:
+                maxDistance = max(maxDistance,len(colors) - 1 - i)
+        return maxDistance

@@ -44,3 +44,4 @@ solutions to graze over
 42. Validate Binary Tree Nodes => tree root is child to no node so it is observation based problem doing level order with set to handle edge case where tree is graph
 43. Next Permutation => this problem is observation based where it can be solved using algorithm
 44. Two Furthest Houses With Different Colors => very simple problem which involves observation to get max distance we need to involve either end
+45. Watering Plants => simple problem we have to simulate the process and some array specific math

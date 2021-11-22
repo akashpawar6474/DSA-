@@ -1,0 +1,88 @@
+class Solution:
+    def checkArithmeticSubarrays(self, nums: List[int], l: List[int], r: List[int]) -> List[bool]:
+        """
+        this problem can be solved using mathematics
+        for AP
+        distance bw two element = an - a1 / n - 1
+        an => last elemnet in progression(maximum in progression)
+        a1 => first element in progression(minimum in prgogression)
+        n => no of elements in progression
+        
+        so idea is to make use of this formula instead of sorting 
+        find min and max
+        then calculate steps or difference
+        then graze over range of min to max with diff/steps
+            if i is not in set
+                then return false
+        return true
+        
+        here it is edge case
+            if (max - min) % n - 1 != 0
+                return false
+        for eg 4,6,5,9
+        min = 4
+        max = 9
+        max - min = 5
+        n - 1 = 3
+        5 % 3 => 2 != 0 so return false
+        
+        Now for valid case
+        4,5,6
+        min = 4
+        max = 6
+        max-min = 2
+        2 % 2 => 0 so go ahead
+        
+        tc = O(m * n)
+        sc = O(n)
+        """
+        def isAP(numsSubarray):
+            minInSubarray = min(numsSubarray)
+            maxInSubarray = max(numsSubarray)
+            eleInSubarray = set(numsSubarray)
+            
+            if (maxInSubarray - minInSubarray) % (len(numsSubarray) - 1) != 0:
+                return False
+            
+            steps = (maxInSubarray - minInSubarray) // (len(numsSubarray) - 1)
+            if steps == 0:
+                return maxInSubarray == minInSubarray
+            
+            for i in range(minInSubarray,maxInSubarray,steps):
+                if i not in eleInSubarray:
+                    return False
+            return True
+        
+        ans = []
+        for i in range(len(l)):
+            ans.append(isAP(nums[l[i]:r[i] + 1]))
+        return ans
+            
+    def bruteForce(self,nums,l,r):
+        """
+        brute force is graze over queries
+        and sort the subarray
+            then again graze over sorted subarray
+            see if it is arithmatic sequence
+        
+        Q.how to slice the array
+        => using array[start:end] end is exclusive
+        
+        tc = O(m * nlogn + n) => O(m * nlogn)
+        sc = O(m + m*logn)
+        """
+        ans = []
+        for i in range(len(l)):
+            start = l[i]
+            end = r[i]
+            slicedNums = nums[start:end + 1]
+            slicedNums.sort()
+            isAP = True
+            diff = slicedNums[1] - slicedNums[0]
+            for j in range(1,len(slicedNums) - 1):
+                if diff != slicedNums[j + 1] - slicedNums[j]:
+                    isAP = False
+                    break
+            ans.append(isAP)
+        return ans
+                

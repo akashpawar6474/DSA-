@@ -46,3 +46,4 @@ solutions to graze over
 44. Two Furthest Houses With Different Colors => very simple problem which involves observation to get max distance we need to involve either end
 45. Watering Plants => simple problem we have to simulate the process and some array specific math
 46. Arithmetic Subarrays => problem is simple involves sorting logic and if we want to optimize in time then we need to make use of formula of finding diff bw two elements in arithmatic progression.
+47. Find Center of Star Graph => this is very simple problem create freq table and return node which has val equal to nodes - 1

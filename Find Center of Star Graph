@@ -1,0 +1,27 @@
+class Solution:
+    def findCenter(self, edges: List[List[int]]) -> int:
+        """
+        idea is very simple create adj list
+        and whichever node has list of size n - 1
+        then return that vertex
+        
+        or just create hashtable of frequencies 
+        and return key with frequency n - 1
+        
+        tc = O(E + V)
+        sc = O(V + E)
+        """
+        ht = {}
+        for x,y in edges:
+            if x not in ht:
+                ht[x] = 0
+            ht[x] += 1
+            if y not in ht:
+                ht[y] = 0
+            ht[y] += 1
+        
+        for key,val in ht.items():
+            if val == len(ht) - 1:
+                return key
+        return -1
+        

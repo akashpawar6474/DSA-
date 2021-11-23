@@ -1,0 +1,72 @@
+class Solution:
+    def minSwaps(self, s: str) -> int:
+        """
+        idea is to solve problem using stack
+        which will be used to remove balaced part of string
+        which should be first thing which should come upto the mind
+        
+        to remove balanced part 
+        if opening bracket
+            insert into stack
+        else if closing bracket and stack is not empty
+            pop the opening bracket
+            
+        so for balanced string at last we will have 0 elements in string
+        
+        now if it is unbalanced
+        
+        unbalanced string       ele into stack      len(stack)          res
+        
+        ]][[                        [[                  2               1
+        ]]][[[                      [[[                 3               2
+        ]]]][[[[                    [[[[                4               2
+        
+        so if we boil down res interms of stack
+        
+        res = (len(stack) + 1) // 2
+        
+        Q.we usually need to know the stack length so is there any need to use stack
+        => absolutely not we should use variable for incrementing and decrementing length
+        """
+        
+        #st = []
+        stackLen = 0
+        for ch in s:
+            if ch == '[':
+                #st.append(ch)
+                stackLen += 1
+            elif stackLen > 0:#len(st) > 0:
+                #st.pop()
+                stackLen -= 1
+        return (stackLen + 1) // 2          #(len(st) + 1) // 2
+    def myTry(self,s):
+        """
+        idea is to have two pointers
+        left pointer will point out 1st closing bracket
+        right pointer point out to last opening bracket
+        swap left and right ptrs
+            and inc count
+            then increment left to next closing bracket
+            and decrement right to second last opening bracket
+        """
+        def findNextClosingBracket(left,stArr):
+            while stArr[left] != ']':
+                left += 1
+            return left
+        
+        def findPrevOpeningBracket(right,stArr):
+            while stArr[right] != '[':
+                right -= 1
+            return right
+        
+        stArr = list(s)
+        left = findNextClosingBracket(0,stArr)
+        right = findPrevOpeningBracket(len(stArr) - 1,stArr)
+        print(str(left)+" "+str(right))
+        count = 0
+        while left < right:
+            stArr[left],stArr[right] = stArr[right],stArr[left]
+            count += 1
+            left = findNextClosingBracket(left + 1,stArr)
+            right = findNextClosingBracket(right - 1,stArr)
+        return count

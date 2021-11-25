@@ -49,3 +49,4 @@ solutions to graze over
 47. Find Center of Star Graph => this is very simple problem create freq table and return node which has val equal to nodes - 1
 48. Minimum Number of Swaps to Make the String Balanced => this is totally observation based math problem but very easy if we get some insights
 49.  Find All Groups of Farmland => bfs problem but if we observe it and figure out to graze over graph boundary then it is very simple problem
+50.  Remove Colored Pieces if Both Neighbors are the Same Color => this is mind blowing problem can be solved using simple comman sense if we dont complicate it

@@ -1,0 +1,59 @@
+class Solution:
+    def isCovered(self, ranges: List[List[int]], left: int, right: int) -> bool:
+        """
+        this is mind blowing problem of prefix sum
+        it is a example of how can we replicate ranges using prefix sum
+        
+        assume ranges [2,5] [7,9]
+        
+        then take seen array
+        0 0 0 0 0 0 0 0 0 0 0
+        0 1 2 3 4 5 6 7 8 9 10
+        
+        now for 2 mark it as 1
+        and for 6 mark it as -1
+        
+        now for 7 mark it as 1
+        and for 10 mark it as -1
+        
+        0 0 1 0 0 0 -1 1 0 0 -1
+        0 1 2 3 4 5 6 `7 8 9 10
+        
+        now take prefix sum
+        0 0 1 1 1 1 0 1 1 1 0
+        0 1 2 3 4 5 6 7 8 9 10
+        
+        now we can just graze over range and check if value is set it for them or not
+        tc = O(r + n)
+        sc = O(max among ranges + 1)
+        """
+        seen = [0] * 52
+        
+        for start,end in ranges:
+            seen[start] += 1
+            seen[end + 1] += -1
+        for i in range(1,52):
+            seen[i] += seen[i - 1]
+        print(seen)
+        for i in range(left,right + 1):
+            if seen[i] == 0:
+                return False
+        return True
+    def bruteForce(self,ranges,left,right):
+        """
+        tc = O(n * r)
+        brute force is graze over range from left to right
+        """
+        isPossible = True
+        for i in range(left,right + 1):
+            isIntervalAvailable = False
+            for start,end in ranges:
+                if start <= i <= end:
+                    isIntervalAvailable = True
+            if isIntervalAvailable == False:
+                isPossible = False
+                break
+        return isPossible
+                    
+                    
+        

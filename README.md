@@ -50,3 +50,4 @@ solutions to graze over
 48. Minimum Number of Swaps to Make the String Balanced => this is totally observation based math problem but very easy if we get some insights
 49.  Find All Groups of Farmland => bfs problem but if we observe it and figure out to graze over graph boundary then it is very simple problem
 50.  Remove Colored Pieces if Both Neighbors are the Same Color => this is mind blowing problem can be solved using simple comman sense if we dont complicate it
+51.  Check if All the Integers in a Range Are Covered => very simple problem to solve using brute force but there is trick to use prefix sum and solve it using linear time

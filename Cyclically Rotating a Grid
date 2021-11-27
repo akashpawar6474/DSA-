@@ -1,0 +1,49 @@
+class Solution:
+    def rotateGrid(self, grid: List[List[int]], k: int) -> List[List[int]]:
+        """
+        what is use of given data
+        like rows and column are even
+        
+        how they gonna help me? is simulation possible?
+        
+        nope k can reach upto 10 ^ 9 times 
+        so it is like n * k where k leads to 10 ^ 9
+        
+        is there any hack? is something i learned earlier?
+        
+        can we reduce k ? maybe 
+        10 20       20 40           40 30               30 10           10 20
+        30 40 =>    10 30 k == 1 => 20 10 => k == 2 =>  40 20 k == 3 => 30 40 k == 4
+        
+        count the outer boundary and take mod with k
+        Q.how to calculate outer boundary?
+        take rows ^ 2 + cols ^ 2 - 4
+        k = k % (rows ^ 2 + cols ^ 2 - 4)
+        
+        then i think we have to perform simulation
+        yes first of all this is same problem as spiral matrix
+        """
+        top = left = 0
+        bottom = len(grid) - 1
+        right = len(grid[0]) - 1
+        
+        while top < bottom and left < right:
+            eleInCurrLayer = 2 * (bottom - top) + 2 * (right - left)
+            noOfRotationsForCurrLayer = k % eleInCurrLayer
+            while noOfRotationsForCurrLayer:
+                topleftElement = grid[top][left]
+                for i in range(left,right):
+                    grid[top][i] = grid[top][i + 1]
+                for i in range(top,bottom):
+                    grid[i][right] = grid[i + 1][right]
+                for i in range(right,left,-1):
+                    grid[bottom][i] = grid[bottom][i - 1]
+                for i in range(bottom,top,-1):
+                    grid[i][left] = grid[i - 1][left]
+                grid[top + 1][left] = topleftElement
+                noOfRotationsForCurrLayer -= 1
+            top += 1
+            bottom -= 1
+            left += 1
+            right -= 1
+        return grid

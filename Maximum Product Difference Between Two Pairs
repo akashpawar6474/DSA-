@@ -1,0 +1,41 @@
+import math
+class Solution:
+    def maxProductDifference(self, nums: List[int]) -> int:
+        """
+        can we do it better
+        yes we can use variable
+        tc = O(n)
+        sc = constant
+        """
+        max1 = -math.inf
+        max2 = -math.inf
+        min1 = math.inf
+        min2 = math.inf
+        for i in range(len(nums)):
+            if nums[i] > max1:
+                max2 = max1
+                max1 = nums[i]
+            elif nums[i] > max2:
+                max2 = nums[i]
+            if nums[i] < min1:
+                min2 = min1
+                min1 = nums[i]
+            elif nums[i] < min2:
+                min2 = nums[i]
+        return (max1 * max2) - (min1 * min2)
+    
+    def bruteforce(self,nums):
+        """
+        idea is to sort the array
+        get two maximum no 
+        and get two minimum no 
+        return prod diff bw them
+        
+        5,6,2,7,4
+        2,4,5,6,7
+        
+        6 * 7 - 2 * 4
+        42 - 8 => 34
+        """
+        nums.sort()
+        return (nums[-1] * nums[-2]) - (nums[0] * nums[1])

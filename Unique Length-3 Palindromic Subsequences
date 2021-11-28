@@ -1,0 +1,65 @@
+class Solution:
+    def countPalindromicSubsequence(self, s: str) -> int:
+        """
+        ODD LENGTH PALINDROMES
+        speciality of odd length palindormes is first and last char is same
+        and we have to find no of distinct char bw them
+        to get no of palindromes for that character
+        tc = O(n)
+        sc = O(1)
+        """
+        def findFirstIdx(ch,s):
+            for i in range(len(s)):
+                if ch == s[i]:
+                    return i
+            return -1
+        
+        def findLastIdx(ch,s):
+            for i in range(len(s) - 1,-1,-1):
+                if ch == s[i]:
+                    return i
+            return -1
+        
+        
+        first = [-1] * 26
+        last = [-1] * 26
+        res = 0
+        for i in range(26):
+            first[i] = findFirstIdx(chr(i + ord('a')),s)
+            last[i] = findLastIdx(chr(i + ord('a')),s)
+            
+        for i in range(26):
+            if first[i] != -1 and last[i] != -1:
+                res += len(set(s[first[i] + 1:last[i]]))
+        return res
+    
+    def myFirstTry(self,s):
+        """
+        subsequence means dp comes into picture
+        and which has two ptrs front and end
+        
+        Q.how can we check if subsequence is palindrome or not?
+        if front and back is same then add 2 and recur for middle string
+        if fun returns 1 then increase counter
+        """
+        def countPalindromicSubsequenceCore(front,back,s,dp):
+            if front > back:
+                return 0
+            if front == back:
+                return 1
+            if (front,back) in dp:
+                return dp[(front,back)]
+            if s[front] == s[back]:
+                if countPalindromicSubsequenceCore(front + 1,back - 1,s,dp) == 1:
+                    self.count += 1
+            skipFront = countPalindromicSubsequenceCore(front + 1,back,s,dp)
+            skipBack = countPalindromicSubsequenceCore(front,back - 1,s,dp)
+            dp[(front,back)] = max(skipFront,skipBack)
+            return dp[(front,back)]
+        
+        front = 0
+        back = len(s) - 1
+        dp = {}
+        self.count = 0
+        countPalindromicSubsequenceCore(front,back,s,dp)
+        return self.count

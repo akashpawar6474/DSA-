@@ -52,3 +52,4 @@ solutions to graze over
 50.  Remove Colored Pieces if Both Neighbors are the Same Color => this is mind blowing problem can be solved using simple comman sense if we dont complicate it
 51.  Check if All the Integers in a Range Are Covered => very simple problem to solve using brute force but there is trick to use prefix sum and solve it using linear time
 52.  Maximum Product Difference Between Two Pairs => sorting problem or finding 2 min and max without sorting in one go
+53.  Unique Length-3 Palindromic Subsequences => earlier this problem diverted me towards dp but this is observation based problem for odd palindromes

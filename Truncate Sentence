@@ -1,0 +1,10 @@
+class Solution:
+    def truncateSentence(self, s: str, k: int) -> str:
+        """
+        brute force is split the string
+        then join first k - 1 instances of words with space
+        tc = O(n)
+        sc = O(1)
+        """
+        stArr = s.split(' ')
+        return ' '.join(stArr[0:k])

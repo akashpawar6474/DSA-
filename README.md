@@ -53,3 +53,5 @@ solutions to graze over
 51.  Check if All the Integers in a Range Are Covered => very simple problem to solve using brute force but there is trick to use prefix sum and solve it using linear time
 52.  Maximum Product Difference Between Two Pairs => sorting problem or finding 2 min and max without sorting in one go
 53.  Unique Length-3 Palindromic Subsequences => earlier this problem diverted me towards dp but this is observation based problem for odd palindromes
+54.  Truncate Sentence => very simple straight forward simple problem
+55.  Finding the Users Active Minutes => simple hashtable and set problem we just need to boil it down to basics

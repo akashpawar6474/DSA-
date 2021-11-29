@@ -1,0 +1,22 @@
+class Solution:
+    def findingUsersActiveMinutes(self, logs: List[List[int]], k: int) -> List[int]:
+        """
+        create array of size k
+        create a map where key is user id and value is set of his actions
+        then graze over map 
+            update count of user for UAM index
+        tc = O(n) n = no of logs
+        sc = O(n) 
+        """
+        ht = {}
+        for userId,action in logs:
+            if userId not in ht:
+                ht[userId] = set()
+            ht[userId].add(action)
+        
+        ans = [0] * k
+        for key,val in ht.items():
+            currUserActionMinutes = len(ht[key])
+            ans[currUserActionMinutes - 1] += 1
+        return ans
+                

@@ -55,3 +55,4 @@ solutions to graze over
 53.  Unique Length-3 Palindromic Subsequences => earlier this problem diverted me towards dp but this is observation based problem for odd palindromes
 54.  Truncate Sentence => very simple straight forward simple problem
 55.  Finding the Users Active Minutes => simple hashtable and set problem we just need to boil it down to basics
+56.   Remove Stones to Minimize the Total => simple heap problem

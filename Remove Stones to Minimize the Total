@@ -1,0 +1,31 @@
+import math
+import heapq
+class Solution:
+    def minStoneSum(self, piles: List[int], k: int) -> int:
+        """
+        initially this looks like heap problem
+        first of all we need to insert all piles into maxHeap
+        then pop the items untill k > 0
+        
+        Q.how to take the floor in python?
+        => math.floor and math.ceil
+        
+        here description is wrong it is ceil problem not floor one
+        tc = O(nlogn + klogn + n) => n = no of piles
+        sc = O(n)
+        """
+        maxHeap = []
+        for i in range(len(piles)):
+            heapq.heappush(maxHeap,-piles[i])
+        
+        while k > 0:
+            currMax = -heapq.heappop(maxHeap)
+            currMax = math.ceil(currMax / 2)
+            heapq.heappush(maxHeap,-currMax)
+            k -= 1
+        
+        ans = 0
+        for i in range(len(maxHeap)):
+            ans += (-maxHeap[i])
+        return ans
+        

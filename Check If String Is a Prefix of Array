@@ -1,0 +1,56 @@
+class Solution:
+    def isPrefixString(self, s: str, words: List[str]) -> bool:
+        """
+        idea is to graze over words
+        for each word take slice of s
+            if it is not equal to word then return false
+            then increment i by lenght of word
+            and ptr reached end then return true
+        return false
+        """
+        stPtr = 0
+        for word in words:
+            if s[stPtr:stPtr + len(word)] != word:
+                return False
+            stPtr += len(word)
+            if stPtr == len(s):
+                return True
+        return False
+    def bruteForce(self,s,words):
+        """
+        this is very simple but implementation based problem
+        brute force is take simple string
+        graze over words and append curr word
+        if prefix string is equal to s
+            then return true
+        else false
+        tc = O(m * n)
+        """
+        prefixString = ""
+        for word in words:
+            prefixString += word
+            if s == prefixString:
+                return True
+        return False
+    def myFirstTry(self,s,words):
+        """
+        brute force is have two pointers
+        stringPointer => will graze over s
+        we will graze over words
+            for each word
+                if stringpointer reached end return true
+                we will match curr char with stringPointer
+                if it is not same then return False
+                else 
+                increments string Pointer
+        """
+        stPtr = 0
+        for i in range(len(words)):
+            for ch in words[i]:
+                if stPtr == len(s) and i != 0:
+                    return True
+                if ch != s[stPtr]:
+                    return False
+                else:
+                    stPtr += 1
+        return True

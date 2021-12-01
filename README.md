@@ -56,3 +56,4 @@ solutions to graze over
 54.  Truncate Sentence => very simple straight forward simple problem
 55.  Finding the Users Active Minutes => simple hashtable and set problem we just need to boil it down to basics
 56.   Remove Stones to Minimize the Total => simple heap problem
+57.  Check If String Is a Prefix of Array => implementation based very simple problem but description is little bit tricky

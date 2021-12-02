@@ -1,0 +1,92 @@
+import math
+class Solution:
+    def sumOddLengthSubarrays(self, arr: List[int]) -> int:
+        """
+        this problem can be solve with very good thought process
+        take first example
+        idx 0   1   2   3   4
+        val 1   4   2   5   3
+        
+        now calculate subarrays of all lengths
+        subarray with        
+        lengths
+        
+        1       => 1,4,2,5,3
+        2       => 14,42,25,53
+        3       => 142,425,253
+        4       => 1425,4253
+        5       => 14253
+        
+        so here 3 are odd lengths
+        now we have to find out how many times each index occured in 
+        odd length subarray
+        idx     0   1   2   3   4
+        val     1   4   2   5   3
+        times   3   4   5   4   3
+        each
+        ele
+contribution    3   16  10  20  9   => total sum = 58
+
+        Q.now question is how to find how many times each idx occured in odd length subarray?
+        consider 3 cities a,b,c
+            ->      ->  
+        a       b   ->  c
+            ->      ->
+            
+        now how many paths are there which are going through city B
+        6 paths => no of paths starting at city B * no of paths ending at city B
+        
+        for idx 0
+            subarrays starting from 1 => 5
+            subarrays ending on 1 => 1
+            total subarrays which include 1 => 5
+        for idx 1
+            subarrays starting from 4 => 4
+            subarrays ending at 4 => 2
+            total subarrays which include 4 => 8
+        for idx 2
+            subarrays starting from 2 => 3
+            subarrays ending at 2 =>  3
+            total subarrays which include 2 => 9
+        
+        so we can say that
+        subarray starting from curr idx = n - i
+        subarrays ending at curr idx = i + 1
+            
+        so from comman sense we can say that half of subarray are even and other are odd
+        But HERE COMES TRICKY PART
+        Q.In how many odd length subarray idx 2 appears?
+        => 5
+            but if we divide total subarrays which include idx 2 by 2
+            then we will get 2.5 
+            so we will use ceil function here
+        this is edge case to remember
+        tc = O(n)
+        sc = constant
+        
+        for finding sum of all even length subarrays
+        we have to remove ceil thats all
+        """
+        ans = 0
+        n = len(arr)
+        for i in range(len(arr)):
+            subarraysStartingAtCurrIdx = n - i
+            subarraysEndingAtCurrIdx = i + 1
+            totalSubarraysIncludingCurrIdx = subarraysStartingAtCurrIdx * subarraysEndingAtCurrIdx
+            oddSubarraysIncludingCurrIdx = ceil(totalSubarraysIncludingCurrIdx / 2)
+            ans += arr[i] * oddSubarraysIncludingCurrIdx
+        return ans
+    def bruteForce(self,arr):
+        """
+        brute force using two loops
+        tc = O(n ^ 2)
+        sc = constant
+        """
+        ans = 0
+        for i in range(len(arr)):
+            tsum = 0
+            for j in range(i,len(arr)):
+                tsum += arr[j]
+                if (j - i + 1) & 1 != 0:
+                    ans += tsum
+        return ans

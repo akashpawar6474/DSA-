@@ -1,0 +1,57 @@
+class Solution:
+    def minimumBuckets(self, street: str) -> int:
+        """
+        it seems very simple problem
+        just graze over every place
+        and check if its atleast one neighbour place 
+        is empty
+        
+        if it is empty space then go ahead
+        if it is 1st place then check for next
+        elif it is last place then check for previous
+        else
+            check if atleast one neighbour is empty
+        
+        nope i misunderstood the problem
+        actually we need to count min no of buckets rather
+        than checking if it is possible or not
+        
+        is it simulation based problem?
+        YES IT IS
+        if it is house and next place is empty then we will try to put the bucket their first
+        because it will be useful for the next houses also
+        then we will try for prvious place
+        
+        graze over array
+            if it is house
+                if it is not first pos and prev cell has bucket then go ahead
+                elif it is not last cell and next cell is empty then put the bucket
+                and inc then count
+                elif this is not first cell and prev cell is empty then put the bucket
+                and inc then count
+                else return -1
+        at last return count
+        
+        to convert string to char array use list function
+        tc = O(n)
+        sc = constant
+        """
+        count = 0
+        stArr = list(street)
+        print(stArr)
+        for i in range(len(stArr)):
+            if stArr[i] == 'H':
+                print(stArr[i])
+                if i > 0 and stArr[i - 1] == 'B':
+                    continue
+                elif i < len(stArr) - 1 and stArr[i + 1] == '.':
+                    stArr[i + 1] = 'B'
+                    count += 1
+                elif i > 0 and stArr[i - 1] == '.':
+                    stArr[i - 1] = 'B'
+                    count += 1
+                else:
+                    return -1
+        return count
+        
+        

@@ -59,3 +59,4 @@ solutions to graze over
 57.  Check If String Is a Prefix of Array => implementation based very simple problem but description is little bit tricky
 58.  Sum of All Odd Length Subarrays => this is classic array manipulation problem.
 59.  Removing Minimum and Maximum From Array => simple array observation based problem
+60.  Minimum Number of Buckets Required to Collect Rainwater from Houses => simple array visualization and simulation problem

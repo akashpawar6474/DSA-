@@ -1,0 +1,62 @@
+import math
+class Solution:
+    def minimumDeletions(self, nums: List[int]) -> int:
+        """
+        find min and max ele indexes as a and b
+        then we have 3 options
+        
+        assume that a <= b
+        delete a from left and b from right a + 1 + N - b
+            or
+        delete a,b from left        b + 1
+            or
+        delete a,b from right   N - a
+        """
+        minEle = math.inf
+        maxEle = -math.inf
+        minEleIdx = -1
+        maxEleIdx = -1
+        for i in range(len(nums)):
+            if nums[i] > maxEle:
+                maxEle = nums[i]
+                maxEleIdx = i
+            if nums[i] < minEle:
+                minEle = nums[i]
+                minEleIdx = i
+        if minEleIdx > maxEleIdx:
+            minEleIdx,maxEleIdx = maxEleIdx,minEleIdx
+        return min((minEleIdx + 1 + len(nums) - maxEleIdx),maxEleIdx + 1,len(nums) - minEleIdx)
+        
+    def myTry(self,nums):
+        """
+        brute force is to graze over the array
+        find min and max in one run and find its idx
+        if idx < mid 
+            then add idx - 0 to ans
+        else:
+            add n - idx to ans
+        """
+        minEle = math.inf
+        maxEle = -math.inf
+        minEleIdx = -1
+        maxEleIdx = -1
+        for i in range(len(nums)):
+            if nums[i] > maxEle:
+                maxEle = nums[i]
+                maxEleIdx = i
+            if nums[i] < minEle:
+                minEle = nums[i]
+                minEleIdx = i
+        ans = 0
+        midIdx = len(nums) // 2
+        print(str(minEle) + " "+str(maxEle)+" "+str(midIdx))
+
+        if maxEleIdx >= midIdx:
+            ans += len(nums) - maxEleIdx
+        else:
+            ans += maxEleIdx - 0 + 1
+        if minEleIdx >= midIdx:
+            ans += len(nums) - minEleIdx
+        else:
+            ans += minEleIdx - 0 + 1
+        return ans

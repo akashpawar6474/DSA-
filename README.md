@@ -57,4 +57,5 @@ solutions to graze over
 55.  Finding the Users Active Minutes => simple hashtable and set problem we just need to boil it down to basics
 56.   Remove Stones to Minimize the Total => simple heap problem
 57.  Check If String Is a Prefix of Array => implementation based very simple problem but description is little bit tricky
-58.  Sum of All Odd Length Subarrays => this is classic array manipulation problem 
+58.  Sum of All Odd Length Subarrays => this is classic array manipulation problem.
+59.  Removing Minimum and Maximum From Array => simple array observation based problem

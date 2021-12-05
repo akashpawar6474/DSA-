@@ -1,0 +1,64 @@
+import math
+class Solution:
+    def minCost(self, startPos: List[int], homePos: List[int], rowCosts: List[int], colCosts: List[int]) -> int:
+        """
+        this is brain teaser
+        we will just move source row to target row by adding costs
+        then we will do same for cols also
+        because all the shortest path will have the same cost
+        
+        BECAUSE ALL THE SHORTEST PATH WILL HAVE THE SAME COST
+        tc = O(n + m)
+        sc = constant
+        """
+        res = 0
+        startRow = startPos[0]
+        startCol = startPos[1]
+        targetRow = homePos[0]
+        targetCol = homePos[1]
+        while startRow != targetRow:
+            if startRow < targetRow:
+                startRow += 1
+                res += rowCosts[startRow]
+            else:
+                startRow -= 1
+                res += rowCosts[startRow]
+                
+        while startCol != targetCol:
+            if startCol < targetCol:
+                startCol += 1
+                res += colCosts[startCol]
+            else:
+                startCol -= 1
+                res += colCosts[startCol]
+                
+        return res
+    
+    """
+    def myFirstTry(self,startPos,homePos,rowCosts,colCosts):
+        it looks like unique paths problem
+        dp approach will work maybe 
+        first of all we need to determine the grid
+        grid will be [max(startPos[row],homePos[row])][max(startPos[col],homePos[col])]
+        then if we reached end then return 0
+        if we are out of grid then return 0
+        if we already visited the cell then return cached value
+        else take min among them + 1
+        and cache that result
+        def minCostCore(i,j,targetRow,targetCol,rowCosts,colCosts,dp,gridRow,gridCol,ans):
+            if i == targetRow and j == targetCol:
+                return 0
+            if i < 0 or i >= gridRow or j < 0 or j >= gridCol:
+                return math.inf
+            if (i,j) in dp:
+                return dp[(i,j)]
+            costFromCurrCell = math.inf
+            costEffectiveRow = -1
+            costEffectiveCol = -1
+            for x,y in [(i + 1,j),(i - 1,j),(i,j + 1),(i,j - 1)]:
+                costFromNeiCell = minCostCore(x,y,targetRow,targetCol,rowCosts,colCosts,dp,gridRow,gridCol,ans)
+                if costFromNeiCell < costFromCurrCell:
+                    costFromCurrCell = costFromNeiCell + 
+    """
+            
+            

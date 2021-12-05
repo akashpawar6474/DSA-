@@ -1,0 +1,71 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def getDirections(self, root: Optional[TreeNode], startValue: int, destValue: int) -> str:
+        """
+        this is problem which involves thought process
+        first find the paths for source and dest
+        then remove the overlapping path
+        for source path convert it to all U
+        then append destination path
+        
+        list.reverse fn dont work into join fun
+        tc = O(3n) => O(n)
+        sc = O(n)
+        """
+        def findPath(root,target,path):
+            if root is None:
+                return False
+            if root.val == target:
+                return True
+            if findPath(root.left,target,path):
+                path.append("L")
+                return True
+            if findPath(root.right,target,path):
+                path.append("R")
+                return True
+        
+        sourcePath = []
+        destPath = []
+        findPath(root,startValue,sourcePath)
+        findPath(root,destValue,destPath)
+        while sourcePath and destPath and sourcePath[-1] == destPath[-1]:
+            sourcePath.pop()
+            destPath.pop()
+        destPath.reverse()
+        return "".join("U" * len(sourcePath)) + "".join(destPath)
+        
+    def myTry(self,root,startValue,destValue):
+        """
+        this is lowest comman ancestor problem
+        first find lca
+        """
+        def findPathForStart(root,startValue,st):
+            if root is None:
+                return ""
+            print(root.val)
+            st = st + findPathForStart(root.left,startValue,st)
+            st = st + findPathForStart(root.right,startValue,st)
+            if root.val == startValue:
+                return "U"
+            return st
+        
+        def lcaCore(root,start,end):
+            if root is None:
+                return None
+            if root.val == start or root.val == end:
+                return root
+            isInLeft = lcaCore(root.left,start,end)
+            isInRight = lcaCore(root.right,start,end)
+            if isInLeft and isInRight:
+                return root
+            return isInLeft if isInLeft else isInRight
+        
+        lca = lcaCore(root,startValue,destValue)
+        ans = ""
+        ans = findPathForStart(root,startValue,ans)
+        print(ans)

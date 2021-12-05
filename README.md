@@ -60,3 +60,4 @@ solutions to graze over
 58.  Sum of All Odd Length Subarrays => this is classic array manipulation problem.
 59.  Removing Minimum and Maximum From Array => simple array observation based problem
 60.  Minimum Number of Buckets Required to Collect Rainwater from Houses => simple array visualization and simulation problem
+61.  Minimum Cost Homecoming of a Robot in a Grid => simple array based greedy observation is very important

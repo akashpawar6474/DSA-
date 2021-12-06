@@ -1,0 +1,56 @@
+class Solution:
+    def checkAlmostEquivalent(self, word1: str, word2: str) -> bool:
+        """
+        whenever i will need to check for each char then go over characters
+        rather than string itself
+        
+        idea is create freq array of length 26
+        then for first string increase the frequecy
+        and for second string decrease the frequency
+        then graze over the array
+        if any cell has abs val gt 3 
+        then return false else true
+        tc = O(n + m)
+        sc = O(1)
+        """
+        freq = [0] * 26
+        for ch in word1:
+            freq[ord(ch) - ord('a')] += 1
+        for ch in word2:
+            freq[ord(ch) - ord('a')] -= 1
+        for i in range(len(freq)):
+            if abs(freq[i]) > 3:
+                return False
+        return True
+    def myFirstTry(self,word1,word2):
+        """
+        we can directly apply brute force here
+        where we will be using 2 maps with total 52 records
+        tc = O(n + m)
+        sc = constant
+        """
+        n1 = len(word1)
+        n2 = len(word2)
+        if n1 > n2:
+            temp = word1
+            word1 = word2
+            word2 = temp
+            
+        ht1 = {}
+        for ch in word1:
+            if ch not in ht1:
+                ht1[ch] = 0
+            ht1[ch] += 1
+            
+        ht2 = {}
+        for ch in word2:
+            if ch not in ht2:
+                ht2[ch] = 0
+            ht2[ch] += 1
+        
+        for ch in word1:
+            if (ch in ht2 and abs(ht1[ch] - ht2[ch]) > 3) or (ht1[ch] > 3 and ch not in ht2):
+                return False
+        return True
+
+                

@@ -62,4 +62,5 @@ solutions to graze over
 60.  Minimum Number of Buckets Required to Collect Rainwater from Houses => simple array visualization and simulation problem
 61.  Minimum Cost Homecoming of a Robot in a Grid => simple array based greedy observation is very important
 62.  Step-By-Step Directions From a Binary Tree Node to Another => finding the nodes then manipulate it this is very good observation based problem
-63.  Check Whether Two Strings are Almost Equivalent => very simple hashmap problem with slice tempering of strings and ord function
+63.  Check Whether Two Strings are Almost Equivalent => very simple hashmap problem with slice tempering of strings and ord function.
+64.  Count Sorted Vowel Strings => simple pattern recognition observation based dp problem

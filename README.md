@@ -64,3 +64,4 @@ solutions to graze over
 62.  Step-By-Step Directions From a Binary Tree Node to Another => finding the nodes then manipulate it this is very good observation based problem
 63.  Check Whether Two Strings are Almost Equivalent => very simple hashmap problem with slice tempering of strings and ord function.
 64.  Count Sorted Vowel Strings => simple pattern recognition observation based dp problem
+65.  Floyd warshall algo finding shortest distance for all pairs of nodes => vimp problem asked in OA of clooktrack imp concept after dijkstra

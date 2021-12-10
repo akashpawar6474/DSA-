@@ -1,0 +1,34 @@
+class Solution:
+    def sumBase(self, n: int, k: int) -> int:
+        """        
+        this is way to convert base 10 number to any base
+        for eg. converting 18 to base 2 (binary)
+                  2 | 9
+                ----------
+                  2 | 4 | 1
+                -----------
+                  2 | 2 | 0
+                ------------
+                  2 | 1 | 1
+                -----------
+                    | 0
+        now add remainders in reverse direction 101 which is binary representation of 9
+        
+        same follwed by other k instead of 2 use 6
+        
+                  6 | 34
+                ----------
+                  6 |  5 | 4
+                -----------
+                  6 |  0 | 5
+                  
+        take remainders in reverse direction
+        here we can directly take sum
+        tc = O(logn to base k)
+        sc = constant
+        """
+        tsum = 0
+        while n > 0:
+            tsum += n % k
+            n = n // k
+        return tsum

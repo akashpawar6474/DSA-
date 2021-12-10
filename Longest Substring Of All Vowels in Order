@@ -1,0 +1,29 @@
+class Solution:
+    def longestBeautifulSubstring(self, word: str) -> int:
+        """
+        by looking at constraints we can say that 
+        definitely this is sliding window problem
+        
+        now question is how to identify if char are in sorted order
+        => look at the constraint we only have aeiou as chars
+        so if previous char is gt curr char
+        then we can shrink the window to curr char
+        
+        Q.how we will know we have all char
+        use set and if size if 5 then we can track curr length
+        
+        tc = O(2n) => O(n)
+        sc = constant
+        """
+        longestSubstring = 0
+        windowStart = 0
+        s = set()
+        for windowEnd in range(len(word)):
+            if windowEnd > 0 and (ord(word[windowEnd - 1]) > ord(word[windowEnd])):
+                s = set()
+                windowStart = windowEnd
+            s.add(word[windowEnd])
+            if len(s) == 5:
+                longestSubstring = max(longestSubstring,windowEnd - windowStart + 1)
+        return longestSubstring
+        

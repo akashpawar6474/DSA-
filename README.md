@@ -67,3 +67,4 @@ solutions to graze over
 65.  Floyd warshall algo finding shortest distance for all pairs of nodes => vimp problem asked in OA of clooktrack imp concept after dijkstra
 66.  Reduction Operations to Make the Array Elements Equal => sorting and count simple problem
 67.  Sum of Digits in Base K => very good basic math algorithmic problem
+68.  Longest Substring Of All Vowels in Order => simple slinding window problem involving little bit observation to check if curr ele is less than previous

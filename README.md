@@ -68,3 +68,4 @@ solutions to graze over
 66.  Reduction Operations to Make the Array Elements Equal => sorting and count simple problem
 67.  Sum of Digits in Base K => very good basic math algorithmic problem
 68.  Longest Substring Of All Vowels in Order => simple slinding window problem involving little bit observation to check if curr ele is less than previous
+69.  First Missing Positive => very good problem brute force with the set and constant time with cyclic sort asked in yellow.ai

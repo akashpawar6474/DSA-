@@ -1,0 +1,39 @@
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        """
+        this problem can be solved using cyclic sort too
+        like putting 1 on 0,2 on 1 and so on
+        
+        return n + 1 is for special cases like [1] [2] [1,2] or [1,2,3]
+        tc = O(n)
+        sc = O(1)
+        """
+        currIdx = 0
+        n = len(nums)
+        while currIdx < n:
+            valAtCurrIdx = nums[currIdx] - 1
+            if nums[currIdx] > 0 and nums[currIdx] < n and nums[currIdx] != nums[valAtCurrIdx]:
+                nums[currIdx],nums[valAtCurrIdx] = nums[valAtCurrIdx],nums[currIdx]
+            else:
+                currIdx += 1
+                
+        for currIdx in range(n):
+            if currIdx + 1 != nums[currIdx]:
+                return currIdx + 1
+        return n + 1
+    def bruteForce(self,nums):
+        """
+        brute force is simple create set
+        then take infinite loop and check for absent value
+        tc = O(2n) = O(n)
+        sc = O(n)
+        """
+        numSet = set(nums)
+        isValPresent = 1
+        while True:
+            if isValPresent in numSet:
+                isValPresent += 1
+            else:
+                break
+        return isValPresent
+        

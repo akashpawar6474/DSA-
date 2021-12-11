@@ -1,0 +1,66 @@
+import random
+class Solution:
+
+    def __init__(self, nums: List[int]):
+        self.original = nums
+
+    def reset(self) -> List[int]:
+        return self.original
+        
+    def shuffle(self) -> List[int]:
+        """
+        this problem can be solved using fisher yates algorithm
+        where idea is start from back
+        find the randidx
+        and swap currIdx and randIdx
+        [1,2,3,4] 
+            we will pass 0 to 3(currIdx) range for rand fun
+            for eg we got the 1
+            then we will swap 1 and 3(currIdx)
+            now we can say that 1 is shuffled
+            
+            | this is partition line
+        [1,4,3, | 2]
+            we will pass 0 to 2 to rand fun
+            for eg we got 0
+            then we will swap ele at 0 with ele at curr idx(2)
+        [3,4, | 1,2]
+            we will pass 0 to 1(currIdx) to rand fun
+            and so on
+            now we wil stop
+            
+        randint(start,end) both included
+        """
+        ans = self.original[:]
+        ansLen = len(ans)
+        for currIdx in range(ansLen - 1,0,-1):
+            randIdx = random.randint(0,currIdx)
+            ans[currIdx],ans[randIdx] = ans[randIdx],ans[currIdx]
+        return ans
+
+    def shuffleBrueForce(self) -> List[int]:
+        """
+        brute force is take the copy
+        find the random idx
+        put it into the copy 
+        and del that idx value
+        tc = O(n ^ 2)
+        sc = O(1)
+        """
+        copy = self.original[:]
+        ans = [0] * len(self.original)
+        ansPtr = 0
+        while len(copy) > 0:
+            randIdx = random.randint(0,len(copy) - 1)
+            ans[ansPtr] = copy[randIdx]
+            ansPtr += 1
+            copy.pop(randIdx)
+        return ans
+            
+        
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(nums)
+# param_1 = obj.reset()
+# param_2 = obj.shuffle()

@@ -1,0 +1,86 @@
+class Solution:
+    def goodDaysToRobBank(self, security: List[int], time: int) -> List[int]:
+        """
+        this is prefix and suffix array problem
+        same as largest histogram and trapping of rainwater problem
+        [5,3,3,3,5,6,2]
+        so we will have left and right precomputed arrays
+        which will tell if at curr pos we have we have decreasing securities from left and increasing securities from right
+        
+        left check in descending order
+        [1,2,3,4,1,1,2]
+        right check in ascending order
+        [1,5,4,3,2,1,1]
+        tc = O(3n) = O(n)
+        sc = O(n)
+        """
+        n = len(security)
+        ans = []
+        if time > n:
+            return ans
+        leftDescendingOrderCheck = [1] * n
+        rightAscendingOrderCheck = [1] * n
+        
+        descendingOrderStreak = 1
+        for currIdx in range(1,n):
+            if security[currIdx] <= security[currIdx - 1]:
+                descendingOrderStreak += 1
+            else:
+                descendingOrderStreak = 1
+            leftDescendingOrderCheck[currIdx] = descendingOrderStreak
+        
+        ascendingOrderStreak = 1
+        for currIdx in range(n - 2,-1,-1):
+            if security[currIdx] <= security[currIdx + 1]:
+                ascendingOrderStreak += 1
+            else:
+                ascendingOrderStreak = 1
+            rightAscendingOrderCheck[currIdx] = ascendingOrderStreak
+            
+        for currIdx in range(time,n - time):
+            if leftDescendingOrderCheck[currIdx] >= time + 1 and rightAscendingOrderCheck[currIdx] >= time + 1:
+                ans.append(currIdx)
+        return ans
+        
+    def bruteForce(self,security,time):
+        """
+        brute forces is we will start at idx equal to time and will stop at idx equal to len - time - 1
+        at every idx it is in bound or not
+        then we will go left and right for that idx
+        then add if it is true
+        [5,3,3,3,5,6,2]
+        """
+        ans = []
+        n = len(security)
+        if time > n:
+            return ans
+        for currIdx in range(time,n - time):
+            if 0 <= currIdx < n:
+                prevPtr = currIdx - 1
+                nextPtr = currIdx + 1
+                currPtr = currIdx
+                steps = time
+                isLHSGood = True
+                while steps > 0:
+                    if 0 <= prevPtr < n and security[prevPtr] < security[currPtr]:
+                        isLHSGood = False
+                        break
+                    prevPtr -= 1
+                    currPtr -= 1
+                    steps -= 1
+                currPtr = currIdx
+                steps = time
+                isRHSGood = True
+                while steps > 0:
+                    if 0 <= nextPtr < n and security[nextPtr] < security[currPtr]:
+                        isRHSGood = False
+                        break
+                    nextPtr += 1
+                    currPtr += 1
+                    steps -= 1
+                if isLHSGood and isRHSGood:
+                    ans.append(currIdx)
+        return ans
+                    
+                        
+        

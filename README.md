@@ -70,3 +70,4 @@ solutions to graze over
 68.  Longest Substring Of All Vowels in Order => simple slinding window problem involving little bit observation to check if curr ele is less than previous
 69.  First Missing Positive => very good problem brute force with the set and constant time with cyclic sort asked in yellow.ai
 70.  Shuffle an Array => fisher yates algorithm going backwards logic partitions into array
+71.  Find Good Days to Rob the Bank => preprocessing is necessary like largest histogram or trapping rainwater

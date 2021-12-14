@@ -1,0 +1,56 @@
+class Solution:
+    def countPoints(self, rings: str) -> int:
+        """
+        it looks very simple problem
+        we will have matrix of 9 rows and 3 columns
+        0th column for Red
+        1st column for green
+        2nd column for blue
+        then we will graze once into rings
+        and if that colour is not visited then mark it found
+        
+        at last have check over all rods
+        B0R0G0R9R0B0G0
+        """
+        colorMap = {}
+        redChar = 'R'
+        blueChar = 'B'
+        greenChar = 'G'
+        colorMap[redChar] = 0
+        colorMap[blueChar] = 1
+        colorMap[greenChar] = 2
+        n = len(rings)
+        lookUpTable = [[False for x in range(3)] for y in range(10)]
+
+        
+        for currIdx in range(0,n - 1,2):
+            if rings[currIdx] == redChar:
+                currRod = int(rings[currIdx + 1])
+                if lookUpTable[currRod][colorMap[redChar]] == False:
+                    lookUpTable[currRod][colorMap[redChar]] = True
+                    
+            elif rings[currIdx] == blueChar:
+                currRod = int(rings[currIdx + 1])
+                if lookUpTable[currRod][colorMap[blueChar]] == False:
+                    """
+                    something is definitely wrong here
+                    array is not working properly
+                    """
+                    print(str(lookUpTable[currRod])+" "+str(lookUpTable[currRod][1]))
+                    """
+                    assignment is not working properly
+                    """
+                    lookUpTable[currRod][colorMap[blueChar]] = True                    
+            elif rings[currIdx] == greenChar:
+                currRod = int(rings[currIdx + 1])
+                if lookUpTable[currRod][colorMap[greenChar]] == False:
+                    lookUpTable[currRod][colorMap[greenChar]] = True
+                    
+        m = len(lookUpTable)
+        ans = 0
+        for currRod in range(m):
+            if lookUpTable[currRod][colorMap[redChar]] and lookUpTable[currRod][colorMap[blueChar]] and lookUpTable[currRod][colorMap[greenChar]]:
+                ans += 1
+        return ans
+                
+            

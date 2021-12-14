@@ -1,0 +1,15 @@
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        """
+        convert string into char array
+        then convert it into set
+        then graze over stones and see if it is present in jewels then increment count
+        """
+        jewelsArr = list(jewels)
+        jewelsSet = set(jewels)
+        
+        ans = 0
+        for stone in stones:
+            if stone in jewelsSet:
+                ans += 1
+        return ans

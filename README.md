@@ -71,3 +71,4 @@ solutions to graze over
 69.  First Missing Positive => very good problem brute force with the set and constant time with cyclic sort asked in yellow.ai
 70.  Shuffle an Array => fisher yates algorithm going backwards logic partitions into array
 71.  Find Good Days to Rob the Bank => preprocessing is necessary like largest histogram or trapping rainwater
+72.  Rings and Rods => simple array manipulation problem

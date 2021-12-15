@@ -73,3 +73,4 @@ solutions to graze over
 71.  Find Good Days to Rob the Bank => preprocessing is necessary like largest histogram or trapping rainwater
 72.  Rings and Rods => simple array manipulation problem
 73.  Jewels and Stones => simple hashtable problem
+74.  Increasing Order Search Tree => very very good problem with though process of inorder with head and tail pointers

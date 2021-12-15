@@ -1,0 +1,59 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def increasingBST(self, root: TreeNode) -> TreeNode:
+        """
+        idea is very simple to have two variables
+        head which indicates head of list
+        and tail which will be last node of list
+        
+        tc= O(n)
+        sc = O(n)
+        """
+        def inorder(root,head,tail):
+            if root is None:
+                return head,tail
+            head,tail = inorder(root.left,head,tail)
+            if head is None:
+                head = root
+            else:
+                tail.right = root
+            tail = root
+            root.left = None
+            head,tail = inorder(root.right,head,tail)
+            return head,tail
+            
+        
+        head = None
+        tail = None
+        head,tail = inorder(root,head,tail)
+        return head
+        
+    def bruteForce(self,root):
+        """
+        brute force is to do inorder and cache data
+        then graze over data and maually construct a tree
+        tc = O(2n) => O(n)
+        sc = O(n)
+        """
+        def preorder(root,ans):
+            if root is None:
+                return
+            preorder(root.left,ans)
+            ans.append(root.val)
+            preorder(root.right,ans)
+        ans = []
+        preorder(root,ans)
+        head = TreeNode(ans[0])
+        curr = head
+        n = len(ans)
+        for currIdx in range(1,n):
+            currNode = TreeNode(ans[currIdx])
+            curr.right = currNode
+            curr = curr.right
+        return head
+        

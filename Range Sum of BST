@@ -1,0 +1,50 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        """
+        brute force is to just graze over tree in any order 
+        and if curr value is in the range then add it
+        
+        but it will take O(n) time and space 
+        and we are not using the fact that this is BST
+        
+        what we can do is we will graze in bst fashion first
+        and if curr value is less than low and high
+        then move towards right
+        else if it is greater than low and high
+        then move towards left
+        else pass the curr root to the function
+        and return the sum
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        def preOrderToCheckAndAdd(root,low,high):
+            if root is None:
+                return
+            if low <= root.val <= high:
+                self.currSum += root.val
+            preOrderToCheckAndAdd(root.left,low,high)
+            preOrderToCheckAndAdd(root.right,low,high)
+    
+        def useBstPropAndFindSource(root,low,high):
+            if root is None:
+                return
+            if root.val < low:
+                root = root.right
+                useBstPropAndFindSource(root,low,high)
+            elif root.val > high:
+                root = root.left
+                useBstPropAndFindSource(root,low,high)
+            else:
+                preOrderToCheckAndAdd(root,low,high)
+        
+        self.currSum = 0
+        useBstPropAndFindSource(root,low,high)
+        return self.currSum
+        

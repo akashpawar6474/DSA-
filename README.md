@@ -75,3 +75,4 @@ solutions to graze over
 73.  Jewels and Stones => simple hashtable problem
 74.  Increasing Order Search Tree => very very good problem with though process of inorder with head and tail pointers
 75.  Range Sum of BST => first find source using bst prop then graze for that tree
+76.  Missing Number => VIMP problem can be solved using set,math,xor and cyclic sort (1st problem of sde sheet)

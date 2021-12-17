@@ -1,0 +1,48 @@
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        """
+        another way is to use cyclic sort
+        like place 0 on 0th idx and 1 on 1st idx and so on
+        """
+        currIdx = 0
+        n = len(nums)
+        while currIdx < n:
+            eleOnCurrIdx = nums[currIdx]
+            if eleOnCurrIdx < n and nums[currIdx] != nums[eleOnCurrIdx]:
+                nums[currIdx],nums[eleOnCurrIdx] = nums[eleOnCurrIdx],nums[currIdx]
+            else:
+                currIdx += 1
+        
+        ans = n
+        for currIdx in range(n):
+            if currIdx != nums[currIdx]:
+                ans = currIdx
+                break
+        return ans
+                
+    def bruteAndXor(self,nums):
+        """
+        brute force is using set then graze over range of 0 to n
+        and if not present then return 
+        tc= O(2n) = O(n)
+        sc = O(n)
+        
+        better we can do is cal sum of n elements using formula
+        but this can cause issue in any of the language
+        
+        we can use xor also
+        like do xor of array elements
+        then do xor of 0 to n elements
+        then do xor of both the answers
+        """
+        n = len(nums)
+        arrXor = 0
+        for currEle in nums:
+            arrXor ^= currEle
+        
+        originalXor = 0
+        for currEle in range(n + 1):
+            originalXor ^= currEle
+        
+        return originalXor ^ arrXor
+            

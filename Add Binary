@@ -1,0 +1,29 @@
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        """
+        this is very easy problem
+        convert strings to list
+        then take a loop untill array has elements
+        OR
+        carry is there
+        
+        area of interest in this problem is 
+        to take mod by 2 then divide by 2
+        tc = O(max(n,m))
+        sc = constant
+        """
+        carry = 0
+        a = list(a)
+        b = list(b)
+        
+        result = ''
+        
+        while a or b or carry:
+            if a:
+                carry += int(a.pop())
+            if b:
+                carry += int(b.pop())
+            
+            result += str(carry % 2)
+            carry = carry // 2
+        return result[::-1]

@@ -1,0 +1,46 @@
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        """
+        In iterative approach we will have check for -ve n
+        """
+        placeHolderPower = n
+        ans = 1
+        placeHolderCoefficient = x
+        
+        if placeHolderPower < 0:
+            placeHolderPower *= -1
+        
+        while placeHolderPower > 0:
+            if placeHolderPower & 1 != 0:
+                ans *= placeHolderCoefficient
+                placeHolderPower -= 1
+            else:
+                placeHolderCoefficient = (placeHolderCoefficient * placeHolderCoefficient)
+                placeHolderPower = placeHolderPower // 2
+                
+        if n < 0:
+            return 1.0 / ans
+        return ans
+    
+    
+    def recursiveApproach(self,x,n):
+        """
+        brute force is linear graze over range of 1 to n
+        and add prod of x to ans
+        
+        we can do it recursive way also
+        tc = O(logn)
+        sc = O(logn)
+        """
+        def recursive(x,n):
+            if n == 0:
+                return 1
+            elif n < 0:
+                #make -ve value +
+                return 1 / recursive(x,-n)
+            elif n & 1 == 0:
+                return recursive(x * x,n // 2)
+            else:
+                return x * recursive(x,n - 1)
+            
+        return recursive(x,n)

@@ -1,0 +1,43 @@
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
+        brute force is using two loops it will take quadratic time
+        
+        history of this problem:
+        Grenandar was solving the problem of finding max rectangular subarray sum
+        in 2-d matrix and he proposed O(n ^ 6) solution
+        
+        Grenandar proposed 1-d problem to get more insights into the problem
+        and he derived O(n ^ 2) approach (brute force)
+        then some scientist shamos derived O(nlogn) solution using divide and conquer
+        algorithm
+        so he has given seminar in carneige mellon university about this problem
+        which was attended by Jay kadane who has derived O(n) dp+greedy problem
+        
+        Q.how problem is greedy or dp?
+        at every step if running sum gets below 0 then we make it 0
+        because greedily rather than continuing -ve sum
+        it is better to start fresh againg from next idx
+        
+        at each position we have two choices either to start from curr idx
+        or add curr ele to max subarray sum untill previous idx
+        
+        Q.what questions should we ask ourselfs?
+        1.at each postion what we have to do?
+        2.if running sum is less than 0 then what we will do?
+        tc = O(n)
+        sc = constant
+        
+        take initial maxSum as -math.inf
+        """
+        maxSum = -math.inf
+        n = len(nums)
+        currSum = 0
+        for currIdx in range(n):
+            currSum += nums[currIdx]
+            maxSum = max(currSum,maxSum)
+            if currSum < 0:
+                currSum = 0
+        return maxSum
+        
+        

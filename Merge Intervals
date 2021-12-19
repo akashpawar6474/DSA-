@@ -1,0 +1,32 @@
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        """
+        this is total implementation problem
+        first of all sort the array using start time
+        then take two variable start and end respectively
+        assign start and end of first interval to variables
+        then graze from 1st idx to last idx
+        if start of currIdx is less than end variable
+        then update end variable with max of end variable and end value of curr idx
+        else
+        create intervals of variable and attach to answer
+        and assign curr iterval details to variables
+        tc = O(nlogn)
+        sc = O(n)
+        """
+        intervals.sort(key = lambda x:x[0])
+        start = intervals[0][0]
+        end = intervals[0][1]
+        ans = []
+        n = len(intervals)
+        for currIdx in range(1,n):
+            currStart = intervals[currIdx][0]
+            currEnd = intervals[currIdx][1]
+            if currStart <= end:
+                end = max(end,currEnd)
+            else:
+                ans.append([start,end])
+                start = currStart
+                end = currEnd
+        ans.append([start,end])
+        return ans

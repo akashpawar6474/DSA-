@@ -79,3 +79,4 @@ solutions to graze over
 77.  Sort Colors => sorting will solve this issue but dutch national flag algo comes to rescue for linear soln with intitution and edge case(2nd problem of sde sheet)
 78.  Pow(x,n) => recursive and iterative VIMP problem (13th problem from sde sheet)
 79.  Add Binary => very simple problem it can be solved using mod by 2 and divide by 2
+80.  Maximum Subarray => this problem can be solved using brute force but this is famous for DP+Greed+Kadane algorithm(4th problme of sde sheet)

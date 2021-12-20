@@ -1,5 +1,44 @@
+import math
 class Solution:
     def maxSubArray(self, nums: List[int]) -> int:
+        """
+        this problem can also be solved using divide and conquer
+        we will divide array untill we remain with only one element
+        
+        idea is to find the mid
+        then find subarray with max sum including mid(CSS => crossing sum subarray)
+        lss = left subarray sum
+        rss = right subarry sum
+        then recur for left and right part and return maximum
+        tc = O(nlogn)
+        sc = O(logn)
+        """
+        def divideAndConquer(nums,start,end):
+            if start == end:
+                return nums[start]
+            mid = (start + end) // 2
+            cssLeftMax = -math.inf
+            tsum = 0
+            for currIdx in range(mid,start - 1,-1):
+                tsum += nums[currIdx]
+                if tsum > cssLeftMax:
+                    cssLeftMax = tsum
+            
+            cssRightMax = -math.inf
+            tsum = 0
+            for currIdx in range(mid + 1,end + 1):
+                tsum += nums[currIdx]
+                if tsum > cssRightMax:
+                    cssRightMax = tsum
+            
+            lss = divideAndConquer(nums,start,mid)
+            rss = divideAndConquer(nums,mid + 1,end)
+            return max(cssLeftMax + cssRightMax,lss,rss)
+        
+        n = len(nums)
+        ans = divideAndConquer(nums,0,n - 1)
+        return ans
+    def kadanesAlgo(self,nums):
         """
         brute force is using two loops it will take quadratic time
         

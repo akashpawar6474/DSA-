@@ -1,0 +1,43 @@
+class Solution:
+    def setZeroes(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        this is total implementation based problem
+        idea is first find out if first row and col has zeroes or not
+        then graze over inner matrix from 1,1
+        and if found 0 then mark its row or col head as 0
+        then againg graze over matrix from 1,1
+        if row or col head is 0 then mark it as 0
+        at last deal with the first row and col
+        tc = O(n * m)
+        sc = constant
+        """
+        isFirstRowZero = False
+        isFirstColZero = False
+        n = len(matrix)
+        m = len(matrix[0])
+        for currIdx in range(n):
+            if matrix[currIdx][0] == 0:
+                isFirstColZero = True
+                break
+        for currIdx in range(m):
+            if matrix[0][currIdx] == 0:
+                isFirstRowZero = True
+                break
+        for row in range(1,n):
+            for col in range(1,m):
+                if matrix[row][col] == 0:
+                    matrix[row][0] = 0
+                    matrix[0][col] = 0
+        for row in range(1,n):
+            for col in range(1,m):
+                if matrix[row][0] == 0 or matrix[0][col] == 0:
+                    matrix[row][col] = 0
+        if isFirstColZero:
+            for currIdx in range(n):
+                matrix[currIdx][0] = 0
+        if isFirstRowZero:
+            for currIdx in range(m):
+                matrix[0][currIdx] = 0
+                
+        

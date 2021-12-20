@@ -82,4 +82,4 @@ solutions to graze over
 80.  Maximum Subarray => this problem can be solved using brute force but this is famous for DP+Greed+Kadane algorithm(4th problme of sde sheet)
 81.  Merge Intervals => very simple implementation based problem (5th problem of sde sheet)
 82.  Set Matrix Zeroes => very simple implementaion based row and col header problem(7th problem of sde sheet)
-83.  
+83.  Find the Duplicate Number => freq table Or cyclic sort Or sorting Or tortoise and hare algo(cycle finding algo)(6th problem of sde sheet)

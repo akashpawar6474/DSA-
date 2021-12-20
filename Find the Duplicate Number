@@ -1,0 +1,67 @@
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        """
+        1 2 4 4 3
+        s f
+          s     f
+            s   f
+                s,f
+                
+        assign 0 to fast
+        1 2 4 4 3
+                s
+        f     s
+          f     s
+            f s
+                f,s
+        so if we go with slow ptr
+        1 to 2 to 4 to 3 to 4(again)
+        
+        return the idx here
+        Q.what will be time complexity here?
+        =>
+        tc = O(n)
+        sc = O(1)
+        
+        """
+        slow = nums[0]
+        fast = nums[nums[0]]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+        fast = 0
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        return slow
+    def cyclicSort(self,nums):
+        """
+        brute force is using frequency table
+        which ever key has value 2 then return that key
+        tc = O(2n) = O(n)
+        sc = O(n)
+        
+        Q.can we do better?
+        yes using cyclic sort we can make use of given data
+        like integers are in range of 1 to n
+        
+        but this approach will distort the output
+        tc = O(2n) => O(n)
+        sc = constant
+        """
+        currIdx = 0
+        n = len(nums)
+        while currIdx < n:
+            valAtCurrIdx = nums[currIdx] - 1
+            if valAtCurrIdx < n and nums[currIdx] != nums[valAtCurrIdx]:
+                nums[currIdx],nums[valAtCurrIdx] = nums[valAtCurrIdx],nums[currIdx]
+            else:
+                currIdx += 1
+                
+        
+        ans = -1
+        for currIdx in range(n):
+            if nums[currIdx] != currIdx + 1:
+                ans = nums[currIdx] 
+                break
+        return ans

@@ -1,0 +1,45 @@
+import math
+class Solution:
+    def minimumAbsDifference(self, arr: List[int]) -> List[List[int]]:
+        """
+        idea is keep track of min diff on run
+        if currabsdiff is less than min
+        then initialize ans with curr pair
+        else if currabsdiff is equal to min
+        add curr pair to existing list
+        tc = O(nlogn) => but only one traversal
+        sc = O(n)
+        """
+        arr.sort()
+        minAbsDiff = math.inf
+        n = len(arr)
+        ans = []
+        for currIdx in range(n - 1):
+            currAbsDiff = abs(arr[currIdx] - arr[currIdx + 1])
+            if currAbsDiff < minAbsDiff:
+                ans = [[arr[currIdx],arr[currIdx + 1]]]
+                minAbsDiff = currAbsDiff
+            elif currAbsDiff == minAbsDiff:
+                ans.append([arr[currIdx],arr[currIdx + 1]])
+        return ans
+    def bruteForce(self,arr):
+        """
+        brute force is sort the array
+        then find min diff with one traversal
+        then graze over it if curr no and next no has diff equal to min diff
+        then add pair to answer
+        tc = O(nlogn)
+        sc = O(n)
+        """
+        arr.sort()
+        minDiff = math.inf
+        n = len(arr)
+        for currIdx in range(n - 1):
+            currAbsDiff = abs(arr[currIdx] - arr[currIdx + 1])
+            minDiff = min(minDiff,currAbsDiff)
+        ans = []
+        for currIdx in range(n - 1):
+            currAbsDiff = abs(arr[currIdx] - arr[currIdx + 1])
+            if currAbsDiff == minDiff:
+                ans.append([arr[currIdx],arr[currIdx + 1]])
+        return ans

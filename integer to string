@@ -1,0 +1,12 @@
+def toString(num):
+	st = []
+	while num > 0:
+		currNo = num % 10
+		num = num // 10
+		st.append(str(currNo))
+	st.reverse()
+	numStr = ''.join(st)
+	return numStr
+num = 12345
+print(toString(num))
+

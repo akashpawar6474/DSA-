@@ -84,3 +84,4 @@ solutions to graze over
 82.  Set Matrix Zeroes => very simple implementaion based row and col header problem(7th problem of sde sheet)
 83.  Find the Duplicate Number => freq table Or cyclic sort Or sorting Or tortoise and hare algo(cycle finding algo)(6th problem of sde sheet)
 84.  integer to string => it is good example of use of % and / operator (asked in dolata capita,bombay)
+85.  Minimum Absolute Difference => sorting and running logic problem asked by akshu

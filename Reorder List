@@ -1,0 +1,68 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reorderList(self, head: Optional[ListNode]) -> None:
+        """
+        Do not return anything, modify head in-place instead.
+        idea is very simple reverse the half list
+        then graze over both lists and merget them
+        1.find slow and fast using midPtr
+        2.reverse half list
+        3.then merge two lists
+        tc = O(n + n / 2 + n / 2) => O(n)
+        sc = constant
+        """
+        def printList(head):
+            while head:
+                print(head.val,end = ' ')
+                head = head.next
+            print('----')
+            
+        def reverse(headPtr):
+            if headPtr is None or headPtr.next is None:
+                return headPtr
+            prev = None
+            nextPtr = None
+            curr = headPtr
+            while curr:
+                nextPtr = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nextPtr
+            return prev
+            
+        def findMidPtr(headPtr):
+            if head is None or head.next is None:
+                return head
+            slow = head
+            fast = head.next
+            while fast is not None and fast.next is not None:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+        
+        def merge(h1,h2):
+            dummyHead = ListNode()
+            curr = dummyHead
+            while h1 or h2:
+                if h1:
+                    curr.next = h1
+                    curr = curr.next
+                    h1 = h1.next
+                if h2:
+                    curr.next = h2
+                    curr = curr.next
+                    h2 = h2.next
+            return dummyHead.next
+        
+        if head is None or head.next is None:
+            return head
+        mid = findMidPtr(head)
+        h2 = reverse(mid.next)
+        h1 = head
+        mid.next = None
+        return merge(h1,h2)
+        

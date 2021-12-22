@@ -1,0 +1,21 @@
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        """
+        this is very easy problem
+        take anslist of length numRows
+        and each row has that no of columns
+        tc = O(n ^ 2)
+        sc = O(n ^ 2)
+        """
+        pascalTriangle = []
+        prev = []
+        for currRow in range(numRows):
+            currRowList = []
+            for currCol in range(currRow + 1):
+                if currCol == 0 or currCol == currRow:
+                    currRowList.append(1)
+                else:
+                    currRowList.append(prev[currCol] + prev[currCol - 1])
+            prev = currRowList
+            pascalTriangle.append(currRowList)
+        return pascalTriangle

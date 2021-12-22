@@ -85,3 +85,4 @@ solutions to graze over
 83.  Find the Duplicate Number => freq table Or cyclic sort Or sorting Or tortoise and hare algo(cycle finding algo)(6th problem of sde sheet)
 84.  integer to string => it is good example of use of % and / operator (asked in dolata capita,bombay)
 85.  Minimum Absolute Difference => sorting and running logic problem asked by akshu
+86.  Pascal Triangle => simple implementation based problem(8th problem of sde sheet)

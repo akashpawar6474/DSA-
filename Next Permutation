@@ -57,3 +57,61 @@ class Solution:
             nums[breakingPoint],nums[noGreaterThanBreakingPoint] = nums[noGreaterThanBreakingPoint],nums[breakingPoint]
         
             reverse(breakingPoint + 1,len(nums) - 1)
+--------------------------------------------------------------------------------------------------
+tried on 22-12-2021
+-------------------------------------------------------------------------------------------------
+class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        
+        1 2 4 3 2
+                4
+                    3
+            2           2
+        1
+               |
+               |
+              this is increasing slope from last of array
+        3 is gt ele than breaking point from back of array
+        now swap them
+        
+                4
+            3   
+                    2   2
+        1   
+        now 13|422
+        now rev from next idx of breaking point to end of array
+        13224
+        
+        tc = O(n + n) => O(n)
+        sc = constant
+        
+        QQQQ.what is intuition behind this and why it works??
+        """
+        def reverse(start,end,nums):
+            while start < end:
+                nums[start],nums[end] = nums[end],nums[start]
+                start += 1
+                end -= 1
+        
+        bp = -1
+        n = len(nums)
+        for currIdx in range(n - 2,-1,-1):
+            if nums[currIdx] < nums[currIdx + 1]:
+                bp = currIdx
+                break
+        #if bp == -1 then we can say that array is sorted in descending
+        #order so just reverse the array
+        if bp == -1:
+            reverse(0,n - 1,nums)
+        else:
+            #find the idx which has greate value than bp
+            idxOfNoGtBp = -1
+            for currIdx in range(n - 1,bp,-1):
+                if nums[currIdx] > nums[bp]:
+                    idxOfNoGtBp = currIdx
+                    break
+            nums[idxOfNoGtBp],nums[bp] = nums[bp],nums[idxOfNoGtBp]
+            #now reverse from range of bp + 1 to end
+            reverse(bp + 1,n - 1,nums)

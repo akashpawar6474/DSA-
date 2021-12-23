@@ -1,0 +1,81 @@
+import math
+class Solution:
+    def majorityElement(self, nums: List[int]) -> List[int]:
+        """
+        this is same problem which can be solved using 
+        Majority voting algorithm
+        
+        One observations is at max we can have two majority elements
+        which has frequency gt n // 3
+        
+        First approach => take one loop for curr ele 
+        then graze over next region using second loop
+        and at last see if frequency is gt n // 3
+        if yes then add to answer
+        tc = O(n ^ 2)
+        sc = constant
+        
+        Second Approach => we can use freq table
+        tc = O(n)
+        sc= O(n)
+        
+        Third approach is MAJORITY VOTING ALGO
+        we will have two variables count1 and count2
+        and two candidates
+            if currele == candidate1
+                inc count1
+            elif currele == candidate2
+                inc count2
+            elif count1 == 0
+                then take curr ele as candidate
+                inc count1
+            elif count2 == 0
+                take curr ele as candidate 2
+                inc count2
+            else means curr ele doesnt match with any candidate
+                now reduce both counts
+        
+        we cant be sure if both candidates has valid value
+        so it is better to graze over again and validate the frequency
+        is gt n // 3 or not
+        tc = O(3n) => O(n)
+        sc = O(1)
+        """
+        count1 = 0
+        count2 = 0
+        candidate1 = -math.inf
+        candidate2 = -math.inf
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if candidate1 == currEle:
+                count1 += 1
+            elif candidate2 == currEle:
+                count2 += 1
+            elif count1 == 0:
+                candidate1 = currEle
+                count1 += 1
+            elif count2 == 0:
+                candidate2 = currEle
+                count2 += 1
+            else:
+                count1 -= 1
+                count2 -= 1
+        
+        ans = []
+        threshold = n // 3
+        count1 = 0
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if currEle == candidate1:
+                count1 += 1
+        count2 = 0
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if currEle == candidate2:
+                count2 += 1
+        if count1 > threshold:
+            ans.append(candidate1)
+        if count2 > threshold:
+            ans.append(candidate2)
+        return ans

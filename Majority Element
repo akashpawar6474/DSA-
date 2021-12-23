@@ -1,0 +1,37 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        """
+        brute force is to take curr ele as candidate element
+        and graze over remaining array to count
+        how many time that element will be there
+        
+        tc= O(n ^ 2)
+        sc = O(1)
+        
+        MAJORITY VOTING ALGO
+        Observation => there always majority ele exists in array
+        so we will have the count variable
+        then we will graze over the array
+        and if count is none
+            then take curr ele as candidate
+        else if curr ele is equal to candidate
+            then inc the count
+        else means curr ele is nteq to candiate
+            so reduce the count
+            
+        tc = O(n)
+        sc = O(1)
+        """
+        count = 0
+        candidate = -1
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if count == 0:
+                candidate = currEle
+                count += 1
+            elif currEle == candidate:
+                count += 1
+            else:
+                count -= 1
+        return candidate

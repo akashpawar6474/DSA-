@@ -1,4 +1,4 @@
-# DSA-
+# DSA
 solutions to graze over
 1. Even Odd tree => simple level order problem with slight modifications
 2. All paths from source to end => simple graph backtracking problem which can be solved easliy using recursion template for backtracking
@@ -87,3 +87,4 @@ solutions to graze over
 85.  Minimum Absolute Difference => sorting and running logic problem asked by akshu
 86.  Pascal Triangle => simple implementation based problem(8th problem of sde sheet)
 87.  Reorder List => simple implementation based problem with logic of reversing half list like LL Palindrome problem(184th problem of sde sheet)
+88.  Course Schedule II => topological sort problem with visited array and stack to find cycle in DAG simple problem to implement(131th problem of sde sheet)

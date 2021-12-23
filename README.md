@@ -90,3 +90,4 @@ solutions to graze over
 88.  Course Schedule II => topological sort problem with visited array and stack to find cycle in DAG simple problem to implement(131th problem of sde sheet)
 89.  Best Time to Buy and Sell Stock => observation based iterative dp problem VIMP problem(10th problem of sde sheet)
 90.  Search a 2D Matrix => this problem has 4 approaches Binary search problem(11th problem of sde sheet)
+91.  Majority Element => Majority voting algorithm very simple and imp problem(14th problem of sde sheet)

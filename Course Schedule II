@@ -1,0 +1,45 @@
+class Solution:
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        """
+        this is problem of finding cycle in DAG
+        here edge is directed
+        we can use stack to store the order
+        we can be sure that there will be no cycle
+        if we are getting the order itself
+        
+        this is very simple problem 
+        based on concept of finding cycle in DAG
+        with the help of visited array and stack to store the order
+        
+        tc = we visit each node max once O(n + m) m=> no of edges to create graph
+        sc = O(n + m) for visited array and graph
+        
+        TOPOLOGICAL SORT
+        """
+        def findCycleInDAG(graph,source,st,visited):
+            if visited[source] == 'U':
+                visited[source] = 'V'
+                for nei in graph[source]:
+                    if findCycleInDAG(graph,nei,st,visited):
+                        return True
+                visited[source] = 'P'
+                st.append(source)
+                return False
+            elif visited[source] == 'V':
+                "means there is cycle"
+                return True
+            
+        graph = [[] for x in range(numCourses)]
+        for x,y in prerequisites:
+            graph[y].append(x)
+        st = []
+        visited = ['U'] * numCourses
+        isCycle = False
+        for currNode in range(numCourses):
+            if findCycleInDAG(graph,currNode,st,visited):
+                isCycle = True
+                break
+        if isCycle:
+            return []
+        st.reverse()
+        return st

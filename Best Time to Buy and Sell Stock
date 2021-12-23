@@ -1,0 +1,28 @@
+import math
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        """
+        brute force is to have one loop 
+        which will take that price as buy price
+        then we will graze over range from buy price idx + 1 to end
+            and record maximum among them
+            and keep track of maximum profit
+        tc = O(n ^ 2)
+        sc = constant
+        
+        Q.can we remember smallest price untill previous idx?
+        yes at every idx we reduce smallest price untill previous idx
+        from curr sell price
+        and track the maximum profit
+        tc = O(n)
+        sc = constant
+        """
+        minUntillNow = math.inf
+        maxProfit = -math.inf
+        n = len(prices)
+        for currIdx in range(n):
+            currPrice = prices[currIdx]
+            minUntillNow = min(minUntillNow,currPrice)
+            currProfit = currPrice - minUntillNow
+            maxProfit = max(maxProfit,currProfit)
+        return maxProfit

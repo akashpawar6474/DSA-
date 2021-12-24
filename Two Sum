@@ -1,0 +1,32 @@
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        """
+        this is very important problem
+        can be solved using two loops 
+        with quadratic time complexity
+        
+        but with map we can remember 
+        things which can be used later
+        
+        prevEle + currEle = target
+        prevEle = target - currEle
+        
+        if this RHS val is there in map then 
+        we found the pair
+        tc = O(n)
+        sc = O(n)
+        """
+        ht = {}
+        n = len(nums)
+        ans = []
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            lookUpVal = target - currEle
+            if lookUpVal in ht:
+                idxOfLookUpVal = ht[lookUpVal]
+                ans.append(idxOfLookUpVal)
+                ans.append(currIdx)
+                break
+            else:
+                ht[currEle] = currIdx
+        return ans

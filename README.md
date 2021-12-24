@@ -95,3 +95,4 @@ solutions to graze over
 93.  Binary Search => simple binary search problem to find target in sorted array
 94.  First Bad Version => binary search problem where we have to shrink the boundaries Very good problem lot of time wasted to understand what is input
 95.  Search Insert Position => binary search problem same as above to shrink the boundaries and couple of edge cases
+96.  Rotate Image => transpose the matrix then reverse each row one thought and implementation based problem

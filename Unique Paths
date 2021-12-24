@@ -1,0 +1,74 @@
+import math
+class Solution:
+    
+    def uniquePaths(self, m: int, n: int) -> int:
+        """
+        iterative is also simple
+        question yourself what will be the no of ways
+        for last row and col cells to reach end?
+        => then fill those with 1
+        
+        after ask yourself what will be no of ways
+        for cell which is diagonally adjecent to end cell
+        in NW direction
+        
+        so dp[i][j] = dp[i + 1][j] + dp[i][j + 1]
+        tc = O(n * m)
+        sc = O(n * m)
+        """
+        dp = [[0 for col in range(n)] for row in range(m)]
+        rows = m - 1
+        cols = n - 1
+        
+        for currCol in range(cols + 1):
+            dp[rows][currCol] = 1
+        
+        for currRow in range(rows + 1):
+            dp[currRow][cols] = 1
+                
+        for currRow in range(rows - 1,-1,-1):
+            for currCol in range(cols - 1,-1,-1):
+                dp[currRow][currCol] = dp[currRow + 1][currCol] + dp[currRow][currCol + 1]
+        
+        return dp[0][0]
+    
+    def recursive(self,m,n):
+        """
+        this is very simple dp problem
+        
+        main thing to identify what we will do 
+        if we reached end
+        return 1
+        to its caller as no of ways to reach the end
+        
+        now at every cell we have two choices
+            either go horizontal right or vertical down
+            
+        do a lookup also and if we got out of bound
+        then return 0 as there is no way to reach end
+        tc = O(n * m)
+        sc = O(n * m)
+        """
+        def uniquePathsRecursive(currRow,currCol,endRow,endCol,dp):
+            if currRow == endRow and currCol == endCol:
+                return 1
+            if (currRow,currCol) in dp:
+                return dp[(currRow,currCol)]
+            if currRow > endRow or currCol > endCol:
+                return 0
+            
+            waysFromRightNei = uniquePathsRecursive(currRow,currCol + 1,endRow,endCol,dp)
+            waysFromBelowNei = uniquePathsRecursive(currRow + 1,currCol,endRow,endCol,dp)
+            
+            waysFromCurrCell = waysFromRightNei + waysFromBelowNei
+            dp[(currRow,currCol)] = waysFromCurrCell
+            return waysFromCurrCell
+        
+        currRow = 0
+        currCol = 0
+        endRow = m - 1
+        endCol = n - 1
+        dp = {}
+        ans = uniquePathsRecursive(currRow,currCol,endRow,endCol,dp)
+        return ans
+             

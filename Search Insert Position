@@ -1,0 +1,36 @@
+class Solution:
+    def searchInsert(self, nums: List[int], target: int) -> int:
+        """
+        this is also same problem of shrinking the boundaries
+        if ele at mid is lt target
+            then go ahead definitely
+        else means ele at mid is gteq target
+            then move leftwards politely
+            because mid can be our answer
+        there can be edge case
+        if target is gt last ele of array then return 
+        len
+        
+        same if target <= first element
+        then return 0
+        
+        that should be followup question
+        tc = O(logn)
+        sc = constant
+        """
+        n = len(nums)
+        start = 0
+        end = n - 1
+        if target <= nums[0]:
+            return start
+        elif target > nums[n - 1]:
+            return end + 1
+
+        while start < end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid + 1
+            else:
+                end = mid
+        return start
+        

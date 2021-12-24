@@ -1,3 +1,50 @@
+------------------------------------------------------------------------------------- 2nd try on 24 12 2021
+class Solution:
+    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
+        """
+        this is very simple observation and implementation based problem
+        
+        Brute Force => sort the intervals by their start time
+        then take two variables as prevStart and prevEnd
+        and assign out start and end of first interval to it
+        
+        then graze over intervals from 1st intervals
+            at each pos
+            check if curr interval st is lteq prevEnd
+                if yes then update prevend
+            else means curr interval start is gt prevStart
+                then create interval of prevStart and prevEnd
+            and attach to answer
+        at last create interval of prevStart and prevEnd and attach to answer
+        
+        Q.can we do it inplace?
+        we need to delete overlapping interval
+        but if we delete in between it will take O(n) time again
+        we can do but it can come at cost of quadratic time
+        tc = O(nlogn + n) => O(nlogn)
+        sc = O(n)
+        """
+        start = 0
+        end = 1
+        intervals.sort(key = lambda x : x[start])
+        prevStart = intervals[0][start]
+        prevEnd = intervals[0][end]
+        n = len(intervals)
+        ans = []
+        for currIdx in range(1,n):
+            currInterval = intervals[currIdx]
+            if prevEnd >= currInterval[start]:
+                prevEnd = max(prevEnd,currInterval[end])
+            else:
+                prevInterval = [prevStart,prevEnd]
+                ans.append(prevInterval)
+                prevStart = currInterval[start]
+                prevEnd = currInterval[end]
+        
+        remainingInterval = [prevStart,prevEnd]
+        ans.append(remainingInterval)
+        return ans
+----------------------------------------------------------------------------------------------------------
 class Solution:
     def merge(self, intervals: List[List[int]]) -> List[List[int]]:
         """

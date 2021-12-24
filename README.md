@@ -92,3 +92,4 @@ solutions to graze over
 90.  Search a 2D Matrix => this problem has 4 approaches Binary search problem(11th problem of sde sheet)
 91.  Majority Element => Majority voting algorithm very simple and imp problem(14th problem of sde sheet)
 92.  Majority Element II => Majorit voting algorithm very simplem but with some additional checks(15th problem of sde sheet)
+93.  Binary Search => simple binary search problem to find target in sorted array

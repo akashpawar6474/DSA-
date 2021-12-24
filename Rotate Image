@@ -1,0 +1,30 @@
+class Solution:
+    
+    def rotate(self, matrix: List[List[int]]) -> None:
+        """
+        Do not return anything, modify matrix in-place instead.
+        
+        brute force is to transpose the matrix then reverse
+        
+        1 2 3               1 4 7               7 4 1
+        4 5 6 = Tranpose => 2 5 6 = reverse =>  6 5 2
+        7 8 9               3 6 9               9 6 3
+        tc = O(n * m)
+        sc = constant
+        """
+        def transpose(matrix,rows,cols):
+            for currRow in range(rows):
+                for currCol in range(0,currRow):
+                    matrix[currRow][currCol],matrix[currCol][currRow] = matrix[currCol][currRow],matrix[currRow][currCol]
+        
+        def reverseMatrix(matrix):
+            rows = len(matrix)
+            for currRow in range(rows):
+                matrix[currRow].reverse()
+        
+        rows = len(matrix)
+        cols = len(matrix[0])
+        
+        transpose(matrix,rows,cols)
+        reverseMatrix(matrix)
+        

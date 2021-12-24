@@ -1,0 +1,33 @@
+# The isBadVersion API is already defined for you.
+# @param version, an integer
+# @return an integer
+# def isBadVersion(version):
+
+class Solution:
+    def firstBadVersion(self, n):
+        """
+        :type n: int
+        :rtype: int
+        
+        Q.what is function prototype?
+        what does it takes as an argument
+        
+        this question dont have clear explanation
+        yeah I didnt able to get we have one defined
+        fun to get if version is bad or not
+        
+        maybe we have to do bs over range of 1 to n
+        tc = O(logn)
+        sc = constant
+        """
+        start = 1
+        end = n
+        while start < end:
+            mid = (start + end) // 2
+            if not isBadVersion(mid):
+                start = mid + 1
+            else:
+                end = mid
+        return start
+                
+        

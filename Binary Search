@@ -1,0 +1,21 @@
+class Solution:
+    def search(self, nums: List[int], target: int) -> int:
+        """
+        this is simple binary search problem
+        tc = O(logn)s
+        sc = constant
+        """
+        n = len(nums)
+        start = 0
+        end = n - 1
+        isPresent = False
+        while start <= end:
+            mid = (start + end) // 2
+            if nums[mid] < target:
+                start = mid + 1
+            elif nums[mid] > target:
+                end = mid - 1
+            else:
+                isPresent = True
+                break
+        return mid if isPresent else -1

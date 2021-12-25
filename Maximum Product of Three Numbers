@@ -1,0 +1,44 @@
+import math
+class Solution:
+    def maximumProduct(self, nums: List[int]) -> int:
+        """
+        we can get max prod in 2 ways
+            multiply maxele,second max ele,third max ele
+            multiply minele,min second ele,max ele (in case we have big -ve no's)
+        we can get it by sorting but it will take nlogn time and linear space
+        
+        we can get those with help of utility variables
+        to keep track mutually
+        tc = O(n)
+        sc = constant
+        """
+        firstMax = -math.inf
+        secondMax = -math.inf
+        thirdMax = -math.inf
+        firstMin = math.inf
+        secondMin = math.inf
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if currEle > firstMax:
+                thirdMax = secondMax
+                secondMax = firstMax
+                firstMax = currEle
+            elif currEle > secondMax:
+                thirdMax = secondMax
+                secondMax = currEle
+            elif currEle > thirdMax:
+                thirdMax = currEle
+            
+            if currEle < firstMin:
+                secondMin = firstMin
+                firstMin = currEle
+            elif currEle < secondMin:
+                secondMin = currEle
+                
+        usingPositiveValues = (firstMax * secondMax * thirdMax)
+        usingNegativeValues = (firstMax * firstMin * secondMin)
+        
+        return max(usingPositiveValues,usingNegativeValues)
+                
+        

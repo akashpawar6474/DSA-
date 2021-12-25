@@ -117,3 +117,4 @@ solutions to graze over
 115.  Palindrome Linked List => reversing half list(34th problem of sde sheet)
 116.  Flatten a Multilevel Doubly Linked List => recursion based problem but easy to implement(35th problem of sde sheet)
 117.  Rotate List => counting length + marking tail ptr + making k inbound + finding nth node from end VGP and VIMP (36th problem of sde sheet)
+118.  Count Complete Tree Nodes => Perfect BT + math formulat to get Nodes of PBT + recursive soln + VIMP problem(40th problem of sde sheet)

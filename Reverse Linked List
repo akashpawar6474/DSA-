@@ -1,0 +1,45 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        iterative is having standard patten
+        tc = O(n)
+        sc = constant
+        """
+        def iterative(head):
+            prev,nextPtr = None,None
+            curr = head
+            while curr:
+                nextPtr = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nextPtr
+            return prev
+        
+        if head is None:
+            return head
+        ans = iterative(head)
+        return ans
+    def recursiveSolution(self,head):
+        """
+        this is very simple and imp problem
+        can be solved using both ways
+        tc = O(n)
+        sc = O(n)
+        """
+        def recursive(head):
+            if head.next is None:
+                return head
+            newHead = recursive(head.next)
+            head.next.next = head
+            head.next = None
+            return newHead
+        
+        if head is None:
+            return head
+        ans = recursive(head)
+        return ans

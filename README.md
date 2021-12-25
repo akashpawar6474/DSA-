@@ -101,3 +101,4 @@ solutions to graze over
 99.  Determine if string is unique => witout map or set or char freq array of lenght 28 with bit manipulation VVIMP amazon,google,fb
 100.  Squares of a Sorted Array => very simple problem two pointers moving in same direction 
 101.  Rotate Array => VIMP and simple problem where reversing is logic
+102.  Basic Calculator II => very imp problem not intuitive asked in google and fb

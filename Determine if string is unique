@@ -1,0 +1,24 @@
+"""
+determine if string contains all unique characters
+dont use set or map
+deal with bit manipulations
+we can have map of 28 char but that is also not allowed
+tc = O(n)
+sc = totally constant
+"""
+def isUnique(st):
+	checker = 0
+	n = len(st)
+	for currIdx in range(n):
+		currCh = st[currIdx]
+		isunique = True
+		bitIdxToSetInBitVector = ord(currCh) - ord('a')
+		bitVector = 1 << bitIdxToSetInBitVector
+		if (checker & bitVector) > 0:
+			isunique = False
+			break
+		else:
+			checker = checker | bitVector
+	return isunique
+
+print(isUnique("acsa"))

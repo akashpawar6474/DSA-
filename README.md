@@ -106,3 +106,4 @@ solutions to graze over
 104.  Reverse Linked List => simple standard interview problem(24th problem of sde sheet)
 105.  Middle of the Linked List => tortoise and hare algorithm (25th problem of sde sheet)
 106.  4Sum => Very Imp problem with visualization of how to skip the duplicates(19th problem of sde sheet)
+107.  3Sum => very imp problem which is exact replica of above problem(39th problem of sde sheet)

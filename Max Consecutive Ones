@@ -1,0 +1,24 @@
+class Solution:
+    def findMaxConsecutiveOnes(self, nums: List[int]) -> int:
+        """
+        Brute force itself is optimal solution
+        we will graze over arrau
+            if it is one
+                then inc count
+                keep track of count with maxcount
+            else
+                make count zero
+        tc = O(n)
+        sc = O(1)
+        """
+        maxOnes = 0
+        count = 0
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if currEle == 1:
+                count += 1
+                maxOnes = max(maxOnes,count)
+            else:
+                count = 0
+        return maxOnes

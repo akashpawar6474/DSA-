@@ -1,0 +1,64 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    
+    def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        in previous problem we discussed about intuition
+        now we will discuss about why we find beginning of list
+        with this algorithm
+                      -----------mp-----          
+        sp ------ lsp                   |
+                      ------------------
+                      
+        sp = starting point
+        lsp = loop starting point
+        mp = meeting point of fast and slow ptr
+        
+        x1 = distance bw sp and lsp
+        x2 = distance bw lsp and mp
+        x3 = distance bw mp to lsp
+        
+        Q.now figure out how much distance fast and slow has covered
+        
+        we know that fast is having double speed than slow
+        it must have travelled twice distance than slow
+        
+        so distance travelled by slow = x1 + x2
+        and distance travelled by fast x1 + x2 + x3 + x2
+        
+        2 * dist(slow) = dist(fast)
+        2 * (x1 + x2) = x1 + x2 + x3 + x2
+        x1 + x1 + x2 + x2 = x1 + x2 + x3 + x2
+        now cancel out
+        one x1 and two x2's
+        x1 = x3
+        
+        so when out ptr meets at mp
+        then we have to put fast at sp
+        as per above formula 
+        when both are equal then we are at beginning of loop
+        """         
+        def findStartingOfLoop(slow,fast,head):
+            fast = head
+            while slow != fast:
+                slow = slow.next
+                fast = fast.next
+            return slow
+        
+        if head is None:
+            return None
+        slow = head
+        fast = head
+        ans = None
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                ans = findStartingOfLoop(slow,fast,head)
+                break
+        return ans

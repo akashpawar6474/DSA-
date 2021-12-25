@@ -120,3 +120,4 @@ solutions to graze over
 118.  Count Complete Tree Nodes => Perfect BT + math formulat to get Nodes of PBT + recursive soln + VIMP problem(40th problem of sde sheet)
 119.  Max Consecutive Ones => simple brute force and greedy approach to track maxcount when ever count will be inreased(49th problem of sde sheet)
 120.  Maximum Product of Three Numbers => finding max and min without sorting(50th problem of sde sheet)
+121.  Remove Duplicates from Sorted Array => simple twoptr approach(42nd problem of sde sheet)

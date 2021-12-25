@@ -1,0 +1,51 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    
+    def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        brute force is very simple create new list with help of two pointers
+        
+        better we can do with two pointers itself
+        but we have to do it inplace
+        
+        basically we will have 3 ptrs
+        smallPrev,small,large
+        for eg in below lists
+        1 3 5
+        2 4 6
+        smallPrev will be None
+        small will be 1 and large will be 2
+        
+        steps as follows
+        1.move small ptr untill it is lteq large along with following smallPrev
+        2.attch smallPrev to larget
+        3.swap small and large ptrs
+        tc = O(n + m)
+        sc = constant
+        """
+        def merge(small,smallPrev,large):
+            while small and large:
+                while small and small.val <= large.val:
+                    smallPrev = small
+                    small = small.next
+                smallPrev.next = large
+                small,large = large,small
+        
+        if list1 is None or list2 is None:
+            return list1 if list1 else list2
+        small,smallPrev,large = None,None,None
+        if list1.val < list2.val:
+            small = list1
+            large = list2
+        else:
+            small = list2
+            large = list1
+        head = small
+        merge(small,smallPrev,large)
+        return head
+            
+        

@@ -100,3 +100,4 @@ solutions to graze over
 98.  Unique Paths => Simple dp problem (17th problem of sde sheet)
 99.  Determine if string is unique => witout map or set or char freq array of lenght 28 with bit manipulation VVIMP amazon,google,fb
 100.  Squares of a Sorted Array => very simple problem two pointers moving in same direction 
+101.  Rotate Array => VIMP and simple problem where reversing is logic

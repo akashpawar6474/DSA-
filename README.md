@@ -103,3 +103,4 @@ solutions to graze over
 101.  Rotate Array => VIMP and simple problem where reversing is logic
 102.  Basic Calculator II => very imp problem not intuitive asked in google and fb
 103.  Longest Consecutive Sequence => Set problem (20th problem of sde sheet)
+104.  Reverse Linked List => simple standard interview problem(24th problem of sde sheet)

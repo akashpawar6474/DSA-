@@ -1,0 +1,64 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        """
+        Brute force is pop each item from list
+        then attach it to start of the list
+        
+        we have to do this k times
+        tc = O(n * k)
+        sc = constant
+        
+        Now better approach is 
+        count the length and attach last node to head
+        for future sake
+        
+        make k inbound
+        
+        then find new Head of list and break the link
+        and return that pointer
+        """
+        def countLengthAndReturnTail(headPtr):
+            count = 1
+            curr = headPtr
+            while curr.next:
+                count += 1
+                curr = curr.next
+            return count,curr
+        
+        def makeKInbound(k,lengthOfList):
+            k = k % lengthOfList
+            return k
+        
+        def reachKthNodeFromEnd(head,k):
+            slow = head
+            fast = head
+            noOfAdditionalStepsForFast = k
+            while noOfAdditionalStepsForFast > 0:
+                fast = fast.next
+                noOfAdditionalStepsForFast -= 1
+            
+            while fast.next:
+                slow = slow.next
+                fast = fast.next
+            
+            return slow
+        
+        if head is None:
+            return head
+        lenOfList,tailPtr = countLengthAndReturnTail(head)
+        k = makeKInbound(k,lenOfList)
+        if k == 0:
+            return head
+        breakingNode = reachKthNodeFromEnd(head,k)
+        tailPtr.next = head
+        newHead = breakingNode.next
+        breakingNode.next = None
+        return newHead
+        
+            
+                

@@ -1,0 +1,17 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        """
+        brute force will be having two pointers
+        initially unique ptr will reside on 2nd idx
+        tc = O(n)
+        sc = O(1)
+        """
+        uniquePtr = 2
+        n = len(nums)
+        for currIdx in range(2,n):
+            currEle = nums[currIdx]
+            recentUniqueEle = nums[uniquePtr - 2]
+            if currEle != recentUniqueEle:
+                nums[uniquePtr] = currEle
+                uniquePtr += 1
+        return uniquePtr

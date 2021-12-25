@@ -1,0 +1,51 @@
+class Solution:
+    
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        brute force is find every substring
+        then make set of it 
+        if length is equal then keep track of maximum
+        
+        for generating substrings it will take 3 loops
+        then additional space everytime
+        tc = O(n ^ 3)
+        sc = O(n) for set where substring is whole string
+        
+        Better approach is have slidng window
+        windowend will graze over range
+            take a loop untill ele at windowEnd is not equal to ele at windowstart
+                inc windowstart
+            when found that first occurance 
+            then skip it by incrementing windowstart
+            keep track of lenght with max
+
+        tc = O(n)
+        sc = O(n)
+        
+        But problem is that rather than 
+        we are shrinking window by walking
+        
+        what if we jump or shrink windowStart in one go
+        we can store mapping of char and its idx in map
+        we will graze our windowEnd 
+            if char at windowend is present into map
+                update windowstart to max of windowStart and idx of char at windowend + 1
+            update idx of curr char
+            keep track of len
+            
+        tc = O(n)
+        sc = O(n)
+        """
+        windowStart = 0
+        n = len(s)
+        ht = {}
+        maxLen = 0
+        for windowEnd in range(n):
+            currChAtWindowEnd = s[windowEnd]
+            if currChAtWindowEnd in ht:
+                prevIdxOfCharAtWindowEnd = ht[currChAtWindowEnd]
+                windowStart = max(windowStart,prevIdxOfCharAtWindowEnd + 1)
+            ht[currChAtWindowEnd] = windowEnd
+            currWindowLen = windowEnd - windowStart + 1
+            maxLen = max(currWindowLen,maxLen)
+        return maxLen

@@ -1,0 +1,26 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        this is also very simple and important problem
+        which can be solved using tortoise and hare algo
+        where slow ptr will move by one step and fast ptr
+        will move by two steps
+        
+        tc = O(n)
+        sc = constant
+        """
+        if head is None:
+            return head
+        slow = head
+        fast = head
+        
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        return slow

@@ -1,0 +1,40 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        this is very simple problem
+        with two pointer on two diff lists
+        tc = O(n + m)
+        sc = O(n + m) for creating new list
+        """
+        carry = 0
+        dummyHead = ListNode()
+        curr = dummyHead
+        
+        while l1 or l2:
+            currTotal = 0
+            if l1:
+                currTotal += l1.val
+                l1 = l1.next
+            if l2:
+                currTotal += l2.val
+                l2 = l2.next
+            if carry:
+                currTotal += carry
+            
+            carry = currTotal // 10
+            currTotal = currTotal % 10
+            
+            currNode = ListNode(currTotal)
+            curr.next = currNode
+            curr = curr.next
+        
+        if carry:
+            newNode = ListNode(carry)
+            curr.next = newNode
+        return dummyHead.next

@@ -1,0 +1,27 @@
+class Solution:
+    
+    def sortedSquares(self, nums: List[int]) -> List[int]:
+        """
+        we can have two pointers front and back
+        then we will compare them
+        and take the greatest and shrink the boundary
+        tc = O(n)
+        sc O(n)
+        """
+        n = len(nums)
+        start = 0
+        end = n - 1
+        ans = []
+        while start <= end:
+            eleAtStart = nums[start]
+            eleAtEnd = nums[end]
+            currSquare = 0
+            if abs(eleAtStart) > abs(eleAtEnd):
+                currSquare = (eleAtStart * eleAtStart)
+                start += 1
+            else:
+                currSquare = (eleAtEnd * eleAtEnd)
+                end -= 1
+            ans.append(currSquare)
+        ans.reverse()
+        return ans

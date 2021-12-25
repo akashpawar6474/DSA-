@@ -1,0 +1,49 @@
+class Solution:
+    def calculate(self, s: str) -> int:
+        """
+        brute force is stabilize + and - operations
+        for eg 2 + 3 * 4 -5
+        now while grazing 
+        push 2 into stack
+        push 3 into stack
+        now for * or / pop 3 and multiply with curr
+        and push the result
+        then again push -5 into stack
+        3+2*2
+        
+        In python // is floor division
+        if answer is 2.5 then it converts it to 2
+        if answer is -2.5 then it converts it to 3
+        print(-3 // 2)
+        print(int(-3 / 2))
+        
+        tc = O(n)
+        """
+
+        st = []
+        currNo = 0
+        n = len(s)
+        sign = '+'
+        for currIdx in range(n):
+            currCh = s[currIdx]
+            if currCh.isdigit():
+                currNo = currNo * 10 + int(currCh)
+            
+            if (not currCh.isdigit() and currCh != ' ') or currIdx == n - 1:
+                if sign == '+':
+                    st.append(currNo)
+                elif sign == '-':
+                    st.append(-currNo)
+                elif sign == '*':
+                    prevCh = st.pop()
+                    currRes = prevCh * currNo
+                    st.append(currRes)
+                elif sign == '/':
+                    prevCh = st.pop()
+                    currRes = int(prevCh / currNo)
+                    st.append(currRes)
+                currNo = 0
+                sign = currCh
+        ans = sum(st)
+        return ans
+                

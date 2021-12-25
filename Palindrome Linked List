@@ -1,0 +1,48 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        """
+        Brute force is do all this stuff using stack
+        tc = O(2n) => O(n)
+        sc = O(n)
+        
+        if we have to do it inplace
+        then we can just revrse second half of the list
+        then check if one by one
+        """
+        def reverse(headPtr):
+            prev,nextPtr = None,None
+            curr = headPtr
+            while curr:
+                nextPtr = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nextPtr
+            return prev
+        
+        def findMidNode(headPtr):
+            slow = headPtr
+            fast = headPtr.next
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+    
+        def compareLists(head1,head2):
+            isIdenticle = True
+            while head2 is not None:
+                if head1.val != head2.val:
+                    isIdenticle = False
+                    break
+                head1 = head1.next
+                head2 = head2.next
+            return isIdenticle
+    
+        mid = findMidNode(head)
+        secondHead = reverse(mid.next)
+        return compareLists(head,secondHead)
+                

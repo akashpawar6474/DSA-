@@ -1,0 +1,50 @@
+class Solution:
+    def fourSum(self, nums: List[int], target: int) -> List[List[int]]:
+        """
+        this is total implementation based problem
+        brute force is having two 4 loops 
+        tc = O(n ^ 4)
+        but how we are going to skip duplicates?
+        => we have to sort the array
+        
+        if we have two fix pointers 
+        then we can follow two pointer approach in remaining array
+        tc = O(nlogn + n ^ 3) => O(n ^ 3)
+        sc = O(n)
+        """
+        def findQuadruplets(first,second,newTarget,nums,ans):
+            n = len(nums)
+            third = second + 1
+            fourth = n - 1
+            while third < fourth:
+                eleAtThird = nums[third]
+                eleAtFourth = nums[fourth]
+                currTotal = eleAtThird + eleAtFourth
+                if currTotal == newTarget:
+                    quadruplet = [nums[first],nums[second],nums[third],nums[fourth]]
+                    ans.append(quadruplet)
+                    third += 1
+                    fourth -= 1
+                    while third < fourth and nums[third] == nums[third - 1]:
+                        third += 1
+                    while third < fourth and nums[fourth] == nums[fourth + 1]:
+                        fourth -= 1
+                elif currTotal < newTarget:
+                    third += 1
+                else:
+                    fourth -= 1
+            
+        nums.sort()
+        n = len(nums)
+        ans = []
+        for first in range(n - 3):
+            eleAtFirst = nums[first]
+            if first > 0 and eleAtFirst == nums[first - 1]:
+                continue
+            for second in range(first + 1,n - 2):
+                eleAtSecond = nums[second]
+                if second > first + 1 and eleAtSecond == nums[second - 1]:
+                    continue
+                newTarget = target - (nums[first] + nums[second])
+                findQuadruplets(first,second,newTarget,nums,ans)
+        return ans

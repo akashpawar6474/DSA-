@@ -115,3 +115,4 @@ solutions to graze over
 113.  Linked List Cycle II => proof how can we get starting point of loop using floyd cycle detection algo(33rd problem of sde sheet)
 114.  Intersection of Two Linked Lists => this can be solved using beautiful two ptr algorithm by switching heads at end(31st problem of sde sheet) 
 115.  Palindrome Linked List => reversing half list(34th problem of sde sheet)
+116.  Flatten a Multilevel Doubly Linked List => recursion based problem but easy to implement(35th problem of sde sheet)

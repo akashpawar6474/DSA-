@@ -1,0 +1,40 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    
+    def hasCycle(self, head: Optional[ListNode]) -> bool:
+        """
+        brute force is to have a set
+        and in set we will be storing addresses of nodes
+        if we found any earlier then return true
+        else false
+        
+        tc = O(n)
+        sc = O(n)
+        
+        Now assume we have race road in circle manner
+        and we have two cars first is slow and second is fast
+        
+        if it is circle then we can assume that in future 
+        fast car and slow car will be overlapping to each other
+        
+        same principle is used here in FLOYD CYCLE DETECTION ALGO
+        tc = O(n)
+        sc = constant
+        """
+        if head is None:
+            return False
+        slow = head
+        fast = head
+        isCycle = False
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                isCycle = True
+                break
+        return isCycle

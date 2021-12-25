@@ -1,0 +1,55 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def countNodes(self, root: Optional[TreeNode]) -> int:
+        """
+        brute force is to count node with any traversal
+        
+        but can we make use of facts like this is CBT
+        
+        CBT => it is PBT where last levelled is not filled completely
+                and all nodes in last level are filled from LHS
+        
+        PBT => this is tree in which each node has two childs except root
+                and each level is completely filled
+                
+        so do we know how many nodes are there into PBT of level L
+         for eg in PBT of level 2
+         no of nodes are 2 ^ level - 1          
+        so Idea is at each node
+        cal left and right height if it is same
+        then this is PBT
+        so return no of nodes with formula
+        else call recursive fun for child nodes and add 1
+        
+        tc = O(logn)
+        sc = O(logn)
+        """
+        if root is None:
+            return 0
+        leftHeight = 1
+        leftPtr = root.left
+        while leftPtr:
+            leftPtr = leftPtr.left
+            leftHeight += 1
+        
+        rightHeight = 1
+        rightPtr = root.right
+        while rightPtr:
+            rightPtr = rightPtr.right
+            rightHeight += 1
+        
+        if leftHeight == rightHeight:
+            noOfNodesInCurrTree = (2 ** leftHeight) - 1
+            return noOfNodesInCurrTree
+        
+        countFromChildern = self.countNodes(root.left) + self.countNodes(root.right)
+        return countFromChildern + 1
+    
+        
+        
+        

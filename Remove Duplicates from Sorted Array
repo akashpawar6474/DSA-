@@ -1,0 +1,18 @@
+class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        """
+        brute force is simple having two pointers
+        one will graze over the array
+        and second will keep track of previous unique no
+        tc = O(n)
+        sc = constant
+        """
+        uniquePtr = 1
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            latestUniqueEle = nums[uniquePtr - 1]
+            if currEle != latestUniqueEle:
+                nums[uniquePtr] = currEle
+                uniquePtr += 1
+        return uniquePtr

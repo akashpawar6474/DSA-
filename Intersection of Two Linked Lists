@@ -1,0 +1,32 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+class Solution:
+    def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> Optional[ListNode]:
+        """
+        Brute force will be using set
+        just graze over the first list
+        and store all addresses into set
+        then graze over second list
+        and check if any address present into list or not
+        tc = O(n + m)
+        sc = O(max(n,m))
+        
+        another beautifull approach is
+        having two list ptrs
+        moving along the line untill not equal
+        only check is if any ptr is null then assign it head of other list
+        tc = O(2(n + m)) => O(n + m)
+        sc = constant
+        """
+        firstListPtr = headA
+        secondListPtr = headB
+        
+        while firstListPtr != secondListPtr:
+            firstListPtr = firstListPtr.next if firstListPtr else headB
+            secondListPtr = secondListPtr.next if secondListPtr else headA
+        
+        return firstListPtr

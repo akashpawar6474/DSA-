@@ -1,0 +1,59 @@
+class Solution:
+    
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        another mindblowing approach is to reverse array first
+        then reverse both the parts
+        tc = O(2n) = O(n)
+        sc = constant
+        """
+        def reverse(nums,start,end):
+            while start < end:
+                nums[start],nums[end] = nums[end],nums[start]
+                start += 1
+                end -= 1
+        
+        n = len(nums)
+        inboundK = k % n
+        
+        reverse(nums,0,n - 1)
+        reverse(nums,0,inboundK - 1)
+        reverse(nums,inboundK,n - 1)
+        
+    def bruteForce(self,nums):
+        """
+        Do not return anything, modify nums in-place instead.
+        graze untill k is gt 0
+            pop last element
+            insert at first
+        tc = O(k * n)
+        sc = constant
+        
+        create deque
+        insert last k ele at first
+        insert first n -k ele at last
+        create list of deque
+        
+        else create new list instead of deque
+        tc = O(n)
+        sc = O(n)
+        """
+        n = len(nums)
+        ans = [0] * n
+        k = k % n
+        placeHolderForK = k
+        ansPtr = 0
+        
+        bp = n - k
+        for currIdx in range(bp,n):
+            currEle = nums[currIdx]
+            ans[ansPtr] = currEle
+            ansPtr += 1
+        
+        for currIdx in range(0,bp):
+            currEle = nums[currIdx]
+            ans[ansPtr] = currEle
+            ansPtr += 1
+        
+        for currIdx in range(n):
+            nums[currIdx] = ans[currIdx]

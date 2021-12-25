@@ -1,0 +1,48 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val, prev, next, child):
+        self.val = val
+        self.prev = prev
+        self.next = next
+        self.child = child
+"""
+
+class Solution:
+    
+    def flatten(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        """
+        Idea behind solving this problem is 
+        graze over list
+        if any node has a child
+            then cache next node
+            call flatten fun on child
+                which will return head of the list
+            then graze over that list
+            then attach end and cached node of list
+            
+        REMEMBER TO NULLIFY CHILD PTR TO AVOID TLE
+        tc = O(n)
+        sc = O(n)
+            
+        """
+        curr = head
+        while curr is not None:
+            if curr.child is not None:
+                nextNodeOfCurr = curr.next
+                headOfChildList = self.flatten(curr.child)
+                
+                headOfChildList.prev = curr
+                curr.next = headOfChildList
+                curr.child = None
+                
+                travInChildList = headOfChildList
+                while travInChildList.next is not None:
+                    travInChildList = travInChildList.next
+                    
+                travInChildList.next = nextNodeOfCurr
+                if nextNodeOfCurr is not None:
+                    nextNodeOfCurr.prev = travInChildList
+                    
+            curr = curr.next
+        return head

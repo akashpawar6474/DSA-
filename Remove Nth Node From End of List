@@ -1,0 +1,52 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        """
+        brute force is count the length
+        then find node to remove with formula of len - n(node pos from end)
+        then locate that node and remove
+        tc = O(2n) = O(n)
+        sc = constant
+        
+        with the help of two pointers moving in same direction we can solve this problem
+        TORTOISE AND HARE METHOD
+        
+        fast ptr will intially move n steps
+        then both will move untill fast.next is not none
+        
+        then remove nth node from last which is next node of slow ptr
+        
+        if fast is None
+        means we want to remove first node
+        so return slow.next
+        ABOVE IS EDGE CASE HERE
+        tc = O(n)
+        sc = constant
+        """
+        if head is None:
+            return head
+        
+        slow = head
+        fast = head
+        
+        nodeIdxToRemoveFromBack = n
+        
+        while nodeIdxToRemoveFromBack > 0:
+            fast = fast.next
+            nodeIdxToRemoveFromBack -= 1
+        
+        if fast is None:
+            return slow.next
+        
+        while fast.next is not None:
+            slow = slow.next
+            fast = fast.next
+        
+        slow.next = slow.next.next if slow.next else None
+        
+        return head

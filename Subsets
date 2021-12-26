@@ -1,0 +1,96 @@
+class Solution:
+    
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        """
+        We can solve this problem with
+        standard backtracking template to
+        for eg 1,2
+        
+                        []
+            add 1               pop 1    
+            recur for           recur
+            remaining           []
+            [1]             /        \
+            /   \          add 2    pop 2
+        add 2   pop 2       [2]
+        recur
+        [1,2]
+        
+        and at each position attach copy of currPath
+        tc = O(2 ^ n)
+        sc = O(2 ^ n)
+        """
+        def standardBacktracking(nums,n,currIdx,ans,currPath):
+            ans.append(currPath[:])
+            for i in range(currIdx,n):
+                currEle = nums[i]
+                currPath.append(currEle)
+                standardBacktracking(nums,n,i + 1,ans,currPath)
+                currPath.pop()
+                
+        n = len(nums)
+        currIdx = 0
+        ans = []
+        currPath = []
+        standardBacktracking(nums,n,currIdx,ans,currPath)
+        return ans
+    def iterative(self,nums):
+        """
+        iterative approach is very simple
+        basically have empty list
+        and append it to ans list
+        for eg array 1 2
+        1.for each ele graze over all subsets
+        2.take copy of each
+        3.append currele to it
+        4.add new list to ans
+                            []
+                        /       \
+                    take as      now add curr ele
+                    it is              [1]
+                    []
+                        /               \
+                    take as it is   now add curr ele
+                    [][1]           [2][1,2]
+        tc = O(2 ^ n)
+        sc = O(2 ^ n)
+        """
+        ans = []
+        emptySubset = []
+        ans.append(emptySubset)
+        
+        n = len(nums)
+        
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            ansLen = len(ans)
+            for currSubsetIdx in range(ansLen): 
+                currSubset = ans[currSubsetIdx]
+                newSubset = currSubset[:]
+                newSubset.append(currEle)
+                ans.append(newSubset)
+        return ans
+          
+    def chooseAndNotChooseApproach(self,nums):
+        """
+        First approach is to solve this problem
+        is to choose particular ele 
+        OR
+        not choose particular ele
+        
+        tc= O(2 ^ n)
+        sc = O(2 ^ n) we can have 2 ^ n subsets of array length n
+        """
+        def chooseNotChoose(nums,currIdx,n,currPath,ans):
+            if currIdx == n:
+                ans.append(currPath[:])
+                return
+            currEle = nums[currIdx]
+            chooseNotChoose(nums,currIdx + 1,n,currPath + [currEle],ans)
+            chooseNotChoose(nums,currIdx + 1,n,currPath,ans)
+        
+        currPath = []
+        ans = []
+        n = len(nums)
+        chooseNotChoose(nums,0,n,currPath,ans)
+        return ans

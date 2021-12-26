@@ -1,0 +1,25 @@
+class Solution:
+    def moveZeroes(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        
+        Idea is to graze over array and have one non zero ptr
+            if curr ele is non zero
+            put it at zero ptr location 
+            and inc zero ptr
+        tc = O(n)
+        sc = O(1)
+        """
+        n = len(nums)
+        nonZeroPtr = 0
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if currEle != 0:
+                nums[nonZeroPtr] = currEle
+                nonZeroPtr += 1
+        while nonZeroPtr < n:
+            nums[nonZeroPtr] = 0
+            nonZeroPtr += 1
+    
+        
+        

@@ -1,0 +1,108 @@
+class Solution:
+    
+    def trap(self, height: List[int]) -> int:
+        """
+        best approach is having 4 pointers
+        largestBarInLeftPtr by default on 0th idx
+        currLeft            by default on 1st idx
+        currRight           by default on second last idx
+        largestBarInRightPtr by default on last idx
+        
+                                while currLeft <= currRight
+                                        |
+                            --------------------------------
+                            |                               |
+            if largestBarInLeft < LBIR             else largestBarInLeft >= largestBarInRight
+                    process on left side                process on right side
+                        |                                           |
+            --------------------------                  ------------------------------ 
+            |                       |                   |                             |
+    if currLeft >=              else add            if currRight >=             else add trapped
+    largestBarInLeft            trapped water       largestBarInRight           rainwater to answer
+        |                       to answer                   |
+    then update                                     then update largest
+    largestBarInLeft                                bar in right
+    
+    tc = O(n)
+    sc = constant
+        """
+        n = len(height)
+        if n < 3:
+            return 0
+        
+        idxOfLargestBarInLeft = 0
+        currLeft = 1
+        currRight = n - 2
+        idxOfLargestBarInRight = n - 1
+        ans = 0
+        
+        while currLeft <= currRight:
+            
+            heightOfLargestBarInLeft = height[idxOfLargestBarInLeft]
+            heightOfLargestBarInRight = height[idxOfLargestBarInRight]
+            heightOfCurrLeftIdx = height[currLeft]
+            heightOfCurrRightIdx = height[currRight]
+            
+            if heightOfLargestBarInLeft < heightOfLargestBarInRight:
+                if heightOfCurrLeftIdx > heightOfLargestBarInLeft:
+                    idxOfLargestBarInLeft = currLeft
+                else:
+                    trappedWater = heightOfLargestBarInLeft - heightOfCurrLeftIdx
+                    ans += trappedWater
+                currLeft +=1
+            else:
+                if heightOfCurrRightIdx > heightOfLargestBarInRight:
+                    idxOfLargestBarInRight = currRight
+                else:
+                    trappedWater = heightOfLargestBarInRight - heightOfCurrRightIdx
+                    ans += trappedWater
+                currRight -= 1
+                
+        return ans
+        
+    def betterApproach(self,height):
+        """
+        brute force is very simple
+        for each idx in range from 1 to second last
+        to get trapped water at that idx
+        we need largest bar in left
+        and largest bar in right
+        then take min among them
+        and reduce curr idx height from it to get trapped water at that cell
+        
+        tc = O(n ^ 2)
+        sc = constant
+        
+        Better we can do but at tradeoff of space
+        we can precompute largest in left and right arrays
+        tc = O(3n) => O(n)
+        sc = O(2n) => O(n)
+        """
+        n = len(height)
+        largestInLeftSide = [-1] * n
+        idxOfLargestBarInLeft = 0
+        for currIdx in range(1,n):
+            currHeight = height[currIdx]
+            currLargestInLeft = height[idxOfLargestBarInLeft]
+            if currHeight > currLargestInLeft:
+                idxOfLargestBarInLeft = currIdx
+            largestInLeftSide[currIdx] = idxOfLargestBarInLeft
+            
+        largestInRightSide = [n] * n
+        idxOfLargestBarInRight = n - 1
+        for currIdx in range(n - 2,-1,-1):
+            currHeight = height[currIdx]
+            currLargestInRight = height[idxOfLargestBarInRight]
+            if currHeight > currLargestInRight:
+                idxOfLargestBarInRight = currIdx
+            largestInRightSide[currIdx] = idxOfLargestBarInRight
+        
+        ans = 0
+        for currIdx in range(1,n - 1):
+            currHeight = height[currIdx]
+            largestBarInLeftForCurrIdx = height[largestInLeftSide[currIdx]]
+            largestBarInRightForCurrIdx = height[largestInRightSide[currIdx]]
+            if currHeight < largestBarInLeftForCurrIdx and currHeight < largestBarInRightForCurrIdx:
+                trappedWaterForCurrIdx = min(largestBarInLeftForCurrIdx,largestBarInRightForCurrIdx) - currHeight
+                ans += trappedWaterForCurrIdx
+        return ans

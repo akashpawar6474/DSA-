@@ -124,3 +124,4 @@ solutions to graze over
 122.  Remove Duplicates from Sorted Array II => simple two ptr approach moving in same direction(48th problem of sde sheet)
 123.  Move Zeroes => Very simple problem move non zero elements to start of array and add zeroes at remaining postions
 124.  Two Sum II - Input Array Is Sorted => simple two pointer problem moving into opposite directions
+125.  K Closest Points to Origin => like finding k smallest elements just modification of dist from origin

@@ -123,3 +123,4 @@ solutions to graze over
 121.  Remove Duplicates from Sorted Array => simple two ptr approach(42nd problem of sde sheet)
 122.  Remove Duplicates from Sorted Array II => simple two ptr approach moving in same direction(48th problem of sde sheet)
 123.  Move Zeroes => Very simple problem move non zero elements to start of array and add zeroes at remaining postions
+124.  Two Sum II - Input Array Is Sorted => simple two pointer problem moving into opposite directions

@@ -1,0 +1,58 @@
+class Solution:
+    
+    def search(self, nums: List[int], target: int) -> int:
+        """
+        we have to do binary search but with some modifications
+        
+        lets do some observations
+        1.both parts of array is sorted
+        2.first part has each ele greater than second part each ele
+        
+                        while start <= end
+                                |
+                            cal mid
+            ----------------------------------------------------------
+            |                     |                                   |
+        if mid has target     if ele at mid                 if ele at mid lt
+        then return             gteq start                  start means ele
+                            means ele from                  from mid to end
+                            start to mid are                are sorted
+                            sorted                                    |
+                            so have check here              ---------------------
+                                |                           |                   |
+                        -------------------             if target           if target is not
+                        |                  |            in range            in this range
+                    if target          if not           of mid + 1 to end       |
+                    is in range        then shrink          |                then shrink end
+                    start to mid       start to mid     then shrink start    to mid - 1
+                        |               plus 1          to mid + 1
+                    shrink end to mid
+        tc = O(logn)
+        sc = O(1)
+        """
+        n = len(nums)
+        start = 0
+        end = n - 1
+        ans = -1
+        while start <= end:
+            
+            eleAtStart = nums[start]
+            eleAtEnd = nums[end]
+            mid = (start + end) // 2
+            eleAtMid = nums[mid]
+            
+            if eleAtMid == target:
+                ans = mid
+                break
+            if eleAtStart <= eleAtMid:
+                if eleAtStart <= target <= eleAtMid:
+                    end = mid - 1
+                else:
+                    start = mid + 1
+            else:
+                if eleAtMid <= target <= eleAtEnd:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+        return ans
+                    

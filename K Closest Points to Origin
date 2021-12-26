@@ -1,0 +1,54 @@
+import heapq
+class Solution:
+    
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        """
+        this is maxHeap problem
+        where we need first k points near to origin
+        
+        Idea is to store first k points with 
+        dist and point as key val in heap
+        
+        Q.how to cal distance of point from origin
+        
+        
+        Euclidean distance bw x and y pt is
+         sqrt((x1 - x2) ^ 2 + (y1 - y2) ^ 2)
+         
+         but for origin x2 and y2 will be 0
+         so we can just take x1 ^ 2 and y1 ^ 2
+        dist(i,j) = (x1) ^ 2 and (y1) ^ 2
+        
+        now graze over points from kth to last point
+        cal dist from origin
+        if it is less than top then pop the top and insert current
+        
+        tc = O(klogk + (n - k)logk)
+        sc = O(logk)
+         """
+        maxHeap = []
+        n = len(points)
+        for currIdx in range(k):
+            currPoint = points[currIdx]
+            x_co = currPoint[0]
+            y_co = currPoint[1]
+            distFromOrigin = sqrt((x_co ** 2) + (y_co ** 2))
+            heapq.heappush(maxHeap,(-distFromOrigin,currPoint))
+        
+        for currIdx in range(k,n):
+            currPoint = points[currIdx]
+            x_co = currPoint[0]
+            y_co = currPoint[1]
+            distFromOrigin = sqrt((x_co ** 2) + (y_co ** 2))
+            
+            distOfFarthestPoint,farthestPointAmongKPoints = maxHeap[0]
+            distOfFarthestPoint = -1 * distOfFarthestPoint
+            
+            if distOfFarthestPoint > distFromOrigin:
+                heapq.heappop(maxHeap)
+                heapq.heappush(maxHeap,(-distFromOrigin,currPoint))
+        
+        ans = [point for (dist,point) in maxHeap]
+        return ans
+            
+            

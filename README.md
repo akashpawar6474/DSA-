@@ -125,3 +125,4 @@ solutions to graze over
 123.  Move Zeroes => Very simple problem move non zero elements to start of array and add zeroes at remaining postions
 124.  Two Sum II - Input Array Is Sorted => simple two pointer problem moving into opposite directions
 125.  K Closest Points to Origin => like finding k smallest elements just modification of dist from origin
+126.  Trapping Rain Water => VIMP two pointer problem (41st problem of sde sheet)

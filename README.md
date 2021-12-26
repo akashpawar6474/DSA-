@@ -127,3 +127,4 @@ solutions to graze over
 125.  K Closest Points to Origin => like finding k smallest elements just modification of dist from origin
 126.  Trapping Rain Water => VIMP two pointer problem (41st problem of sde sheet)
 127.  Search in Rotated Sorted Array => VGP with some observation how array parts are sorted Binary Search problem(43rd problem from sde sheet)
+128.  Subsets => VIMP Backtracking problem with 3 approaches(52nd problem of sde sheet)

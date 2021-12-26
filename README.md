@@ -122,3 +122,4 @@ solutions to graze over
 120.  Maximum Product of Three Numbers => finding max and min without sorting(50th problem of sde sheet)
 121.  Remove Duplicates from Sorted Array => simple two ptr approach(42nd problem of sde sheet)
 122.  Remove Duplicates from Sorted Array II => simple two ptr approach moving in same direction(48th problem of sde sheet)
+123.  Move Zeroes => Very simple problem move non zero elements to start of array and add zeroes at remaining postions

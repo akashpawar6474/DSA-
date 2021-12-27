@@ -130,3 +130,4 @@ solutions to graze over
 128.  Subsets => VIMP Backtracking problem with 3 approaches(52nd problem of sde sheet)
 129.  Reverse String => two pointer both recursive and iterative
 130.  Reverse Words in a String III => String reverse simulation based problem with two pointers
+131.  Number Complement => bit manipulation problem generate binary then flip bits then generate no

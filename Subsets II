@@ -1,0 +1,98 @@
+class Solution:
+    
+    def subsetsWithDup(self, nums: List[int]) -> List[List[int]]:
+        """
+        we can solve this using iterative approach too
+        first thing is we have to sort the array
+        
+        Unlike subset solution we will not have to graze over
+        all anslist for each ele instead we will graze over specified
+        range
+        for eg arr 1,2,2
+                            [] start = end = 0
+                        /        \
+                    []              [1] for 1 start = 0 end = 0 
+                    /               \
+                [] [1]              [2][1,2] start = 0 end = 1 then update to 1 after dup check
+                  /                     \ 
+            [][1][2][1,2]           here curr ele is dup to prev
+                                    earlier start = 0 and end = 1
+                                    so update start to end + 1 and update end
+                                    start = 2 end = 3
+                                    so we will not use first two subsets which have potential
+                                    to create duplicates
+                                    [2,2][1,2,2]
+                                    
+        tc = O(nlogn + 2 ^ n) => O(2 ^ n)
+        sc = O(n + 2 ^ n) => O(2 ^ n)
+        """
+        nums.sort()
+        start = 0
+        ans = []
+        ans.append([])
+        end = len(ans) - 1
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            start = 0
+            
+            if currIdx > 0 and currEle == nums[currIdx - 1]:
+                start = end + 1
+            end = len(ans) - 1
+            for i in range(start,end + 1):
+                currSubset = ans[i]
+                newSubset = currSubset[:]
+                newSubset.append(currEle)
+                ans.append(newSubset)
+        return ans
+    
+    def standardBacktracking(self,nums):
+        """
+        We can do slight modification to standard backtracking
+        template 
+        
+        first thing is to sort the list
+        
+        Idea is to skip curr ele if it is equal to previous element
+        for eg 1 1 2
+        
+        then recursion tree as follows
+        fn(currIdx,currPath)
+                                        fn(0,[])
+                        ci = 0                     ci = 1           ci = 2
+                          -----------------------------------------------
+            add 1(idx 0)/  \pop 1                    |                  |
+                    fn(1,[1])                     we will             fn(3,[2])
+           add 1(idx 1)/   \pop 1                 skip this               
+                fn(2,[1,1])
+        add 2(idx 2)/  \pop 2
+            fn(3,[1,1,2])
+            |
+        now this is edge case
+        3 is equal to len
+    
+        and at each pos attach currpath to answer
+        tc = O(nlogn + 2 ^ n) => O(2 ^ n)
+        sc = O(n + 2 ^ n) => O(2 ^ n)
+        """
+        def backtrack(nums,n,currIdx,ans,currPath):
+            ans.append(currPath[:])
+            
+            for i in range(currIdx,n):
+                currEle = nums[i]
+                if currIdx != i:
+                    prevEle = nums[i - 1]
+                    if prevEle == currEle:
+                        continue
+                        
+                currPath.append(currEle)
+                backtrack(nums,n,i + 1,ans,currPath)
+                currPath.pop()
+                
+        n = len(nums)
+        currIdx = 0
+        ans = []
+        currPath = []
+        nums.sort()
+        backtrack(nums,n,currIdx,ans,currPath)
+        return ans

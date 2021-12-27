@@ -1,0 +1,65 @@
+class Solution:
+    
+    def findComplement(self, num: int) -> int:
+        """
+        Idea is to generate binary representation
+        then graze over binary representation
+        and flip all numbers and generate number
+        
+        step 1: find binary representation
+        for eg 6        remainder
+              2 |  6
+            ----------
+              2 |  3    0
+            ----------
+              2 |  1    1
+            ---------
+                |  0    1
+                
+        now take remainder from last to first
+        that will be binary representation of 6
+        110
+        
+        step 2:
+        flip all values
+        
+        step 3:
+        now generate ans out of it
+        
+        In worst case our binary list can go upto 32 cells
+        
+        tc = (logn + 32 Operations + 32 Operations) = O(logn) 
+        sc = O(32) => O(1)
+        """
+        def genrateBinary(num,binaryList):
+            while num > 0:
+                remainder = num % 2
+                num = num // 2
+                binaryList.append(remainder)
+                
+        def flipBinaryValues(binaryList):
+            n = len(binaryList)
+            for currIdx in range(n):
+                currEle = binaryList[currIdx]
+                if currEle == 0:
+                    binaryList[currIdx] = 1
+                else:
+                    binaryList[currIdx] = 0
+                    
+        def generateComplement(binaryList):
+            ans = 0
+            currPower = 0
+            n = len(binaryList)
+            for currIdx in range(n):
+                currEle = binaryList[currIdx]
+                if currEle == 1:
+                    currVal = 2 ** currPower
+                    ans += currVal
+                currPower += 1
+            return ans
+        
+        binaryList = []
+        genrateBinary(num,binaryList)
+        flipBinaryValues(binaryList)
+        ans = generateComplement(binaryList)
+        return ans

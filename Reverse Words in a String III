@@ -1,0 +1,35 @@
+class Solution:
+    
+    def reverseWords(self, s: str) -> str:
+        """
+        Here one followup qustion can make diff to question itself
+        as mentioned in constraint
+        string will dont have leading and trailing spaces
+        and words are seperated by single space only
+        
+        above two observations can make changes to code if manipulated
+        tc = O(n + n + n) => O(n)
+        sc = constant
+        """
+        def reverse(sarr,start,end):
+            while start < end:
+                sarr[start],sarr[end] = sarr[end],sarr[start]
+                start += 1
+                end -= 1
+                
+        sarr = list(s)
+        n = len(sarr)
+        stPtr = 0
+        endPtr = 0
+        
+        while endPtr < n:
+            while endPtr < n and sarr[endPtr] != ' ':
+                endPtr += 1
+            reverse(sarr,stPtr,endPtr - 1)
+            stPtr = endPtr + 1
+            endPtr = stPtr
+            
+        
+        ansStr = ''.join(sarr)
+        return ansStr
+        

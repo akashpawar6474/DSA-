@@ -24,3 +24,41 @@ class Solution:
             slow = slow.next
             fast = fast.next.next
         return slow
+------------------------------------------------------------------
+D 28-12-2021
+-----------------------------------------------------------
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    
+    def middleNode(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        this is very easy and important problem
+        a good example of TORTOISE AND HARE ALGO 
+        
+        Brute force is count the length and find the mid
+        tc = O(2n) = O(n)
+        sc = constant
+        
+        Better approach is have two pointers fast and slow
+        slow will move by one step
+        and steps will move by two steps
+        
+        take a loop untill fast is not none and fast.next is not none 
+        tc = O(n)
+        sc = O(1)
+        """
+        if head is None or head.next is None:
+            return head
+        slow = head
+        fast = head
+        
+        while fast is not None and fast.next is not None:
+            slow = slow.next
+            fast = fast.next.next
+        
+        return slow
+        

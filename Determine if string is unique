@@ -22,3 +22,36 @@ def isUnique(st):
 	return isunique
 
 print(isUnique("acsa"))
+---------------------------------------------------
+D 28.12.2021
+--------------------------------------------------------
+"""
+check if currstring is unique or not
+
+ip = bcd
+op true
+
+ip = bcb
+op = false
+
+can we do it using bit manipulation
+
+Idea is to have bit array named as checkable
+which will have 32 bits
+by default each bit is set to 0
+
+for each char we have to set the bit to 1
+if that bit is set already then return false
+"""
+def isUnique(st):
+	checkable = 0
+	for ch in st:
+		idxToSetInBitArray = ord(ch) - ord('a')
+		bitArray = 1 << idxToSetInBitArray
+		if checkable & bitArray > 1:
+			return False
+		else:
+			checkable = checkable | bitArray
+	return True
+
+print(isUnique("bcdb"))

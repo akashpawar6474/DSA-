@@ -50,3 +50,66 @@ class Solution:
         slow.next = slow.next.next if slow.next else None
         
         return head
+        ------------------------------------------------------------------------
+        D 28.12.2021
+        ---------------------------------------------------
+        # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
+        """
+        Brute force is to calculate length first
+        then reduce length - n to get idx of node to remove
+        tc = O(2 * n) => O(n)
+        sc = constant
+        
+        To do it in one pass we need help of TORTOISE AND HARE ALGO
+        but implemented in different way
+        we can have two pointer fast and slow
+        
+        Step 1:
+        fast will move by n nodes first of all
+        
+        step 2:
+        if fast is None (EDGE CASE) means we have to remve first node
+        AND
+        we have to be sure that n should be bw 1 and no of nodes in list
+        
+        step 3:
+        move fast and slow by 1 step untill fast.next is not None
+        
+        and connect slow to next->next node of slow
+        tc = O(n)
+        sc = constant
+        """
+        def moveFastPtrByNSteps(fast,steps):
+            while steps > 0:
+                fast = fast.next
+                steps -= 1
+            return fast
+        
+        def locatePrevNodeOfRemovableNode(slow,fast):
+            while fast.next is not None:
+                slow = slow.next
+                fast = fast.next
+            return slow,fast
+        
+        def removeNthNodeFromLast(slow):
+            slow.next = slow.next.next
+        
+        if head is None:
+            return head
+        
+        slow = head
+        fast = head
+        fast = moveFastPtrByNSteps(fast,n)
+        if fast is None:
+            return slow.next
+        
+        slow,fast = locatePrevNodeOfRemovableNode(slow,fast)
+        removeNthNodeFromLast(slow)
+        return head
+        

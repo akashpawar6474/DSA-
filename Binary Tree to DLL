@@ -1,0 +1,92 @@
+
+#Function to convert a binary tree to doubly linked list.
+class Solution:
+    def bToDLL(self,root):
+        """
+        Idea is to do post and In order traversal
+        interchangably
+        
+        actually At root
+        we will check if root has left child
+            then convert left subtree to DLL
+            it will return left child which will be 
+            part of DLL
+            then move that left ptr towards right
+            untill it has node in DLL
+            
+            then connect that last node and root node
+        we will check if root has right child
+            then convert right subtree to DLL
+            
+            it will return right child which is part of DLL
+            then move that right ptr towards extreme left
+            and attach root node to that ptr
+        return root node
+        tc = O(2n) => O(n)
+        sc = O(n) => implicit stack
+        """
+        def convert(root):
+            if root is None:
+                return None
+            if root.left is not None:
+                leftChildPtr = convert(root.left)
+                
+                while leftChildPtr.right is not None:
+                    leftChildPtr = leftChildPtr.right
+                
+                leftChildPtr.right = root
+                root.left = leftChildPtr
+            if root.right is not None:
+                rightChildPtr = convert(root.right)
+                
+                while rightChildPtr.left is not None:
+                    rightChildPtr = rightChildPtr.left
+                
+                rightChildPtr.left = root
+                root.right = rightChildPtr
+            return root
+        
+        def convertDLL(root):
+            rootPtr = convert(root)
+            head = None
+            while rootPtr.left is not None:
+                rootPtr = rootPtr.left
+            head = rootPtr
+            return head
+        
+        head = convertDLL(root)
+        return head
+                
+                
+    def BruteAndBetter(self,root):
+        """
+        Brute force is to do Inorder trav
+        put all ele in array
+        then graze over array
+        and create new list manually
+        tc = O(n + n) => O(n)
+        sc = O(n + n) => O(n)
+        
+        Better approach is rather than
+        constructing after doing traversal
+        do it while traversing itself
+        """
+        def convert(root,head,tail):
+            if root is None:
+                return head,tail
+            head,tail = convert(root.left,head,tail)
+            currNode = DLLNode(root.val)
+            if head is None:
+                head = currNode
+                tail = currNode
+            else:
+                tail.next = currNode
+                currNode.prev = tail
+                tail = tail.next
+            head,tail = convert(root.right,head,tail)
+            return head,tail
+            
+        head = None
+        tail = None
+        convert(root,head,tail)
+        return head

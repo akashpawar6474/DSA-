@@ -1,0 +1,9 @@
+VIMP question needs to be solved AMazon
+
+[4,3,5]
+op = 2
+op = replace 4 by 3 or 3 by 4
+
+Edge case
+[4,4,2,2]
+op = false

@@ -49,3 +49,54 @@ class Solution:
             currWindowLen = windowEnd - windowStart + 1
             maxLen = max(currWindowLen,maxLen)
         return maxLen
+        
+        ------------------------------------------------------------
+        D 29.12.2021
+        -----------------------------------------------------------
+class Solution:    
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        Brute Force is to generate every substring
+        then check with set and keep track of longest substring
+        tc = O(n ^ 3)
+        sc = O(n)
+        
+        
+        Better approach is using sliding window with the help
+        of set
+        while grazing over string
+            if curr char is not in set
+                then add
+                keep track of length
+            else
+                shrink the window
+                and remove that char from set
+                
+        tc = O(n + n) => O(n)
+        sc = O(n)
+        
+        Best we can do when we are shrinking window in above
+        solution we are just walking step by step
+        
+        Instead we can store char and its idx into map
+        when we found the char 
+            then take the prev idx from map
+            update windowstart
+        then update/add record with currIdx in map
+        
+        tc = O(n)
+        sc = O(n) 
+        """
+        windowStart = 0
+        n = len(s)
+        ht = {}
+        maxLen = 0
+        for windowEnd in range(n):
+            charAtWindowEnd = s[windowEnd]
+            if charAtWindowEnd in ht:
+                prevIdxOfCurrCh = ht[charAtWindowEnd]
+                windowStart = max(windowStart,prevIdxOfCurrCh + 1)
+            ht[charAtWindowEnd] = windowEnd
+            currLen = windowEnd - windowStart + 1
+            maxLen = max(maxLen,currLen)
+        return maxLen

@@ -1,0 +1,44 @@
+    def longestKSubstr(self, s, k):
+        """
+        Brute force is to generate all substrings
+        then convert it to set
+        and check if set size is equal to k
+        if yes then keep track of length
+        
+        tc = O(n ^ 3)
+        sc = O(n)
+        
+        Better can we do using sliding window
+        with the help of map
+        graze over string
+            add curr char to map
+            if map len is gt k
+                then shrink the window
+            at last keep track of length
+        tc = O(n)
+        sc = O(n)
+        
+        edge case if we dont have k unique char in string
+        then return -1
+        so do a lookUp first
+        """
+            
+        windowStart = 0
+        maxLen = 0
+        n = len(s)
+        chMap = {}
+        for windowEnd in range(n):
+            chAtWindowEnd = s[windowEnd]
+            if chAtWindowEnd not in chMap:
+                chMap[chAtWindowEnd] = 0
+            chMap[chAtWindowEnd] += 1 
+            while len(chMap) > k:
+                chAtWindowStart = s[windowStart]
+                windowStart += 1
+                if chAtWindowStart in chMap:
+                    chMap[chAtWindowStart] -= 1
+                    if chMap[chAtWindowStart] == 0:
+                        del chMap[chAtWindowStart]
+            currLen = windowEnd - windowStart + 1
+            maxLen = max(maxLen,currLen)
+        return maxLen

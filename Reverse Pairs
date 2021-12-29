@@ -1,0 +1,110 @@
+class Solution:
+    def __init__(self):
+        self.pairs = 0
+    def reversePairs(self, nums: List[int]) -> int:
+        """
+        Brute force is take each ele
+        and graze over remaining array
+        along with formula check
+        
+        tc = O(n ^ 2)
+        sc = constant
+        
+        we can do it using merge sort to
+        we have to follow merge sort procedure
+        then in Merge fn we have perform some logic on sorted arrays
+                                    1,3,2,3,1
+                                    /       \
+                                1,3          2,3,1
+                              /     \        /    \
+                              1     3       2      3,1
+                                                   /  \
+                                                  3    1
+        now we will merge and at 2nd step we will demonstrate our logic
+                             1       3     2        1,3
+                             \       /      \        /
+                              1,3              1,2,3
+        now we will have left and right ptr on respective arrays
+        we will graze over left array
+            and we will move right array untill
+            left[leftPtr] > 2 * right[rightPtr]
+                move right ptr
+            then add right ptr into ans
+        for eg. left ptr on 1 and right ptr also on 1(of right array)
+            so inner loop condn fails so inc leftPtr
+        now leftPtr on 3
+            so condn become true so move rightPtr
+            
+        It is efficient because for each leftPtr we are not grazing all
+        right array
+        
+        Because as per merge sort both right and left Ptr are sorted
+        for eg.
+        leftArr = 3,4
+        rightArr = 1,2,5
+        Assume our leftPtr on 4 and right Ptr on 5
+        so we can assume that if first two no are less than
+        prev no in left array
+        then definitely those are less than curr element
+        
+        so this is additional logic we have to perform into it
+        tc = O(n)
+        sc = O(n)
+        """ 
+        def countReversePairs(leftArr,rightArr):
+            n = len(leftArr)
+            m = len(rightArr)
+            rightPtr = 0
+            
+            for leftPtr in range(n):
+                while rightPtr < m and leftArr[leftPtr] > 2 * rightArr[rightPtr]:
+                    rightPtr += 1
+                self.pairs += rightPtr
+                
+        def merge(leftArr,rightArr):
+            countReversePairs(leftArr,rightArr)
+            
+            res = []
+            left = 0
+            right = 0
+            n = len(leftArr)
+            m = len(rightArr)
+            
+            while left < n and right < m:
+                currEleInLeft = leftArr[left]
+                currEleInRight = rightArr[right]
+                if currEleInLeft < currEleInRight:
+                    res.append(currEleInLeft)
+                    left += 1
+                else:
+                    res.append(currEleInRight)
+                    right += 1
+                    
+            while left < n:
+                currEle = leftArr[left]
+                res.append(currEle)
+                left += 1
+                
+            while right < m:
+                currEle = rightArr[right]
+                res.append(currEle)
+                right += 1
+            return res
+            
+                
+        def mergeSort(nums):
+            n = len(nums)
+            if n == 1:
+                return nums
+            start = 0
+            end = n
+            mid = (start + end) // 2
+            left = nums[:mid]
+            right = nums[mid:]
+            left = mergeSort(left)
+            right = mergeSort(right)
+            res = merge(left,right)
+            return res
+        
+        mergeSort(nums)
+        return self.pairs

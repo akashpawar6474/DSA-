@@ -135,3 +135,4 @@ solutions to graze over
 133.  can we make array in increasing order by at most 1 replacement => VIIMP asked in mazon 1st interview not able to solve edge case yet
 134.  Binary Tree to DLL => VIMP problem asked in mamazon with inplace no extraa space for list GFG (VIMP)
 135.  Populating Next Right Pointers in Each Node => vimp level order problem but can be optimized in space using two pointers as it is PBT
+136.  Permutation in String => Standard sliding window problem Vimp problem

@@ -1,0 +1,75 @@
+class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        """
+        Brute force create set of first string
+        Then generate all substrings of
+        length of first string then 
+        for each substring check if each char 
+        is present into set of first string
+        if yes then return true
+        else false
+        
+        n = len of first string
+        m = len of second string
+        tc = O(n + m ^ 3)
+        sc = O(n)
+        
+        Better appoach to do it in linear time 
+        then we can use sliding window on second string
+        Idea is create freq table of first string
+        Then graze over second string
+                if curr ch in freq table
+                    then reduce its freq
+                        if freq of ch get to 0
+                        then update noOfMatched charaters by 1
+                if windowlen is gt first string
+                    then reduce it by 1
+                    check if removed char from start
+                    is present in freq table
+                        if freq is 0
+                            then reduce no of matched char
+                        then inc its freq
+                if noofmatched char is eq to len of freq table
+                    then break or return true
+        tc = O(n + 2 * m) = O(n + m)
+        sc = O(n)
+        """
+        def createFreqTable(s1):
+            freq = {}
+            for currCh in s1:
+                if currCh not in freq:
+                    freq[currCh] = 0
+                freq[currCh] += 1
+            return freq
+                
+        n = len(s1)
+        m = len(s2)
+        
+        freq1 = createFreqTable(s1)
+        uniqueChInS1 = len(freq1)
+        windowStart = 0
+        noOfMatchedChar = 0
+        isValid = False
+        
+        for windowEnd in range(m):
+            
+            chAtWindowEnd = s2[windowEnd]
+            if chAtWindowEnd in freq1:
+                freq1[chAtWindowEnd] -= 1
+                if freq1[chAtWindowEnd] == 0:
+                    noOfMatchedChar += 1
+                    
+            windowLen = windowEnd - windowStart + 1
+            if windowLen > n:
+                stChInWindow = s2[windowStart]
+                windowStart += 1
+                if stChInWindow in freq1:
+                    if freq1[stChInWindow] == 0:
+                        noOfMatchedChar -= 1
+                    freq1[stChInWindow] += 1
+                    
+            if noOfMatchedChar == uniqueChInS1:
+                isValid = True
+                break
+                
+        return isValid

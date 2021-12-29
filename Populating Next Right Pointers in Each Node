@@ -1,0 +1,47 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        """
+        Brute force is to do level order traversal
+        and for each curr ptr attach prev node
+        
+        tc = O(n)
+        sc = O(n)
+        
+        HERE it is given that tree is PBT
+        means all levels are filled completely
+        
+        so why cant we use two ptrs
+        one is vertical ptr which will move
+        from root to leftmost leaf node
+        and horizontal ptr will move through curr row
+        from vertical ptr to last node of row
+        
+        tc = O(n)
+        sc = O(1)
+        """
+        if root is None:
+            return None
+        
+        verticalPtr = root
+        
+        while verticalPtr is not None:
+            horizontalPtr = verticalPtr
+            while horizontalPtr is not None:
+                if horizontalPtr.left is not None:
+                    horizontalPtr.left.next = horizontalPtr.right
+                if horizontalPtr.right is not None and horizontalPtr.next is not None:
+                    horizontalPtr.right.next = horizontalPtr.next.left
+                horizontalPtr = horizontalPtr.next
+            verticalPtr = verticalPtr.left
+        return root

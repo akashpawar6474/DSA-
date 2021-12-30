@@ -138,4 +138,4 @@ solutions to graze over
 136.  Permutation in String => Standard sliding window problem Vimp problem(150th problem of sde sheet)
 137.  Reverse Pairs => This is very Imp problem using merge sort to count reverse pairs(16th problem of sde sheet)
 138.  Longest Substring with At Most K Distinct Characters => asked in google VIMP sliding window and hashmap problem we can twist question make it equal to k distinct char by                                                              having check when when map has k keys then only keep track of length and reduce logic will be same as this question                                                              this is leetcode premium question so solved on GFG
-139.  
+139.  Smallest Integer Divisible by K => this is math problem with one edge case not sure how it is linked to pigeon hole principle

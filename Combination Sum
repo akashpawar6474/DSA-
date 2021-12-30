@@ -1,0 +1,38 @@
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        """
+        At each element we have two choices
+        if curr ele <= target
+            then pick curr ele
+            recur again from same ele
+            pop curr ele
+        else
+            skip curr ele and recur for remaining array
+            
+        Base case is if curr Idx reached end
+        and target is 0
+        then attach that currPath to ans list
+        tc = O(2 ^ n)
+        sc = O(m)
+        
+        Note we shouldnt take both edge cases into one line with and operation
+            if we do that then in case second condn fails then we get idxOutOFBound ex
+        """
+        def backtrack(currIdx,candidates,n,target,ans,currPath):
+            if currIdx == n:
+                if target == 0:
+                    ans.append(currPath.copy())
+                return
+            currEle = candidates[currIdx]
+            if currEle <= target:
+                currPath.append(currEle)
+                backtrack(currIdx,candidates,n,target - currEle,ans,currPath)
+                currPath.pop()
+            backtrack(currIdx + 1,candidates,n,target,ans,currPath)
+        
+        currIdx = 0
+        n = len(candidates)
+        ans = []
+        currPath = []
+        backtrack(currIdx,candidates,n,target,ans,currPath)
+        return ans

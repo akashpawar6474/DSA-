@@ -1,0 +1,36 @@
+class Solution:
+    def smallestRepunitDivByK(self, k: int) -> int:
+        """
+        Question itself is ambiguous
+        
+        ideally smallest integer divisibly by k
+        should be k itself right?
+        
+        In second example they are saying that
+        there is no +ve integer divisible by n
+        
+        what I am thinking is having array of 64 bits
+        then set each bit 1 by 1
+        
+        in worst case tc 2 ^ 64
+        
+        One thing in question is N ONLY CONTAINS DIGIT OF 1
+        ANY N with only 1 cant be divisible by multiple of 2 means 2,4,6,8..
+        and same cant be divisible by multiple of 5 means 5,10,15,20..
+        
+        so first take 1 
+        Then question is how to convert 1 to 11
+        n * 10 + 1
+        for eg if n == 11
+        11 * 10 + 1 => 111
+        tc = O(n) n = range from 1 to last 11...11 which can accumulate in 64 bits
+        sc = constants
+        """
+        if k % 2 == 0 or k % 5 == 0:
+            return -1
+        n = 1
+        noOfDigits = 1
+        while n % k != 0:
+            n = n * 10 + 1
+            noOfDigits += 1
+        return noOfDigits

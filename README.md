@@ -141,4 +141,4 @@ solutions to graze over
 139.  Smallest Integer Divisible by K => this is math problem with one edge case not sure how it is linked to pigeon hole principle
 140.  Flood Fill => very simple dfs problem with one edge case (166th problem of sde sheet)
 141.  Max Area of Island => very simple dfs problem MAANG favourite (165th problem of sde sheet)
-142.  
+142.  Combinations => this is standard backtracking problem

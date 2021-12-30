@@ -1,0 +1,35 @@
+class Solution:
+    def maxAreaOfIsland(self, grid: List[List[int]]) -> int:
+        """
+        this is simple dfs problem
+        whenever we encounter landmass
+        then do dfs and mark them visited
+        along with this cal area of island
+        and keep track of maximum
+        
+        tc = O(n) in worst case we will visit each cell once
+        sc = O(n)
+        """
+        def isValidNeighbour(x,y,grid,visited,rows,cols):
+            return 0 <= x < rows and 0 <= y < cols and grid[x][y] == 1 and (x,y) not in visited
+        
+        def dfs(x,y,grid,visited,rows,cols):
+            count = 1
+            visited.add((x,y))
+            dirs = [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]
+            for newx,newy in dirs:
+                if isValidNeighbour(newx,newy,grid,visited,rows,cols):
+                    count += dfs(newx,newy,grid,visited,rows,cols)
+            return count
+                    
+        
+        rows = len(grid)
+        cols = len(grid[0])
+        visited = set()
+        maxArea = 0
+        for row in range(rows):
+            for col in range(cols):
+                if grid[row][col] == 1 and (row,col) not in visited:
+                    currArea = dfs(row,col,grid,visited,rows,cols)
+                    maxArea = max(maxArea,currArea)
+        return maxArea

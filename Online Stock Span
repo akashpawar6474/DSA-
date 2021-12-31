@@ -1,0 +1,21 @@
+class StockSpanner:
+    """
+    Idea is very simple
+    
+    In stack we will be storing 
+    pair of price and span
+    
+    when ever we have incoming price
+    then pop all pairs which have less price
+    than curr incoming price and add respective span
+    to curr incoming price span
+    """
+    def __init__(self):
+        self.stack = []
+
+    def next(self, price: int) -> int:
+        span = 1
+        while self.stack and self.stack[-1][0] <= price:
+            span += self.stack.pop()[1]
+        self.stack.append([price,span])
+        return span

@@ -45,3 +45,29 @@ class Solution:
                 horizontalPtr = horizontalPtr.next
             verticalPtr = verticalPtr.left
         return root
+-------------------------------------------------------------------31-12-2021
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val: int = 0, left: 'Node' = None, right: 'Node' = None, next: 'Node' = None):
+        self.val = val
+        self.left = left
+        self.right = right
+        self.next = next
+"""
+
+class Solution:
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        if root is None:
+            return None
+        verticalPtr = root
+        while verticalPtr is not None:
+            horizontalPtr = verticalPtr
+            while horizontalPtr is not None:
+                if horizontalPtr.left:
+                    horizontalPtr.left.next = horizontalPtr.right
+                if horizontalPtr.right and horizontalPtr.next:
+                    horizontalPtr.right.next = horizontalPtr.next.left
+                horizontalPtr = horizontalPtr.next
+            verticalPtr = verticalPtr.left
+        return root

@@ -1,0 +1,55 @@
+class Solution:
+    def maxDistance(self, position: List[int], m: int) -> int:
+        """
+        This is total observation based problem
+        Q.what is max distance we can have bw two balls?
+        => in best case if we have two balls then we will put them in 1st and last
+        
+        Q.what is min distance we can have bw two balls?
+        => in case we have adjacent buckets where we had the ball then it will be 1
+        
+        In any case we have to sort the array
+        to check if we can put balls(to do simulation basically)
+        
+        we can easily convert this linear solution to bs one
+        because range of currMinDistance is sorted right?
+        n = no of buckets
+        tc = O(nlogn + log(range(1,position[-1] - position[0])) * n)
+        sc = O(n)
+        """
+        def isPossibleToPutAllBalls(buckets,balls,minDistance):
+            balls -= 1
+            prevBucket = position[0]
+            n = len(buckets)
+            for i in range(1,n):
+                currBucket = position[i]
+                if currBucket >= prevBucket + minDistance:
+                    prevBucket = currBucket
+                    balls -= 1
+                    if balls == 0:
+                        break
+            return True if balls == 0 else False
+        
+        def linearSolution(position,balls,minPossibleDistance,maxPossibleDistance):
+            maxDistanceInTwoBalls = 1
+            for currMinDistance in range(minPossibleDistance,maxPossibleDistance + 1):
+                if isPossibleToPutAllBalls(position,balls,currMinDistance):
+                    maxDistanceInTwoBalls = max(maxDistanceInTwoBalls,currMinDistance)
+            return maxDistanceInTwoBalls
+        
+        def binarySearch(position,balls,minPossibleDistance,maxPossibleDistance):
+            ans = 1
+            while minPossibleDistance <= maxPossibleDistance:
+                mid = (minPossibleDistance + maxPossibleDistance) // 2
+                if isPossibleToPutAllBalls(position,balls,mid):
+                    ans = mid
+                    minPossibleDistance = mid + 1
+                else:
+                    maxPossibleDistance = mid - 1
+            return ans
+    
+        position.sort()
+        minPossibleDistance = 1
+        maxPossibleDistance = position[-1] - position[0]
+        #return linearSolution(position,m,minPossibleDistance,maxPossibleDistance)
+        return binarySearch(position,m,minPossibleDistance,maxPossibleDistance)

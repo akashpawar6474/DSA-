@@ -1,0 +1,27 @@
+class MinStack:
+    """
+    This is very easy problem
+    we will have two stack
+    first is normal one and
+    second one is for storing
+    min elements
+    """
+    def __init__(self):
+        self.normalStack = []
+        self.minStack = []
+
+    def push(self, val: int) -> None:
+        self.normalStack.append(val)
+        if not self.minStack or self.minStack[-1] >= val:
+            self.minStack.append(val)
+
+    def pop(self) -> None:
+        poppedVal = self.normalStack.pop()
+        if self.minStack and self.minStack[-1] == poppedVal:
+            self.minStack.pop()
+
+    def top(self) -> int:
+        return self.normalStack[-1]
+
+    def getMin(self) -> int:
+        return self.minStack[-1]

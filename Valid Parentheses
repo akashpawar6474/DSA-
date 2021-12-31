@@ -1,0 +1,23 @@
+class Solution:
+    def isValid(self, s: str) -> bool:
+        """
+        Idea is simple to 
+        use map and stack to keep track 
+        of opening brackets
+        """
+        ht = {}
+        ht[')'] = '('
+        ht[']'] = '['
+        ht['}'] = '{'
+        
+        stack = []
+        n = len(s)
+        for currIdx in range(n):
+            currCh = s[currIdx]
+            if currCh in ht:
+                if not stack or ht[currCh] != stack.pop():
+                    return False
+            else:
+                stack.append(currCh)
+
+        return len(stack) == 0

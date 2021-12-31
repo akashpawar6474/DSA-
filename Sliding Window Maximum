@@ -1,0 +1,30 @@
+from collections import deque
+class Solution:
+    def maxSlidingWindow(self, nums: List[int], k: int) -> List[int]:
+        """
+        brute force is to run two loops 
+        and in between that find max by grazing over k distance
+        tc = O(n * k)
+        sc = constant
+        
+        But we can make use of DeQueue here
+        we will insert curr ele into queue untill queue len < k
+        then we will popleft out of bound char
+        then pop right all ele which are less than curr ele
+        and at each running window take front ele of queue as maximum
+        tc = O(n)
+        sc = O(k)
+        """
+        q = deque()
+        n = len(nums)
+        ans = []
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if q and q[0] == currIdx - k:
+                q.popleft()
+            while q and nums[q[-1]] <= currEle:
+                q.pop()
+            q.append(currIdx)
+            if currIdx >= k - 1:
+                ans.append(nums[q[0]])
+        return ans

@@ -1,0 +1,33 @@
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        """
+        this is very simple problem
+        we will have generic binary search function
+        where we will additionally have direction variable
+        if it is true then we will find in either direction
+        tc = O(logn)
+        sc = O(1)
+        """
+        def bs(start,end,nums,target,isLeft):
+            ans = -1
+            while start <= end:
+                mid = (start + end) // 2
+                eleOnMid = nums[mid]
+                if eleOnMid < target:
+                    start = mid + 1
+                elif eleOnMid > target:
+                    end = mid - 1
+                elif isLeft:
+                    ans = mid
+                    end = mid - 1
+                else:
+                    ans = mid
+                    start = mid + 1
+            return ans
+        
+        isLeft = True
+        ans = [-1] * 2
+        n = len(nums) - 1
+        ans[0] = bs(0,n,nums,target,isLeft)
+        ans[1] = bs(0,n,nums,target,not isLeft)
+        return ans

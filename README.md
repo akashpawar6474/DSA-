@@ -156,4 +156,4 @@ solutions to graze over
 154.  Sliding Window Maximum => this is standard deque and sliding window VIMP problem(80th problem of sde sheet)
 155.  Min Stack => simple problem can be solved using two stacks(81st problem of sde sheet)
 156.  Online Stock Span => this is very good stack problem similar lime Sliding window maximum(83rd problem of sde sheet)
-157.  
+157.  Roman to Integer => traversing from back is crux of this problem(88th problem of sde sheet)

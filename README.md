@@ -153,3 +153,5 @@ solutions to graze over
 151.  Magnetic Force Between Two Balls => exactly same as aggresive cows(71st problem of sde sheet)
 152.  Implement Stack using Queues => simple problem can be solved using one queue(72nd problem of sde sheet)
 153.  Implement Queue using Stacks => simple problem using input and output stacks(73rd problem of sde sheet)
+154.  Sliding Window Maximum => this is standard deque and sliding window VIMP problem(80th problem of sde sheet)
+155.  

@@ -1,0 +1,41 @@
+class MyQueue:
+    """
+    Brute force is very simple
+    using two stacks
+        1.pop all ele from stack1 to stack2
+        2.push ele into stack1
+        3.pop all ele from stack2 to stack1
+        In this approach for each incoming ele we are popping 
+        all ele into stack again and again
+        tc = O(n ^ 2) on an average for push
+    using two stacks input and output stack
+        1.push all ele into input stack
+        while doing peek:
+            push all ele from input stack to output stack
+            return top ele from output stack
+        while doing pop
+            do peek operation
+            then pop top ele from output stack
+        In this approach each ele is pushed and popped only once
+        tc = O(n)
+    """
+    def __init__(self):
+        self.input = []
+        self.output = []
+
+    def push(self, x: int) -> None:
+        self.input.append(x)
+
+    def pop(self) -> int:
+        self.peek()
+        return self.output.pop()
+
+    def peek(self) -> int:
+        if len(self.output) == 0:
+            while self.input:
+                self.output.append(self.input.pop())
+        return self.output[-1]
+
+    def empty(self) -> bool:
+        return len(self.input) == 0 and len(self.output) == 0
+

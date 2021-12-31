@@ -145,3 +145,4 @@ solutions to graze over
 143.  Combination Sum => standard Backtraking problem with some crisp of dp(54th problem of sde sheet)
 144.  Valid Sudoku => standard set problem(61st problem of sde sheet)
 145.  Sqrt(x) => simple binary search problem(64th problem of sde sheet)
+146.  Maximum Difference Between Node and Ancestor => preorder passing values from parent to childern

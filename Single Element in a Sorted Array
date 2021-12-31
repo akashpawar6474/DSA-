@@ -1,0 +1,52 @@
+class Solution:
+    def singleNonDuplicate(self, nums: List[int]) -> int:
+        """
+        this is classic boundaries shrinking problem
+        One key is we have to make some observations
+        Except one element all elements appears twice
+        
+        Means there are two parts first is before unique ele
+        and second is after unique ele
+        
+        In first part 
+            on even idx => 1st occurance of ele
+            on odd idx => 2nd occurance of ele
+        In second part
+            on even idx => 2nd occurance of ele
+            on odd idx => 1st occurance of ele
+            
+        if idx is odd
+            then check if next ele != curr
+                update start by mid + 1
+            if next ele == curr
+                then update end by mid - 1
+        if idx is even
+            if next ele is same
+                then update start by mid + 2
+            elif next ele is diff
+                then update end by mid - 1
+        tc = O(logn)
+        sc = constant
+        """
+        def bs(start,end,nums):
+            while start < end:
+                mid = (start + end) // 2
+                eleOnMid = nums[mid]
+                eleOnMidNext = nums[mid + 1]
+                if mid & 1 != 0:
+                    if eleOnMid != eleOnMidNext:
+                        start = mid + 1
+                    else:
+                        end = mid - 1
+                else:
+                    if eleOnMid == eleOnMidNext:
+                        start = mid + 2
+                    else:
+                        end = mid - 1
+            return start
+        
+        start = 0
+        end = len(nums) - 1
+        uniqueEleIdx = bs(start,end,nums)
+        return nums[uniqueEleIdx]
+                    

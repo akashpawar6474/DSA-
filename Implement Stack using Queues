@@ -1,0 +1,34 @@
+from collections import deque
+class MyStack:
+    
+    """
+    This is very easy conceptualization problem
+    while doing push
+    we can have two approaches
+        1.using two queues
+            a.pop all ele from q1 to q2
+            b.then insert ele to q1
+            3.pop all ele from q2 to q1 again
+        2.using one queue
+            a.insert ele into q
+            b.pop all ele and insert again in q except last ele
+    In second approach we are saving some space
+    """
+    def __init__(self):
+        self.queue = deque()
+
+    def push(self, x: int) -> None:
+        self.queue.append(x)
+        n = len(self.queue)
+        for i in range(n - 1):
+            self.queue.append(self.queue.popleft())
+
+    def pop(self) -> int:
+        return self.queue.popleft()
+        
+
+    def top(self) -> int:
+        return self.queue[0]
+
+    def empty(self) -> bool:
+        return len(self.queue) == 0

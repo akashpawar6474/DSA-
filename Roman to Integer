@@ -1,0 +1,36 @@
+class Solution:
+    def romanToInt(self, s: str) -> int:
+        """
+        THis is very simple problem
+        first task is to put all the mappings
+        into table
+        
+        then start from back
+            if curr ele is greater than next
+                then add it to result
+            else
+                reduce from result
+        tc = O(n)
+        sc = constant
+        """
+        ht = {}
+        ht['I'] = 1
+        ht['V'] = 5
+        ht['X'] = 10
+        ht['L'] = 50
+        ht['C'] = 100
+        ht['D'] = 500
+        ht['M'] = 1000
+        
+        n = len(s)
+        nextEle = 0
+        res = 0
+        for currIdx in range(n - 1,-1,-1):
+            currCh = s[currIdx]
+            currVal = ht[currCh]
+            if currVal < nextEle:
+                res -= currVal
+            else:
+                res += currVal
+            nextEle = currVal
+        return res

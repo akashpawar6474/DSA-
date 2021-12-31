@@ -1,0 +1,49 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        """
+        Idea is very simple
+        when ever we encounter occupied cell
+            check if that val is present in curr row
+                              is present in curr col
+                              is present in curr sub-grid
+                              
+        Q.Now question is how to know row no and col no of grid?
+        => to get row no divide curr row by 3 
+           to get col no divide curr col by 3
+        This is beautiful problem for set
+        tc = O(9 * 9) => constant
+        sc = O(9 * 9) => constant
+        """
+        def createKeys(row,col,board):
+            currVal = board[row][col]
+            rowKey = currVal+" in row "+str(row)
+            colKey = currVal+" in col "+str(col)
+            subGridKey = currVal+" in sub grid ["+str(row // 3)+","+str(col // 3)+"]"
+            return rowKey,colKey,subGridKey
+        
+        def isValidValue(row,col,board,sudokuSet):
+            rowKey,colKey,subGridKey = createKeys(row,col,board)
+            return rowKey not in sudokuSet and colKey not in sudokuSet and subGridKey not in sudokuSet
+        
+        def addValueToSet(row,col,board,sudokuSet):
+            rowKey,colKey,subGridKey = createKeys(row,col,board)
+            sudokuSet.add(rowKey)
+            sudokuSet.add(colKey)
+            sudokuSet.add(subGridKey)
+        
+            
+        sudokuSet = set()
+        n = len(board)
+        m = len(board[0])
+        isValidSudoku = True
+
+        for row in range(n):
+            for col in range(m):
+                if board[row][col] != ".":
+                    if isValidValue(row,col,board,sudokuSet):
+                        addValueToSet(row,col,board,sudokuSet)
+                    else:
+                        isValidSudoku = False
+                        break
+        return isValidSudoku
+                    

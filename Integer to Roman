@@ -1,0 +1,30 @@
+class Solution:
+    def intToRoman(self, num: int) -> str:
+        """
+        Idea is to create mapping of value and representation
+        
+        If we can do it in array
+        then it will be easier to deal with
+        
+        1   4   5   9   10  ..
+        I   IV  V   IX  X ..
+        
+        then start from back
+        untill number is gt 0
+            reduce currVal from number
+                and add mapping to res
+        tc = O(num)
+        sc = constant
+        """
+        values = [1,4,5,9,10,40,50,90,100,400,500,900,1000]
+        romans = ["I","IV","V","IX","X","XL","L","XC","C","CD","D","CM","M"]
+        ans = ""
+        n = len(values)
+        currPtr = n - 1
+        while num > 0:
+            if values[currPtr] <= num:
+                num -= values[currPtr]
+                ans += romans[currPtr]
+            else:
+                currPtr -= 1
+        return ans

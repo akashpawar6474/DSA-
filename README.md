@@ -158,4 +158,5 @@ solutions to graze over
 156.  Online Stock Span => this is very good stack problem similar lime Sliding window maximum(83rd problem of sde sheet)
 157.  Roman to Integer => traversing from back is crux of this problem(88th problem of sde sheet)
 158.  Integer to Roman => very simple mapping problem and reducing num untill gt 0(89th problem of sde sheet)
-159.  
+159.  Valid Parentheses => map and stack VIMP problem(74th problem of sde sheet)
+160.  

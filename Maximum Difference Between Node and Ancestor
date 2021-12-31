@@ -1,0 +1,44 @@
+import math
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def __init__(self):
+        self.maxDiff = -math.inf
+    def maxAncestorDiff(self, root: Optional[TreeNode]) -> int:
+        """
+        This is simple preorder problem
+        
+        Idea is while visiting each node we should have
+        min and max in ancestor line from root of tree to curr node
+        then we can recur same for childern too
+                                    8
+                                /       \
+                                3       10
+                              /   \       \
+                             1     6       14
+                                  /  \     /
+                                  4  7    13
+        for eg.in above tree 
+        for 7 maxInAncestorLine is 8 and minInAncestorLine is 3
+        tc = O(n)
+        sc = O(n)
+        """
+        def trackMaxAndMin(root,maxInAncestorLine,minInAncestorLine):
+            if root is None:
+                return
+            candidate1 = abs(root.val - maxInAncestorLine)
+            candidate2 = abs(root.val - minInAncestorLine)
+            self.maxDiff = max(self.maxDiff,candidate1,candidate2)
+            
+            maxInAncestorLine = max(root.val,maxInAncestorLine)
+            minInAncestorLine = min(root.val,minInAncestorLine)
+            
+            trackMaxAndMin(root.left,maxInAncestorLine,minInAncestorLine)
+            trackMaxAndMin(root.right,maxInAncestorLine,minInAncestorLine)
+        
+        trackMaxAndMin(root,root.val,root.val)
+        return self.maxDiff

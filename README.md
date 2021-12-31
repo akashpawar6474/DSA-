@@ -146,3 +146,4 @@ solutions to graze over
 144.  Valid Sudoku => standard set problem(61st problem of sde sheet)
 145.  Sqrt(x) => simple binary search problem(64th problem of sde sheet)
 146.  Maximum Difference Between Node and Ancestor => preorder passing values from parent to childern
+147.  Merge Two Binary Trees => simple preorder problem

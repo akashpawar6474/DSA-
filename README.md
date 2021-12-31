@@ -148,4 +148,5 @@ solutions to graze over
 146.  Maximum Difference Between Node and Ancestor => preorder passing values from parent to childern
 147.  Merge Two Binary Trees => simple preorder problem
 148.  Rotting Oranges => very good multi source bfs problem(82nd problem of sde sheet)
-149.  
+149.  Find First and Last Position of Element in Sorted Array => this is simple bs problem(67th problem of sde sheet)
+150.  

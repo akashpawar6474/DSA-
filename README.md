@@ -150,4 +150,5 @@ solutions to graze over
 148.  Rotting Oranges => very good multi source bfs problem(82nd problem of sde sheet)
 149.  Find First and Last Position of Element in Sorted Array => this is simple bs problem(67th problem of sde sheet)
 150.  Single Element in a Sorted Array => this is observation based binary search problem(66th problem of sde sheet)
-151.  
+151.  Magnetic Force Between Two Balls => exactly same as aggresive cows(71st problem of sde sheet)
+152.  

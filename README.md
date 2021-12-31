@@ -155,4 +155,5 @@ solutions to graze over
 153.  Implement Queue using Stacks => simple problem using input and output stacks(73rd problem of sde sheet)
 154.  Sliding Window Maximum => this is standard deque and sliding window VIMP problem(80th problem of sde sheet)
 155.  Min Stack => simple problem can be solved using two stacks(81st problem of sde sheet)
-156.  
+156.  Online Stock Span => this is very good stack problem similar lime Sliding window maximum(83rd problem of sde sheet)
+157.  

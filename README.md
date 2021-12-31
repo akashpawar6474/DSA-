@@ -143,3 +143,4 @@ solutions to graze over
 141.  Max Area of Island => very simple dfs problem MAANG favourite (165th problem of sde sheet)
 142.  Combinations => this is standard backtracking problem
 143.  Combination Sum => standard Backtraking problem with some crisp of dp(54th problem of sde sheet)
+144.  Valid Sudoku => standard set problem(61st problem of sde sheet)

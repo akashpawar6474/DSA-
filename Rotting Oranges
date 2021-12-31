@@ -1,0 +1,67 @@
+from collections import deque
+class Solution:
+    def orangesRotting(self, grid: List[List[int]]) -> int:
+        """
+        Idea is to do multi source bfs
+        we will graze over grid
+            push all rotten oranges into queue
+            and calculate total oranges
+        then do bfs
+        while doing it calculate no of iterations
+        level by level(day by day)
+        Take a loop untill queue is empty
+            and traverse level by level
+            and count total no of oranges
+        
+        if total no of oranges visited equal to total no of oranges
+            then return days else return -1(means some oranges are not adjcent)
+            
+        Q.what all are followup questions we should ask?
+        1.what if there is no orange?
+        2.what if we unable to rotten all oranges?
+        
+        tc = O(2 * n) = O(n) => no of cells
+        sc = O(n)
+        """
+        def isValidCell(newRow,newCol,grid,visited):
+            n = len(grid)
+            m = len(grid[0])
+            return 0 <= newRow < n and 0 <= newCol < m and grid[newRow][newCol] == 1 and (newRow,newCol) not in visited 
+        
+        def multiSourceBfs(q,grid,visited):
+            days = -1
+            visitedOranges = 0
+            while q:
+                size = len(q)
+                for i in range(size):
+                    currOrange = q.popleft()
+                    rowIdx = currOrange[0]
+                    colIdx = currOrange[1]
+                    visitedOranges += 1
+                    dirs = [(rowIdx + 1,colIdx),(rowIdx,colIdx + 1),(rowIdx - 1,colIdx),(rowIdx,colIdx - 1)]
+                    for newRow,newCol in dirs:
+                        if isValidCell(newRow,newCol,grid,visited):
+                            q.append((newRow,newCol))
+                            visited.add((newRow,newCol))
+                days += 1
+            return days,visitedOranges
+        
+        q = deque()
+        rows = len(grid)
+        cols = len(grid[0])
+        totalOranges = 0
+        visited = set()
+        for currRow in range(rows):
+            for currCol in range(cols):
+                currVal = grid[currRow][currCol]
+                if currVal != 0:
+                    if currVal == 2:
+                        q.append((currRow,currCol))
+                        visited.add((currRow,currCol))
+                    totalOranges += 1
+        
+        if totalOranges == 0:
+            return 0
+        
+        days,visitedOranges =  multiSourceBfs(q,grid,visited)
+        return -1 if visitedOranges != totalOranges else days

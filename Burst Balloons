@@ -1,0 +1,70 @@
+class Solution:
+    def maxCoins(self, nums: List[int]) -> int:
+        """
+        Append 1 at front and end to avoid corner case
+        then just keep sliding window of length 3 bw left and right
+        """
+        nums = [1] + nums + [1]
+        n = len(nums)
+        dp = [[0 for y in range(n)] for x in range(n)]
+        
+        for gap in range(2,n):
+            for left in range(0,n - gap):
+                right = left + gap
+                for currIdx in range(left + 1,right):
+                    dp[left][right] = max(dp[left][right],nums[left] * nums[currIdx] * nums[right] + dp[left][currIdx] + dp[currIdx][right])
+                    
+        return dp[0][n - 1]
+    def recursiveTLE(self,nums):
+        """
+        This is really hard problem while 
+        digesting the intuition
+        
+        dp[i][j] => max coins we can obtain by bursting all
+                    ballons from window (i to j)
+        dp[i][j] = max(dp[i][k - 1] + dp[k + 1][j] + nums[i - 1] * nums[k] * nums[j + 1])
+                    k = range from i to j
+        assume ballon at k is last ballon to burst from window
+        we will have dp function
+            where we will have two variables
+            start and end which will determine curr window
+            base case if start > end return 0
+            else if do a lookup
+            else graze over that window
+                check edge cases
+                if start = 0 or end == last idx
+                
+                then assume curr idx ballon
+                is the last ballon we are bursting in window
+                    then add ballon and prev and next to sum
+                    then recur for left part in window
+                    and recur for right part in window
+        """
+        def topDown(nums,start,end,dp):
+            if start > end:
+                return 0
+            if (start,end) in dp:
+                return dp[(start,end)]
+            
+            maxCoinsFromWindow = 0
+            for currIdx in range(start,end + 1):
+                prevBallon = 1 if start == 0 else nums[start - 1]
+                nextBallon = 1 if end == len(nums) - 1 else nums[end + 1]
+                
+                coinsByBurstingCurrBallonAtEnd = 0
+                coinsByBurstingCurrBallonAtEnd += prevBallon * nums[currIdx] * nextBallon
+                coinsByBurstingCurrBallonAtEnd += topDown(nums,start,currIdx - 1,dp)
+                coinsByBurstingCurrBallonAtEnd += topDown(nums,currIdx + 1,end,dp)
+                
+                maxCoinsFromWindow = max(maxCoinsFromWindow,coinsByBurstingCurrBallonAtEnd)
+            
+            dp[(start,end)] = maxCoinsFromWindow
+            return maxCoinsFromWindow
+        
+        n = len(nums)
+        if  n == 0:
+            return 0
+        start = 0
+        end = n - 1
+        dp = {}
+        return topDown(nums,start,end,dp)

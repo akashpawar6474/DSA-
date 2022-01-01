@@ -1,0 +1,56 @@
+from collections import deque
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        """
+        This is standard multisource bfs problem
+        
+        Brute force is to take each one and find nearest 0 then 
+        return that distance to update the cell
+        tc = O(n ^ 2) we may end up visiting each cell for each cell in worst case
+        sc = O(n) for queue
+        
+        If we reverse the problem then we may end up
+        visiting each cell only once in bfs
+        
+        Idea is to push all 0's to queue
+        then do multisource bfs
+        and add distance for each level
+        tc = O(n + n)
+        sc = O(n)
+        """
+        def isValidNei(x,y,n,m,visited):
+            return 0 <= x < n and 0 <= y < m and (x,y) not in visited
+        
+        def getDirections(rowVal,colVal):
+            return [(rowVal + 1,colVal),(rowVal - 1,colVal),(rowVal,colVal + 1),(rowVal,colVal - 1)]
+        
+        def multiSourceBfs(q,mat,n,m,visited):
+            distanceFromZeroes = 0
+            while q:
+                size = len(q)
+                for i in range(size):
+                    currCell = q.popleft()
+                    rowVal = currCell[0]
+                    colVal = currCell[1]
+                    mat[rowVal][colVal] = distanceFromZeroes
+                    dirs = getDirections(rowVal,colVal)
+                    for newx,newy in dirs:
+                        if isValidNei(newx,newy,n,m,visited):
+                            q.append((newx,newy))
+                            visited.add((newx,newy))
+                distanceFromZeroes += 1
+                
+        q = deque()
+        n = len(mat)
+        m = len(mat[0])
+        visited = set()
+        
+        for currRow in range(n):
+            for currCol in range(m):
+                currEle = mat[currRow][currCol]
+                if currEle == 0:
+                    q.append((currRow,currCol))
+                    visited.add((currRow,currCol))
+                    
+        multiSourceBfs(q,mat,n,m,visited)
+        return mat

@@ -6,6 +6,46 @@
 class Solution:
     def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         """
+        recursive solution is to simple
+        we dont have to handle lot of edge cases
+        
+        Idea is first have a check if we have k nodes from curr head
+            if not then return head
+        
+        else reverse k nodes
+        then recur and attach head of transformed list to head.next
+        then return prev which is new Head
+        tc = O(2 * n) => O(n) because we are visiting each node twice
+        sc = O(m) no of groups can form with k nodes
+        """
+        def recursive(head,k):
+            curr = head
+            isKNodes = True
+            for currVal in range(k):
+                if not curr:
+                    isKNodes = False
+                    break
+                curr = curr.next
+            if not isKNodes:
+                return head
+            
+            prev,nxt = None,None
+            curr = head
+            
+            for currVal in range(k):
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+            
+            head.next = recursive(curr,k)
+            return prev
+        
+        return recursive(head,k)
+                
+            
+    def iterative(self,head):
+        """
         This is totally implementation based problem
         which will test our visualization skills
         

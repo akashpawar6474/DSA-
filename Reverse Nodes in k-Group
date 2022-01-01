@@ -1,0 +1,89 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        """
+        This is totally implementation based problem
+        which will test our visualization skills
+        
+        Idea is to count the list first
+            then take a loop untill count >= k
+                reverse curr k nodes group
+                then attach it to prev group(if exists)
+          
+        tt = tailTwo
+        to = tailOne
+        p = prev
+        c = curr
+        k = 2 (assume)
+        to = None
+        newHead = None
+        1 2 3 4 5
+        c
+        tt
+        after 1st iteration
+        2   1   3   4   5
+        p   tt  c
+            if newHead is empty assign prev
+            assign tt to to
+            and c to tt
+            now it looks like
+        2   1   3   4   5
+        nh  to  tt
+                c
+        after 2nd iteration
+        2   1   4   3   5
+        nh  to  p   tt  c
+            if to is not None Means prev part exists
+                connect it to prev
+            assign tt to to
+            assign c to tt
+        
+        tc = O(n + n)
+        sc = constant
+        """
+        def getCount(head):
+            count = 0
+            while head:
+                count += 1
+                head = head.next
+            return count
+        
+        def reverseKNodes(head,k):
+            curr = head
+            prev,nxt = None,None
+            for i in range(k):
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+            return prev,curr
+        
+        if head is None:
+            return head
+        
+        count = getCount(head)
+        
+        curr = head
+        tailTwo = head
+        
+        prev,tailOne,newHead = None,None,None
+        
+        while count >= k:
+            prev,curr = reverseKNodes(curr,k)
+            
+            if newHead is None:
+                #Means this is first group
+                newHead = prev
+            elif tailOne is not None:
+                #Means previous group exists
+                tailOne.next = prev
+            tailTwo.next = curr
+            tailOne = tailTwo
+            tailTwo = curr
+            count -= k
+            
+        return newHead

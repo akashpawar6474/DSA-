@@ -55,3 +55,20 @@ def isUnique(st):
 	return True
 
 print(isUnique("bcdb"))
+---------------------------------------------D 1-1-2021
+"""
+Check if string contains duplicate elements
+assume we only have smaller case letters into string
+"""
+def isUnique(s):
+	checkable = 0
+	for currCh in s:
+		idxToSetInBitVector = ord(currCh) - ord('a')
+		bitVector = 1 << idxToSetInBitVector
+		if checkable & bitVector > 0:
+			return False
+		else:
+			checkable = checkable | bitVector
+	return True
+
+print(isUnique("asdfghjklpoiuy"))

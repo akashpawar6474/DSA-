@@ -162,4 +162,5 @@ solutions to graze over
 160.  01 Matrix => similar to rotten oranges Multisource BFS problem(188th problem of sde sheet)
 161.  Burst Balloons => One of the hard problem to digest the intuition including divide and conquer,sliding window and DP asked in google or fb
 162.  Reverse Nodes in k-Group => this is simplest hard problem of linked list VIMP(33rd problem of sde sheet)
-163.  
+163.  Permutations => This is classic backtracking problem can be solved using both recursive and iterative way(58th problem of sde sheet)
+164.  

@@ -1,0 +1,106 @@
+class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """
+        One observation while doing pre computation
+        makes this problem little hot
+        
+        assume we have thousand duplicate elements
+        then in precomputation we dont have walk thorough all elements
+        if prev OR next is gteq current bar then we can jump currIdx
+        directly to smallest bar for prev Or next respectively
+        
+        so in this case our precomputation tc will reduced to amortized linear
+        tc = O(3 * n) => O(n)
+        sc = O(n)
+        """
+        n = len(heights)
+        latestSmallestBarInLeft = [0] * n
+        latestSmallestBarInLeft[0] = -1
+        
+        for currIdx in range(1,n):
+            prev = currIdx - 1
+            while prev > -1 and heights[prev] >= heights[currIdx]:
+                prev = latestSmallestBarInLeft[prev] #this is change
+            latestSmallestBarInLeft[currIdx] = prev
+        
+        latestSmallestBarInRight = [0] * n
+        latestSmallestBarInRight[n - 1] = n
+        
+        for currIdx in range(n - 2,-1,-1):
+            nxt = currIdx + 1
+            while nxt < n and heights[nxt] >= heights[currIdx]:
+                nxt = latestSmallestBarInRight[nxt] #this is change
+            latestSmallestBarInRight[currIdx] = nxt
+        
+        maxRectangle = 0
+        for currIdx in range(n):
+            currBarHeight = heights[currIdx]
+            idxOfSmallestBarInLeft = latestSmallestBarInLeft[currIdx]
+            idxOfSmallestBarInRight = latestSmallestBarInRight[currIdx]
+            width = idxOfSmallestBarInRight - idxOfSmallestBarInLeft - 1
+            rectangleForCurrBar = currBarHeight * width
+            maxRectangle = max(maxRectangle,rectangleForCurrBar)
+        return maxRectangle
+            
+        
+        
+        
+    def better(self,heights):
+        """
+        Ask ourself how can we get largest rectange at currIdx?
+        => following is histogram example
+            [2,1,5,6,2,3]
+          -1 0 1 2 3 4 5 6
+         In above array how we will get largest rectange at index 4 where val is 2
+         
+        Idea is to find latest Smallest Bar Idx In Left and right
+        in this case if is 1 and 6 respectively
+        
+        so how we will get no of bars(width of rectangle) which has
+        all bars either greater than current or equal to current
+        
+        FORMULA for width of rectangle
+            idxOfLatestSmallestBarInRight - idxOfLatestSmallerBarInLeft - 1
+            6 - 1 - 1 => 5- 1 => 4
+        
+        now multiply width with curr height to get largest rectangle for curr idx
+        
+        we can do it on run but it will take quadratic time
+        so we can precompute it this will also take quadratic time
+        
+        Edge case => for first node by default smallest bar in left doesnt exists to put -1
+                     for last node by default smallest bar in right doesnt exists so put len of array
+        tc = O(n ^ 2 + n ^ 2 + n) => O(n)
+        sc = O(n)
+        """
+        n = len(heights)
+        latestSmallestBarInLeft = [0] * n
+        latestSmallestBarInLeft[0] = -1
+        
+        for currIdx in range(1,n):
+            prev = currIdx - 1
+            while prev > -1 and heights[prev] >= heights[currIdx]:
+                prev -= 1
+            latestSmallestBarInLeft[currIdx] = prev
+        
+        latestSmallestBarInRight = [0] * n
+        latestSmallestBarInRight[n - 1] = n
+        
+        for currIdx in range(n - 2,-1,-1):
+            nxt = currIdx + 1
+            while nxt < n and heights[nxt] >= heights[currIdx]:
+                nxt += 1
+            latestSmallestBarInRight[currIdx] = nxt
+        
+        maxRectangle = 0
+        for currIdx in range(n):
+            currBarHeight = heights[currIdx]
+            idxOfSmallestBarInLeft = latestSmallestBarInLeft[currIdx]
+            idxOfSmallestBarInRight = latestSmallestBarInRight[currIdx]
+            width = idxOfSmallestBarInRight - idxOfSmallestBarInLeft - 1
+            rectangleForCurrBar = currBarHeight * width
+            maxRectangle = max(maxRectangle,rectangleForCurrBar)
+        return maxRectangle
+            
+        
+        

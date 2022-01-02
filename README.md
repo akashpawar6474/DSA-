@@ -163,4 +163,5 @@ solutions to graze over
 161.  Burst Balloons => One of the hard problem to digest the intuition including divide and conquer,sliding window and DP asked in google or fb
 162.  Reverse Nodes in k-Group => this is simplest hard problem of linked list VIMP(33rd problem of sde sheet)
 163.  Permutations => This is classic backtracking problem can be solved using both recursive and iterative way(58th problem of sde sheet)
-164.  
+164.  Largest Rectangle in Histogram => This is math and simulation based problem asked in Google FB Amazon(79th problem of sde sheet)
+165.  

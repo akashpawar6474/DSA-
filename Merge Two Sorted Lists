@@ -4,8 +4,28 @@
 #         self.val = val
 #         self.next = next
 class Solution:
-    
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        recursive is also very simple
+        tc = O(n + m)
+        sc = O(max(n,m))
+        """
+        def recursiveCore(head1,head2):
+            if head1 is None:
+                return head2
+            if head2 is None:
+                return head1
+            if head1.val < head2.val:
+                head1.next = recursiveCore(head1.next,head2)
+                return head1
+            else:
+                head2.next = recursiveCore(head1,head2.next)
+                return head2
+            
+        ans = recursiveCore(list1,list2)
+        return ans
+    
+    def iterative(self,list1,list2):
         """
         brute force is very simple create new list with help of two pointers
         

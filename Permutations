@@ -80,4 +80,40 @@ class Solution:
         backtrack(nums,0,n,ans,currPath)
         return ans
         
+        ----------------------------------------------------------------------2-2-2022
+        from collections import deque
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        q = deque()
+        q.append([])
+        n = len(nums)
+        ans = []
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            for i in range(len(q)):
+                currPermute = q.popleft()
+                for j in range(len(currPermute) + 1):
+                    newPermute = currPermute.copy()
+                    newPermute.insert(j,currEle)
+                    if len(newPermute) == n:
+                        ans.append(newPermute)
+                    else:
+                        q.append(newPermute)
+        return ans
+    def recursive(self,nums):
+        def backtrack(nums,n,ans,currList,currIdx):
+            if currIdx == n:
+                ans.append(currList.copy())
+                return
+            for i in range(len(currList) + 1):
+                newPermute = currList.copy()
+                newPermute.insert(i,nums[currIdx])
+                backtrack(nums,n,ans,newPermute,currIdx + 1)
+        
+        n = len(nums)
+        ans = []
+        currList = []
+        currIdx = 0
+        backtrack(nums,n,ans,currList,currIdx)
+        return ans
         

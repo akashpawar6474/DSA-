@@ -164,4 +164,5 @@ solutions to graze over
 162.  Reverse Nodes in k-Group => this is simplest hard problem of linked list VIMP(33rd problem of sde sheet)
 163.  Permutations => This is classic backtracking problem can be solved using both recursive and iterative way(58th problem of sde sheet)
 164.  Largest Rectangle in Histogram => This is math and simulation based problem asked in Google FB Amazon(79th problem of sde sheet)
-165.  
+165.  Letter Case Permutation => standard backtracking problem very good
+166.  

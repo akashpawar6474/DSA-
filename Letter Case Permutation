@@ -1,0 +1,57 @@
+class Solution:
+    def letterCasePermutation(self, s: str) -> List[str]:
+        """
+                            a1b1
+                        /           \  for first char copy as it is and change case
+                    a1b1            A1b1
+                    |               |       skip second char
+                    /               \   for third char 
+                a1b1,A1b1           a1B1,A1B1
+                    
+        tc = O(n * 2 ^ n)
+        sc = O(n * 2 ^ n)
+        """
+        permutations = []
+        permutations.append(s)
+        n = len(s)
+        for i in range(n):
+            if s[i].isalpha():
+                for currIdx in range(len(permutations)):
+                    currPermute = permutations[currIdx]
+                    newPermute = list(currPermute)
+                    newPermute[i] = newPermute[i].swapcase()
+                    permutations.append(''.join(newPermute))
+        return permutations
+    
+                    
+    def recursive(self,s):
+        """
+        Brute force is just graze over array
+        whenever we found char
+        then make it lowercase and uppercase and recur
+        
+        if we reached end then add list to answer
+        print('A'.lower())
+        ''.upper()
+        ''.isalpha()
+        ''.isdigit()
+        ''.swapcase()
+        """
+        def backtrack(currIdx,n,starr,ans):
+            if n == currIdx:
+                ans.append(''.join(starr))
+                return
+            if starr[currIdx].isalpha():
+                starr[currIdx] = starr[currIdx].lower()
+                backtrack(currIdx + 1,n,starr,ans)
+                starr[currIdx] = starr[currIdx].upper()
+                backtrack(currIdx + 1,n,starr,ans)
+            else:
+                backtrack(currIdx + 1,n,starr,ans)
+                
+        currIdx = 0
+        n = len(s)
+        starr = list(s)
+        ans = []
+        backtrack(currIdx,n,starr,ans)
+        return ans

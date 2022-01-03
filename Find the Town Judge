@@ -1,0 +1,24 @@
+class Solution:
+    def findJudge(self, n: int, trust: List[List[int]]) -> int:
+        """
+        this is graph problem
+        If we look carefully
+        TownJudge is person who have 0 outdegree and n - 1
+        indegree 
+        if no such person exists then return -1
+        tc = O(E) e = no of edges
+        sc = O(n) n = no of nodes
+        """
+        indegree = [0] * (n + 1)
+        outdegree = [0] * (n + 1)
+        
+        for x,y in trust:
+            indegree[y] += 1
+            outdegree[x] += 1
+            
+        townJudge = -1
+        for i in range(1,n + 1):
+            if indegree[i] == n - 1 and outdegree[i] == 0:
+                townJudge = i
+                break
+        return townJudge

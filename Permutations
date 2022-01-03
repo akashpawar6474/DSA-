@@ -1,0 +1,83 @@
+from collections import deque
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        """
+        This can be solved using iterative way too
+        we need queue for this
+        Idea is to push empty list into queue
+        then we will graze over each no in array
+            for each no we will graze over all lists into queue
+                for each list we will graze over each idx including last
+                    if it make upto the length of nums
+                        then add to ans
+                    else
+                        add to queue
+        for eg.[1,2,3]
+                                    [ ]
+                                     | for 1
+                                    [1]
+                                /          \ for 2
+                            [2,1]           [1,2]
+                        /   |   \          /    |   \ for 3
+                      321   231 213       312   132  123  now add it to answer
+        tc = O(n * n!)
+        sc = O(n!) for queue
+                                     
+        """
+        q = deque()
+        q.append([])
+        n = len(nums)
+        ans = []
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            queueLen = len(q)
+            for currListIdx in range(queueLen):
+                innerPermute = q.popleft()
+                for idxInCurrList in range(len(innerPermute) + 1):
+                    newPermute = innerPermute.copy()
+                    newPermute.insert(idxInCurrList,currEle)
+                    if len(newPermute) == n:
+                        ans.append(newPermute)
+                    else:
+                        q.append(newPermute)
+        return ans
+    
+    def recursive(self,nums):
+        """
+        we can do it recursively
+        Idea is to graze over numbers array
+        means for each curr idx
+            graze over curr path for each position
+                insert ele at curr idx in curr path
+                and recur
+        for eg. [1,2,3]
+                                    [ ]
+                                     |
+                                    [1]
+                            /                       \
+                         [2,1]                      [1,2]
+                    /      |    \          /           |       \
+              [3,2,1]   [2,3,1] [2,1,3]   [3,1,2]   [1,3,2]    [1,2,3]
+              
+        base case is if curr idx is reached end
+            then attach curr path copy to answer
+            
+        tc = O(n * n!) for any n length array or string there are n! permutations
+        sc = O(n!) to store all recursive calls of permutation
+        """
+        def backtrack(nums,currIdx,n,ans,currPath):
+            if currIdx == n:
+                ans.append(currPath)
+                return
+            for i in range(len(currPath) + 1):
+                newList = currPath.copy()
+                newList.insert(i,nums[currIdx])
+                backtrack(nums,currIdx + 1,n,ans,newList)
+                
+        currPath = []
+        ans = []
+        n = len(nums)
+        backtrack(nums,0,n,ans,currPath)
+        return ans
+        
+        

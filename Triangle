@@ -1,0 +1,75 @@
+class Solution:
+    def minimumTotal(self, triangle: List[List[int]]) -> int:
+        """
+        this problem involves optimal substructure and overlappign subrpoblems
+        then dp comes into picture
+        tc = O(n * m)
+        sc = O(n * m)
+        """
+        def topDown(triangle,rows,ci,cri,dp):
+            if cri == rows - 1:
+                return triangle[cri][ci]
+            
+            if (ci,cri) in dp:
+                return dp[(ci,cri)]
+            
+            selectBelowEle = topDown(triangle,rows,ci,cri + 1,dp)
+            selectNextOfBelowEle = topDown(triangle,rows,ci + 1,cri + 1,dp)
+            
+            minAmongCandidates = min(selectBelowEle,selectNextOfBelowEle)
+            
+            dp[(ci,cri)] = triangle[cri][ci] + minAmongCandidates
+            return dp[(ci,cri)]
+        
+        rows = len(triangle)
+        ci = 0
+        cri = 0
+        dp = {}
+        return topDown(triangle,rows,ci,cri,dp)
+        
+    def recursive(self,triangle):
+        """
+        there is one given data which we shouldnt ignore
+        form curr location we can only select just below ele
+        or next of it
+        
+        we cant randomly select any element from next row
+        
+        base case if we are into last row
+            return curr val
+        else
+            recur for below and its next val
+            then take min among them
+            add it to curr no and return
+            
+            
+        -1
+        2  3
+        1 -1 -3
+        
+        r = return
+        
+        if we draw recursive tree out of it
+                         fn(0,0) = 1  =>  r 1
+                    /r 1                  \ r 0
+                fn(0,1) = 2             fn(1,1) = 3
+              r1/      r -1\            r -1/        \r = -1
+        fn(0,2)=1   fn(1,2)=-1     fn(1,2)=-1   fn(2,2) = -3
+            
+        ci = currIdx
+        cri = curr row idx
+        tc = O(n ^ m)
+        sc = O(n ^ m)
+        """
+        def recursive(triangle,rows,ci,cri):
+            if cri == rows - 1:
+                return triangle[cri][ci]
+            selectBelowEle = recursive(triangle,rows,ci,cri + 1)
+            selectNextOfBelowEle = recursive(triangle,rows,ci + 1,cri + 1)
+            minAmongCandidates = min(selectBelowEle,selectNextOfBelowEle)
+            return triangle[cri][ci] + minAmongCandidates
+        
+        rows = len(triangle)
+        ci = 0
+        cri = 0
+        return recursive(triangle,rows,ci,cri)

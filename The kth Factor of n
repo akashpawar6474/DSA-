@@ -1,0 +1,96 @@
+class Solution:
+    def kthFactor(self, n: int, k: int) -> int:
+        """
+        brute force is calculate factor once
+        Q.what is brute force to calculate the factors?
+        => we can graze from 1 to n and see
+            if curr no has remaider 0 with n
+                if yes then add it to count
+        tc = O(n)
+        sc = O(1)
+        
+        Now assume if we have n == 10 ^ 9
+        and our system process 10 ^ 9 instructions per sec
+        and our brute force soln has 5 instructions per iterations
+        
+        so how much time it will take for n = 10 ^ 9
+        no of iterations = 10 ^ 9
+        no of instructions = 5 * 10 ^ 9 instructions
+        so it will take 5 sec
+        
+        Now if our n is equal to 10 ^ 18
+        no of iterations = 10 ^ 18 
+        no of instructions = 5 * 10 ^ 18
+        so it will take 5 * 10 ^ 9 sec => 158 years
+        
+        so we need to optimize solution right?
+        
+        i * j = n
+        i and j both are factors of n
+        what will be i = n / i
+        if we put that in equation
+        i * (n / i) = n
+        
+        for eg n = 100
+        i               n / i
+        ---------------------
+        1               100
+        2               50
+        4               45
+        5               20
+        10              10
+        ------------------ from here steps factors repeating
+        20              5
+        25              4
+        50              2
+        100             1
+        
+        what if we just iterate over first half
+        But how to know when to stop
+        
+        our curr val ranges from [1,sqrt(n)]
+        
+        will you use sqrt function?
+        we can also iterate untill currVal * currVal <= n
+        
+        This approach will reduce tc to O(sqrt(n))
+        
+        One edge case is that if factors are same then just count once
+        
+        Idea is to gather factors
+        if k > no of factors then return -1
+        tc = O(sqrt(n) + sqrt(n)) = O(sqrt(n))
+        sc = O(2 * sqrt(n)) => O(sqrt(n))
+        """
+        def rearrangeFactors(factors):
+            orderedFactors = [0] * len(factors)
+            n = len(factors)
+            smallFactorsPtr = 0
+            largeFactorsPtr = n - 1
+            for i in range(n):
+                if i & 1 == 0:
+                    orderedFactors[smallFactorsPtr] = factors[i]
+                    smallFactorsPtr += 1
+                else:
+                    orderedFactors[largeFactorsPtr] = factors[i]
+                    largeFactorsPtr -= 1
+            return orderedFactors
+        
+        def generateFactors(n,factors):
+            currVal = 1
+            while currVal * currVal <= n:
+                if n % currVal == 0:
+                    if currVal == (n // currVal):
+                        factors.append(currVal)
+                    else:
+                        factors.append(currVal)
+                        factors.append(n // currVal)
+                currVal += 1
+            return factors
+                    
+        factors = []
+        factors = generateFactors(n,factors)
+        if  k > len(factors):
+            return -1
+        factors = rearrangeFactors(factors)
+        return factors[k - 1]

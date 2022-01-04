@@ -169,4 +169,4 @@ solutions to graze over
 167.  Climbing Stairs => VIMP dp problem asked in serviceNow(170th problem of sde sheet)
 168.  House Robber => VIMP dp problem(174th problem of sde sheet)
 169.  Complement of Base 10 Integer => brute force bit manipulation problem
-170.  
+170.  Triangle => this is classic dp problem and one of my favourite

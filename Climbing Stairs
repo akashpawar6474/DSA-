@@ -1,0 +1,90 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        """
+        as we know we just need previous two values
+        to calculate no of steps for nth stair
+        then we can just use variable instead of table
+        tc = O(n)
+        sc = O(1)
+        """
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        stepsForPrevStair = 1
+        stepsForPrevPrevStair = 2
+        stepsForCurrStair = 0
+        for i in range(3,n + 1):
+            stepsForCurrStair = stepsForPrevStair + stepsForPrevPrevStair
+            stepsForPrevStair = stepsForPrevPrevStair
+            stepsForPrevPrevStair = stepsForCurrStair
+        return stepsForCurrStair
+    
+    def bottomUp(self,n):
+        """
+        we can solve this problem using tabulation also
+        
+        dp[n] = dp[n - 1] + dp[n - 2]
+        this is formula to get no of steps to reach nth step
+        tc = O(n)
+        sc = O(n)
+        """
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+        dp = [0 for x in range(n + 1)]
+        dp[1] = 1
+        dp[2] = 2
+        for currStairNo in range(3,n + 1):
+            dp[currStairNo] = dp[currStairNo - 1] + dp[currStairNo - 2]
+        return dp[n]
+    
+    def topDown(self,n):
+        """
+        This problem has two points to note
+        it has optimal substructure of problem
+        and it also has overlapping subproblems
+        
+        so we can introduce dp here
+        tc = O(n)
+        sc = O(n)
+        """
+        def climbStairsCore(n,dp):
+            if n == 1:
+                return 1
+            if n == 2:
+                return 2
+            if n in dp:
+                return dp[n]
+            noOfSteps = 0
+            noOfSteps += climbStairsCore(n - 1,dp)
+            noOfSteps += climbStairsCore(n - 2,dp)
+            dp[n] = noOfSteps
+            return noOfSteps
+        
+        noOfSteps = climbStairsCore(n,{})
+        return noOfSteps
+        
+    def recursive(self,n):
+        """
+        Brute force is when n == 1 return1
+        when n == 2 return 2
+        if n == 0 return 0
+        
+        then just recur
+        tc = O(2 ^ n)
+        sc = O(2 ^ n)
+        """
+        def climbStairsCore(n):
+            if n == 1:
+                return 1
+            if n == 2:
+                return 2
+            noOfSteps = 0
+            noOfSteps += climbStairsCore(n - 1)
+            noOfSteps += climbStairsCore(n - 2)
+            return noOfSteps
+        
+        noOfSteps = climbStairsCore(n)
+        return noOfSteps

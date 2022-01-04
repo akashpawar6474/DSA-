@@ -1,0 +1,45 @@
+class Solution:
+    def bitwiseComplement(self, n: int) -> int:
+        """
+        Idea is to convert it to base 2
+        then flip the characters then build the number
+        tc = O(32 + 32 + 32) = O(1)
+        sc = O(32) = O(1)
+        
+        there is edge case if n == 0
+        then our convertBinary fn stucks into loop
+        so handle it seperately
+        """
+        
+        def convertBinary(n,binaryNo):
+            while n > 0:
+                binaryNo.append(n % 2)
+                n = n // 2
+            return binaryNo
+        
+        def flipBits(binaryNo):
+            for i in range(len(binaryNo)):
+                currVal = binaryNo[i]
+                if currVal == 0:
+                    binaryNo[i] = 1
+                else:
+                    binaryNo[i] = 0
+            return binaryNo
+        
+        def buildBase10Number(binaryNo):
+            ans = 0
+            powerOfTwo = 0
+            n = len(binaryNo)
+            for i in range(n):
+                if binaryNo[i] != 0:
+                    ans += 2 ** powerOfTwo
+                powerOfTwo += 1
+            return ans
+                    
+        if n == 0:
+            return 1
+        binaryNo = convertBinary(n,[])
+        binaryNo = flipBits(binaryNo)
+        ans = buildBase10Number(binaryNo)
+        return ans
+        

@@ -174,4 +174,5 @@ solutions to graze over
 172.  Palindrome Partitioning => VIMP backtracking problem(56th problem of sde sheet)
 173.  Power of Two => very good math problem can be solved using counting set bits
 174.  Number of 1 Bits => it has core part of above problem
-175.  
+175.  Reverse Bits => this is brute force generate binary then build decimal
+176.  

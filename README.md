@@ -171,4 +171,5 @@ solutions to graze over
 169.  Complement of Base 10 Integer => brute force bit manipulation problem
 170.  Triangle => this is classic dp problem and one of my favourite
 171.  The kth Factor of n => very beautiful problem involves concept of converting linear solution to sqrt one using one observation
-172.  
+172.  Palindrome Partitioning => VIMP backtracking problem(56th problem of sde sheet)
+173.  

@@ -1,0 +1,74 @@
+class Solution:
+    def isPowerOfTwo(self, n: int) -> bool:
+        """
+        we can say that only one bit is set in 
+        binary representation of power of 2
+        1 = 0001
+        2 = 0010
+        4 = 0100
+        8 = 1000
+        
+        just right shift untill no is not 0
+            and if last bit is 1
+                then calculate set bit
+                if it went ahead of 1
+                    then return False
+        return true
+        It will take only 32 iterations as
+        interger array is at max 32 bits
+        tc = O(32) = O(1)
+        sc = constant
+        """
+        setBits = 0
+        while n > 0:
+            if n & 1 != 0:
+                setBits += 1
+                if setBits > 1:
+                    break
+            n = n >> 1
+        return setBits == 1
+                    
+    def recursiveApproach(self,n):
+        """
+        we can do it recursively
+        if n == 1
+            return True
+        if n is not divisible by 2
+            return False
+        else recur(n // 2)
+        
+        if n == 0
+            return false
+        
+        tc = O(logn)
+        sc = O(logn)
+        """
+        def recursive(n):
+            if n == 1:
+                return True
+            if n % 2 != 0:
+                return False
+            return recursive(n // 2)
+        if n == 0:
+            return False
+        return recursive(n)
+        
+    def iterative(self,n):
+        """
+        brute force is divide no untill != 1
+            and edge case if no is not divisible by 2 then just break
+            and return false
+            else divide n by 2
+            
+        tc = O(logn)
+        sc = O(1)
+        """
+        isValid = True
+        if n == 0:
+            return False
+        while n != 1:
+            if n % 2 != 0:
+                isValid = False
+                break
+            n = n // 2
+        return isValid

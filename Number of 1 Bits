@@ -1,0 +1,17 @@
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        """
+        Brute force is to right shift
+        bit untill we reaches to 0
+        and if any bit is set
+            then count
+        at wors we have to traverse 32 bits
+        tc = O(32) => O(1)
+        sc = O(1)
+        """
+        setBits = 0
+        while n > 0:
+            if n & 1 != 0:
+                setBits += 1
+            n = n >> 1
+        return setBits

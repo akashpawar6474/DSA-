@@ -1,0 +1,37 @@
+class Solution:
+    def reverseBits(self, n: int) -> int:
+        """
+        Brute force is generate binary representation
+        it will take logn time
+        while doing that for 
+        for 10 binary representation is 1010
+        but while generating it we get 0101
+        which is same as reverse
+        so build decimal no without reversing it
+        tc = O(32 + 32) = O(1)
+        sc = O(32) => O(1)
+        """
+        def generateBinary(n):
+            binaryArr = [0] * 32
+            binaryArrPtr = 0
+            while n > 0:
+                remainder = n % 2
+                binaryArr[binaryArrPtr] = remainder
+                binaryArrPtr += 1
+                n = n // 2
+            return binaryArr
+        
+        def binaryToDecimal(binaryArr):
+            print(binaryArr)
+            powerOfTwo = 0
+            ans = 0
+            for i in range(len(binaryArr) - 1,-1,-1):
+                if binaryArr[i] == 1:
+                    ans += (2 ** powerOfTwo)
+                powerOfTwo += 1
+            return ans
+        
+        binaryArr = generateBinary(n)
+        ans = binaryToDecimal(binaryArr)
+        return ans
+            

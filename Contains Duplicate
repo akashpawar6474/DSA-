@@ -1,0 +1,27 @@
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        """
+        brute force is having two loops
+        tc = O(n ^ 2)
+        sc = O(1)
+        
+        better can be sort the array
+        if next ele is same 
+        then break and return false
+        tc = O(nlogn)
+        sc = O(n)
+        
+        we can use hash table or set
+        tc = O(n)
+        sc = O(n)
+        """
+        n = len(nums)
+        s = set()
+        isDuplicate = False
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if currEle in s:
+                isDuplicate = True
+                break
+            s.add(currEle)
+        return isDuplicate

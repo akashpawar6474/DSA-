@@ -37,3 +37,33 @@ class Solution:
                 break
         return isValPresent
         
+------------------------------------------------------------6 Jan 2022
+class Solution:
+    def firstMissingPositive(self, nums: List[int]) -> int:
+        """
+        we can do cyclic sort here
+        tc = O(n)
+        sc = O(1)
+        """
+        def cyclicSort(nums):
+            n = len(nums)
+            currIdx = 0
+            while currIdx < n:
+                valAtCurrIdx = nums[currIdx]
+                if 1 <= valAtCurrIdx <= n and nums[currIdx] != nums[valAtCurrIdx - 1]:
+                    nums[currIdx],nums[valAtCurrIdx - 1] = nums[valAtCurrIdx - 1],nums[currIdx]
+                else:
+                    currIdx += 1
+            return nums
+        
+        def findMissingInteger(nums):
+            n = len(nums)
+            for i in range(n):
+                if nums[i] != i + 1:
+                    return i + 1
+            return n + 1
+            
+        nums = cyclicSort(nums)
+        ans = findMissingInteger(nums)
+
+        return ans

@@ -79,4 +79,103 @@ class Solution:
                 currSum = 0
         return maxSum
         
+----------------------------------------------------------6 Jan 2022 (I got intuition behind kadanes algo)
+import math
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
+        we will discuss how we reached kadane's algo
+        
+        arr = [ only +ve ele ] =>Q.what is max subarray sum? => sum of array
+        arr = [ only -ve ele ] =>Q.what is max subarray sum? => max ele in array
+        
+        arr[ -ve ele's | +ve ele | -ve ele's ] => Q.what is max subarray sum?
+        => it will subarray with +ve ele only
+        
+        arr = [ -ve ele's | _ 1-ve ele | +ve ele's | -ve ele's ]
+        Q.by adding previous adjcent ele to +ve ele's subarray will it increase the sum?
+        => definitely not
+        
+        arr = [ -ve ele's | _ 1 +ve ele _ 1 -ve ele | +ve ele's | -ve ele's ]
+        Q.just before +ve ele's subarray there is pair of +ve and -ve ele
+          which makes total +ve
+          so by adding that total to +ve subarray forward will it increase the sum?
+        => yes
+        
+        So that is the point 
+            1.if currSum is +ve then that will not reduce subarray sum of forward ele's
+                so take it forward
+            2.if currSum is -ve then that will definitely reduce subarray sum of forward(remaining)
+                ele so make it 0 and go ahead
+        """
+        maxSum = -math.inf
+        runningSum = 0
+        n = len(nums)
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            runningSum += currEle
+            if runningSum > maxSum:
+                maxSum = runningSum
+            if runningSum < 0:
+                runningSum = 0
+        return maxSum
+    def dividerAndConquer(self,nums):
+        """
+        Basic solution is to find all subarrays
+        then cal sum and track it
+        tc = O(n ^ 3)
+        sc = O(1)
+        
+        rather than using third loop
+        we can calculate sum on run
+        tc = O(n ^ 2)
+        sc = O(1)
+        
+        we can do this using divide and conquer too
+        assume that our mid is part of max sum subarray
+        then cal subarray sum towards left and right
+        Q.how to do that
+        go towards in left and right
+        add curr ele to tsum
+        and if it is gt subarray sum in left and right
+            then update it
+            
+        then recur for left and right part
+        then return max among subarray from 
+            1.subarray sum in left including mid plus
+              subarray sum in right
+            2.max subarray sum in left part
+            3.max subarray sum in right part
+        tc = O(nlogn)
+        sc = O(n)
+        """
+        def divideAndConquer(nums,st,end):
+            if st == end:
+                return nums[st]
+            mid = (st + end) // 2
+            
+            subarraySumInLeftWithMid = -math.inf
+            runningSum = 0
+            for i in range(mid,st - 1,-1):
+                runningSum += nums[i]
+                if runningSum > subarraySumInLeftWithMid:
+                    subarraySumInLeftWithMid = runningSum
+                
+            subarraySumInRightWithMid = -math.inf
+            runningSum = 0
+            for i in range(mid + 1,end + 1):
+                runningSum += nums[i]
+                if runningSum > subarraySumInRightWithMid:
+                    subarraySumInRightWithMid = runningSum
+            
+            subarraySumInLeftPart = divideAndConquer(nums,st,mid)
+            subarraySumInRightPart = divideAndConquer(nums,mid + 1,end)
+            return max(subarraySumInLeftWithMid + subarraySumInRightWithMid,subarraySumInLeftPart,subarraySumInRightPart)
+        
+        st = 0
+        end = len(nums) - 1
+        return divideAndConquer(nums,st,end)
+                
+
+        
         

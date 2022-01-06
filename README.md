@@ -132,7 +132,7 @@ solutions to graze over
 130.  Reverse Words in a String III => String reverse simulation based problem with two pointers
 131.  Number Complement => bit manipulation problem generate binary then flip bits then generate no
 132.  Subsets II => VIMP followup question to subsets needs sorting and dup checkup(53rd problem of sde sheet)
-133.  can we make array in increasing order by at most 1 replacement => VIIMP asked in mazon 1st interview not able to solve edge case yet
+133.  Non-decreasing Array => can we make array in increasing order by at most 1 replacement? VIIMP asked in mazon 1st interview not able to solve edge case yet
 134.  Binary Tree to DLL => VIMP problem asked in mamazon with inplace no extraa space for list GFG (VIMP)
 135.  Populating Next Right Pointers in Each Node => vimp level order problem but can be optimized in space using two pointers as it is PBT
 136.  Permutation in String => Standard sliding window problem Vimp problem(150th problem of sde sheet)

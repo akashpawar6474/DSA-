@@ -1,0 +1,68 @@
+class Solution:
+    def checkPossibility(self, nums: List[int]) -> bool:
+        """
+        This is very Imp problem
+        we can call it FAANG one
+        
+        Brute force is to check consecutive elements
+        but it will break in some edge cases as follows
+        for eg 4,4,2,2
+        
+        here we found inversion at idx 1
+        but if we change 2 to 4 or vice-versa
+        it doesnt resolve the issue
+        
+        so we have broden our brain width along with
+        window width
+        4           4         2         2
+        pos - 1    pos     pos + 1   pos + 2
+        
+        we have to make sure 
+        1st condition => nums[pos - 1] <= nums[pos + 1]
+        2nd condition => nums[pos] <= nums[pos + 2]
+        
+        what about edge cases into edge cases?
+        
+        4       2       3
+        
+        here we cant check above two conditions
+        so just check if pos == 0 at last
+        means we found inversion a 0th idx
+        but after that everything is increasing sequence 
+        thats why pos remains at 0
+        
+        3rd condition => pos == 0 OR pos == -1(means array is totally increasing)
+        
+        2       2       1
+        
+        here we had inversion at (n - 2)nd idx
+        means before that everything is in polite increasing sequence
+        
+        4th condition => pos == n - 2
+        
+        Another edge case means while grazing 
+        if pos != -1
+            means somewhere earlier we found inverse pair
+            so break or return false
+            
+        then had 5 testing condition on it
+        
+        This problem has 5 edge cases
+        """
+        n = len(nums)
+        inversionStartIdx = -1
+        isPossible = True
+        for currIdx in range(n - 1):
+            if nums[currIdx] > nums[currIdx + 1]:
+                if inversionStartIdx != -1:
+                    #means we found pair earlier
+                    isPossible = False
+                    break
+                inversionStartIdx = currIdx
+        
+        if not isPossible:
+            return isPossible
+        isPossible = inversionStartIdx == -1 or inversionStartIdx == 0 or inversionStartIdx == n - 2 or nums[inversionStartIdx - 1] <= nums[inversionStartIdx + 1] or nums[inversionStartIdx] <= nums[inversionStartIdx + 2]
+        return isPossible
+                
+        

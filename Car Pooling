@@ -1,0 +1,58 @@
+class Solution:
+    def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
+        """
+        Brute force is to sort trips 
+        based on their starting point
+        
+        then create map for each stop and no of passegers
+        on that stop
+        +ve val means passenger are entering
+        -ve val means passengers are going out
+        
+        then graze over stops range
+            and add passengers at each stop
+            if at any point of time it exceeds
+                then return false
+        tc = O(nlogn + n + m) n = trips m = stops
+        tc = O(nlogn + m)
+        sc = O(n)
+        """
+        def sortTrips(trips):
+            trips.sort(key = lambda x : x[1])
+            return trips
+        
+        def createMapOfStopsAndPassengers(trips,n):
+            ht = {}
+            for i in range(n):
+                currTrip = trips[i]
+                
+                if currTrip[1] not in ht:
+                    ht[currTrip[1]] = 0
+                ht[currTrip[1]] += currTrip[0]
+                
+                if currTrip[2] not in ht:
+                    ht[currTrip[2]] = 0
+                ht[currTrip[2]] += -currTrip[0]
+            return ht
+            
+            
+        def isEveryStopInsideCapacity(trips,ht):
+            startingStop = trips[0][1]
+            endingStop = trips[-1][2]
+            totalNoOfPassengers = 0
+            isInsideCapacity = True
+            for stopNo in range(startingStop,endingStop + 1):
+                if stopNo in ht:
+                    totalNoOfPassengers += ht[stopNo]
+                    if totalNoOfPassengers > capacity:
+                        isInsideCapacity = False
+                        break
+            return isInsideCapacity
+        
+        trips = sortTrips(trips)
+        n = len(trips)
+        ht = createMapOfStopsAndPassengers(trips,n)
+        isValidCarPooling = isEveryStopInsideCapacity(trips,ht)
+        return isValidCarPooling
+
+            

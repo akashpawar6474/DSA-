@@ -176,6 +176,47 @@ class Solution:
         end = len(nums) - 1
         return divideAndConquer(nums,st,end)
                 
-
+-----------------------------------------------------------------------------------------7 Jan 2022 I understood how to find left and right Idx of max subarray
+import math
+class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        """
+        Q.How to get left and right idx of max subarray sum?
         
+        we can have 
+        leftIdx = 0
+        rightIdx = 0
+        windowStart initially 0 set it to next idx when ever we abadon array
+        window end which is used to graze over array
+            add curr ele to curr sum
+            if curr sum gt maxsum
+                maxsum = currsum
+                leftIdx = windowStart
+                rightIdx = windowend
+            if currsum gone beyond 0
+                then abadon that subarray
+                windowStart = windowEnd + 1
+        print nums[leftIdx : rightIdx + 1]
+        tc = O(n)
+        sc = constant
+        
+        Now I feel completed
+        """
+        windowStart = 0
+        leftIdx = 0
+        rightIdx = 0
+        currSum = 0
+        maxSum = -math.inf
+        n = len(nums)
+        for windowEnd in range(n):
+            currSum += nums[windowEnd]
+            if currSum > maxSum:
+                maxSum = currSum
+                leftIdx = windowStart
+                rightIdx = windowEnd
+            if currSum < 0:
+                currSum = 0
+                windowStart = windowEnd + 1
+        print(nums[leftIdx : rightIdx + 1])
+        return maxSum
         

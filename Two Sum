@@ -30,3 +30,40 @@ class Solution:
             else:
                 ht[currEle] = currIdx
         return ans
+----------------------------------------------------------------7 Jan 2022
+class Solution:
+    def twoSum(self, nums: List[int], target: int) -> List[int]:
+        """
+        This is very simple problem
+        where brute force is check all possibilities
+        using two loops
+        but it will take quadratic time
+        
+        Q.can we make use of any observation
+        for eg arr = 2,7,11,15 and target = 9
+        
+        2 + 7 = 9
+        can be
+        9 - 7 = 2
+        
+        means at 7 we can check if 2 is present before or not
+        and best ds to remember in constant time is map
+        
+        so idea it to graze over array
+            if target - currEle present into map
+                then return ans
+            else store currele and its idx into map
+            
+        tc = O(n)
+        sc= O(n)
+        """
+        n = len(nums)
+        ht = {}
+        ans = []
+        for currIdx in range(n):
+            currEle = nums[currIdx]
+            if target - currEle in ht:
+                ans = [ht[target - currEle],currIdx]
+                break
+            ht[currEle] = currIdx
+        return ans

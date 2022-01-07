@@ -1,0 +1,39 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    """
+    brute force is graze over list
+    and create array from list
+    
+    and in get random function return random ele from array
+    
+    tc = constructor = O(n) getRandom = O(1)
+    sc = constructor = O(n) getrandom = O(1)
+    
+    This is not optimized approach need to take a look for it..
+    """
+
+    def __init__(self, head: Optional[ListNode]):
+        self.arr = []
+        curr = head
+        while curr:
+            currEle = curr.val
+            self.arr.append(currEle)
+            curr = curr.next
+        
+        
+
+    def getRandom(self) -> int:
+        import random
+        n = len(self.arr) - 1
+        randIdx = random.randint(0,n)
+        return self.arr[randIdx]
+        
+
+
+# Your Solution object will be instantiated and called as such:
+# obj = Solution(head)
+# param_1 = obj.getRandom()

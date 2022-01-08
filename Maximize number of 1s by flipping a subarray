@@ -1,0 +1,91 @@
+Problem Description
+
+You are given a binary string A(i.e. with characters 0 and 1) consisting of characters A1, A2, …, AN. In a single operation, you can choose two indices L and R such that 1 ≤ L ≤ R ≤ N and flip the characters AL, AL+1, …, AR. By flipping, we mean change character 0 to 1 and vice-versa.
+
+Your aim is to perform ATMOST one operation such that in final string number of 1s is maximised.
+
+If you don't want to perform the operation, return an empty array. Else, return an array consisting of two elements denoting L and R. If there are multiple solutions, return the lexicographically smallest pair of L and R.
+
+NOTE: Pair (a, b) is lexicographically smaller than pair (c, d) if a < c or, if a == c and b < d.
+
+
+
+Problem Constraints
+
+1 <= size of string <= 100000
+
+
+
+Input Format
+
+First and only argument is a string A.
+
+
+
+Output Format
+
+Return an array of integers denoting the answer.
+
+
+
+Example Input
+
+Input 1:
+
+A = "010"
+Input 2:
+
+A = "111"
+
+
+Example Output
+
+Output 1:
+
+[1, 1]
+Output 2:
+
+[]
+-----------------------------
+    def flip(self, A):
+        """
+        Idea is to use kadanes algo
+        to find out max subarray
+        where diff of count of 0's - count of 1s is 
+        greater
+        
+        tc = O(n)
+        sc = constant
+        """
+        leftIdx = -1
+        rightIdx = -1
+        currDiff = 0
+        maxDiff = 0
+        n = len(A)
+        windowStart = 0
+        zeroCount = 0
+        oneCount = 0
+        for currIdx in range(n):
+            currCh = A[currIdx]
+            if currCh == '0':
+                zeroCount += 1
+            else:
+                oneCount += 1
+            currDiff = zeroCount - oneCount
+            if currDiff > maxDiff:
+                maxDiff = currDiff
+                leftIdx = windowStart
+                rightIdx = currIdx
+            if currDiff < 0:
+                zeroCount = 0
+                oneCount = 0
+                windowStart = currIdx + 1
+        
+        if leftIdx != -1:
+            return  [leftIdx + 1,rightIdx + 1]
+        else:
+            return []
+            
+         
+        ------------------------------
+        referernce question : https://www.geeksforgeeks.org/maximize-number-0s-flipping-subarray/

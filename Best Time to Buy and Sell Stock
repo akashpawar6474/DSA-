@@ -26,3 +26,33 @@ class Solution:
             currProfit = currPrice - minUntillNow
             maxProfit = max(maxProfit,currProfit)
         return maxProfit
+--------------------------------------------------------------------------------8 Jan 2022
+class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        """
+        Brute force is take every price
+        and for that price find max price in future
+        and take diff to keep track with maximum
+        
+        tc = O(n ^ 2)
+        sc = O(1)
+        
+        another approacch is to remeber smallest price 
+        untill this no
+        
+        which can help us to reduce the problem to linear tc
+        tc = O(n)
+        sc = O(1)
+        
+        """
+        import math
+        n = len(prices)
+        minPriceSoFar = math.inf
+        maxProfitSoFar = -math.inf
+        
+        for currIdx in range(n):
+            currEle = prices[currIdx]
+            minPriceSoFar = min(minPriceSoFar,currEle)
+            currProfit = currEle - minPriceSoFar
+            maxProfitSoFar = max(maxProfitSoFar,currProfit)
+        return maxProfitSoFar

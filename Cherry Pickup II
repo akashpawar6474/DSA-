@@ -1,0 +1,69 @@
+class Solution:
+    def cherryPickup(self, grid: List[List[int]]) -> int:
+        """
+        THis is very simple problem if we can think
+        of progressively
+        
+        assume robo1 is at i1,j1
+        and robo2 is at i2,j2
+        
+        Q.how to check if both are at same place?
+        => compare i1 with i2 and j1 with j2
+          
+        if yes then add cherry of that grid once
+        else add both cell cherries
+        
+        then we can have 9 different cases for both robots and next steps
+        pos     robo1   robo2
+                left    left
+                left    right
+                left    below
+                below   left
+                below   right
+                below   below
+                right   left
+                right   right
+                right   below
+                
+        from their original pos
+        and take max among them and add to res
+        
+        tc = O((n * m) ^ 9)
+        sc = O((n * m) ^ 9)
+        """
+        import math
+        def topDown(grid,i1,i2,j1,j2,dp):
+            n = len(grid)
+            m = len(grid[0])
+            
+            if (i1,i2,j1,j2) in dp:
+                return dp[(i1,i2,j1,j2)]
+            if j1 == m or j2 == m or j1 == -1 or j2 == -1:
+                return -math.inf
+            if i1 == n and i2 == n:
+                return 0
+        
+            case1 = topDown(grid,i1 + 1,i2 + 1,j1 - 1,j2 - 1,dp)
+            case2 = topDown(grid,i1 + 1,i2 + 1,j1 - 1,j2 + 1,dp)
+            case3 = topDown(grid,i1 + 1,i2 + 1,j1 - 1,j2,dp)
+            case4 = topDown(grid,i1 + 1,i2 + 1,j1,j2 - 1,dp)
+            case5 = topDown(grid,i1 + 1,i2 + 1,j1,j2 + 1,dp)
+            case6 = topDown(grid,i1 + 1,i2 + 1,j1,j2,dp)
+            case7 = topDown(grid,i1 + 1,i2 + 1,j1 + 1,j2 - 1,dp)
+            case8 = topDown(grid,i1 + 1,i2 + 1,j1 + 1,j2 + 1,dp)
+            case9 = topDown(grid,i1 + 1,i2 + 1,j1 + 1,j2,dp)
+            
+            maxFromNextStates = max(case1,case2,case3,case4,case5,case6,case7,case8,case9)
+            
+            if i1 == i2 and j1 == j2:
+                maxFromCurrState = grid[i1][j1] + maxFromNextStates
+            else:
+                maxFromCurrState = grid[i1][j1] + grid[i2][j2] + maxFromNextStates
+            dp[(i1,i2,j1,j2)] = maxFromCurrState
+            return maxFromCurrState
+        
+        n = len(grid)
+        m = len(grid[0])
+        i1,j1,i2,j2 = 0,0,0,m - 1
+        dp = {}
+        return topDown(grid,i1,i2,j1,j2,dp)

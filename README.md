@@ -179,4 +179,5 @@ solutions to graze over
 177.  Contains Duplicate => brute -> sorting -> hashmap -> set very simple problem
 178.  Linked List Random Node => brute force worked here but it is taking linear space to reduce it we have to know about concept of "Reservoir sampling".
 179.  Intersection of Two Arrays II => very ambiguous question can be solved using sorting and two pointer
-180.  
+180.  Maximize number of 1s by flipping a subarray => VVVIMP problem can be solved using modification of kadanes algo
+181.  

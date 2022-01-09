@@ -1,0 +1,32 @@
+class NumArray:
+    """
+    brute force is very simple but it will take O(q * n) time and constant space
+    we can calculate prefix sum array for those
+    -2  0   3   -5  2   -1
+    -2  -2  1   -4  -2  -3
+    
+    q[left,right] = ps[right] - ps[left - 1]
+    0,2 => in case of 0 just return ps[2]
+    2,5 => ps[5] - ps[1] => -3 - (-2) => -3 + 2 => -1
+    
+    tc = for building prefix sum O(n) + q = O(n + q)
+    sc = if we are allowed to modify original array then constant else O(n)
+    
+    we assume we are allowed as we can recover original array from prefix sum array
+    """
+    def __init__(self, nums: List[int]):
+        n = len(nums)
+        for currIdx in range(1,n):
+            nums[currIdx] = nums[currIdx] + nums[currIdx - 1]
+        self.prefixArray = nums
+
+    def sumRange(self, left: int, right: int) -> int:
+        if left == 0:
+            return self.prefixArray[right]
+        else:
+            return self.prefixArray[right] - self.prefixArray[left - 1]
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)

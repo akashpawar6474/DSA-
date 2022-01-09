@@ -1,0 +1,22 @@
+def generatePrefixSum(arr):
+	n = len(arr)
+	for currIdx in range(1,n):
+		arr[currIdx] = arr[currIdx] + arr[currIdx - 1]
+	return arr
+
+def retriveArray(prefixSum):
+	n = len(prefixSum)
+	for currIdx in range(n - 1,0,-1):
+		prefixSum[currIdx] = prefixSum[currIdx] - prefixSum[currIdx - 1]
+	return prefixSum
+	
+arr = [1,4,-5,-4,7,7,10]
+prefixSum = generatePrefixSum(arr)
+print(prefixSum)
+originalArr = retriveArray(prefixSum)
+print(originalArr)
+
+-------------------------
+[1, 5, 0, -4, 3, 10, 20]
+[1, 4, -5, -4, 7, 7, 10]
+---------------------------

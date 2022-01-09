@@ -181,4 +181,5 @@ solutions to graze over
 179.  Intersection of Two Arrays II => very ambiguous question can be solved using sorting and two pointer
 180.  Maximize number of 1s by flipping a subarray => VVVIMP problem can be solved using modification of kadanes algo
 181.  Cherry Pickup II => very easy but thought full dp problem VIMP
-182.  
+182.  Range Sum Query - Immutable => VIMP problem can be solved using prefix sum
+183.  

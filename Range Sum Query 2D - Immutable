@@ -1,0 +1,73 @@
+class NumMatrix:
+    """
+    Idea is very simple if we progress step by step
+    
+        0   1   2
+    0   3   0   1
+    1   5   6   3
+    2   1   2   0
+    
+    and we have top left and bottom right corner of region
+    q [1,1 to 2,2]
+    
+    = ps[2,2] = which will have ps of elements in rectangle of 0,0 to 2,2
+      so reduce first row from it(3,0,1)
+      then reduce first col from it(3,5,1)
+      by doing that we are subtracting overlapping part twice so add it
+      
+    q[a1,b1 to a2,b2]
+    = ps[a2][b2] - ps[a2][b1 - 1] - ps[a1 - 1][b2] + ps[a1 - 1][b1 - 1]
+    
+    Q.Now million dollor question is how to construct prefix matrix
+    => simplest way is to construct row prefix matrix
+        then apply col prefix on it
+        
+        a0  b0  c0
+        a1  b1  c1
+        a2  b2  c2
+        
+        apply row prefix sum
+        a0          a0+b0           a0+b0+c0
+        a1          a1+b1           a1+b1+c1
+        a2          a2+b2           a2+b2+c2
+        
+        apply col prefix sum
+        a0          a0+b0           a0+b0+c0
+        a0+a1       a0+b0+a1+b1     a0+b0+c0+a1+b1+c1
+        a0+a1+a2    a0+b0+a1+b1     a0+b0+c0+a1+b1+c1
+                    +a2+b2          a2+b2+c2
+        
+    if allowed we will modify ip array as we can recover original matrix though
+    
+    tc = for calculating prefix matrix O(n * m + m * n) + O(q) for queries
+    sc =O(1) if we used existing matrix else O(n * m)
+    """
+    def __init__(self, matrix: List[List[int]]):
+        self.prefixMatrix = matrix
+        r = len(matrix)
+        c = len(matrix[0])
+        for currRowIdx in range(r):
+            for currColIdx in range(1,c):
+                self.prefixMatrix[currRowIdx][currColIdx] = self.prefixMatrix[currRowIdx][currColIdx] + self.prefixMatrix[currRowIdx][currColIdx - 1]
+        
+        for currColIdx in range(c):
+            for currRowIdx in range(1,r):
+                self.prefixMatrix[currRowIdx][currColIdx] = self.prefixMatrix[currRowIdx][currColIdx] + self.prefixMatrix[currRowIdx - 1][currColIdx]
+        
+
+    def sumRegion(self, row1: int, col1: int, row2: int, col2: int) -> int:
+        subMatrixSum = 0
+        subMatrixSum += self.prefixMatrix[row2][col2]
+        if col1 > 0:
+            subMatrixSum -= self.prefixMatrix[row2][col1 - 1]
+        if row1 > 0:
+            subMatrixSum -= self.prefixMatrix[row1 - 1][col2]
+        if row1 > 0 and col1 > 0:
+            subMatrixSum += self.prefixMatrix[row1 - 1][col1 - 1]
+        return subMatrixSum
+        
+
+
+# Your NumMatrix object will be instantiated and called as such:
+# obj = NumMatrix(matrix)
+# param_1 = obj.sumRegion(row1,col1,row2,col2)

@@ -1,0 +1,35 @@
+class Solution:
+    def matrixReshape(self, mat: List[List[int]], r: int, c: int) -> List[List[int]]:
+        """
+        problem is very simple
+        we just have to graze over original matrix
+        then add those values in new matrix
+            update currcol to 0 if it reached end
+            and increment currrow ptr
+        else
+            just increment currcol ptr
+        
+        another edge case if new matrix constraints are not
+        valid then return original matrix
+        tc =O(n * m)
+        sc= O(1)
+        """
+        rows = len(mat)
+        cols = len(mat[0])
+        
+        if rows * cols != r * c:
+            return mat
+        
+        newMat = [[-1 for y in range(c)]for x in range(r)]
+        currCol = 0
+        currRow = 0
+        
+        for currRowIdx in range(rows):
+            for currColIdx in range(cols):
+                if currCol == c:
+                    currCol = 0
+                    currRow += 1
+                currEle = mat[currRowIdx][currColIdx]
+                newMat[currRow][currCol] = currEle
+                currCol += 1
+        return newMat

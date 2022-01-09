@@ -1,0 +1,47 @@
+class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        """
+        This is same as "Maximize sum of K corner elements in Array" GFG
+        can be also solved using dp
+        
+        This is classic circular sliding window problem
+        which can be solved with circular sliding window
+                ws
+        [1,2,3,4,5,6,1] k = 3
+        
+        first calculate ws position => n - k
+        
+        then calculate sum of last k elements and keep track with maxsum
+        
+         take a loop untill it is less than n
+            remove ele at windowstart from currsum
+            increment windowstart
+            add windowend to currsum
+            increment windowend
+    
+        tc = O(n)
+        sc = constant
+        """
+        def calculateLastWindow(cardPoints,n,windowStart):
+            currSum = 0
+            for i in range(windowStart,n):
+                currSum += cardPoints[i]
+            return currSum
+        
+        n = len(cardPoints)
+        windowStart = n - k
+        windowEnd = 0
+        
+        currSum = calculateLastWindow(cardPoints,n,windowStart)
+        maxSum = currSum
+        
+        while windowStart < n:
+            currSum -= cardPoints[windowStart]
+            windowStart += 1
+            currSum += cardPoints[windowEnd]
+            windowEnd += 1
+            maxSum = max(currSum,maxSum)
+        
+        return maxSum
+        
+        

@@ -183,4 +183,5 @@ solutions to graze over
 181.  Cherry Pickup II => very easy but thought full dp problem VIMP
 182.  Range Sum Query - Immutable => VIMP problem can be solved using prefix sum
 183.  Range Sum Query 2D - Immutable => VIMP problem can be solved using prefix matrix
-184.  
+184.  First Unique Character in a String => VIMP and simple problem can be solved using hashmap
+185.  

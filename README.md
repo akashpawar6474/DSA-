@@ -185,4 +185,5 @@ solutions to graze over
 183.  Range Sum Query 2D - Immutable => VIMP problem can be solved using prefix matrix
 184.  First Unique Character in a String => VIMP and simple problem can be solved using hashmap
 185.  Reshape the Matrix => very simple simulation based problem
-186.  
+186.  Find original Array from given Prefix Sum Array => VVIMP basic question not on leetcode on gfg
+187.  

@@ -186,4 +186,5 @@ solutions to graze over
 184.  First Unique Character in a String => VIMP and simple problem can be solved using hashmap
 185.  Reshape the Matrix => very simple simulation based problem
 186.  Find original Array from given Prefix Sum Array => VVIMP basic question not on leetcode on gfg
-187.  
+187.  Maximum Points You Can Obtain from Cards => max sum of k elements from both ends circular sliding window problem VVVIMP
+188.  

@@ -1,0 +1,125 @@
+Problem Description
+
+Given an array of integers A and an integer B, find and return the minimum number of swaps required to bring all the numbers less than or equal to B together.
+
+Note: It is possible to swap any two elements, not necessarily consecutive.
+
+
+
+Problem Constraints
+
+1 <= length of the array <= 100000
+-109 <= A[i], B <= 109
+
+
+
+Input Format
+
+The first argument given is the integer array A.
+The second argument given is the integer B.
+
+
+
+Output Format
+
+Return the minimum number of swaps.
+
+
+
+Example Input
+
+Input 1:
+
+ A = [1, 12, 10, 3, 14, 10, 5]
+ B = 8
+Input 2:
+
+ A = [5, 17, 100, 11]
+ B = 20
+
+
+Example Output
+
+Output 1:
+
+ 2
+Output 2:
+
+ 1
+ ---------------------------------------------------------
+ class Solution:
+    # @param A : list of integers
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        Idea is very simple
+        first count no of ele leeq pivot
+
+        then keep the window of that no of ele length
+        and graze over array
+
+        in any window min no of ele gt pivot are no of swaps
+        required to bring all of them together
+        """
+        countOfEleLeEqPivot = 0
+        n = len(A)
+        pivot = B
+        for currIdx in range(n):
+            currEle = A[currIdx]
+            if currEle <= pivot:
+                countOfEleLeEqPivot += 1
+        
+        windowLen = countOfEleLeEqPivot
+
+        windowStart = 0
+        windowEnd = 0
+        countOfEleGtPivot = 0
+        minNoOfEleGtPivotInWindow = windowLen
+
+        while windowEnd < windowLen:
+            currVal = A[windowEnd]
+            if currVal > pivot:
+                countOfEleGtPivot += 1
+            windowEnd += 1
+
+        minNoOfEleGtPivotInWindow = min(minNoOfEleGtPivotInWindow,countOfEleGtPivot)
+
+        while windowEnd < n:
+            #pop left no from window
+            eleAtWindowStart = A[windowStart]
+            windowStart += 1
+            if eleAtWindowStart > pivot:
+                countOfEleGtPivot -= 1
+            #add ele at windowEnd to window
+            eleAtWindowEnd = A[windowEnd]
+            windowEnd += 1
+            if eleAtWindowEnd > pivot:
+                countOfEleGtPivot += 1
+            minNoOfEleGtPivotInWindow = min(minNoOfEleGtPivotInWindow,countOfEleGtPivot)
+        
+        return minNoOfEleGtPivotInWindow
+    def usingQuickSortPart(self,A,B):
+        """
+        we can use part of quick sort here
+        where B is our pivot
+        then take i as -1
+        then graze from 0 to n - 1
+            if arr[curr] > pivot
+                inc i
+                if arr[i] != arr[j]
+                    swap the value
+                    increment count
+        no need to set pivot
+        """
+        i = -1
+        pivot = B
+        n = len(A)
+        swapCount = 0
+        for currIdx in range(n):
+            if A[currIdx] <= pivot:
+                i += 1
+                if A[i] != A[currIdx]:
+                    A[i],A[currIdx] = A[currIdx],A[i]
+                    swapCount += 1
+        return swapCount

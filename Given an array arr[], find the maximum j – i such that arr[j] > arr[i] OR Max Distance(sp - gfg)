@@ -1,0 +1,112 @@
+Problem Description
+
+Given an array A of integers of size N. Find the maximum of value of j - i such that A[i] <= A[j].
+
+
+
+Problem Constraints
+
+1 <= N <= 1000000
+
+-109 <= A[i] <= 109
+
+
+
+Input Format
+
+First argument is an integer array A of size N.
+
+
+
+Output Format
+
+Return an integer denoting the maximum value of j - i.
+
+
+
+Example Input
+
+Input 1:
+
+A = [3, 5, 4, 2]
+
+
+Example Output
+
+Output 1:
+
+2
+
+
+Example Explanation
+
+Explanation 1:
+
+For A[0] = 3 and A[2] = 4, the ans is (2 - 0) = 2. 
+--------------------------------------------------------
+class Solution:
+    # @param A : tuple of integers
+    # @return an integer
+    def maximumGap(self, A):
+        """
+        This is somewhat similar problem 
+        like best time to buy and sell the stock
+        [10,1,11,2,3,4]
+
+        create list with tuples of ele and indices
+        [(10,1),(1,1),(11,2),(2,3),(3,4),(4,5)]
+
+        sort the array with values
+        [(1,1),(2,3),(3,4),(4,5),(10,1),(11,2)]
+
+
+        we can say that we cant have leeq ele than 0th idx ele
+        so start from 1st idx 
+        and at each point keep track of min idx untill now
+        then reduce min idx from curr Idx
+        and keep track of difference
+
+        tc = O(nlogn)
+        sc = O(n)
+        """
+        n = len(A)
+        valIdxPairs = [(-1,-1)] * n
+        for currIdx in range(n):
+            currPair = (A[currIdx],currIdx)
+            valIdxPairs[currIdx] = currPair
+        
+        valIdxPairs.sort(key = lambda x : x[0])
+
+        val = 0
+        idx = 1
+        minIdxUntillNow = valIdxPairs[0][idx]
+        currDistance = 0
+        maxDistance = -1
+
+        for currVal,currIdx in valIdxPairs:
+            minIdxUntillNow = min(currIdx,minIdxUntillNow)
+            currDistance = currIdx - minIdxUntillNow
+            maxDistance = max(currDistance,maxDistance)
+        
+        return maxDistance
+        
+    def bruteForce(self,A):
+        """
+        Brute force is 
+        first loop start from the left
+            second loop start from the end
+                and whenever we found valid pair
+                    count the distance
+                    and keep track of max distance
+        tc = O(n ^ 2)
+        sc = constant
+        """
+        n = len(A)
+        maxDistance = 0
+        for i in range(n):
+            for j in range(n - 1,i,-1):
+                if A[i] <= A[j]:
+                    currDistance = j - i
+                    maxDistance = max(maxDistance,currDistance)
+        
+        return maxDistance 

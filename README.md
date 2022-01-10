@@ -179,7 +179,7 @@ solutions to graze over
 177.  Contains Duplicate => brute -> sorting -> hashmap -> set very simple problem
 178.  Linked List Random Node => brute force worked here but it is taking linear space to reduce it we have to know about concept of "Reservoir sampling".
 179.  Intersection of Two Arrays II => very ambiguous question can be solved using sorting and two pointer
-180.  Maximize number of 1s by flipping a subarray => VVVIMP problem can be solved using modification of kadanes algo
+180.  Maximize number of 1s by flipping a subarray(sp) => VVVIMP problem can be solved using modification of kadanes algo
 181.  Cherry Pickup II => very easy but thought full dp problem VIMP
 182.  Range Sum Query - Immutable => VIMP problem can be solved using prefix sum
 183.  Range Sum Query 2D - Immutable => VIMP problem can be solved using prefix matrix
@@ -187,7 +187,8 @@ solutions to graze over
 185.  Reshape the Matrix => very simple simulation based problem
 186.  Find original Array from given Prefix Sum Array => VVIMP basic question not on leetcode on gfg
 187.  Maximum Points You Can Obtain from Cards => max sum of k elements from both ends circular sliding window problem VVVIMP
-188.  Beggars Outside Temple => range queries to update donations VIMP prfix sum problem
-189.  Maximum Sum Square SubMatrix => VIMP prefix sum matrix problem where top left is fixed and diff is given from top left to bottom right
-190.  
+188.  Beggars Outside Temple (sp) => range queries to update donations VIMP prfix sum problem
+189.  Maximum Sum Square SubMatrix (sp) => VIMP prefix sum matrix problem where top left is fixed and diff is given from top left to bottom right
+190.  Minimum swaps required to bring all elements less than or equal to k together(sp) => this is classic observation based two pointer and sliding window problem VVVIMP
+191.  
 

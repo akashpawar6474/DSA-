@@ -46,4 +46,39 @@ class Solution:
                         isValidSudoku = False
                         break
         return isValidSudoku
+        
+ ---------------------------------------------------------------------------------------10th Jan 2022
+ class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+        def isFilled(i,j,board):
+            return board[i][j] != "."
+        
+        def getKeys(i,j,board):
+            rowKey = board[i][j] + " is not in row "+str(i)
+            colKey = board[i][j] + " is not in col "+str(j)
+            subGridKey = board[i][j] +" is not in subgrid "+str(i // 3) + str(j // 3)
+            return rowKey,colKey,subGridKey
+        
+        def isValidCell(i,j,board,s):
+            rowKey,colKey,subGridKey = getKeys(i,j,board)
+            isPresent = rowKey not in s and colKey not in s and subGridKey not in s
+            return isPresent
+        
+        def addKeys(i,j,board,s):
+            rowKey,colKey,subGridKey = getKeys(i,j,board)
+            s.add(rowKey)
+            s.add(colKey)
+            s.add(subGridKey)
+        
+        s = set()
+        isValid = True
+        for i in range(9):
+            for j in range(9):
+                if isFilled(i,j,board):
+                    if isValidCell(i,j,board,s):
+                        addKeys(i,j,board,s)
+                    else:
+                        isValid = False
+                        break
+        return isValid
                     

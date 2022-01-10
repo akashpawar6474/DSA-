@@ -1,0 +1,28 @@
+class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:
+        def calPrefixSum(nums,n):
+            ps = [0] * n
+            ps[0] = nums[0]
+            for currIdx in range(1,n):
+                ps[currIdx] = nums[currIdx] + ps[currIdx - 1]
+            return ps
+
+        def calSuffixSum(nums,n):
+            ss = [0] * n
+            ss[-1] = nums[-1]
+            for currIdx in range(n - 2,-1,-1):
+                ss[currIdx] = nums[currIdx] + ss[currIdx + 1]
+            return ss
+        
+        def checkEquilibriumIdx(prefixSum,suffixSum,n):
+            eqIdx = -1
+            for currIdx in range(n):
+                if prefixSum[currIdx] == suffixSum[currIdx]:
+                    eqIdx = currIdx
+                    break
+            return eqIdx
+        
+        n = len(nums)
+        prefixSum = calPrefixSum(nums,n)
+        suffixSum = calSuffixSum(nums,n)
+        return checkEquilibriumIdx(prefixSum,suffixSum,n)

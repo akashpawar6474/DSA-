@@ -27,3 +27,21 @@ class Solution:
             result += str(carry % 2)
             carry = carry // 2
         return result[::-1]
+--------------------------------------------------------------------10 Jan 2022
+class Solution:
+    def addBinary(self, a: str, b: str) -> str:
+        carry = 0
+        alist = list(a)
+        blist = list(b)
+        ans = []
+        while alist or blist or carry:
+            if alist:
+                carry += int(alist.pop())
+            if blist:
+                carry += int(blist.pop())
+            ans.append(str(carry % 2))
+            carry = carry // 2
+        ans.reverse()
+        return "".join(ans)
+
+        

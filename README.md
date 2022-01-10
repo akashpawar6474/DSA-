@@ -191,5 +191,6 @@ solutions to graze over
 189.  Maximum Sum Square SubMatrix (sp) => VIMP prefix sum matrix problem where top left is fixed and diff is given from top left to bottom right
 190.  Minimum swaps required to bring all elements less than or equal to k together(sp - gfg) => this is classic observation based two pointer and sliding window problem VVVIMP
 191.  Minimum number of swaps required to sort an array of first N number(sp - gfg) => brute force is to do selection sort(O(n ^ 2) but as question mention cyclic sort can                                                                                           solve this in linear time
-192.  
+192.  Given an array arr[], find the maximum j – i such that arr[j] > arr[i] OR Max Distance(sp - gfg) => brute force will take polynomial time so It is exactly same problem as                                                                                                          BUY and SELL STOCK problem we just have to club val and idx then sort                                                                                                           using values and apply same logic.
+193.  
 

@@ -64,3 +64,44 @@ class Solution:
             else:
                 end = mid - 1
         return isPresent
+        
+----------------------------------------------------------------------------------10th Jan 2022
+class Solution:
+    def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
+        start = 0
+        n = len(matrix)
+        m = len(matrix[0])
+        end = n * m - 1
+        isPresent = False
+        while start <= end:
+            mid = (start + end) // 2
+            rowIdx = mid // m
+            colIdx = mid % m
+            currVal = matrix[rowIdx][colIdx]
+            if currVal < target:
+                start = mid + 1
+            elif currVal > target:
+                end = mid - 1
+            else:
+                isPresent = True
+                break
+        return isPresent
+    
+    def linear(self,matrix,target):
+        row = 0
+        col = len(matrix[0]) - 1
+        n = len(matrix)
+        m = len(matrix[0])
+        isPresent = False
+        while row < n and col > -1:
+            currVal = matrix[row][col]
+            if currVal > target:
+                col -= 1
+            elif currVal < target:
+                row += 1
+            else:
+                isPresent = True
+                break
+        return isPresent
+            
+

@@ -189,6 +189,7 @@ solutions to graze over
 187.  Maximum Points You Can Obtain from Cards => max sum of k elements from both ends circular sliding window problem VVVIMP
 188.  Beggars Outside Temple (sp) => range queries to update donations VIMP prfix sum problem
 189.  Maximum Sum Square SubMatrix (sp) => VIMP prefix sum matrix problem where top left is fixed and diff is given from top left to bottom right
-190.  Minimum swaps required to bring all elements less than or equal to k together(sp) => this is classic observation based two pointer and sliding window problem VVVIMP
-191.  
+190.  Minimum swaps required to bring all elements less than or equal to k together(sp - gfg) => this is classic observation based two pointer and sliding window problem VVVIMP
+191.  Minimum number of swaps required to sort an array of first N number(sp - gfg) => brute force is to do selection sort(O(n ^ 2) but as question mention cyclic sort can                                                                                           solve this in linear time
+192.  
 

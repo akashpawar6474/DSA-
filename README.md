@@ -187,4 +187,6 @@ solutions to graze over
 185.  Reshape the Matrix => very simple simulation based problem
 186.  Find original Array from given Prefix Sum Array => VVIMP basic question not on leetcode on gfg
 187.  Maximum Points You Can Obtain from Cards => max sum of k elements from both ends circular sliding window problem VVVIMP
-188.  
+188.  Beggars Outside Temple => range queries to update donations VIMP prfix sum problem
+189.  
+

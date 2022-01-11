@@ -193,5 +193,6 @@ solutions to graze over
 191.  Minimum number of swaps required to sort an array of first N number(sp - gfg) => brute force is to do selection sort(O(n ^ 2) but as question mention cyclic sort can                                                                                           solve this in linear time
 192.  Given an array arr[], find the maximum j – i such that arr[j] > arr[i] OR Max Distance(sp - gfg) => brute force will take polynomial time so It is exactly same problem as                                                                                                          BUY and SELL STOCK problem we just have to club val and idx then sort                                                                                                           using values and apply same logic.
 193.  Find Pivot Index (lc - sp - gfg) => very simple problem can be solved using prefix and suffix sum
-194.  
+194.  Valid Anagram => very simple problem can be solved using freq table
+195.  
 

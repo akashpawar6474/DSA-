@@ -1,0 +1,30 @@
+class Solution:
+    def isAnagram(self, s: str, t: str) -> bool:
+        """
+        idea is to take a array of 26 cells
+        and use it as a map
+        graze over s and fill the array
+        then graze over t and reduce freq of array
+        then graze over 26 char array
+            if any no is != 0
+                then break or return false
+        return true
+        tc = O(n + m)
+        sc = constant
+        """
+        chMap = [0] * 26
+        for currCh in s:
+            idxToUpdate = ord(currCh) - ord('a')
+            chMap[idxToUpdate] += 1
+        
+        for currCh in t:
+            idxToUpdate = ord(currCh) - ord('a')
+            chMap[idxToUpdate] -= 1
+        
+        
+        isAnagram = True
+        for i in range(26):
+            if chMap[i] != 0:
+                isAnagram = False
+                break
+        return isAnagram

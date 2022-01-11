@@ -1,0 +1,43 @@
+
+    def subarraySum(self, a, n):
+        """
+        1,2,3,4
+        
+        how many subarrays are there 
+        [1],[1,2],[1,2,3],[1,2,3,4]
+        [2],[2,3],[2,3,4]
+        [3][3,4]
+        [4]
+        
+        
+        how many subarray starts with 
+        1 = 4   (n - i)
+        2 = 3
+        3 = 2
+        4 = 1
+        
+        how many subarrays contains curr ele as intermediate or last ele
+        1 = 0   (n - i) * i
+        2 = 3
+        3 = 4
+        4 = 3
+        
+        currEle can appear in subarrays = subarrays starts with curr ele + subarrays where
+                                            currEle is part of subarray except 1st pos
+                                            
+                                        = (n - i) + ((n - i) * i)
+                                        
+        if we take n - i comman => (n - i) * (1 + i)
+                                        
+        so with this approach of contributions of curr ele in respective subarrays can be
+        added to ans
+        
+        this will take linear time
+        """
+        total = 0
+        for currIdx in range(n):
+            currEle = a[currIdx]
+            noOfSubarraysForCurrEle = (n - currIdx) * (1 + currIdx)
+            contributionOfCurrEle = currEle * noOfSubarraysForCurrEle
+            total += contributionOfCurrEle
+        return total

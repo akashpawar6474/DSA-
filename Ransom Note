@@ -1,0 +1,28 @@
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        """
+        cal freq table for both of them
+        then graze over freq table of ransomNote
+        and check if any key is not there or has less freq
+        
+        tc = O(n + m)
+        sc = O(n + m)
+        """
+        ranNoteMap = {}
+        for currCh in ransomNote:
+            if currCh not in ranNoteMap:
+                ranNoteMap[currCh] = 0
+            ranNoteMap[currCh] += 1
+        
+        magazineMap = {}
+        for currCh in magazine:
+            if currCh not in magazineMap:
+                magazineMap[currCh] = 0
+            magazineMap[currCh] += 1
+        
+        canConstruct = True
+        for key,val in ranNoteMap.items():
+            if key not in magazineMap or magazineMap[key] < ranNoteMap[key]:
+                canConstruct = False
+                break
+        return canConstruct

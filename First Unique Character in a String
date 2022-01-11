@@ -25,3 +25,31 @@ class Solution:
                 ansIdx = currIdx
                 break
         return ansIdx
+--------------------------------------------------------------------------11th Jan 2022
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        """
+        idea is very simple 
+        create freq table
+        then graze over string 
+        if currr char is with 1 freq
+        then return that idx
+        
+        tc = O(2n)
+        sc = O(n)
+        """
+        freq = {}
+        n = len(s)
+        for currIdx in range(n):
+            currCh = s[currIdx]
+            if currCh not in freq:
+                freq[currCh] = 0
+            freq[currCh] += 1
+        
+        ansIdx = -1
+        for currIdx in range(n):
+            currCh = s[currIdx]
+            if freq[currCh] == 1:
+                ansIdx = currIdx
+                break
+        return ansIdx

@@ -1,0 +1,55 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def sumRootToLeaf(self, root: Optional[TreeNode]) -> int:
+        """
+        This looks like backtracking problem
+        whenever node is none 
+            then convert currpath the base 10 number 
+            then add it to global sum
+            return
+        else
+            add curr node to currpath
+            recur for left and right
+            then op curr node from curr path
+            
+        tc = O(n) as in worst case we have to visit all nodes
+        sc = O(n) in case tree is skewed
+        """
+        def convertToBase10(binaryArr):
+            powerOfTwo = 0
+            n = len(binaryArr)
+            baseTen = 0
+            for i in range(n - 1,-1,-1):
+                if binaryArr[i] != 0:
+                    baseTen += (2 ** powerOfTwo)
+                powerOfTwo += 1
+            return baseTen
+        
+        def isLeaf(root):
+            return root is not None and root.left is None and root.right is None
+        
+        def backtrack(root,currPath,tsum):
+            if root is None:
+                return tsum
+            
+            currPath.append(root.val)
+            
+            if isLeaf(root):
+                baseTenVal = convertToBase10(currPath)
+                tsum += baseTenVal
+            else:
+                tsum += backtrack(root.left,currPath,tsum) + backtrack(root.right,currPath,tsum)
+            
+            currPath.pop()
+            
+            return tsum
+        
+        currPath = []
+        tsum = 0
+        return backtrack(root,currPath,tsum)
+            

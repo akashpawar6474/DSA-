@@ -195,5 +195,6 @@ solutions to graze over
 193.  Find Pivot Index (lc - sp - gfg) => very simple problem can be solved using prefix and suffix sum
 194.  Valid Anagram => very simple problem can be solved using freq table
 195.  Ransom Note => very similar hashmap problem
-196.  
+196.  Sum of Root To Leaf Binary Numbers => this is same problem as "sum of root to leaf(lc)" which can be solved using backtracking
+197.  
 

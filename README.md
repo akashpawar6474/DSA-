@@ -197,5 +197,6 @@ solutions to graze over
 195.  Ransom Note => very similar hashmap problem
 196.  Sum of Root To Leaf Binary Numbers => this is same problem as "sum of root to leaf(lc)" which can be solved using backtracking
 197.  Sum of Subarrays(gfg - sp) => RAN ALL TC IN GFG BUT FAILED DESPITE OF WORKING SOLUTION VIMP can be solved using finding contribution of curr ele by finding in how many                                       subarray it is coming
-198.  
+198.  Remove Linked List Elements => both recursive and iterative solution.
+199.  
 

@@ -1,0 +1,56 @@
+class Solution:
+    def findMinArrowShots(self, points: List[List[int]]) -> int:
+        """
+        hack is we can sort with ending times
+        we will assign first ballon to prevBallon
+        and we will take arrows as 1
+        then graze from 1st idx to end
+            if currInterval start <= prevBallonEnd
+                then we can shoot currBallon with prevBallon arrow
+                so continue
+            else
+                inc arrows count by 1
+                and mark currBallon as prevBallon
+        tc = O(nlogn + n)
+        sc = O(n)
+        """
+        n = len(points)
+        start = 0
+        end = 1
+        points.sort(key = lambda x : x[end])
+        
+        prevBallon = points[0]
+        arrowsCount = 1
+        for currIdx in range(n):
+            currBallon = points[currIdx]
+            if currBallon[start] <= prevBallon[end]:
+                continue
+            prevBallon = currBallon
+            arrowsCount += 1
+        return arrowsCount
+    def firstTrySortingWithStart(self,points):
+        """
+        one idea is count overlapping intervals 
+        then reduce them from total interavals
+        
+        """
+        n = len(points)
+        points.sort(key = lambda x : x[0])
+        
+        overlappingPoints = 0
+        prevSt = points[0][0]
+        prevEnd = points[0][1]
+        start = 0
+        end = 1
+        for currIdx in range(1,n):
+            currPoint = points[currIdx]
+            if currPoint[start] < prevEnd:
+                overlappingPoints += 1
+            elif currPoint[start] == prevEnd:
+                overlappingPoints += 1
+                prevSt = currPoint[start]
+                prevEnd = currPoint[end]
+            else:
+                prevSt = currPoint[start]
+                prevEnd = currPoint[end]
+        return n - overlappingPoints

@@ -199,5 +199,6 @@ solutions to graze over
 197.  Sum of Subarrays(gfg - sp) => RAN ALL TC IN GFG BUT FAILED DESPITE OF WORKING SOLUTION VIMP can be solved using finding contribution of curr ele by finding in how many                                       subarray it is coming
 198.  Remove Linked List Elements => both recursive and iterative solution.
 199.  Remove Duplicates from Sorted List => very simple problem
-200.  
+200.  Minimum Number of Arrows to Burst Balloons => same as non overlapping intervals problem sort with then end times
+201.  
 

@@ -200,5 +200,6 @@ solutions to graze over
 198.  Remove Linked List Elements => both recursive and iterative solution.
 199.  Remove Duplicates from Sorted List => very simple problem
 200.  Minimum Number of Arrows to Burst Balloons => same as non overlapping intervals problem sort with then end times
-201.  
+201.  Median of Two Sorted Arrays => VIMP problem of binary search (68th problem of sde sheet)
+202.  
 

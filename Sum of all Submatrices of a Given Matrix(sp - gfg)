@@ -1,0 +1,40 @@
+class Solution:
+    # @param A : list of list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+        brute force is generate prefix matrix
+        then generate all submatrices
+        for all submatrices cal sum using prefix matrix
+        tc= O(n * m + m * n + n ^ 2 * m ^ 2)
+        sc = constant
+
+        can we make use of contribution technique here
+
+        [1,1,1]
+        [1,1,1]
+        [1,1,1]
+
+        in this matrix 1 at (1,1) comes in 4 toplefts
+        and 4 bottom rights
+
+        noOfTopLefts = (i + 1) * (j + 1)
+        noOfBottomRights = (n - i) * (m - i)
+        noOfSubmatricesWithCurrEle = toplefts * bottomRights
+        contribution = A[i][j] * noOfSubmatricesWithCurrEle
+        add contribution to answer
+
+        tc = O(n * m)
+        sc = constant
+        """
+        ans = 0
+        n = len(A)
+        m = len(A[0])
+        for i in range(n):
+            for j in range(m):
+                topLefts = (i + 1) * (j + 1)
+                bottomRights = (n - i) * (m - j)
+                totalSubmatrices = topLefts * bottomRights
+                contribution = A[i][j] * totalSubmatrices
+                ans += contribution
+        return ans

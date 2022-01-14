@@ -21,3 +21,31 @@ class Solution:
                 stack.append(currCh)
 
         return len(stack) == 0
+--------------------------------------------------------------------14 Jan 2022
+class Solution:
+    def isValid(self, s: str) -> bool:
+        """
+        idea is very simple if we have opening bracket
+        push it into the stack
+        else pop from stack if doesnt match break and return false
+        
+        all all closing bracket and opening bracket pairs to hashtable
+        tc= O(n)
+        sc = constant
+        """
+        ht = {}
+        ht[')'] = '('
+        ht['}'] = '{'
+        ht[']'] = '['
+        st = []
+        for ch in s:
+            if ch in ht:
+                if not st:
+                    return False
+                else:
+                    top = st.pop()
+                    if top != ht[ch]:
+                        return False
+            else:
+                st.append(ch)
+        return len(st) == 0

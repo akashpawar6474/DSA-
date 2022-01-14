@@ -1,0 +1,55 @@
+class Solution:
+    # @param A : list of list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+        idea is very simple
+        we will have outer loop to graze over rows
+        and we can make use of fact that every row is sorted
+        if we wont start from back again and again
+        if curr ch idx in row has one 
+            then graze over to left once again
+        
+        at max our inner loop runs n times only
+        tc = O(n)
+        sc = constant
+        """
+        ans = -1
+        maxNoOfOnes = 0
+        currNoOfOnes = 0
+        n = len(A)
+        j = n - 1
+        for i in range(n):
+            while j >= 0:
+                if A[i][j] != 1:
+                    break
+                j -= 1
+                currNoOfOnes += 1
+            if currNoOfOnes > maxNoOfOnes:
+                maxNoOfOnes = currNoOfOnes
+                ans = i 
+        return ans
+            
+            
+
+    def bruteForce(self,A):
+        """
+        brute force is to
+        graze over rows
+        and graze from back for each rows
+
+        tc = O(row * col)
+        """
+        ans = -1
+        n = len(A)
+        maxNoOfOnes = 0
+        for i in range(n):
+            noOfOnesInCurrRow = 0
+            for j in range(n - 1,-1,-1):
+                if A[i][j] != 1:
+                    break
+                noOfOnesInCurrRow += 1
+            if noOfOnesInCurrRow > maxNoOfOnes:
+                maxNoOfOnes = noOfOnesInCurrRow
+                ans = i
+        return ans

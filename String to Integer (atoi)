@@ -1,0 +1,44 @@
+class Solution:
+    def myAtoi(self, s: str) -> int:
+        """
+        Problem is very simple
+        First skip all the leading spaces
+        Second check for the sign and cache accordingly
+        Third is to graze over the no
+            and buid up the result using ord function
+        return max(-2 ** 31,min(2 ** 31,sign * res))
+        
+        tc = O(n)
+        sc = constant
+        """
+        currPtr = 0
+        n = len(s)
+        sign = 1
+        res = 0
+        
+        #phase 1
+        while currPtr < n and s[currPtr] == ' ':
+            currPtr += 1
+        if currPtr == n:
+            return res
+        
+        #phase2
+        if s[currPtr] == '-':
+            sign = -1
+            currPtr += 1
+        elif s[currPtr] == '+':
+            currPtr += 1
+        
+        #phase3
+        while currPtr < n and s[currPtr].isdigit():
+            res = res * 10 + (ord(s[currPtr]) - ord('0'))
+            currPtr += 1
+
+        #phase4
+        return max(-2 ** 31,min(sign * res,2 ** 31 - 1))
+            
+            
+        
+        
+        
+        

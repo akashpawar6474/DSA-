@@ -1,0 +1,64 @@
+from collections import deque
+class Solution:
+    def minJumps(self, arr: List[int]) -> int:
+        """
+        This is classic graph modelling problem
+        we have to model all nodes in graph
+        then just do dfs from 0th idx to last idx node
+        
+        Idea is create freq table where key is no and value
+        is list of indices with that particular value
+        
+        after than do simple BFS from 0th idx to last idx of an array
+        
+        While doing BFS we have two type of neigbours
+            1.if currNode is i th idx then it have i - 1 and i + 1 as neighbours
+            2.j th idx where arr[i] == arr[j] we can fetch that from freq table
+                2.a. after visiting 2nd type of nei we can nullify the list
+                     to avoid extraa unnecessary computation(Memory Limit exceeded ex's)
+                     
+        ask if we cant reach last idx then what should we do? as followup question.
+        
+        tc = O(2n) => O(n)
+        sc = O(n)
+        """
+        def createFreqTable(ht,arr,n):
+            for currIdx in range(n):
+                currEle = arr[currIdx]
+                if currEle not in ht:
+                    ht[currEle] = []
+                ht[currEle].append(currIdx)
+                
+        def bfsToFindTarget(ht,n):
+            target = n - 1
+            q = deque()
+            q.append((0,0))
+            visited = set()
+            while q:
+                currNode,steps = q.popleft()
+                if currNode == target:
+                    return steps
+                if currNode in visited:
+                    continue
+                visited.add(currNode)
+
+                for nei in [currNode + 1,currNode - 1]:
+                    if nei not in visited and 0 <= nei < n:
+                        q.append((nei,steps + 1))
+
+                if ht[arr[currNode]]:
+                    for nei in ht[arr[currNode]]:
+                        if nei not in visited:
+                            q.append((nei,steps + 1))
+                    ht[arr[currNode]] = []
+            return -1
+        
+        n = len(arr)
+        
+        #Phase 1
+        ht = {}
+        createFreqTable(ht,arr,n)
+        
+        #Phase 2
+        return bfsToFindTarget(ht,n)
+        

@@ -1,0 +1,48 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def preorderTraversal(self, root: Optional[TreeNode]) -> List[int]:
+        """
+        Iterative is also very simple
+        have curr ptr and stack
+        push curr to stack
+        
+        then take a loop untill stack is not empty
+            pop the top item
+            process it 
+            push right child if exists
+            push left child if exists
+        tc = O(n)
+        sc = O(1) in case tree is skeweed we at max have only 1 ele into stack
+        """
+        st = []
+        st.append(root)
+        ans = []
+        while st:
+            top = st.pop()
+            ans.append(top.val)
+            if top.right:
+                st.append(top.right)
+            if top.left:
+                st.append(top.left)
+        return ans
+    
+    def recursiveSolution(self,root):
+        """
+        tc = O(n)
+        sc = O(n) in case tree is skeweed
+        """
+        def recursive(root,ans):
+            if root is None:
+                return
+            ans.append(root.val)
+            recursive(root.left,ans)
+            recursive(root.right,ans)
+        
+        ans = []
+        recursive(root,ans)
+        return ans

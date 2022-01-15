@@ -203,6 +203,8 @@ solutions to graze over
 201.  Median of Two Sorted Arrays => VIMP problem of binary search (68th problem of sde sheet)
 202.  Sum of all Submatrices of a Given Matrix(sp - gfg) => very simple problem can be solved using contributions
 203.  Find the row with maximum number of 1s(sp - gfg) => very simple but braintease problem I like this problem
-204.  Binary Tree Preorder Traversal => both recursive and iterative (98th problem of sde sheet)
-205.  
+204.  Binary Tree Preorder Traversal => both recursive and iterative (99th problem of sde sheet)
+205.  Binary Tree Inorder Traversal => both recursive and iterative(98th problem of sde sheet)
+206.  Binary Tree Postorder Traversal =>  both recursive and iterative (100th problem of sde sheet)
+207.  
 

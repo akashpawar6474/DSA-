@@ -215,5 +215,5 @@ solutions to graze over
 213.  A, B and Modulo (sp - stackOverflow) => Given two integers A and B, find the greatest possible positive M, such that A % M = B % M. asked in competitive coding .
 214.  Modular Exponentiation/Power in Modular Arithmetic(sp - gfg) => Same as power just take % while doing computation to avoid TLE's
 215.  Count pairs in array divisible by K(sp - gfg) => This is VVIMP problem creationg freq table of remainders and count them PAYPAL
-216.  
+216.  Prime Modulo Inverse(sp) => we can get modulo inverse by calling powermod fun of 214th problem
 

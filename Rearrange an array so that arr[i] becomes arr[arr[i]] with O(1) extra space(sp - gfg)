@@ -1,0 +1,55 @@
+class Solution:
+    # @param A : list of integers
+    # Modify the array A which is passed by reference. 
+    # You do not need to return anything in this case. 
+    def arrange(self, A):
+        """
+        brute force is very simple
+        create new array and copy the values
+
+        but we have to do it in-place
+        so can we store old value and new value at same idx
+        yes we can because we only have ele ranging from 0 to n - 1
+
+        idx = 0   1   2   3   4
+        arr = 2   3   4   1   0
+
+        STEP1:
+        now multiply each array ele by n
+        arr = 2*5 3*5 4*5 1*5 0*5
+
+        by dividing each ele by n we can get old values
+
+        STEP2:
+        now graze over array 
+            for each idx we need to calculate arr[arr[i]]
+            so to get old value of arr[i] do arr[i] // n => (idx)
+            now to get val at arr[idx] we cant get directly so
+                do arr[idx] // n
+
+            for eg currIdx = 0
+                idx = arr[currIdx] // n => 10 // 5 => 2
+                valAtIdx = arr[idx] // n => arr[2] // 5 => 20 // 5 => 4
+                now store
+                arr[currIdx] += valAtIdx
+                means 10 + 4 = 14
+        STEP3:
+            now graze over array and take mod with n to get new values
+        tc = O(3n)
+        sc = constant
+        we have to follow this equation
+        arr[i] = arr[arr[i]]
+        """
+        n = len(A)
+        for currIdx in range(n):
+            A[currIdx] = A[currIdx] * n
+        
+        for currIdx in range(n):
+            #arr[i] = arr[arr[i]] => arr[idx] => valAtIdx
+            idx = A[currIdx] // n
+            valAtIdx = A[idx] // n
+            A[currIdx] += valAtIdx
+        
+        for currIdx in range(n):
+            A[currIdx] = A[currIdx] % n
+        

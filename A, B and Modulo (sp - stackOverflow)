@@ -1,0 +1,19 @@
+Given two integers A and B, find the greatest possible positive M, such that A % M = B % M.
+--------------------------------------
+class Solution:
+    # @param A : integer
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        a % m == b % m
+        (a % m) - (b % m) = 0
+        add m on bs
+        a % m - b % m + m = m
+        take % m on bs
+        (a - b) % m = m % m
+        (a - b) % m = 0
+
+        so we can say that m can be factors of (a - b) to get 0
+        """
+        return abs(A - B)

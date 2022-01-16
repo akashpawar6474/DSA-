@@ -1,0 +1,33 @@
+class Solution:
+    # @param A : integer
+    # @param B : integer
+    # @param C : integer
+    # @return an integer
+    def pow(self, A, B, C):
+        """
+        while implementing the modular power
+        then do it right away in computations itself 
+        rather than doing it after that
+        tc  = O(logB)
+        sc = constant
+        """
+        def getPower(coefficient,power,C):
+            tempPower = power
+            ans = 1
+            while power > 0:
+                if power % 2 == 0:
+                    coefficient = (coefficient * coefficient) % C
+                    power = power // 2
+                else:
+                    ans *= coefficient
+                    ans = ans % C
+                    power = power - 1
+            
+            if tempPower < 0:
+                return 1 / ans
+            return ans
+
+        if A == 0:
+            return 0
+        powerVal = getPower(A,B,C)
+        return powerVal

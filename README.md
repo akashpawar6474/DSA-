@@ -210,5 +210,6 @@ solutions to graze over
 208.  String to Integer (atoi) => VIMP string problem can be solved in 4 phases
 209.  Binary Tree Level Order Traversal => simple level order traversal 
 210.  Maximum Depth of Binary Tree => very simple dfs or bfs problem
-211.  
+211.  Symmetric Tree => very simple and IMP problem
+212.  
 

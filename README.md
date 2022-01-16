@@ -211,5 +211,6 @@ solutions to graze over
 209.  Binary Tree Level Order Traversal => simple level order traversal 
 210.  Maximum Depth of Binary Tree => very simple dfs or bfs problem
 211.  Symmetric Tree => very simple and IMP problem
-212.  
+212.  Rearrange an array so that arr[i] becomes arr[arr[i]] with O(1) extra space(sp - gfg) => VVVIMP storing two values at 1 idx adobe question
+213.  
 

@@ -219,5 +219,6 @@ solutions to graze over
 217.  Invert Binary Tree => VIMp problem with small trick
 218.  Path Sum => Very simple and intuitive problem reduce val untill we go to leaf and have a check
 219.  Word Pattern => just check respective loyalties with two maps
-220.  
+220.  Very Large Power => VIMp problem calculating (A ^ (B!) % C
+221.  
 

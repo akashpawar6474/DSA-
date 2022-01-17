@@ -218,5 +218,6 @@ solutions to graze over
 216.  Prime Modulo Inverse(sp) => we can get modulo inverse by calling powermod fun of 214th problem
 217.  Invert Binary Tree => VIMp problem with small trick
 218.  Path Sum => Very simple and intuitive problem reduce val untill we go to leaf and have a check
-219.  
+219.  Word Pattern => just check respective loyalties with two maps
+220.  
 

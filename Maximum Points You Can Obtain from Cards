@@ -43,5 +43,40 @@ class Solution:
             maxSum = max(currSum,maxSum)
         
         return maxSum
+ --------------------------------------------------------------------------17 Jan 2022
+ class Solution:
+    def maxScore(self, cardPoints: List[int], k: int) -> int:
+        """
+        THis is classic sliding window problem
+        we have to find max sum of subarray of size k
+        where all elements either belong to start or end of an array
+        
+        if k == 3
+        then all 3 from start or end
+            1 from start and 2 from end OR vice-versa
+        tc = O(2k)
+        sc = O(1)
+        """
+        def calLastWindowSum(windowStart,n,cardPoints):
+            currSum = 0
+            while windowStart < n:
+                currSum += cardPoints[windowStart]
+                windowStart += 1
+            return currSum
+        
+        n = len(cardPoints)
+        windowStart = n - k
+        windowEnd = 0
+        windowSum = calLastWindowSum(windowStart,n,cardPoints)
+        maxSum = windowSum
+        
+        while windowStart < n:
+            windowSum -= cardPoints[windowStart]
+            windowStart += 1
+            windowSum += cardPoints[windowEnd]
+            windowEnd += 1
+            maxSum = max(windowSum,maxSum)
+        return maxSum
+            
         
         

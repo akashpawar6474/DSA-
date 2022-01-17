@@ -1,0 +1,93 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, x: int, next: 'Node' = None, random: 'Node' = None):
+        self.val = int(x)
+        self.next = next
+        self.random = random
+"""
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        """
+        Optimal approach is elementary in algorithmic terms
+        steps => 
+            create new node and attach it to next of curr node
+            copy random ptrs
+            extract copied list
+        tc = O(3n) = O(n)
+        sc = constant
+        """
+        def createIntermediateNodes(originalPtr,originalNextPtr):
+            while originalPtr:
+                originalNextPtr = originalPtr.next
+                newNode = Node(originalPtr.val)
+                originalPtr.next = newNode
+                newNode.next = originalNextPtr
+                originalPtr = originalNextPtr
+                
+        def copyRandomPtrs(originalPtr):
+            while originalPtr:
+                if originalPtr.random:
+                    originalPtr.next.random = originalPtr.random.next
+                originalPtr = originalPtr.next.next
+                
+        def extractCopyList(dummyHead,originalPtr):
+            copyPtr = dummyHead
+            while originalPtr:
+                originalNextPtr = originalPtr.next.next
+                copyPtr.next = originalPtr.next
+                copyPtr = copyPtr.next
+                originalPtr.next = originalNextPtr
+                originalPtr = originalNextPtr
+            return dummyHead.next
+                
+        if head is None:
+            return None
+
+        
+        #Phase 1
+        originalPtr = head
+        originalNextPtr = None
+        createIntermediateNodes(originalPtr,originalNextPtr)
+        
+        #Phase2
+        originalPtr = head
+        copyRandomPtrs(originalPtr)
+
+        #Phase 3
+        dummyHead = Node(0)
+        originalPtr = head
+        return extractCopyList(dummyHead,originalPtr)
+            
+            
+    def bruteForce(self,head):
+        """
+        Brute force is create mapping of 
+        old and new nodes
+        then again graze over old nodes
+        and connect random ptr of new nodes
+        
+        tc = O(2n)
+        sc = O(n)
+        """
+        ht = {}
+        curr = head
+        while curr:
+            newNode = Node(curr.val)
+            ht[curr] = newNode
+            curr = curr.next
+        
+        curr = head
+        while curr is not None:
+            oldNode = curr
+            newNode = ht[curr]
+            if oldNode.next:
+                nextOfNewNode = ht[oldNode.next]
+                newNode.next = nextOfNewNode
+            if oldNode.random:
+                randomOfNewNode = ht[oldNode.random]
+                newNode.random = randomOfNewNode
+            curr = curr.next
+            
+        return ht[head] if head else None

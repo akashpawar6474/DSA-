@@ -1,0 +1,51 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        """
+        we can do this using level order traversal also
+        when ever we pop the node
+        shift its childern using intermediate node
+        
+        tc = O(n)
+        sc = O(2 ^ last level)
+        """
+        from collections import deque
+        if root is None:
+            return None
+        q = deque()
+        q.append(root)
+        while q:
+            top = q.popleft()
+            leftChild = top.left
+            top.left = top.right
+            top.right = leftChild
+            
+            if top.left:
+                q.append(top.left)
+            if top.right:
+                q.append(top.right)
+        return root
+    def dfs(self,root):
+        """
+        This is very simple problem
+        which can be solved using postorder
+        
+        we can make mistake of not caching left subtree
+        which can be a big red flag and that is the area of interest 
+        for this question
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        if root is None:
+            return None
+        cachedLeftSubtree = root.left
+        root.left = self.invertTree(root.right)
+        root.right = self.invertTree(cachedLeftSubtree)
+        return root
+    

@@ -1,0 +1,48 @@
+class Solution:
+    def wordPattern(self, pattern: str, s: str) -> bool:
+        """
+        We have to follow what is said into question
+        means each char in pattern should be loyal to resepctive
+        word in string
+        and vice-versa
+        
+        for that we will use two maps
+        we will just graze over pattern or string
+            if pattern is already in map
+                then fetch respective word
+                and check with curr word
+                if diff then return False
+            if word in map(second map)
+                then fetch respective char
+                check with curr char
+                if diff then return false
+            else
+                add new entry in both maps
+        return True
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        slist = s.split(' ')
+        n = len(pattern)
+        m = len(slist)
+        if n != m:
+            return False
+        
+        chToWord = {}
+        wordToCh = {}
+        for i in range(n):
+            currCh = pattern[i]
+            currWord = slist[i]
+            if currCh in chToWord:
+                oldWord = chToWord[currCh]
+                if oldWord != currWord:
+                    return False
+            elif currWord in wordToCh:
+                oldCh = wordToCh[currWord]
+                if oldCh != currCh:
+                    return False
+            else:
+                chToWord[currCh] = currWord
+                wordToCh[currWord] = currCh
+        return True

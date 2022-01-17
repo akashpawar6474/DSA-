@@ -217,5 +217,6 @@ solutions to graze over
 215.  Count pairs in array divisible by K(sp - gfg) => This is VVIMP problem creationg freq table of remainders and count them PAYPAL
 216.  Prime Modulo Inverse(sp) => we can get modulo inverse by calling powermod fun of 214th problem
 217.  Invert Binary Tree => VIMp problem with small trick
-218.  
+218.  Path Sum => Very simple and intuitive problem reduce val untill we go to leaf and have a check
+219.  
 

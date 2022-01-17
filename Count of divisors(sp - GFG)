@@ -1,0 +1,199 @@
+Problem Description
+
+Given an array of integers A, find and return the count of divisors of each element of the array.
+
+NOTE: Order of the resultant array should be same as the input array.
+
+
+
+Problem Constraints
+
+1 <= length of the array <= 100000
+1 <= A[i] <= 106
+
+
+
+Input Format
+
+The only argument given is the integer array A.
+
+
+
+Output Format
+
+Return the count of divisors of each element of the array in the form of an array.
+
+
+
+Example Input
+
+Input 1:
+
+ A = [2, 3, 4, 5]
+Input 2:
+
+ A = [8, 9, 10]
+
+
+Example Output
+
+Output 1:
+
+ [2, 2, 3, 2]
+Output 1:
+
+ [4, 3, 4]
+
+
+Example Explanation
+
+Explanation 1:
+
+ The number of divisors of 2 : [1, 2], 3 : [1, 3], 4 : [1, 2, 4], 5 : [1, 5]
+ So the count will be [2, 2, 3, 2].
+Explanation 2:
+
+ The number of divisors of 8 : [1, 2, 4, 8], 9 : [1, 3, 9], 10 : [1, 2, 5, 10]
+ So the count will be [4, 3, 4].
+ ----------------------------------------------------------------------------------------
+ ---------------------------------------------------------------------------------------
+ class Solution:
+    # @param A : list of integers
+    # @return a list of integers
+    def solve(self, A):
+        """
+        how to count divisors of 100
+        100 = 2 * 2 * 5 * 5
+            = 2 ^ 2 * 5 ^ 2
+        take the powers add 1 to them
+        and take multiplication
+        ans = (2 + 1)(2 + 1) = 9 divisors
+
+        Now question is how to know how many powers
+        of 2 3 and 5..are there
+
+        We can build a sieve
+        for eg. max ele is 100
+
+        so we will take sieve of max ele size
+        by default take all values as 0
+        then just graze from 2
+            if val at idx is not 0
+                then assign i 
+            then take a loop from i * i to end and inc by i 
+                if curr val at j is not 0
+                    then assign i
+        assume for eg 
+        max ele = 18
+        at 2 we will mark 2 at idx 4,6,8,10,12,14,16,18
+        at 3 we will mark 3 at idx 9,15
+        at 4 we dont have anything to mark
+
+        then graze over array
+            and for each ele
+            if it is 1 
+                return 1
+            take ans eq 1
+            and take loop untill
+            currEle gt 1
+                take minPrimeFactor of curr ele
+                then take a loop untill
+                currEle gt 1 and currEle is divisible by minPrimeFactor
+                    inc power count
+                inc ans by maultiplying it with powerCount + 1
+            append ans
+
+        **
+        This sieve only work with -1 not 0
+        This is hardest problem which i solved untill now
+        """
+        def constructMinPrimeFactorSieve(sieve,maxValInArr):
+            p = 2
+            while p * p <= maxValInArr:
+                if sieve[p] == -1:
+                    sieve[p] = p
+                for multiple in range(p * p,maxValInArr + 1,p):
+                    if sieve[multiple] == -1:
+                        sieve[multiple] = p
+                p += 1
+        
+        maxValInArr = max(A)
+        sieve = [-1] * (maxValInArr + 1)
+
+        constructMinPrimeFactorSieve(sieve,maxValInArr)
+
+        n = len(A)
+        ans = []
+        for i in range(n):
+            currEle = A[i]
+            if currEle == 1:
+                ans.append(1)
+                continue
+            countForCurrEle = 1
+            while currEle > 1:
+                smallestPrimeFactor = sieve[currEle]
+                powerCount = 0
+                while currEle > 1 and (currEle % smallestPrimeFactor) == 0:
+                    powerCount += 1
+                    currEle = currEle // smallestPrimeFactor
+                countForCurrEle *= (powerCount + 1)
+            ans.append(countForCurrEle)
+        return ans
+
+
+    def betterApproach(self,A):
+        """
+        build sieve but in different manner
+        take maxValInA
+        construct sieve for it 
+        then start from 1 to end
+            for each no go to its multiple
+                and inc count by 1
+            means for i == 2
+                j = 2,4,6,8..
+        
+        and at last just do constant time operation
+        tc = O(maxValInA * log(maxValInA) + n)
+        sc = O(maxValInA)
+
+        0 1 2 3 4 5 6
+        0 1 2 2 2 1 3
+        """
+        def countDivisors(maxValInA,divisorCountArr):
+            i = 4
+            while i < maxValInA:
+                j = 1
+                while i * j < maxValInA:
+                    divisorCountArr[i * j] += 1
+                    j += 1
+                i += 1
+        
+        maxValInA = 1000001 #
+        divisorCountArr = [2] * maxValInA
+        divisorCountArr[1] = 1
+        countDivisors(maxValInA,divisorCountArr)
+
+        n = len(A)
+        ans = []
+        for i in range(n):
+            currEle = A[i]
+            divisorCount = divisorCountArr[currEle]
+            ans.append(divisorCount)
+        
+        return ans
+
+    def bruteForce(self,A):
+        def countDivisors(target):
+            count = 1
+            for i in range(2,target + 1):
+                if target % i == 0:
+                    count += 1
+            return count
+        
+        n = len(A)
+        ans = []
+        for i in range(n):
+            currEle = A[i]
+            divisorsForCurrEle = countDivisors(currEle)
+            ans.append(divisorsForCurrEle)
+        return ans

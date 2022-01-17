@@ -220,5 +220,7 @@ solutions to graze over
 218.  Path Sum => Very simple and intuitive problem reduce val untill we go to leaf and have a check
 219.  Word Pattern => just check respective loyalties with two maps
 220.  Very Large Power => VIMp problem calculating (A ^ (B!) % C
-221.  
+221.  Count of divisors(sp - GFG) => this is hardest problem faced untill 17 Jan 2022 building sieve for smallest prime factor then divide and count the powers ..
+222.  
+
 

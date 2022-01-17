@@ -94,3 +94,36 @@ class Solution:
             return -1
         factors = rearrangeFactors(factors)
         return factors[k - 1]
+        
+  ------------------------------------------------------------------------17 Jan 2022
+  class Solution:
+    def kthFactor(self, n: int, k: int) -> int:
+        def generateFactors(n,factors):
+            currVal = 1
+            while currVal * currVal <= n:
+                if n % currVal == 0:
+                    if currVal == n // currVal:
+                        factors.append(currVal)
+                    else:
+                        factors.append(currVal)
+                        factors.append(n // currVal)
+                currVal += 1
+            return factors
+        
+        def rearrangeFactors(factors):
+            n = len(factors)
+            orderedFactors = [0] * n
+            leftPtr = 0
+            rightPtr = n - 1
+            for i in range(n):
+                if i & 1 == 0:
+                    orderedFactors[leftPtr] = factors[i]
+                    leftPtr += 1
+                else:
+                    orderedFactors[rightPtr] = factors[i]
+                    rightPtr -= 1
+            return orderedFactors
+        
+        factors = generateFactors(n,[])
+        factors = rearrangeFactors(factors)
+        return factors[k - 1] if k <= len(factors) else -1

@@ -1,0 +1,76 @@
+Problem Description
+
+Given two Integers A, B. You have to calculate (A ^ (B!)) % (1e9 + 7).
+
+"^" means power ,
+
+"%" means "mod", and
+
+"!" means factorial.
+
+
+
+Problem Constraints
+
+1 <= A, B <= 5e5
+
+
+
+Input Format
+
+First argument is the integer A
+
+Second argument is the integer B
+
+
+
+Output Format
+
+Return one integer, the answer to the problem
+
+-------------------------------------------------------------------------------
+class Solution:
+    # @param A : integer
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        B! % (C - 1)
+
+        little fermat therom
+
+        (q ^ (p - 1)) % p = 1
+        (q ^ x) % p 
+
+        q ^ -1 % p == (q ^ p - 2) % p  /// if p is prime
+        """
+        def getPower(coefficient,power,C):
+            tempPower = power
+            ans = 1
+            while power > 0:
+                if power % 2 == 0:
+                    coefficient = (coefficient * coefficient) % C
+                    power = power // 2
+                else:
+                    ans *= coefficient
+                    ans = ans % C
+                    power = power - 1
+            
+            if tempPower < 0:
+                return 1 / ans
+            return ans
+
+        def factIterative(B,C):
+            res = 1
+            for i in range(2,B + 1):
+                res = (res *  i) % (C - 1)
+            return res
+
+        def findFactorial(B):
+            if B <= 2:
+                return 2
+            return B * findFactorial(B - 1)
+        
+        C = 1000000007
+        power = factIterative(B,C)
+        return getPower(A,power,C)

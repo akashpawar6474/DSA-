@@ -216,4 +216,6 @@ solutions to graze over
 214.  Modular Exponentiation/Power in Modular Arithmetic(sp - gfg) => Same as power just take % while doing computation to avoid TLE's
 215.  Count pairs in array divisible by K(sp - gfg) => This is VVIMP problem creationg freq table of remainders and count them PAYPAL
 216.  Prime Modulo Inverse(sp) => we can get modulo inverse by calling powermod fun of 214th problem
+217.  Invert Binary Tree => VIMp problem with small trick
+218.  
 

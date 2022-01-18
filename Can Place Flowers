@@ -1,0 +1,129 @@
+class Solution:
+    def canPlaceFlowers(self, flowerbed: List[int], n: int) -> bool:
+        """
+        just graze over array
+        if curr place is empty 
+            then take prev and next
+            if both of them are empty then place the flower
+            
+        this is so intuitive
+        tc = O(n)
+        sc = constant
+        """
+        placedFlowers = 0
+        bedLen = len(flowerbed)
+        for i in range(bedLen):
+            if flowerbed[i] == 0:
+                prev = 0 if i == 0 else flowerbed[i -1]
+                nxt = 0 if i == bedLen - 1 else flowerbed[i + 1]
+                if prev == 0 and nxt == 0:
+                    flowerbed[i] = 1
+                    placedFlowers += 1
+            
+        return placedFlowers >= n
+                
+    def thirdTry(self,flowerbed):
+        """
+        Q.How many flowers can we plant at count zeroes bw to two ones
+        => for eg 1 0 0 0 0 0 1
+        here vacancies are 5
+        and we can plant 2 flowers
+        1 0 0 0 0 0 0 1
+            vacancies = 6
+            we can plant 2 flowers
+        1 0 0 0 0 0 0 0 1
+            vacancies = 7
+            we can plant 3 flowers
+        
+        so no of flowers in vacancies = vacancies - 1 // 2
+        
+        Now there are two edge cases 
+        at beginning
+        0 0 0 0 1
+            vacancies = 4
+            possible flowers = 2
+        0 0 0 0 0 1
+            vacancies = 5
+            possible flowers = 2
+        
+        same thing for possible vacancies at end of flowerbed too
+        
+        so we have to handle those edgecases
+        """
+        isBeginning = True if flowerbed[0] == 0 else False
+        bedLen = len(flowerbed)
+        vacancies = 0
+        plantedFlowers = 0
+        for i in range(bedLen):
+            if flowerbed[i] == 0:
+                vacancies += 1
+            if isBeginning:
+                plantedFlowers += (vacancies // 2)
+                vacancies = 0
+                isBeginning = False
+            else:
+                plantedFlowers += ((vacancies - 1) // 2) if vacancies != 0 else 0
+                vacancies = 0
+        
+        #Handle vacancies at last
+        plantedFlowers += (vacancies // 2)
+        return plantedFlowers >= n
+                
+            
+    def secondTry(self,flowerbed):
+        """
+        Another approach is follow simulation only
+        take curr ptr 
+        move it by two step if it is pointing to flower
+        
+        then from curr location check if we can place the flowers
+        """
+        def findNextValidLocationToStart(currPtr,flowerbed):
+            while flowerbed[currPtr] == 1:
+                currPtr += 2
+            return currPtr
+        
+        currPtr = 0
+        currPtr = findNextValidLocationToStart(currPtr,flowerbed)
+        
+        flowersToPlace = n
+        isPossible = True
+        while n > 0:
+            if currPtr >= n:
+                isPossible = False
+                break
+            if flowerbed[currPtr] == 0:
+                currPtr += 1
+                n -= 1
+                if n == 0:
+                    return True
+            else:
+                n = flowersToPlace
+                currPtr = findNextValidLocationToStart(currPtr + 1)
+        
+        return isPossible
+                
+    def firstTry(self,flowerbed):
+        """
+        This is classic observation based problem
+        
+        Q.how many flowers we can have in flowerbed?
+        => len(flowerbed) + 1 // 2
+        
+        so count the existing flowers then add n to it
+        return True if total <= capacity
+        
+        tc = O(n)
+        sc = constant
+        
+        THis will break here
+        [0,1,0]
+        1
+        """
+        bedLen = len(flowerbed)
+        capacity = (bedLen + 1) // 2
+        flowers = 0
+        for i in range(bedLen):
+            if flowerbed[i] == 1:
+                flowers += 1
+        return True if flowers + n <= capacity else False

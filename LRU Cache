@@ -1,0 +1,116 @@
+class DLLNode:
+    def  __init__(self,key = 0,val = 0):
+        self.key = key
+        self.val = val
+        self.prev = None
+        self.next = None
+        
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        """
+        We can solve this problem using two DS
+        HashMap and DLL
+        
+        While constructing composite DS we have to follow
+        some steps
+            1.take curr capacity and total capcity variablems
+            2.take head and tail two DLL Nodes
+                2.a connect them
+            3.take hashMap
+            
+        Algo get() => O(1)
+            1.if key present in cache(map)
+                1.a.fetch dll node
+                1.b. move node to front and return val
+            2.else return -1
+        
+        Algo put() => O(1)
+            1.if present into cache
+                1.a then update the val
+            2.else
+                a.create new DLL Nodes
+                b.add it to cache
+                c.move node to front
+                d.inc the curr capacity
+                e.if curr and total capacity become eq
+                    e.1.remove Node before tail
+                    e.2.del entry from cache
+                    e.3.reduce curr capacity by 1
+        
+        Algo moveToFront()
+            1.remove that node
+            2.add after head
+        
+        Algo removeNodeBeforeTail()
+            1.take that node
+            2.remove that node
+            3.return that node so we can remove from cache too
+        
+        Algo addAfterHead()
+            1.connect targetNode prev to head
+            2.connect curr next of head to target node next
+            3.connect targetNode next node prev to targetNode
+            4.attach head.next to targetNode
+            
+        Algo removeTargetNode()
+            1.take target node prev and next
+            2.connect them
+        """
+        self.totalCapacity = capacity
+        self.currCapacity = 0
+        self.head = DLLNode(0)
+        self.tail = DLLNode(0)
+        self.head.next = self.tail
+        self.tail.prev = self.head
+        self.cache = {}
+        
+    def removeNode(self,targetNode):
+        prevNode = targetNode.prev
+        nextNode = targetNode.next
+        prevNode.next = nextNode
+        nextNode.prev = prevNode
+        
+    def addAfterHead(self,targetNode):
+        targetNode.prev = self.head
+        targetNode.next = self.head.next
+        targetNode.next.prev = targetNode
+        self.head.next = targetNode
+        
+    def moveToFront(self,targetNode):
+        self.removeNode(targetNode)
+        self.addAfterHead(targetNode)
+
+    def get(self, key: int) -> int:
+        if key in self.cache:
+            valNode = self.cache[key]
+            self.moveToFront(valNode)
+            return valNode.val
+        return -1
+        
+    def removeNodeBeforeTail(self):
+        lastNode = self.tail.prev
+        self.removeNode(lastNode)
+        return lastNode
+        
+    def put(self, key: int, value: int) -> None:
+        if key in self.cache:
+            currNode = self.cache[key]
+            currNode.val = value
+            self.moveToFront(currNode)
+        else:
+            newNode = DLLNode(key,value)
+            self.cache[key] = newNode
+            self.addAfterHead(newNode)
+            self.currCapacity += 1
+            if self.currCapacity > self.totalCapacity:
+                lastNode = self.removeNodeBeforeTail()
+                del self.cache[lastNode.key]
+                self.currCapacity -= 1
+        
+
+
+# Your LRUCache object will be instantiated and called as such:
+# obj = LRUCache(capacity)
+# param_1 = obj.get(key)
+# obj.put(key,value)

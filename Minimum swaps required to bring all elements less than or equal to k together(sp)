@@ -123,3 +123,58 @@ Output 2:
                     A[i],A[currIdx] = A[currIdx],A[i]
                     swapCount += 1
         return swapCount
+----------------------------------------------------------------------------------------18th Jan 2022
+class Solution:
+    # @param A : list of integers
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        Idea is very simple
+        count  no of elements less than B
+
+        so to combine all ele leeq B
+        we need windowsize of count of no of ele leeq B
+
+        so graze over initial window
+        count ele gt b in window
+        and keep track with min ele gt b in window
+
+        then shift window 1 by 1 to the end of an array
+        accordingly do the changes 
+        and keep track of min ele
+
+        Inuition is min swaps equal to min no ele gt b in any windows
+        """
+        n = len(A)
+        eleLeEqB = 0
+        for i in range(n):
+            if A[i] <= B:
+                eleLeEqB += 1
+        
+        windowSize = eleLeEqB
+        windowStart = 0
+        windowEnd = 0
+        eleGtBInWindow = 0
+        minEleGtBInWindow = windowSize
+
+        while windowEnd < windowSize:
+            eleAtWindowEnd = A[windowEnd]
+            if eleAtWindowEnd > B:
+                eleGtBInWindow += 1
+            windowEnd += 1
+        
+        minEleGtBInWindow = min(minEleGtBInWindow,eleGtBInWindow)
+
+        while windowEnd < n:
+            eleAtWindowStart = A[windowStart]
+            if eleAtWindowStart > B:
+                eleGtBInWindow -= 1
+            windowStart += 1
+            eleAtWindowEnd = A[windowEnd]
+            if eleAtWindowEnd > B:
+                eleGtBInWindow += 1
+            windowEnd += 1
+            minEleGtBInWindow = min(minEleGtBInWindow,eleGtBInWindow)
+        
+        return minEleGtBInWindow

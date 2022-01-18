@@ -223,6 +223,7 @@ solutions to graze over
 221.  Count of divisors(sp - GFG) => this is hardest problem faced untill 17 Jan 2022 building sieve for smallest prime factor then divide and count the powers ..
 222.  Copy List with Random Pointer => VIMP Implementation based problem(37th problem of sde sheet)
 223.  Insert into a Binary Search Tree => very simple problem keep track of parent while doing iterative order traversal
-224.  
+224.  Search in a Binary Search Tree => very simple problem
+225.  
 
 

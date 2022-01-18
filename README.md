@@ -225,6 +225,7 @@ solutions to graze over
 223.  Insert into a Binary Search Tree => very simple problem keep track of parent while doing iterative order traversal
 224.  Search in a Binary Search Tree => very simple problem
 225.  Can Place Flowers => This is very simple proble I LIKE THIS PROBLEM can be solved using simulation
-226.  
+226.  LRU Cache => this is VIMP problem (78th problem of sde sheet)
+227.  
 
 

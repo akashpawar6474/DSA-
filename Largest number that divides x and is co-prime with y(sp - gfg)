@@ -1,0 +1,64 @@
+class Solution:
+	# @param A : integer
+	# @param B : integer
+	# @return an integer
+	def cpFact(self, A, B):
+        """
+        this is too mathematical problem
+        """
+        def gcd(a,b):
+            if b == 0:
+                return a
+            return gcd(b,a % b)
+        
+        while gcd(A,B) != 1:
+            A = A // gcd(A,B)
+        return A
+    def bruteForce(self,A,B):
+        """
+        brute force is generate all factors of A 
+        then rearrange factors
+
+        then graze from back in factors
+        and return if any factor and B has gcd 1
+        """
+        def gcd(a,b):
+            if b == 0:
+                return a
+            return gcd(b,a % b)
+
+        def generateFactors(A):
+            currVal = 1
+            factors = []
+            while currVal * currVal <= A:
+                if A % currVal == 0:
+                    if currVal == (A // currVal):
+                        factors.append(currVal)
+                    else:
+                        factors.append(currVal)
+                        factors.append(A // currVal)
+                currVal += 1
+            return factors
+        def rearrange(factors):
+            n = len(factors)
+            sortedFactors = [0] * n
+            left = 0
+            right =  n - 1
+            for i in range(n):
+                if i % 2 == 0:
+                    sortedFactors[left] = factors[i]
+                    left += 1
+                else:
+                    sortedFactors[right] = factors[i]
+                    right -= 1
+            return sortedFactors
+        
+        factors = generateFactors(A)
+        factors = rearrange(factors)
+        n = len(factors)
+        for i in range(n - 1,-1,-1):
+            if gcd(factors[i],B) == 1:
+                return factors[i]
+        return -1
+
+

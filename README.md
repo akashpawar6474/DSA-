@@ -229,7 +229,8 @@ solutions to graze over
 227.  Remove an element to maximize the GCD of the given array(sp -gfg) => classic prefix gcd and suffix gcd problem VIMP one
 228.  Enumerating GCD(sp) => THis is classic brainteaser gcd problem
 229.  Pubg(sp) => finding gcd of an array with some lavish story
-230.  
+230.  Largest number that divides x and is co-prime with y(sp - gfg) => very mathemaical problem and hard also
+231.  
 
 
 

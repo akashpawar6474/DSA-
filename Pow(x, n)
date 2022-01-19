@@ -44,3 +44,21 @@ class Solution:
                 return x * recursive(x,n - 1)
             
         return recursive(x,n)
+-----------------------------------------------------------------19 Jan  2022
+class Solution:
+    def myPow(self, x: float, n: int) -> float:
+        power = n
+        coefficient = x
+        ans = 1
+        if power < 0:
+            power = -1 * power
+        while power > 0:
+            if power & 1 == 0:
+                coefficient = (coefficient * coefficient)
+                power = power // 2
+            else:
+                ans *= coefficient
+                power = power - 1
+        if n < 0:
+            return 1 / ans
+        return ans

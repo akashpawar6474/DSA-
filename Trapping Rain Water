@@ -106,3 +106,28 @@ class Solution:
                 trappedWaterForCurrIdx = min(largestBarInLeftForCurrIdx,largestBarInRightForCurrIdx) - currHeight
                 ans += trappedWaterForCurrIdx
         return ans
+------------------------------------------------------------------------------19 Jan 2022
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        n = len(height)
+        maxLeft = height[0]
+        maxRight = height[n - 1]
+        leftPtr = 1
+        rightPtr = n - 1
+        ans = 0
+        while leftPtr <= rightPtr:
+            if maxLeft < maxRight:
+                heightAtLeftPtr = height[leftPtr]
+                if maxLeft <= heightAtLeftPtr:
+                    maxLeft = heightAtLeftPtr
+                else:
+                    ans += (maxLeft - heightAtLeftPtr)
+                leftPtr += 1
+            else:
+                heightAtRightPtr = height[rightPtr]
+                if maxRight <= heightAtRightPtr:
+                    maxRight = heightAtRightPtr
+                else:
+                    ans += (maxRight - heightAtRightPtr)
+                rightPtr -= 1
+        return ans

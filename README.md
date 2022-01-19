@@ -226,6 +226,7 @@ solutions to graze over
 224.  Search in a Binary Search Tree => very simple problem
 225.  Can Place Flowers => This is very simple proble I LIKE THIS PROBLEM can be solved using simulation
 226.  LRU Cache => this is VIMP problem (78th problem of sde sheet)
-227.  
+227.  Remove an element to maximize the GCD of the given array(sp -gfg) => classic prefix gcd and suffix gcd problem VIMP one
+228.  
 
 

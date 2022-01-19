@@ -227,6 +227,8 @@ solutions to graze over
 225.  Can Place Flowers => This is very simple proble I LIKE THIS PROBLEM can be solved using simulation
 226.  LRU Cache => this is VIMP problem (78th problem of sde sheet)
 227.  Remove an element to maximize the GCD of the given array(sp -gfg) => classic prefix gcd and suffix gcd problem VIMP one
-228.  
+228.  Enumerating GCD(sp) => THis is classic brainteaser gcd problem
+229.  
+
 
 

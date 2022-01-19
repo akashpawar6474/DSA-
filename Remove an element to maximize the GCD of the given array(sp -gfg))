@@ -1,0 +1,102 @@
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+        Another idea is to solve this 
+        problem using prefix gcd and suffix gcd
+
+        [a1,a2,a3,a4...,an - 1,an]
+
+        pgcd[i] = gcd(a1,a2,a3,..,ai) => gcd(pgcd[i - 1],ai)
+        sgcd[i] = gcd(ai,ai + 1,ai + 2,.. an) => gcd(ai,sgcd[i + 1])
+
+        Now if we want to delete ele at i idx 
+        what will be gcd of remaining array?
+
+        gcd(gcd(ele upto i - 1),gcd(ele from i + 1))
+        gcd(pgcd[i - 1],sgcd[i + 1])
+
+        tc = O(nlogn + nlogn + nlogn) 
+        sc = O(logn) for implicit stack in gcd fun
+        """
+        def gcd(a,b):
+            if b == 0:
+                return a
+            return gcd(b,a % b)
+
+        def preparePrefixGCD(A):
+            n = len(A)
+            prefixGCDArr = [0] * n
+            prefixGCDArr[0] = A[0]
+            for i in range(1,n):
+                prefixGCDArr[i] = gcd(prefixGCDArr[i - 1],A[i])
+            return prefixGCDArr
+        
+        def prepareSuffixGCD(A):
+            n = len(A)
+            suffixGCDArr = [0] * n
+            suffixGCDArr[n - 1] = A[n - 1]
+            for i in range(n - 2,-1,-1):
+                suffixGCDArr[i] = gcd(A[i],suffixGCDArr[i + 1])
+            return suffixGCDArr
+
+        prefixGCDArr = preparePrefixGCD(A)
+        suffixGCDArr = prepareSuffixGCD(A)
+        n = len(A)
+        maxGCD = 1
+        for i in range(n):
+            if i == 0:
+                maxGCD = max(maxGCD,suffixGCDArr[i + 1])
+            elif i == n - 1:
+                maxGCD = max(maxGCD,prefixGCDArr[i - 1])
+            else:
+                gcdBySkippingCurr = gcd(prefixGCDArr[i - 1],suffixGCDArr[i + 1])
+                maxGCD = max(maxGCD,gcdBySkippingCurr)
+        return maxGCD
+
+
+    def bruteForce(self,A):
+        """
+        brute force is skip each ele
+        and generate GCD of remaining array
+        and keep track of maximum
+        tc = O(n * nlogn)
+        sc = constant
+        """
+        def gcd(a,b):
+            if b == 0:
+                return a
+            return gcd(b,a % b)
+
+        def findGCDOfRemainingArr(A,skipCurrIdx):
+            n = len(A)
+            currGCD = 1
+            if skipCurrIdx == 0:
+                currGCD = gcd(A[1],A[2])
+                for i in range(3,n):
+                    currGCD = gcd(currGCD,A[i])
+                return currGCD
+            elif skipCurrIdx == 1:
+                currGCD = gcd(A[0],A[2])
+                for i in range(3,n):
+                    currGCD = gcd(currGCD,A[i])
+                return currGCD
+            else:
+                currGCD = gcd(A[0],A[1])
+                for i in range(3,n):
+                    if i != skipCurrIdx:
+                        currGCD = gcd(currGCD,A[i])
+                return currGCD
+        
+        n = len(A)
+        if n == 2:
+            return max(A)
+        skipCurrIdx = 0
+        maxGCD = 1
+        while skipCurrIdx < n:
+            remainingArrGCD = findGCDOfRemainingArr(A,skipCurrIdx)
+            maxGCD = max(maxGCD,remainingArrGCD)
+            skipCurrIdx += 1
+        return maxGCD
+

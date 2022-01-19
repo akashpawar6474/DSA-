@@ -228,7 +228,9 @@ solutions to graze over
 226.  LRU Cache => this is VIMP problem (78th problem of sde sheet)
 227.  Remove an element to maximize the GCD of the given array(sp -gfg) => classic prefix gcd and suffix gcd problem VIMP one
 228.  Enumerating GCD(sp) => THis is classic brainteaser gcd problem
-229.  
+229.  Pubg(sp) => finding gcd of an array with some lavish story
+230.  
+
 
 
 

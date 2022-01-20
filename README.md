@@ -230,7 +230,8 @@ solutions to graze over
 228.  Enumerating GCD(sp) => THis is classic brainteaser gcd problem
 229.  Pubg(sp) => finding gcd of an array with some lavish story
 230.  Largest number that divides x and is co-prime with y(sp - gfg) => very mathemaical problem and hard also
-231.  
+231.  Koko Eating Bananas => This is classic binary search problem similar like aggresive cows
+232.  
 
 
 

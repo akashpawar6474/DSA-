@@ -1,0 +1,51 @@
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        """
+        Idea is very simple
+        we can have min speed = 1 banana per hour
+        and max speed = max ele in array
+        
+        either we can do linear search to determine
+        what is min speed to eat bananas
+        else we can do binary search over that range
+        
+        tc = O(log(max(piles)) * n)
+        sc = constant
+        
+        rathere than manually calculating
+        we can calculate total no of hours
+        to eat curr pile of banana
+        is to just divide it by currspedd
+        """
+        def canEatAllBananas(piles,currSpeed,maxHours):
+            import math
+            totalHoursNeeded = 0
+            n = len(piles)
+            for i in range(n):
+                hoursNeededToFinishCurrPile = math.ceil(piles[i] / currSpeed)
+                totalHoursNeeded += hoursNeededToFinishCurrPile
+            return totalHoursNeeded <= maxHours
+        
+        def canEatAllBananasFirstTry(piles,currSpeed,maxHours):
+            currPileIdx = 0
+            n = len(piles)
+            currHours = 0
+            while currPileIdx < n:
+                currBananas = 0
+                while piles[currPileIdx] > currBananas:
+                    currBananas += currSpeed
+                    maxHours -= 1
+                currPileIdx += 1
+            return maxHours > -1
+        
+        minSpeed = 1
+        maxSpeed = max(piles)
+        ans = 0
+        while minSpeed <= maxSpeed:
+            midSpeed = (minSpeed + maxSpeed) // 2
+            if canEatAllBananas(piles,midSpeed,h):
+                ans = midSpeed
+                maxSpeed = midSpeed - 1
+            else:
+                minSpeed = midSpeed + 1
+        return ans

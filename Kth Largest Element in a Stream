@@ -1,0 +1,58 @@
+class KthLargest:
+
+    def __init__(self, k: int, nums: List[int]):
+        """
+        brute force is store the array 
+        and then add each val at its correct position
+        
+        if there are n values to be in serted at its correct position
+        then it will take O(n ^ 2) time
+        
+        Instead what we can do is to use the maxHeap
+        for eg in constructor 
+        we will graze over initial list of numbers
+            if heap is empty or heap size is less than k 
+                push the ele into heap
+            else if check if curr ele is less than top ele
+                then pop the top
+                and insert curr ele
+        
+        tc = O(nlogk)
+        sc = O(k)
+        """
+        import heapq
+        self.minHeap = []
+        self.k = k
+        n = len(nums)
+        for i in range(n):
+            if not self.minHeap or len(self.minHeap) < k:
+                heapq.heappush(self.minHeap,nums[i])
+            elif self.minHeap[0] <= nums[i]:
+                heapq.heappop(self.minHeap)
+                heapq.heappush(self.minHeap,nums[i])
+        print(self.minHeap)
+        
+        
+
+    def add(self, val: int) -> int:
+        """
+        check if heap is not empty or size is than k 
+            then add curr val
+        else if top ele gteq curr ele
+            then pop the top
+            insert then curr
+        then return the top
+        tc = O(logk)
+        sc = constant
+        """
+        if not self.minHeap or len(self.minHeap) < self.k:
+            heapq.heappush(self.minHeap,val)
+        elif self.minHeap[0] <= val:
+            heapq.heappop(self.minHeap)
+            heapq.heappush(self.minHeap,val)
+        return self.minHeap[0]
+
+
+# Your KthLargest object will be instantiated and called as such:
+# obj = KthLargest(k, nums)
+# param_1 = obj.add(val)

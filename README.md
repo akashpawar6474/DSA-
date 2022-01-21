@@ -232,7 +232,8 @@ solutions to graze over
 230.  Largest number that divides x and is co-prime with y(sp - gfg) => very mathemaical problem and hard also
 231.  Koko Eating Bananas => This is classic binary search problem similar like aggresive cows
 232.  Kth Largest Element in a Stream => this is classic heap problem asked in amazon
-233.  
+233.  Gas Station => this is classic greedy problem which need to be boil down.. asked in fb
+234.  
 
 
 

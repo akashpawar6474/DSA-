@@ -1,0 +1,52 @@
+class Solution:
+    def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
+        """
+        we will have couple of tracking tools
+        like total surplus and curr surplus
+        
+        if our curr surplus get 0 at any time
+            then we can directly set starting point to i + 1
+            and make curr surplus as 0
+            
+            because there is no point to start from prev starting point to i
+            it will eventually ran out of fuel
+        """
+        totalSurplus = 0
+        currSurplus = 0
+        startingPoint = 0
+        n = len(gas)
+        for currIdx in range(n):
+            totalSurplus += (gas[currIdx] - cost[currIdx])
+            currSurplus += (gas[currIdx] - cost[currIdx])
+            if currSurplus < 0:
+                currSurplus = 0
+                startingPoint = currIdx + 1
+        return startingPoint if totalSurplus >= 0 else -1 
+    def bruteForce(self,gas,cost):
+        """
+        this is brute force approach 
+        which will give tle
+        
+        tc = O(n ^ 2)
+        sc = constant
+        """
+        n = len(gas)
+        for currIdx in range(n):
+            if gas[currIdx] >= cost[currIdx]:
+                firstStationIdx = currIdx
+                nextStationIdx = (currIdx + 1) % n
+                gasAfterReachingNextStation = gas[currIdx] - cost[currIdx] + gas[nextStationIdx]
+                while nextStationIdx != firstStationIdx:
+                    if gasAfterReachingNextStation < cost[nextStationIdx % n]:
+                        break
+                    else:
+                        #cache the currIdx
+                        prevIdx = nextStationIdx
+                        #go to next station
+                        nextStationIdx = (nextStationIdx + 1) % n
+                        #update gas
+                        gasAfterReachingNextStation = gasAfterReachingNextStation + gas[nextStationIdx] - cost[prevIdx]
+                if nextStationIdx == firstStationIdx:
+                    return firstStationIdx
+        return -1
+

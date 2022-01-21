@@ -234,7 +234,8 @@ solutions to graze over
 232.  Kth Largest Element in a Stream => this is classic heap problem asked in amazon
 233.  Gas Station => this is classic greedy problem which need to be boil down.. asked in fb
 234.  Find two prime numbers with given sum(sp -gfg) => generate sieve then using two pointer locate the sum
-235.  
+235.  Prime Subsequences(sp) => cal no of primes then cal no of subsequence using 2 ^ n - 1 formula
+236.  
 
 
 

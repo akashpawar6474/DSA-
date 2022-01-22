@@ -1,0 +1,75 @@
+You are given an even number N and you need to represent the given number as the sum of primes. The prime numbers do not necessarily have to be distinct. It is guaranteed that at least one possible solution exists.
+
+You need to determine the minimum number of prime numbers needed to represent the given number.
+
+Input
+
+The first argument contains an integer N,the number you need to represent (3<=N<=10^9).
+Output
+
+Return an integer which is the minimum number of prime numbers needed to represent the given number N.
+Examples
+
+Input
+
+26
+Output
+
+2
+Explanation
+
+Testcase 1-
+
+You can represent 26 as: 13+13
+So we require minimum of 2 prime numbers to represent the number 26.
+----------------------------------------------------------------------22 Jan 2022
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def solve(self, A):
+        """
+        Case 1: If the number is prime, then the minimum primes numbers required to make sum N is 1.
+        Case 2: If the number is even, then it can be expressed as a sum of two primes as per the Goldbach’s Conjecture for every even integer greater than 2. Therefore the minimum prime number required to make the sum N is 2.
+        Case 3: If the number is odd: 
+        If (N-2) is prime, then the minimum prime number required to make the given sum N is 2.
+        Else The minimum prime numbers required to make the given sum N is 3 because:
+        """
+        if A == 2:
+            return 1
+        return 2
+    def bruteFn(self,A):
+        """
+        brute force is to generate sieve upto that no
+        then graze from back 
+        take a loop untill num > 0
+            if valAtCurPtr <= num:
+                then reduce
+            else:
+                shiftCurrPtrTo lates left prime
+        """
+        def markNonPrimes(sieve,A):
+            currVal = 2
+            while currVal * currVal <= A:
+                if sieve[currVal]:
+                    multiple = currVal * currVal
+                    while multiple <= A:
+                        if sieve[multiple]:
+                            sieve[multiple] = False
+                        multiple += currVal
+                currVal += 1
+
+        def setCurr(sieve,currLocation):
+            while currLocation >= 2  and sieve[currLocation] == False:
+                currLocation -= 1
+            return currLocation
+        
+        sieve = [True for x in range(A + 1)]
+        markNonPrimes(sieve,A)
+        currPrime = setCurr(sieve,A)
+        count = 0
+        while A > 0:
+            while currPrime <= A:
+                count += 1
+                A -= currPrime
+            currPrime = setCurr(sieve,currPrime - 1)
+        return count

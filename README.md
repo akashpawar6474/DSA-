@@ -235,7 +235,9 @@ solutions to graze over
 233.  Gas Station => this is classic greedy problem which need to be boil down.. asked in fb
 234.  Find two prime numbers with given sum(sp -gfg) => generate sieve then using two pointer locate the sum
 235.  Prime Subsequences(sp) => cal no of primes then cal no of subsequence using 2 ^ n - 1 formula
-236.  
+236.  Lucky Numbers(sp) => generate a sieve and count all no which has 2 prime divisors
+237.  
+
 
 
 

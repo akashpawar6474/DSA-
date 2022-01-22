@@ -1,0 +1,21 @@
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def solve(self, A):
+        """
+        a door can be only open if it is visited odd no of times(odd no of factors)
+        a door will remain close if it is visited even no of times(even no of factors)
+
+        only perfect square has odd no of factors/divisors
+        25 = > 5 * 5 => (2 + 1)
+
+        even power always generate odd no of divisors
+
+        so our task is to find out no of perfect square from 1 to no
+
+        One more observation is that we have sqrt(n) perfect squares from 1 to no
+        tc = O(sqrt(n))
+        sc = constant
+        """
+        import math
+        return int(math.sqrt(A))

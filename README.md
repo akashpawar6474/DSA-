@@ -236,7 +236,8 @@ solutions to graze over
 234.  Find two prime numbers with given sum(sp -gfg) => generate sieve then using two pointer locate the sum
 235.  Prime Subsequences(sp) => cal no of primes then cal no of subsequence using 2 ^ n - 1 formula
 236.  Lucky Numbers(sp) => generate a sieve and count all no which has 2 prime divisors
-237.  
+237.  Distinct Prime Factors of Array Product(sp - gfg) => take max ele of array generate sieve of smallest prime factors then cal divisors for each ele and add to set to return len
+238.  
 
 
 

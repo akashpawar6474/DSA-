@@ -1,0 +1,73 @@
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+        we can generate prime divisors
+        for each ele in array 
+        then put them into set
+
+        and at last return len of set
+        """
+        def generateSPFSieve(sieve,num):
+            currVal = 2
+            while currVal <= num:
+                if sieve[currVal] == -1:
+                    sieve[currVal] = currVal
+                    multiple = currVal * currVal
+                    while multiple <= num:
+                        if sieve[multiple] == -1:
+                            sieve[multiple] = currVal
+                        multiple += currVal
+                currVal += 1
+
+        def countDivisors(num,sieve):
+            if num == 1:
+                return []
+            primeFactors = []
+            while num > 1:
+                spf = sieve[num]
+                primeFactors.append(spf)
+                while num > 1 and (num % spf) == 0:
+                    num = num // spf
+            return primeFactors
+        
+        n = len(A)
+        distinctPrimeFactors = set()
+        maxEle = max(A)
+        sieve = [-1] * (maxEle + 1)
+        generateSPFSieve(sieve,maxEle)
+        for i in range(n):
+            currEle = A[i]
+            primeFactors = countDivisors(A[i],sieve)
+            for j in range(len(primeFactors)):
+                distinctPrimeFactors.add(primeFactors[j])
+        return len(distinctPrimeFactors)
+
+    def bruteForce(self,A):
+        """
+        brute force is calculate the product first of all
+        then generate sieve for it 
+
+        for eg we have all 10 ^ 5 ele then prod will be too huge
+        so instead of generating sieve of product
+
+        """ 
+        def generateSieve(sieve,prod):
+            currVal = 2
+            while currVal <= prod:
+                if sieve[currVal] == 0:
+                    multiple = 2 * currVal
+                    while multiple <= prod:
+                        sieve[multiple] += 1
+                        multiple += currVal
+                currVal += 1
+        
+        n = len(A)
+        prod = 1
+        for i in range(n):
+            prod *= A[i]
+        
+        sieve = [0] * (prod + 1)
+        generateSieve(sieve,prod)
+        return sieve[prod]

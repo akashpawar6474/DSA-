@@ -197,3 +197,50 @@ Explanation 2:
             divisorsForCurrEle = countDivisors(currEle)
             ans.append(divisorsForCurrEle)
         return ans
+        -----------------------------------------------------------------------------22 Jan 2022
+class Solution:
+    # @param A : list of integers
+    # @return a list of integers
+    def solve(self, A):
+        """
+        idea is first generate sieve of 
+        spf untill max ele of a
+
+        then using that formula cal no of prime factors or divisors
+        """
+        def generateSPFSieve(sieve,maxEle):
+            currVal = 2
+            while currVal * currVal <= maxEle:
+                if sieve[currVal] == -1:
+                    sieve[currVal] = currVal
+                    multiple = currVal * currVal
+                    while multiple <= maxEle:
+                        if sieve[multiple] == -1:
+                            sieve[multiple] = currVal
+                        multiple += currVal
+                currVal += 1
+        
+
+
+        n = len(A)
+        maxEle = max(A)
+        sieve = [-1] * (maxEle + 1)
+        generateSPFSieve(sieve,maxEle)
+
+        ans = []
+        for i in range(n):
+            currEle = A[i]
+            if currEle == 1:
+                ans.append(1)
+                continue
+            totalPrimeFactor = 1
+            while currEle > 1:
+                spfOfCurrE1e = sieve[currEle]
+                powerOfCurrPrimeFactor = 0
+                while currEle > 1 and (currEle % spfOfCurrE1e) == 0:
+                    powerOfCurrPrimeFactor += 1
+                    currEle = currEle // spfOfCurrE1e
+                totalPrimeFactor *= (powerOfCurrPrimeFactor + 1)
+            ans.append(totalPrimeFactor)
+        return ans
+

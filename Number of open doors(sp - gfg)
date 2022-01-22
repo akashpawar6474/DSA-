@@ -14,7 +14,7 @@ class Solution:
         so our task is to find out no of perfect square from 1 to no
 
         One more observation is that we have sqrt(n) perfect squares from 1 to no
-        tc = O(sqrt(n))
+        tc = O(log(n))
         sc = constant
         """
         import math

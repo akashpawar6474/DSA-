@@ -239,7 +239,8 @@ solutions to graze over
 237.  Distinct Prime Factors of Array Product(sp - gfg) => take max ele of array generate sieve of smallest prime factors then cal divisors for each ele and add to set to return len
 238.  Minimum number of primes required such that their sum is equal to N(sp -gfg) => goldbach conjecture and observations based problem This is BRAINTEASER
 239.  Number of open doors(sp - gfg) => odd and even logic and sqrt and perfect square logic TCS question BRAINTEASER
-240.  
+240.  Sequential Digits => this can be solved using queue and some mathematics to construct next no
+241.  
 
 
 

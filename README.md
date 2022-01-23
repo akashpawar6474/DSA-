@@ -240,7 +240,8 @@ solutions to graze over
 238.  Minimum number of primes required such that their sum is equal to N(sp -gfg) => goldbach conjecture and observations based problem This is BRAINTEASER
 239.  Number of open doors(sp - gfg) => odd and even logic and sqrt and perfect square logic TCS question BRAINTEASER
 240.  Sequential Digits => this can be solved using queue and some mathematics to construct next no
-241.  
+241.  Compute nCr % m(sp - codeforces) => can be solved using tabulation and dp table
+242.  
 
 
 

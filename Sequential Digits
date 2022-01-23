@@ -1,0 +1,49 @@
+class Solution:
+    def sequentialDigits(self, low: int, high: int) -> List[int]:
+        """
+        Another way is using queue
+        while initializing queue has 1 to 9 ele into the queue
+        then take a loop untill q has ele
+            popleft
+            if in the range then add
+            take last digit 
+            then if it is less than 9
+                (to avoid edge case)
+                generate next sequential digit
+                using ele * 10 + last digit + 1
+                
+        Q.when loop will terminate?
+        """
+        from collections import deque
+        q = deque(range(1,10))
+        ans = []
+        while q:
+            front = q.popleft()
+            print(front)
+            if low <= front <= high:
+                ans.append(front)
+            lastDigitOfFront = front % 10
+            if lastDigitOfFront < 9:
+                nextNo = (front * 10) + lastDigitOfFront + 1
+                q.append(nextNo)
+        return ans
+            
+    def bruteForce(self,low,high):
+        def isSequential(num):
+            curr = num % 10
+            num = num // 10
+            prev = 0
+            isValid = True
+            while num > 0:
+                prev = num % 10
+                if prev + 1 != curr:
+                    isValid = False
+                    break
+                curr = prev
+                num = num // 10
+            return isValid
+        ans = []
+        for num in range(low,high + 1):
+            if isSequential(num):
+                ans.append(num)
+        return ans

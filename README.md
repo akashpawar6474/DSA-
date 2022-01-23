@@ -242,7 +242,8 @@ solutions to graze over
 240.  Sequential Digits => this can be solved using queue and some mathematics to construct next no
 241.  Compute nCr % m(sp - codeforces) => can be solved using tabulation and dp table
 242.  Compute nCr % p(sp - gfg) => inverse modulo and diff approach with python
-243.  
+243.  Lexicographic rank of a string(sp - gfg) => we have to calculate no of string lexicographically less than curr string using some thought process
+244.  
 
 
 

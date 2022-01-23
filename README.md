@@ -241,7 +241,8 @@ solutions to graze over
 239.  Number of open doors(sp - gfg) => odd and even logic and sqrt and perfect square logic TCS question BRAINTEASER
 240.  Sequential Digits => this can be solved using queue and some mathematics to construct next no
 241.  Compute nCr % m(sp - codeforces) => can be solved using tabulation and dp table
-242.  
+242.  Compute nCr % p(sp - gfg) => inverse modulo and diff approach with python
+243.  
 
 
 

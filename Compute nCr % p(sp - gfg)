@@ -1,0 +1,41 @@
+
+fact = [1] * (10 ** 6 + 1)
+isCal = False
+class Solution:
+    # @param A : integer
+    # @param B : integer
+    # @param C : integer
+    # @return an integer
+    def solve(self, A, B, C):
+        """
+        here we have to use fermats therom to calculate inv mod
+
+        and we also need the function to calculate factorialMod
+        nCr % p => n! % p * ((n - r)! % p) ^ p - 2 % p * (r! % p) ^ p - 2 % p
+        """
+        def powerMod(coefficient,power,C):
+            ans = 1
+            while power > 0:
+                if power % 2 == 0:
+                    coefficient = (coefficient * coefficient) % C
+                    power = power // 2
+                else:
+                    ans *= coefficient
+                    ans = ans % C
+                    power = power - 1
+            return ans
+
+        def preComputeFactorial(n,C,fact):
+            for i in range(1,n + 1):
+                fact[i] = (fact[i - 1] * i) % C
+        global fact 
+        global isCal
+        B = max(B,A - B)
+        num = 1
+        den = 1
+        for i in range(B + 1,A + 1):
+            num = (num * i) % C
+            den = (den * (i - B)) % C
+        firstTerm = num
+        secondTerm = powerMod(den,C - 2,C)
+        return int(((firstTerm  % C * secondTerm % C) % C) % C)

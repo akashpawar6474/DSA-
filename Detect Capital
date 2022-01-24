@@ -1,0 +1,26 @@
+class Solution:
+    def detectCapitalUse(self, word: str) -> bool:
+        """
+        idea is very simple
+        just calculate no of capital letters
+        and check with the conditions
+        """
+        def countCapitals(word):
+            capitalLetters = 0
+            for ch in word:
+                asciiVal = ord(ch) - ord('A')
+                if 0 <= asciiVal <= 25:
+                    capitalLetters += 1
+            return capitalLetters
+        
+        capitalCount = countCapitals(word)
+        wordLen = len(word)
+        if wordLen == capitalCount:
+            return True
+        elif capitalCount == 0:
+            return True
+        elif capitalCount == 1:
+            asciiValOfFirstCh = ord(word[0]) - ord('A')
+            if 0 <= asciiValOfFirstCh <= 25:
+                return True
+        return False

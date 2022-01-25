@@ -1,0 +1,38 @@
+class Solution:
+    def validMountainArray(self, arr: List[int]) -> bool:
+        """
+        Idea is very simple 
+        have two pointers left and right
+        
+        left pointer will move untill it has next ele
+        gt left pointer
+        
+        right pointer will move untill it has prev ele
+        gt right pointer
+        
+        at last if both are at same idx then this is
+        mountain array
+        tc = O(n)
+        sc = constant
+        """
+        def moveLeftPtr(arr,n):
+            left = 0
+            while left < n - 1 and arr[left] < arr[left + 1]:
+                left += 1
+            return left
+        
+        def moveRightPtr(arr,n):
+            right = n - 1
+            while right > 0 and arr[right] < arr[right - 1]:
+                right -= 1
+            return right
+        
+        n = len(arr)
+        if n < 3:
+            return False
+        left = moveLeftPtr(arr,n)
+        right = moveRightPtr(arr,n)
+        if left == n - 1 or right == 0:
+            return False
+        return left == right
+                

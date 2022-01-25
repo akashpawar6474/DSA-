@@ -244,7 +244,9 @@ solutions to graze over
 242.  Compute nCr % p(sp - gfg) => inverse modulo and diff approach with python
 243.  Lexicographic rank of a string(sp - gfg) => we have to calculate no of string lexicographically less than curr string using some thought process
 244.  Detect Capital => very simple problem
-245.  
+245.  Valid Mountain Array => very simple two pointer problem
+246.  
+
 
 
 

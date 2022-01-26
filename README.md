@@ -245,7 +245,8 @@ solutions to graze over
 243.  Lexicographic rank of a string(sp - gfg) => we have to calculate no of string lexicographically less than curr string using some thought process
 244.  Detect Capital => very simple problem
 245.  Valid Mountain Array => very simple two pointer problem
-246.  
+246.  All Elements in Two Binary Search Trees => very simple problem can be solved by traversing and merge function
+247.  
 
 
 

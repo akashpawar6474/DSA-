@@ -252,8 +252,9 @@ solutions to graze over
 250.  Check whether an Array can be made 0 by splitting and merging repeatedly(sp - gfg) => this problem involves some number system and boiled down to calculat no of odd no in aray
 251.  Minimum XOR Value Pair(sp - gfg) => msb gets canceled in xor so sort the array and find out
 252.  Count no of diff bits in two numbers => this question is made by me untill now using right shift and AND check with least significant bit
-253.  Number of 1 Bits => right shift untill get 0 then have check with AND operator on least significant bit
-254.  
+253.  find if ith bit is set or not => this question also made by me yet
+254.  Sum of bit differences among all pairs(sp - gfg) => VIMP and classic bit problem where we have to go bit by bit on each array ele like single no 2
+255.  
 
 
 

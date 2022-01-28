@@ -247,7 +247,7 @@ solutions to graze over
 245.  Valid Mountain Array => very simple two pointer problem
 246.  All Elements in Two Binary Search Trees => very simple problem can be solved by traversing and merge function
 247.  Single Number => solve using xor
-248.  Number of 1 Bits => moving right shift and check if last digit is set or not
+248.  
 249.  
 
 

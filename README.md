@@ -248,7 +248,7 @@ solutions to graze over
 246.  All Elements in Two Binary Search Trees => very simple problem can be solved by traversing and merge function
 247.  Single Number => solve using xor
 248.  Design Add and Search Words Data Structure => this is exact trie problem where search fun is dependent on dfs
-249.  
+249.  Single Number II(sp) => only works natural no why it breaks for -ve no
 250.  
 
 

@@ -1,0 +1,27 @@
+class Solution:
+    # @param A : list of integers
+    # @return a strings
+    def solve(self, A):
+        """
+        this problem involves thought process
+
+        any even no can be divided by 2 into 2 same no
+        and two same no can become 0
+
+        any odd no can be represented as 1 + odd no - 1
+
+        (oddNo - 1) will be even no so using above stratergy
+        we can make it 0
+
+        at last we will reduce all odd no to 0
+        if odd no count is even means we can make them 0
+        else we cannt
+        tc = O(n)
+        sc = constant
+        """
+        n = len(A)
+        oddNoCount = 0
+        for i in range(n):
+            if A[i] & 1 == 1:
+                oddNoCount += 1
+        return "Yes" if oddNoCount & 1 == 0 else "No"

@@ -246,7 +246,8 @@ solutions to graze over
 244.  Detect Capital => very simple problem
 245.  Valid Mountain Array => very simple two pointer problem
 246.  All Elements in Two Binary Search Trees => very simple problem can be solved by traversing and merge function
-247.  
+247.  Single Number => solve using xor
+248.  
 
 
 

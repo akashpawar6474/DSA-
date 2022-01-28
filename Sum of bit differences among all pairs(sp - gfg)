@@ -1,0 +1,67 @@
+class Solution:
+	# @param A : list of integers
+	# @return an integer
+	def cntBits(self, A):
+        """
+        a = [1,2,3,4,5]
+        1 = 0 0 1
+        2 = 0 1 0
+        3 = 0 1 1
+        4 = 1 0 0
+        5 = 1 0 1
+
+        so no of diff bits for last position
+        1 0 1 0 1
+        so it can be 12 diff bit pairs either 0,1 or 1,0
+        2 * (no of set bits * no of unset bits)
+
+        so idea is to count pairs for each bit 
+        tc = O(32 * n)
+        sc = constant
+        """
+        def isBitSet(n,bitToCheck):
+            if n & (1 << bitToCheck) != 0:
+                return True
+            return False
+        
+        n = len(A)
+        ans = 0
+        for i in range(31):
+            noOfSetBits = 0
+            noOfUnsetBits = 0
+            for j in range(n):
+                if isBitSet(A[j],i):
+                    noOfSetBits += 1
+            noOfUnsetBits = n - noOfSetBits
+            noOfPairsAtCurrBit = 2 * (noOfSetBits * noOfUnsetBits)
+            ans = (ans + noOfPairsAtCurrBit) % (10 ** 9 + 7)
+        return ans
+
+    def bruteForce(self,A):
+        def getCountOfSetBits(n):
+            count = 0
+            while n > 0:
+                if n & 1 != 0:
+                    count += 1
+                n = n >> 1
+            return count
+        def getCountOfDifferentBits(n1,n2):
+            count = 0
+            while n1 > 0 and n2 > 0:
+                if n1 & 1 != n2 & 1:
+                    count += 1
+                n1 = n1 >> 1
+                n2 = n2 >> 1
+            if n1 == 0:
+                count += getCountOfSetBits(n2)
+            elif n2 == 0:
+                count += getCountOfSetBits(n1)
+            return count
+
+        ans = 0
+        n = len(A)
+        for i in range(n):
+            for j in range(i + 1,n):
+                diffBitsCount = getCountOfDifferentBits(A[i],A[j])
+                ans += (2 * diffBitsCount)
+        return ans

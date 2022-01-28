@@ -250,7 +250,8 @@ solutions to graze over
 248.  Design Add and Search Words Data Structure => this is exact trie problem where search fun is dependent on dfs
 249.  Single Number II(sp) => only works natural no why it breaks for -ve no
 250.  Check whether an Array can be made 0 by splitting and merging repeatedly(sp - gfg) => this problem involves some number system and boiled down to calculat no of odd no in aray
-251.  
+251.  Minimum XOR Value Pair(sp - gfg) => msb gets canceled in xor so sort the array and find out
+252.  
 
 
 

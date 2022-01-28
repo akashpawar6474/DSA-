@@ -1,0 +1,7 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        uniqueEle = 0
+        n = len(nums)
+        for i in range(n):
+            uniqueEle = uniqueEle ^ nums[i]
+        return uniqueEle

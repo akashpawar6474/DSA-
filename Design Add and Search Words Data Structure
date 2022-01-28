@@ -1,0 +1,58 @@
+class TrieNode:
+    def __init__(self):
+        self.isWordEnd = False
+        self.childern = {}
+        
+class WordDictionary:
+
+    def __init__(self):
+        """
+        we should ask followup question 
+        like if duplicate is there to add
+        
+        and it is same Trie implementation
+        we have to modify search function 
+        to check each childern for .
+        sc = O(maxWordLen) for whole trie
+
+        """
+        self.rootNode = TrieNode()
+
+    def addWord(self, word: str) -> None:
+        """
+        tc = O(wordLen)
+        """
+        curr = self.rootNode
+        for ch in word:
+            if ch not in curr.childern:
+                curr.childern[ch] = TrieNode()
+            curr = curr.childern[ch]
+        curr.isWordEnd = True
+        
+
+    def search(self, word: str) -> bool:
+        """
+        base case is when we reached end after
+        grazing over word
+        tc = O(wordLen)
+        sc = O(wordLen) implicit stack
+        """
+        def dfs(currNode,currIdx,wordLen):
+            if currIdx == wordLen:
+                return currNode.isWordEnd
+            if word[currIdx] == '.':
+                for child in currNode.childern:
+                    if dfs(currNode.childern[child],currIdx + 1,wordLen):
+                        return True
+            if word[currIdx] in currNode.childern:
+                if dfs(currNode.childern[word[currIdx]],currIdx + 1,wordLen):
+                    return True
+            return False
+        return dfs(self.rootNode,0,len(word))
+                    
+
+
+# Your WordDictionary object will be instantiated and called as such:
+# obj = WordDictionary()
+# obj.addWord(word)
+# param_2 = obj.search(word)

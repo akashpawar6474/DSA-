@@ -1,0 +1,4 @@
+        def isBitSet(n,bitToCheck):
+            if n & (1 << bitToCheck) != 0:
+                return True
+            return False

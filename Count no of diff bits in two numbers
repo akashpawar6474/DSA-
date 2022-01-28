@@ -1,0 +1,12 @@
+def cntdiffbits(n1,n2):
+	count = 0
+	while n1 > 0 and n2 > 0:
+		if n1 & 1 != n2 & 1:
+			count += 1
+		n1 = n1 >> 1
+		n2 = n2 >> 1
+	return count
+
+print(cntdiffbits(5,2))
+		
+		

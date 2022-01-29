@@ -258,7 +258,8 @@ solutions to graze over
 256.  Minimum Number of Flips to Make the Binary String Alternating => google question which can be some thought process and implementation also
 257.  Summary Ranges => this is two pointer problem moving in same direction
 258.  Minimum Height Trees => truncating leaves one by one using indegree and bfs
-259.  
+259.  Largest Number At Least Twice of Others => very easy simulation based problem
+260.  
 
 
 

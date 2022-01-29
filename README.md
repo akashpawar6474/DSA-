@@ -261,7 +261,8 @@ solutions to graze over
 259.  Largest Number At Least Twice of Others => very easy simulation based problem
 260.  Single Number III(sp - leetcode) => get whole array xor then find out set bit location then divide array based on that location
 261.  Shortest Completing Word => easy simulation based problem
-262.  
+262.  Count of Smaller Numbers After Self => this is classic merge sort problem on line of reverse pairs problem
+263.  
 
 
 

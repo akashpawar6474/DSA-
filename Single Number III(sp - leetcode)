@@ -1,0 +1,37 @@
+class Solution:
+    def singleNumber(self, nums: List[int]) -> List[int]:
+        def calArrXor(nums,n):
+            xor = 0
+            n = len(nums)
+            for i in range(n):
+                xor = xor ^ nums[i]
+            return xor
+        
+        def findRightMostSetBit(xor):
+            setBitLocation = 32
+            for i in range(31):
+                if xor & (1 << i) != 0:
+                    setBitLocation = i
+                    break
+            return setBitLocation
+        
+        def isBitSet(num,bitLocation):
+            if num & (1 << bitLocation) != 0:
+                return True
+            return False
+        
+        n = len(nums)
+        arrXor = calArrXor(nums,n)
+        setBitLocation = findRightMostSetBit(arrXor)
+        
+        num1 = 0 
+        num2 = 0
+        for i in range(n):
+            if isBitSet(nums[i],setBitLocation):
+                num1 = num1 ^ nums[i]
+            else:
+                num2 = num2 ^ nums[i]
+        return [num1,num2]
+        
+        
+            

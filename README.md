@@ -255,7 +255,8 @@ solutions to graze over
 253.  find if ith bit is set or not => this question also made by me yet
 254.  Sum of bit differences among all pairs(sp - gfg) => VIMP and classic bit problem where we have to go bit by bit on each array ele like single no 2
 255.  Find the Missing Number in a sorted array(gfg) => asked in amazon very simple problem of binary search just shrinking the boundaries
-256.  
+256.  Minimum Number of Flips to Make the Binary String Alternating => google question which can be some thought process and implementation also
+257.  
 
 
 

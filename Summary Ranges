@@ -1,0 +1,47 @@
+class Solution:
+    def summaryRanges(self, nums: List[int]) -> List[str]:
+        """
+        as we are having sorted array means
+        there is no issue regarding manual sorting
+        
+        and we can use two pointers moving in same direction
+        
+        take a loop untill right ptr is less than n
+            move right ptr untill is has val == prev val + 1
+            if not such case
+            check if left + 1 == right:
+                then just add "left" to answer
+            else
+                then add "ele at left -> ele at right - 1"
+            left = right
+            right = right + 1
+            
+        at last we have to handle edge case like when
+        we have only last ele as single range
+        
+        tc = O(n)
+        sc = constant
+        
+        """
+        n = len(nums)
+        leftPtr = 0
+        rightPtr = 1
+        if n == 0:
+            return []
+        if n == 1:
+            return [str(nums[0])]
+        
+        ans = []
+        while rightPtr < n:
+            while rightPtr < n and nums[rightPtr] == nums[rightPtr - 1] + 1:
+                rightPtr += 1
+            if leftPtr + 1 == rightPtr:
+                ans.append(str(nums[leftPtr]))
+            else:
+                ans.append(str(nums[leftPtr])+"->"+str(nums[rightPtr - 1]))
+            leftPtr = rightPtr
+            rightPtr = rightPtr + 1
+        
+        if leftPtr < n and leftPtr + 1 == rightPtr:
+            ans.append(str(nums[leftPtr]))
+        return ans

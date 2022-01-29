@@ -1,0 +1,37 @@
+"""
+Given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in list. One of the integers is missing in the list. Write an efficient code to find the missing integer. 
+Examples: 
+
+Input : arr[] = [1, 2, 3, 4, 6, 7, 8]
+Output : 5
+
+Input : arr[] = [1, 2, 3, 4, 5, 6, 8, 9]
+Output : 7
+"""
+def findMissingNoInSortedArr(arr):
+	"""
+	brute force is use math formula
+	of sum of natural no n * (n + 1) // 2
+	
+	but for calculating sum it will take O(n) time
+	
+	or another simple approach is check if next no is 
+	present or not that also take linear time
+	
+	and we need to ask are we getting valid input always
+	because if there is invalid input then our code might give wrong ans
+	and we are not using the fact that array is sorted
+	"""
+	n = len(arr)
+	start = 0
+	end = n - 1
+	while start < end:
+		mid = (start + end) // 2
+		if arr[mid] == mid + 1:
+			start = mid + 1
+		else:
+			end = mid
+	return start + 1
+
+print(findMissingNoInSortedArr([1, 2, 3, 4, 5, 6, 8, 9]))
+print(findMissingNoInSortedArr([1, 3]))

@@ -102,5 +102,48 @@ class Solution:
             maxRectangle = max(maxRectangle,rectangleForCurrBar)
         return maxRectangle
             
+ ----------------------------------------------------------------------------------29 Jan 2022
+ class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """
+        Idea is very simple
+        for each position we should know
+        idx of latest smallest bar in left and right
+        
+        for eg for 2nd idx
+        idx of latest smallest bar in left = 1
+        idx of latest smallest bar in right = 4
+        
+        height = height of bar at currIdx
+        width = 4 - 1 - 1
+        
+        area of rectangle of height of currIdx = height * width
+        5 * 2 = 10
+        
+        tc = O(3n) => O(n)
+        sc = O(2n) = O(n)
+        """
+        n = len(heights)
+        latestSmallestBarInLeft = [-1] * n
+        for i in range(1,n):
+            prev = i - 1
+            while prev > -1 and heights[prev] >= heights[i]:
+                prev = latestSmallestBarInLeft[prev]
+            latestSmallestBarInLeft[i] = prev
+        
+        latestSmallestBarInRight = [n] * n
+        for i in range(n - 2,-1,-1):
+            nxt = i + 1
+            while nxt < n and heights[nxt] >= heights[i]:
+                nxt = latestSmallestBarInRight[nxt]
+            latestSmallestBarInRight[i] = nxt
+
+        maxArea = 0
+        for i in range(n):
+            currHeight = heights[i]
+            currWidth = latestSmallestBarInRight[i] - latestSmallestBarInLeft[i] - 1
+            currArea = currHeight * currWidth
+            maxArea = max(maxArea,currArea)
+        return maxArea
         
         

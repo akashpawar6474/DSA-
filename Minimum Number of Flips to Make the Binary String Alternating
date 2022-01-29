@@ -1,0 +1,79 @@
+class Solution:
+    def minFlips(self, s: str) -> int:
+        """
+        111000
+        uee the first operation two times
+        100011
+        use second operation on 2nd and last idx
+        101010
+        
+        is it something related to count of 1's and 0's?
+        
+        there is one mindblowing solution out there in discussion forum
+        
+        to handle removing operation what we can do is to append 
+        curr string to same string again
+        
+        for eg s = 110
+        s = 110110
+        
+        now take two string s1 and s2
+        which start with 01 and 10 respectively and has alternate binary representation
+        s =  110|110
+        s1 = 101|010
+        s2 = 010|101
+        
+        now we will keep track of changed bits in window for both s1 and s2 
+        with s
+        
+        and windowsize will be of len original string
+        
+        count1 = positions need to flip to convert s to s1
+        count2 = positions need to flip to convert s to s2
+        for
+        idx         count1          count2
+        0             0               1
+        1             1               1
+        2             2               1
+        
+        whenever our idx goes beyound n
+            then just validate out of boundary ele
+            and if not same the reduce the count of flip
+        s =  1|101|10
+        s1 = 1|010|10
+        s2 = 0|101|01
+        3            2 => 3           0 => 0
+        and so on keep track of min count among both
+        
+        tc = O(2n)
+        sc = O(n)        
+        """
+        oldLen = len(s)
+        s += s
+        s1 = ""
+        s2 = ""
+        newLen = len(s)
+        for i in range(newLen):
+            if i % 2 == 0:
+                s1 += "0"
+                s2 += "1"
+            else:
+                s1 += "1"
+                s2 += "0"
+    
+        count1 = 0
+        count2 = 0
+        minFlips = newLen
+        for i in range(newLen):
+            if s[i] != s1[i]:
+                count1 += 1
+            if s[i] != s2[i]:
+                count2 += 1
+            if i >= oldLen:
+                if s[i - oldLen] != s1[i - oldLen]:
+                    count1 -= 1
+                if s[i - oldLen] != s2[i - oldLen]:
+                    count2 -= 1
+            if i >= oldLen - 1:
+                minFlips = min(minFlips,count1,count2)
+        return minFlips

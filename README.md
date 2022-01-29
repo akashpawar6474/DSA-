@@ -257,7 +257,8 @@ solutions to graze over
 255.  Find the Missing Number in a sorted array(gfg) => asked in amazon very simple problem of binary search just shrinking the boundaries
 256.  Minimum Number of Flips to Make the Binary String Alternating => google question which can be some thought process and implementation also
 257.  Summary Ranges => this is two pointer problem moving in same direction
-258.  
+258.  Minimum Height Trees => truncating leaves one by one using indegree and bfs
+259.  
 
 
 

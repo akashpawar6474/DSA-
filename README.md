@@ -254,7 +254,8 @@ solutions to graze over
 252.  Count no of diff bits in two numbers => this question is made by me untill now using right shift and AND check with least significant bit
 253.  find if ith bit is set or not => this question also made by me yet
 254.  Sum of bit differences among all pairs(sp - gfg) => VIMP and classic bit problem where we have to go bit by bit on each array ele like single no 2
-255.  
+255.  Find the Missing Number in a sorted array(gfg) => asked in amazon very simple problem of binary search just shrinking the boundaries
+256.  
 
 
 

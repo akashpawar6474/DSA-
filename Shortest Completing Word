@@ -1,0 +1,43 @@
+class Solution:
+    def shortestCompletingWord(self, licensePlate: str, words: List[str]) -> str:
+        """
+        Idea is to prepare the freq table first of all
+        then for each word
+        we have to check if it is matching freq of licence chars
+            if yes
+                then keep track 
+                
+        tc = O(n + m) n = len of licensePlate m = no of char into words
+        sc = O(n)
+        """
+        import copy
+        import math
+        def prepareMap(licensePlate):
+            ht = {}
+            for ch in licensePlate:
+                currCh = ch.lower()
+                if currCh.isalpha() and currCh not in ht:
+                    ht[currCh] = 0
+                if currCh in ht:
+                    ht[currCh] += 1
+            return ht
+        
+        def currWordMatchWithLicensePlate(currWord,currMap):
+            for ch in currWord:
+                if ch in currMap:
+                    currMap[ch] -= 1
+                    if currMap[ch] == 0:
+                        del currMap[ch]
+            return len(currMap) == 0
+        
+        freqTable = prepareMap(licensePlate)
+        wordsLen = len(words)
+        maxLen = math.inf
+        ans = ""
+        for i in range(wordsLen):
+            currMap = copy.deepcopy(freqTable)
+            if currWordMatchWithLicensePlate(words[i],currMap):
+                if len(words[i]) < maxLen:
+                    maxLen = len(words[i])
+                    ans = words[i]
+        return ans

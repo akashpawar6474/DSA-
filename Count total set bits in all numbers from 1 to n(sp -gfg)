@@ -1,0 +1,98 @@
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def solve(self, A):
+        """
+        do the brute force
+        for every no count bits
+
+        tc = O(A * 32)
+        sc = constant
+
+        1 = 001
+        2 = 010
+        3 = 011
+        -------
+        4 set bits
+
+        even if we reverse the logic 
+        like grazing over bits then over array
+        still it has same tc and it will break out
+        0  0000
+        1  0001
+        2  0010
+        3  0011
+        4  0100
+        5  0101
+        6  0110
+        7  0111
+        8  1000
+        9  1001
+        10 1010
+        11 1011
+
+        Now observe untill 7
+        in 0th bit location 
+            bits are unset and set alternately
+        at 1st bit location
+            2 bits are unset and set alternately
+        at 2nd bit positio
+            4 bits are set and unset alternately
+
+        4 + 4 + 4 = 12 set bits
+
+        untill (2 ^ 3 - 1) = 12 set bits => (2 ^ 2 * 3) set bits
+        x = 3
+
+        now what is remaining?
+        count set bits at 3rd bit position
+        n - 2 ^ x + 1 => 11 - 8 + 1 => 4 se bits
+
+        if we remove that 3rd bit from remaing bits 
+        8 becomes 0
+        9 becomes 1
+        10 becomes 2
+        11 becomes 3 
+
+        no of set bits untill n = 
+        (2 ^ x - 1) * x + (n - (2 ^ x) + 1) + fn(n - (2 ^ x))
+
+        and base case if n == 0:
+        return 0
+
+        Now how to find out largest power in range?
+        take power variable
+        then take a loop untill 1 << power <= n
+            inc power
+        at last return power - 1
+        """
+        def getLargestPowerOfTwoLtN(n):
+            x = 0
+            while (1 << x) <= n:
+                x += 1
+            return x - 1
+        
+        def solve(n):
+            if n == 0:
+                return 0
+            x = getLargestPowerOfTwoLtN(n)
+            firstTerm = 0
+            if x > 0:
+                firstTerm = x * (1 << (x - 1))
+            secondTerm = n - (1 << x) + 1
+            thirdTerm = solve(n - (1 << x))
+            return (firstTerm + secondTerm + thirdTerm) % ((10 ** 9) + 7)
+        
+        return solve(A) % ((10 ** 9) + 7)
+
+    def bruteForce(self,A):
+        def isBitSet(A,i):
+            if A & (1 << i) != 0:
+                return True
+            return False
+        count = 0
+        for i in range(1,A + 1):
+            for j in range(31):
+                if isBitSet(i,j):
+                    count += 1
+        return count % (10 ** 9 + 7)

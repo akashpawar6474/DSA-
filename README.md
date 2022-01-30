@@ -262,7 +262,8 @@ solutions to graze over
 260.  Single Number III(sp - leetcode) => get whole array xor then find out set bit location then divide array based on that location
 261.  Shortest Completing Word => easy simulation based problem
 262.  Count of Smaller Numbers After Self => this is classic merge sort problem on line of reverse pairs problem
-263.  
+263.  Find a number X such that (X XOR A) is minimum and the count of set bits in X and B are equal(sp - gfg) => first graze from MSB to LSB to set bit in ans whenever it is set in A then if B is still gt 0 then graze from LSB to MSB in answer to set bits to get min xor
+264.  
 
 
 

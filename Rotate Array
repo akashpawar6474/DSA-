@@ -57,3 +57,35 @@ class Solution:
         
         for currIdx in range(n):
             nums[currIdx] = ans[currIdx]
+            
+      ---------------------------------------------------------------30 Jan 2022
+class Solution:
+    def rotate(self, nums: List[int], k: int) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        with extraa space we can do that
+        but without extraa space it is much more easier
+        
+         1 2 3 4 5 6 7 | k = 3
+         reverse the whole array
+         7 6 5 4 3 2 1
+         reverse first k ele
+         5 6 7 4 3 2 1
+         reverse ele from n - k to last
+         5 6 7 1 2 3 4
+         
+         tc = O(2n) => O(n)
+         sc = constant
+        """
+        def reverse(arr,start,end):
+            while start < end:
+                arr[start],arr[end] = arr[end],arr[start]
+                start += 1
+                end -= 1
+        
+        n = len(nums)
+        k = k % n
+        reverse(nums,0,n - 1)
+        reverse(nums,0,k - 1)
+        reverse(nums,k,n - 1)
+        

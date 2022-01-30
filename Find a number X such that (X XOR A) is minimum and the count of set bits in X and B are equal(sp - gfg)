@@ -1,0 +1,83 @@
+Problem Description
+
+Given two integers A and B, find a number X such that A xor X is minimum possible, and the number of set bits in X equals B.
+
+
+
+Problem Constraints
+
+0 <= A <= 109
+0 <= B <= 30
+
+
+
+Input Format
+
+First argument contains a single integer A. Second argument contains a single integer B.
+
+
+
+Output Format
+
+Return a single integer X.
+----------------------------------------------------
+class Solution:
+    # @param A : integer
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        how to deal with this problem
+        In first example A = 3 and B = 3
+        so in this case it is having x val is 7
+        which is gt A
+
+        and in second example A = 15 and B = 2
+        so here x val is 12
+
+        so is it like we have to check for smaller Or greater no
+        based on comaparison of a and b?
+        a = 10110 b = 4
+
+        so we will go from 30th bit to 0th bit
+        if bit is set we will set that in answer too
+
+        and if at any point of time b is 0
+            means we got all set bits then return 0
+        here in our x after all iterations
+        we will get 
+        x = 10110 but b is still 1
+        so we will go from 0th bit to last bit
+            and whenever we found bit is unset we will set it 
+            and dec b 
+            once b becomes 0 return ans
+
+        tc = O(1)
+        sc = O(1)
+        """
+        def isBitSet(no,location):
+            if no & (1 << location) != 0:
+                return True
+            return False
+
+        if B == 0:
+            return 0
+
+        ans = 0
+        for i in range(30,-1,-1):
+            if isBitSet(A,i):
+                ans = ans | (1 << i)
+                B -= 1
+                if B == 0:
+                    return ans
+        
+        if B > 0:
+            for i in range(31):
+                if isBitSet(ans,i) == False:
+                    ans = ans | (1 << i)
+                    B -= 1
+                    if B == 0:
+                        return ans
+        return ans
+
+        

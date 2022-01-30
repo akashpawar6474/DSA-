@@ -1,0 +1,116 @@
+Given an integer A.
+Two numbers X and Y are defined as follows:
+
+X is the greatest number smaller than A such that XOR sum of X and A is the same as the sum of X and A.
+Y is the smallest number greater than A such that XOR sum of Y and A is the same as the sum of Y and A.
+Find and return the XOR of X and Y.
+
+NOTE 1: XOR of X and Y is defined as X ^ Y where '^' is the BITWISE XOR operator.
+
+NOTE 2: Your code will be run against a maximum of 100000 Test Cases.
+
+
+
+Problem Constraints
+
+1 <= A <= 109
+
+
+
+Input Format
+
+First and only argument is an integer A.
+
+
+
+Output Format
+
+Return an integer denoting the XOR of X and Y.
+
+
+
+Example Input
+
+A = 5
+
+
+Example Output
+
+10
+
+
+Example Explanation
+
+The value of X will be 2 and the value of Y will be 8. The XOR of 2 and 8 is 10.
+-----------------------------------------------------------------------------
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def solve(self, A):
+        """
+        A = 5
+            101
+            010  == 2
+            ---
+            111
+
+
+            101
+           1000
+           ----
+           1101 
+
+        A= 4
+
+            100
+            011 => 3
+            ----
+            111 => 7
+
+            100
+           1000 => 8
+           ----- 
+           1100 => 12
+
+           7 ^ 12 = 11 
+
+        A = 2
+            10
+            01 = 1
+            --
+            11 => 3
+
+            10
+           100 => 4
+           ---
+           110 => 6
+
+           3 ^ 6 => 5
+
+        to find x basically flip all bits from a
+        means set all bits where A is unset
+
+        and to find y
+        find then most significant set bit
+        and set most significant bit + 1 th bit in y
+        """
+        def isBitSet(n,i):
+            if n & (1 << i) != 0:
+                return True
+            return False
+        def findMostSignificantSetBit(no):
+            mostSignificantSetBit = 31
+            for i in range(30,-1,-1):
+                if no & (1 << i) != 0:
+                    mostSignificantSetBit = i
+                    break
+            return mostSignificantSetBit
+            
+        x = 0
+        mostSignificantSetBit = findMostSignificantSetBit(A)
+        for i in range(mostSignificantSetBit + 1):
+            if isBitSet(A,i) == False:
+                x = x | (1 << i)
+        
+        y = (1 << (mostSignificantSetBit + 1))
+        return x ^ y

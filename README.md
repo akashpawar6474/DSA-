@@ -265,7 +265,8 @@ solutions to graze over
 263.  Find a number X such that (X XOR A) is minimum and the count of set bits in X and B are equal(sp - gfg) => first graze from MSB to LSB to set bit in ans whenever it is set in A then if B is still gt 0 then graze from LSB to MSB in answer to set bits to get min xor
 264.  Strange Equality(sp) => this problem involves flipping active bits then finding most siginificant set bit then set 1 bit after that take little time to come up with this
 265.  Divide Two Integers => it has standard process to do with some math
-266.  
+266.  Count total set bits in all numbers from 1 to n(sp -gfg) => this is classic formula based recursive problem
+267.  
 
 
 

@@ -33,5 +33,47 @@ class Solution:
         
         binaryArr = generateBinary(n)
         ans = binaryToDecimal(binaryArr)
+        
+   -------------------------------------------------------------30 Jan 2022
+   class Solution:
+    def reverseBits(self, n: int) -> int:
+        """
+        tc = O(1)
+        sc = O(1)
+        """
+        res = 0
+        for i in range(32):
+            res = res << 1
+            if (n & 1) != 0:
+                res += 1
+            n = n >> 1
+        return res
+    def bruteForce(self,n):
+        """
+        tc = O(1)
+        sc = O(1)
+        """
+        def getBinary(no):
+            binaryBits = [0] * 32
+            currIdx = 0
+            while no > 0:
+                remainder = no % 2
+                no = no // 2
+                binaryBits[currIdx] = remainder
+                currIdx += 1
+            return binaryBits
+        
+        def getDecimal(binaryBits):
+            currBitLocation = 0
+            n = len(binaryBits)
+            ans = 0
+            for i in range(n - 1,-1,-1):
+                if binaryBits[i] != 0:
+                    ans = ans | (1 << currBitLocation)
+                currBitLocation += 1
+            return ans
+        
+        binaryBits = getBinary(n)
+        return getDecimal(binaryBits)
         return ans
             

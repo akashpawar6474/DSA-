@@ -268,7 +268,8 @@ solutions to graze over
 266.  Count total set bits in all numbers from 1 to n(sp -gfg) => this is classic formula based recursive problem
 267.  Richest Customer Wealth => very simple problem
 268.  Find Mode in Binary Search Tree => inorder trav with some cases to handle
-269.  
+269.  Minimum Absolute Difference in BST=> inorder trav with some little cases to handle as compare to above
+270.  
 
 
 

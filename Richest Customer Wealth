@@ -1,0 +1,15 @@
+class Solution:
+    def maximumWealth(self, accounts: List[List[int]]) -> int:
+        """
+        Idea is to graze over all customers
+        take sum of all its accounts amount
+            and keep track of max
+        tc = O(n * m)
+        sc = O(1)
+        """
+        maxWealth = 0
+        n = len(accounts)
+        for i in range(n):
+            currCustomerWealth = sum(accounts[i])
+            maxWealth = max(currCustomerWealth,maxWealth)
+        return maxWealth

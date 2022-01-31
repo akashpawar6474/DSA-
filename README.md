@@ -267,7 +267,8 @@ solutions to graze over
 265.  Divide Two Integers => it has standard process to do with some math
 266.  Count total set bits in all numbers from 1 to n(sp -gfg) => this is classic formula based recursive problem
 267.  Richest Customer Wealth => very simple problem
-268.  
+268.  Find Mode in Binary Search Tree => inorder trav with some cases to handle
+269.  
 
 
 

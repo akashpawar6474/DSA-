@@ -1,0 +1,43 @@
+import math
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def __init__(self):
+        self.prev = None
+        self.minDiff = math.inf
+        
+    def getMinimumDifference(self, root: Optional[TreeNode]) -> int:
+        """
+        first thing it is bst
+        if we do inorder traversal it will give us sorted array
+        
+        and to get min diff in sorted array just check adjcent ele's
+        
+        Q.can we do this on the fly?
+        yes take prev node 
+        do inorder traversal
+            recur for left 
+            if prev is not none
+                take min diff
+            set prev = root
+            recur for right
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        def inorder(root):
+            if root is None:
+                return
+            inorder(root.left)
+            if self.prev is not None:
+                currDiff = (root.val - self.prev.val)
+                self.minDiff = min(self.minDiff,currDiff)
+            self.prev = root
+            inorder(root.right)
+        inorder(root)
+        return self.minDiff
+        

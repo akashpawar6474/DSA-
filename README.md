@@ -266,7 +266,8 @@ solutions to graze over
 264.  Strange Equality(sp) => this problem involves flipping active bits then finding most siginificant set bit then set 1 bit after that take little time to come up with this
 265.  Divide Two Integers => it has standard process to do with some math
 266.  Count total set bits in all numbers from 1 to n(sp -gfg) => this is classic formula based recursive problem
-267.  
+267.  Richest Customer Wealth => very simple problem
+268.  
 
 
 

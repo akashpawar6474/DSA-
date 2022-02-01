@@ -269,8 +269,7 @@ solutions to graze over
 267.  Richest Customer Wealth => very simple problem
 268.  Find Mode in Binary Search Tree => inorder trav with some cases to handle
 269.  Minimum Absolute Difference in BST=> inorder trav with some little cases to handle as compare to above
-270.  Best Time to Buy and Sell Stock => we have to remember min price so far untill curr idx
-271.  
+270.  
 
 
 

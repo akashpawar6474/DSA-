@@ -56,3 +56,29 @@ class Solution:
             currProfit = currEle - minPriceSoFar
             maxProfitSoFar = max(maxProfitSoFar,currProfit)
         return maxProfitSoFar
+        
+       --------------------------------------------------------------------01 Feb 2022
+       class Solution:
+    def maxProfit(self, prices: List[int]) -> int:
+        """
+        Brute force is to for each price
+        find out previou min price
+        
+        tc = O(n ^ 2)
+        sc = O(1)
+        
+        Another approach is to remember prev min price
+        untill curr idx while grazing over the array
+        
+        tc = O(n)
+        sc = O(1)
+        """
+        import math
+        minPrice = math.inf
+        maxProfit = -math.inf
+        n = len(prices)
+        for i in range(n):
+            minPrice = min(minPrice,prices[i])
+            currProfit = prices[i] - minPrice
+            maxProfit = max(currProfit,maxProfit)
+        return maxProfit

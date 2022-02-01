@@ -1,0 +1,34 @@
+class Solution:
+    def frequencySort(self, s: str) -> str:
+        """
+        Idea is to create freq table
+        and push all pairs into maxHeap
+        
+        then pop untill it is not empty
+        and add to anslist
+        
+        tc = O(n + nlogn + nlogn)
+        sc = O(n)
+        """
+        import heapq
+        freq = {}
+        maxHeap = []
+        ans = []
+        for ch in s:
+            if ch not in freq:
+                freq[ch] = 0
+            freq[ch] += 1
+        
+        for key,val in freq.items():
+            heapq.heappush(maxHeap,(-freq[key],key))
+        
+        while maxHeap:
+            count,char = heapq.heappop(maxHeap)
+            count *= -1
+            while count > 0:
+                ans.append(char)
+                count -= 1
+        return ''.join(ans)
+                
+                
+            

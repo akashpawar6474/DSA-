@@ -269,7 +269,8 @@ solutions to graze over
 267.  Richest Customer Wealth => very simple problem
 268.  Find Mode in Binary Search Tree => inorder trav with some cases to handle
 269.  Minimum Absolute Difference in BST=> inorder trav with some little cases to handle as compare to above
-270.  
+270.  Longest Univalue Path => this is same as diameter of problem taking heights and keep tracks of path -- Google
+271.  
 
 
 

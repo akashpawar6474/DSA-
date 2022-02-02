@@ -1,0 +1,58 @@
+class Solution:
+    def findAnagrams(self, s: str, p: str) -> List[int]:
+        """
+        brute force is generate every substring of second string length
+        and check if it is anagram or not
+        
+        tc = O(n ^ 3)
+        sc = constant
+        
+        Another better approach to calculate freq table first of all
+        then move sliding winodw of len(p) over s
+        if any window has no of matched char == no of keys in ht
+            then add start point as this window has anagram
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        #Step 1
+        def generateFreqTable(p):
+            ht = {}
+            for ch in p:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        
+        freq = generateFreqTable(p)
+        windowStart = 0
+        n = len(s)
+        m = len(p)
+        ans = []
+        matchedCharCount = 0
+        for windowEnd in range(n):
+            #Step 2
+            chAtWindowEnd = s[windowEnd]
+            if chAtWindowEnd in freq:
+                freq[chAtWindowEnd] -= 1
+                if freq[chAtWindowEnd] == 0:
+                    matchedCharCount += 1
+            
+            #Step 3
+            currWindowSize = windowEnd - windowStart + 1
+            if currWindowSize > m:
+                chAtWindowStart = s[windowStart]
+                windowStart += 1
+                if chAtWindowStart in freq:
+                    if freq[chAtWindowStart] == 0:
+                        matchedCharCount -= 1
+                    freq[chAtWindowStart] += 1
+            
+            #Step 4
+            if matchedCharCount == len(freq):
+                ans.append(windowStart)
+        return ans
+                    
+
+                    
+            

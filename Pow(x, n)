@@ -62,3 +62,21 @@ class Solution:
         if n < 0:
             return 1 / ans
         return ans
+        
+   ------------------------------------------------------------------------------02 Feb 2022
+   class Solution:
+    def pow(self, A, B, C):
+        coefficient = A 
+        power = B
+        remainder = C 
+        ans = 1
+        if power == 0:
+            return ans % C
+        while power > 0:
+            if power & 1 == 0:
+                coefficient = (coefficient * coefficient) % remainder
+                power = power // 2
+            else:
+                ans = (ans * coefficient) % remainder
+                power -= 1
+        return ans

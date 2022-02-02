@@ -276,7 +276,8 @@ solutions to graze over
 274.  Check if a number is magic (Recursive sum of digits is 1)(sp - gfg) => very simple problem
 275.  Find Factorial!(sp -gfg) => very simple problem
 276.  Program for Fibonacci numbers(sp - gfg) => very easy problem
-277.  
+277.  Print reverse of a string using recursion(sp - gfg) => very easy problem
+278.  
 
 
 

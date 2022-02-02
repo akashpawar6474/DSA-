@@ -277,7 +277,8 @@ solutions to graze over
 275.  Find Factorial!(sp -gfg) => very simple problem
 276.  Program for Fibonacci numbers(sp - gfg) => very easy problem
 277.  Print reverse of a string using recursion(sp - gfg) => very easy problem
-278.  
+278.  Another sequence problem(sp) => same line on the fibonacci
+279.  
 
 
 

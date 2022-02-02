@@ -1,0 +1,37 @@
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def solve(self, A):
+        """
+        Q.how to check if digit len is 1?
+        if num % 10 is 0 then it is single digit
+
+        Assumption fn will return if it is magic no or not
+        logic fn(A) = fn(digitSum(A))
+            take digit sum 
+            recur for digit sum
+            
+        base case
+        if no is single digit
+            if it is 1 
+                return True
+            else
+                return False
+                
+        """
+        def digitSum(A):
+            if A == 0:
+                return 0
+            return A % 10 + digitSum(A // 10)
+        
+        def isSingleDigit(A):
+            return A // 10 == 0
+        
+        if isSingleDigit(A):
+            if A == 1:
+                return 1
+            else:
+                return 0
+
+        currDigitSum = digitSum(A)
+        return self.solve(currDigitSum)

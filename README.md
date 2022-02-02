@@ -271,7 +271,8 @@ solutions to graze over
 269.  Minimum Absolute Difference in BST=> inorder trav with some little cases to handle as compare to above
 270.  Longest Univalue Path => this is same as diameter of problem taking heights and keep tracks of path -- Google
 271.  Sort Characters By Frequency => maxHeap will solve this problem -- Google
-272.   
+272.  Find All Anagrams in a String => sliding window and freq table problem.. 
+273.  
 
 
 

@@ -272,7 +272,8 @@ solutions to graze over
 270.  Longest Univalue Path => this is same as diameter of problem taking heights and keep tracks of path -- Google
 271.  Sort Characters By Frequency => maxHeap will solve this problem -- Google
 272.  Find All Anagrams in a String => sliding window and freq table problem.. 
-273.  
+273.  Sum of digit of a number using recursion(sp -gfg) => very simple problem
+274.  
 
 
 

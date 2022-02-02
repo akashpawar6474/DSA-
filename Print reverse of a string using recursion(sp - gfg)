@@ -1,0 +1,31 @@
+def main():
+    # YOUR CODE GOES HERE
+    # Please take input and print output to standard input/output (stdin/stdout)
+    # E.g. 'input()/raw_input()' for input & 'print' for output
+    def reverse(s,st,end):
+        """
+        Assumption is we have to return reversed string
+        replace st and end
+        inc start and dec end
+
+        base case if st >= end:
+            return
+    
+        tc = O(n)
+        sc = O(n)
+        """
+        if st >= end:
+            return
+        s[st],s[end] = s[end],s[st]
+        reverse(s,st + 1,end - 1)
+    
+    s = input()
+    sarr = list(s)
+    n = len(s)
+    reverse(sarr,0,n - 1)
+    s = ''.join(sarr)
+    print(s)
+    return 0
+
+if __name__ == '__main__':
+    main()

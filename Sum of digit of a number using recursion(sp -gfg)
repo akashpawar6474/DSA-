@@ -1,0 +1,11 @@
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def solve(self, A):
+        """
+        tc = O(logA base 10)
+        sc = O(logA base 10)
+        """
+        if A == 0:
+            return 0
+        return A % 10 + self.solve(A // 10)

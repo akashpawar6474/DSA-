@@ -274,7 +274,8 @@ solutions to graze over
 272.  Find All Anagrams in a String => sliding window and freq table problem.. 
 273.  Sum of digit of a number using recursion(sp -gfg) => very simple problem
 274.  Check if a number is magic (Recursive sum of digits is 1)(sp - gfg) => very simple problem
-275.  
+275.  Find Factorial!(sp -gfg) => very simple problem
+276.  
 
 
 

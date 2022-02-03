@@ -1,0 +1,54 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def __init__(self):
+        self.dupHeads = {}
+        self.ans = []
+        
+    def findDuplicateSubtrees(self, root: Optional[TreeNode]) -> List[Optional[TreeNode]]:
+        """
+        Idea is very simple
+        where we have to get serialized representation from left and right subtree
+        and now add root to it
+
+        add in map if not present then inc freq
+        if freq = 2 then add root associated to result
+        
+        Assumption => fun will return serialized representation of tree
+        
+        logic is above
+        
+        base case => if root is None return * or #
+        
+        edge cases => [2,1,11,11,null,1]
+        so add , to get different values 
+        """
+        
+        def serialize(root):
+            if root is None:
+                return "%"
+            serializedLeftSubtree = serialize(root.left)
+            serializedRightSubtree = serialize(root.right)
+            
+            #create serialized tree at root
+            serializationAtRoot = str(root.val) + ","+ serializedLeftSubtree +","+ serializedRightSubtree
+            
+            print(serializationAtRoot)
+            #add in map if not present then inc freq
+            if serializationAtRoot not in self.dupHeads:
+                self.dupHeads[serializationAtRoot] = 0
+            self.dupHeads[serializationAtRoot] += 1
+            
+            #if freq =  2 then add root associated to result
+            if self.dupHeads[serializationAtRoot] == 2:
+                self.ans.append(root)
+                
+            return serializationAtRoot
+    
+        
+        serialize(root)
+        return self.ans

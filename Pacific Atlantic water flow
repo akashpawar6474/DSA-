@@ -85,3 +85,52 @@ class Solution:
                 if (i,j) in pacVisited and (i,j) in atlanVisited:
                     res.append((i,j))
         return res
+-------------------------------------------------------------------------------------03 Feb 2022
+class Solution:
+    def pacificAtlantic(self, heights: List[List[int]]) -> List[List[int]]:
+        """
+        Idea is very simple do dfs from all boundaries
+        and at last collect cells which is visited by floods of both oceans
+        
+        tc = O(n * m) in worst case we are visiting each cell two times
+        sc = O(max(n,m)) in worst case for implicit call stack
+        """
+        def findCellsVisitedByBotOceans(n,m,cellsVisitedByPacific,cellsVisitedByAtlantic):
+            ans = []
+            for row in range(n):
+                for col in range(m):
+                    if (row,col) in cellsFloodedByPacific and (row,col) in cellsFloodedByAtlantic:
+                        ans.append([row,col])
+            return ans
+        
+        def getDirections(x,y):
+            return [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]
+        
+        def isValidCell(x,y,heights,visited):
+            return 0 <= x < len(heights) and  0 <= y < len(heights[0]) and (x,y) not in visited
+        
+        def dfs(x,y,heights,visited):
+            visited.add((x,y))
+            dirs = getDirections(x,y)
+            for newx,newy in dirs:
+                if isValidCell(newx,newy,heights,visited) and heights[x][y] <= heights[newx][newy]:
+                    dfs(newx,newy,heights,visited)
+            
+                    
+        n = len(heights)
+        m = len(heights[0])
+        
+        cellsFloodedByPacific = set()
+        cellsFloodedByAtlantic = set()
+        for row in range(n):
+            dfs(row,0,heights,cellsFloodedByPacific)
+            dfs(row,m - 1,heights,cellsFloodedByAtlantic)
+        
+        for col in range(m):
+            dfs(0,col,heights,cellsFloodedByPacific)
+            dfs(n - 1,col,heights,cellsFloodedByAtlantic)
+        
+        return findCellsVisitedByBotOceans(n,m,cellsFloodedByPacific,cellsFloodedByAtlantic)
+
+                    
+

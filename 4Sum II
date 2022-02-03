@@ -1,0 +1,30 @@
+class Solution:
+    def fourSumCount(self, nums1: List[int], nums2: List[int], nums3: List[int], nums4: List[int]) -> int:
+        """
+        brute force is to use 4 or 3 loops to get that tuples
+        but still tc will be ^3 or ^ 4
+        
+        what we can do it to generate all pairs of first two lists
+        then add their sum to freq table
+        
+        and again graze over last two array take sum
+        if negation of sum is present in map then add freq to answer
+        
+        tc = O(2 * n ^ 2) => O(n ^ 2)
+        sc = O(2n) => O(n)
+        """
+        freq = {}
+        ans = 0
+        for a in nums1:
+            for b in nums2:
+                currSum = a + b
+                if currSum not in freq:
+                    freq[currSum] = 0
+                freq[currSum] += 1
+        
+        for c in nums3:
+            for d in nums4:
+                currSum = - c - d
+                if currSum in freq:
+                    ans += freq[currSum]
+        return ans

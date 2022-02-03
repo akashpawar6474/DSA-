@@ -1,0 +1,40 @@
+class Node:
+	def __init__(self,val = 0,left = None,right = None):
+		self.val = val
+		self.left = left
+		self.right = right
+
+
+def preorder(root):
+	if root is None:
+		return
+	print(root.val,end = ' ')
+	preorder(root.left)
+	preorder(root.right)
+	
+def convertToDLL(root,head,prev):
+	if root is None:
+		return head,prev
+	head,prev = convertToDLL(root.left,head,prev)
+	if head is None:
+		head = root
+	if prev is not None:
+		prev.left = root
+		root.right = prev
+	prev = root
+	head,prev = convertToDLL(root.right,head,prev)
+	return head,prev
+
+def printList(head):
+	curr = head
+	while curr:
+		print(curr.val,end = ' ')
+		curr = curr.next
+	
+
+root = Node(5)
+root.left = Node(2)
+root.right = Node(3)
+preorder(root)
+head,prev = convertToDLL(root,None,None)
+printList(head)

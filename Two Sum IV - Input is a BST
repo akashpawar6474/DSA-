@@ -1,0 +1,63 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        """
+        As this is BST
+        so we can use two bst iterators 
+        one from left side and one from right side
+        
+        and use them as two pointers
+        
+        tc = O(n)
+        sc = O(logn) if tree is balanced
+        """
+        def leftIteratorPush(root,leftStack):
+            curr = root
+            while curr:
+                leftStack.append(curr)
+                curr = curr.left
+            
+        def leftIteratorGet(leftStack):
+            top = leftStack.pop()
+            curr = top.right
+            leftIteratorPush(curr,leftStack)
+            return top.val
+            
+        def rightIteratorPush(root,rightStack):
+            curr = root
+            while curr:
+                rightStack.append(curr)
+                curr = curr.right
+            
+        def rightIteratorGet(rightStack):
+            top = rightStack.pop()
+            curr = top.left
+            rightIteratorPush(curr,rightStack)
+            return top.val
+        
+        
+        
+        leftStack = []
+        rightStack = []
+        
+        leftIteratorPush(root,leftStack)
+        rightIteratorPush(root,rightStack)
+        
+        leftVal = leftIteratorGet(leftStack)
+        rightVal = rightIteratorGet(rightStack)
+        
+        while leftVal < rightVal:
+            currSum = leftVal + rightVal
+            if currSum == k:
+                return True
+            if currSum < k:
+                leftVal = leftIteratorGet(leftStack)
+            else:
+                rightVal = rightIteratorGet(rightStack)
+        
+        return False

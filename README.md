@@ -284,6 +284,8 @@ solutions to graze over
 282.  Find Duplicate Subtrees => brainteaser how to check if subtree is equal do serialization with map
 283.  Contiguous Array => very good problem
 284.  Tower of Hanoi(sp - gfg) => best recursive problem
+285.  K-th Symbol in Grammar => very good prblem - Google
+286.  
 
 
 

@@ -1,0 +1,22 @@
+class Solution:
+    # @param A : integer
+    # @return a list of list of integers
+    def towerOfHanoi(self, A):
+        """
+        tc = O(2 ^ n)
+        sc = O(n)
+        """
+        def toh(discs,src,temp,dest,ans):
+            if discs == 0:
+                return
+            toh(discs - 1,src,dest,temp,ans)
+            ans.append([discs,src,dest])
+            toh(discs - 1,temp,src,dest,ans)
+        
+        discs = A 
+        src = 1
+        temp = 2
+        dest = 3
+        ans = []
+        toh(discs,src,temp,dest,ans)
+        return ans

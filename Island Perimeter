@@ -1,0 +1,46 @@
+class Solution:
+    def __init__(self):
+        self.perimeter = 0
+    def islandPerimeter(self, grid: List[List[int]]) -> int:
+        """
+        Brute force is to do dfs from any cell
+        
+        while doing dfs check if any nei is out of bound or it is water cell
+            and inc count there
+            
+        tc = O(n * m) as in worst case we are visiting each cell once
+        sc = O(max(n,m))
+        """
+        def isCellAdjcentToPerimeter(x,y,grid):
+            n = len(grid)
+            m = len(grid[0])
+            return x < 0 or x >= n or y < 0 or y >= m or grid[x][y] == 0
+        
+        def getDirections(x,y):
+            return [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]
+        
+        def isValidCell(x,y,grid,visited):
+            n = len(grid)
+            m = len(grid[0])
+            return 0 <= x < n and 0 <= y < m and (x,y) not in visited and grid[x][y] == 1
+        
+        def dfs(x,y,visited,grid):
+            visited.add((x,y))
+            dirs = getDirections(x,y)
+            for newx,newy in dirs:
+                if isCellAdjcentToPerimeter(newx,newy,grid):
+                    self.perimeter += 1
+                elif isValidCell(newx,newy,grid,visited):
+                    dfs(newx,newy,visited,grid)
+                          
+                
+        n = len(grid)
+        m = len(grid[0])
+        visited = set()
+        for i in range(n):
+            for j in range(m):
+                if grid[i][j] == 1:
+                    dfs(i,j,visited,grid)
+                    return self.perimeter
+                    
+        return self.perimeter

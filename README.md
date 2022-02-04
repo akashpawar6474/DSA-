@@ -286,7 +286,8 @@ solutions to graze over
 284.  Tower of Hanoi(sp - gfg) => best recursive problem
 285.  K-th Symbol in Grammar => very good prblem - Google
 286.  Gray Code => recursion based total algorithmic problem
-287.  
+287.  Island Perimeter => simple dfs problem with some modification
+288.  
 
 
 

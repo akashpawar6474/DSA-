@@ -282,7 +282,8 @@ solutions to graze over
 280.  Convert BST to DLL(LC premium) => using head and prev pointer doing it inplace
 281.  Two Sum IV - Input is a BST => two bst iterators and two pointers problem
 282.  Find Duplicate Subtrees => brainteaser how to check if subtree is equal do serialization with map
-283.  
+283.  Contiguous Array => very good problem
+284.  
 
 
 

@@ -1,0 +1,20 @@
+class Solution:
+    def canVisitAllRooms(self, rooms: List[List[int]]) -> bool:
+        """
+        Idea is very simple we have to start from 0th room
+        then graze over keys in 0th room
+            and do dfs
+        at last if len of visited is equal to no of rooms
+            then return True else false
+        tc = O(n) in worst case we are visiting each room once
+        sc = O(n)
+        """
+        def dfs(currRoom,rooms,visited):
+            visited.add(currRoom)
+            for key in rooms[currRoom]:
+                if key not in visited:
+                    dfs(key,rooms,visited)
+        
+        visited = set()
+        dfs(0,rooms,visited)
+        return len(visited) == len(rooms)

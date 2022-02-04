@@ -285,7 +285,8 @@ solutions to graze over
 283.  Contiguous Array => very good problem
 284.  Tower of Hanoi(sp - gfg) => best recursive problem
 285.  K-th Symbol in Grammar => very good prblem - Google
-286.  
+286.  Gray Code => recursion based total algorithmic problem
+287.  
 
 
 

@@ -1,0 +1,48 @@
+class Solution:
+    def findMaxLength(self, nums: List[int]) -> int:
+        """
+        This is very beautiful problem of map and prefix sum
+        
+        Idea is to take count variable
+        add -1 when we found 0
+        and add 1 when we found 1
+        
+        whenever we will get count variable as 0 Or
+        we will find out that we already visited this count
+        variable means we have subarray with same no of zeroes and one
+        
+        for eg
+        
+            0   1   0   0   1    0   1   1   0   0   0
+            here max subarray with same count is from idx 1 to 8
+            
+            -1  0  -1  -2  -1    -2  -1  0   -1 -2  -3
+            
+        [0,1] is edge case here
+        because if we dont take default entry of count and idx with 0 and -1 
+        then it will return -1
+        
+        take default value of ans is 0
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        sumIdxMap = {}
+        sumIdxMap[0] = -1
+        ans = 0
+        count = 0
+        n = len(nums)
+        for i in range(n):
+            currEle = nums[i]
+            if currEle == 0:
+                count -= 1
+            else:
+                count += 1
+            
+            if count in sumIdxMap:
+                prevIdx = sumIdxMap[count]
+                currSubarrayLen = i - prevIdx
+                ans = max(ans,currSubarrayLen)
+            else:
+                sumIdxMap[count] = i
+        return ans

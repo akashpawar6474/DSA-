@@ -287,7 +287,8 @@ solutions to graze over
 285.  K-th Symbol in Grammar => very good prblem - Google
 286.  Gray Code => recursion based total algorithmic problem
 287.  Island Perimeter => simple dfs problem with some modification -- Google
-288.  
+288.  Keys and Rooms => this is simple dfs problem - Google
+289.  
 
 
 

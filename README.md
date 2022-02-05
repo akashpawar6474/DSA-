@@ -289,7 +289,8 @@ solutions to graze over
 287.  Island Perimeter => simple dfs problem with some modification -- Google
 288.  Keys and Rooms => this is simple dfs problem - Google
 289.  Merge k Sorted Lists => very simple problem with minHeap
-290.  
+290.  Shortest Bridge => very good problem with combination of dfs and multisource bfs
+291.  
 
 
 

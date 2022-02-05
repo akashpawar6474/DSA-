@@ -290,8 +290,9 @@ solutions to graze over
 288.  Keys and Rooms => this is simple dfs problem - Google
 289.  Merge k Sorted Lists => very simple problem with minHeap
 290.  Shortest Bridge => very good problem with combination of dfs and multisource bfs
-291.  Find All Numbers Disappeared in an Array => this is simple cyclic sort problem
-292.  
+291.  Find All Numbers Disappeared in an Array => this is simple cyclic sort problem -- Google
+292.  Split Array into Consecutive Subsequences => this is greedy problem with hashmap at each no check if can be included in prev subsequnce or can we create new subsequence
+293.  
 
 
 

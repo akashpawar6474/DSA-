@@ -1,0 +1,83 @@
+class Solution:
+    def shortestBridge(self, grid: List[List[int]]) -> int:
+        """
+        brute force idea is 
+        to use dfs and bfs combined
+        
+        for first land mass do dfs
+        and mark all its nei water cells as -1
+        
+        2 means it can be adj bridge point to first land mass
+        
+        then do multisource bfs from second land mass
+        and cal no of levels
+        
+        tc = O(n * m) in worst case we are visiting each cell once
+        sc = O(n * m) for dfs call stack or queue
+        """
+        def getDirections(x,y):
+            return [(x + 1,y),(x - 1,y),(x,y + 1),(x,y - 1)]
+    
+        def isValidCell(x,y,grid,visited):
+            return 0 <= x < len(grid) and  0 <= y < len(grid[0]) and (x,y) not in visited and grid[x][y] == 1
+        
+        def isWaterCell(x,y,grid):
+            return 0 <= x < len(grid) and  0 <= y < len(grid[0]) and grid[x][y] == 0
+
+        
+        def dfs(x,y,grid,visited):
+            visited.add((x,y))
+            dirs = getDirections(x,y)
+            for newx,newy in dirs:
+                if isValidCell(newx,newy,grid,visited):
+                    dfs(newx,newy,grid,visited)
+                elif isWaterCell(newx,newy,grid):
+                    grid[newx][newy] = 2
+                
+        
+        def findFirstLandMassAndDoDFS(grid,n,m,visited):
+            for i in range(n):
+                for j in range(m):
+                    if grid[i][j] == 1:
+                        dfs(i,j,grid,visited)
+                        return
+                    
+        def findLandCellFromSecondLandMass(grid,n,m,visited):
+            from collections import deque
+            landCellsOfSecondLandMass = deque()
+            for i in range(n):
+                for j in range(m):
+                    if (i,j) not in visited and grid[i][j] == 1:
+                        landCellsOfSecondLandMass.append((i,j))
+            return landCellsOfSecondLandMass
+        
+        def isAdjcentBridgeCellForFirstLandMass(x,y,grid):
+            return 0 <= x < len(grid) and  0 <= y < len(grid[0]) and grid[x][y] == 2 
+        
+        def bfs(multiSourceQueue,grid):
+            level = 1
+            visitedForBfs = set()
+            while multiSourceQueue:
+                size = len(multiSourceQueue)
+                for i in range(size):
+                    currNodeX,currNodeY = multiSourceQueue.popleft()
+                    if (currNodeX,currNodeY) in visitedForBfs:
+                        continue
+                    visitedForBfs.add((currNodeX,currNodeY))
+                    dirs = getDirections(currNodeX,currNodeY)
+                    for newx,newy in dirs:
+                        if isAdjcentBridgeCellForFirstLandMass(newx,newy,grid):
+                            return level
+                        if 0 <= newx < len(grid) and 0 <= newy <= len(grid[0]) and (newx,newy) not in visitedForBfs:
+                            multiSourceQueue.append((newx,newy))
+                level += 1
+            return level
+            
+            
+        n = len(grid)
+        m = len(grid[0])
+        visited = set()
+        findFirstLandMassAndDoDFS(grid,n,m,visited)
+        multiSourceQueue = findLandCellFromSecondLandMass(grid,n,m,visited)
+        return bfs(multiSourceQueue,grid)
+        

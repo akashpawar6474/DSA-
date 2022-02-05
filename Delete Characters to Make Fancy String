@@ -1,0 +1,59 @@
+class Solution:
+    def makeFancyString(self, s: str) -> str:
+        """
+         "leeetcode"
+         
+         two pointer will work out for us
+         first and second pointer will reside at 0th loc
+         then take a loop until second ptr is less than str len
+            move second ptr untill it is equal to first ptr
+            then cal diff
+            if diff >= 2
+                add it once
+            add it again
+            set first pointer to second ptr location
+        tc = O(n)
+        sc = O(1) if we exclude op string
+        """
+        stLen = len(s)
+        firstPtr = 0
+        secondPtr = 0
+        ans = []
+        while secondPtr < stLen:
+            while secondPtr < stLen and s[firstPtr] == s[secondPtr]:
+                secondPtr += 1
+            diff = secondPtr - firstPtr
+            if diff >= 2:
+                ans.append(s[firstPtr])
+            ans.append(s[firstPtr])
+            firstPtr = secondPtr
+        return ''.join(ans)
+    
+    def firstTry(self,s):
+        """
+        we can use ordered dict
+        and create it using string 
+        
+        then graze over dictionary
+        and prepare output
+        """
+        from collections import OrderedDict
+        def prepareDict(s):
+            freq = OrderedDict()
+            for ch in s:
+                if ch not in freq:
+                    freq[ch] = 0
+                freq[ch] += 1
+            return freq
+        
+        def prepareOutputString(freq):
+            output = []
+            for key,val in freq.items():
+                if val >= 2:
+                    output.append(key)
+                output.append(key)
+            return ''.join(output)
+        
+        freq = prepareDict(s)
+        print(freq)
+        return prepareOutputString(freq)

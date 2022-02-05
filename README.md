@@ -292,7 +292,8 @@ solutions to graze over
 290.  Shortest Bridge => very good problem with combination of dfs and multisource bfs
 291.  Find All Numbers Disappeared in an Array => this is simple cyclic sort problem -- Google
 292.  Split Array into Consecutive Subsequences => this is greedy problem with hashmap at each no check if can be included in prev subsequnce or can we create new subsequence
-293.  
+293.  Delete Characters to Make Fancy String => two pointer will help us out -- Google Microsoft(OA)
+294.  
 
 
 

@@ -1,0 +1,134 @@
+class Solution:
+    def isPossible(self, nums: List[int]) -> bool:
+        """
+        This is greedy problem at each position we have two options
+        either to include currNo to existing subsequence of len 3 and its las no is currNo - 1
+        elif we can start new subsequence from curr no
+            at cost of currNo + 1 and currNo + 2
+        
+        if both of them is not possible then return false
+        [1,2,3,3,4,5]
+        for 0th idx start new subsequcene
+        for 1st idx our cnt of 2 becomes 0 as it is added in above subsequnce
+        for 2nd idx our cnt of 3 is not 1 because other one is added in above subsequnce
+            so start new subsequen here making cnt of 4 and cnt 5 is 0
+        
+        
+        [1,2,3,4,4,5]
+        for 0th idx create new subsequnce
+        for 1st idx our cnt of 2 becomes 0 as it was added above
+        for 2nd idx our cnt of 3 becomes 0 as it was added above
+        for 3rd idx we can add 4 to prev subsequnce where 3 is last ele
+        for 4th idx we dont have any subsequence ending at 3
+        so can we create new NOO
+        so both options is not possible so return False
+        
+        tails map will represent how many subsequence of len 3 are there where last ele is key
+        
+        tc = O(2n) = O(n)
+        sc = O(n)
+        """
+        from collections import Counter
+        freq = Counter(nums)
+        
+        tails = {}
+        for no in nums:
+            if freq[no] != 0:
+                freq[no] -= 1
+                if (no - 1) in tails and tails[no - 1] > 0:
+                    tails[no - 1] -= 1
+                    if no not in tails:
+                        tails[no] = 0
+                    tails[no] += 1
+                elif freq[no + 1] > 0 and freq[no + 2] > 0:
+                    freq[no + 1] -= 1
+                    freq[no + 2] -= 1
+                    if (no + 2) not in tails:
+                        tails[no + 2] = 0
+                    tails[no + 2] += 1
+                else:
+                    return False
+        return True
+        
+
+    def firstTry(self,nums):
+        """
+        we can generate one or move subsequences
+        
+        each subsequece should have len 3 atleast
+        overall due to subsequence word it looks dp problem
+        
+        can we do something different?
+        lets take some examples
+        [1,2,3,3,4,5]
+        s1 = [1,2,3]
+        s2 = [3,4,5]
+        
+        first thing is they are asking if possible OR not?
+        they are not asking to generate subsequence
+        
+        take another example
+        [1,2,3,3,4,4,5,5]
+        s1 = 1,2,3,4,5
+        s2 = 3,4,5
+        
+        Idea is cal freq of each no
+        1 = 1
+        2 = 1
+        3 = 2
+        4 = 2
+        5 = 2
+        
+        find the mid of first and last no
+        and check if it has freq more than 1
+        
+        what if we take something like this
+        [1,2,3,4,4,5,6]
+        s1 = 1,2,3
+        s2 = 4,5,6
+        
+        finding mid based on first and last idx value 
+        cant work so we need to find something different
+        
+        [1,2,3,4,4,5]
+
+        idea is to push first 3 ele into min Heap 
+        and last 3 ele into maxHeap
+        pop 3 times if any no is same
+        and it has freq less than 2 then return false
+        at last return true
+        """
+        import heapq
+        def prepareFreqTable(nums):
+            freq = {}
+            for no in nums:
+                if no not in freq:
+                    freq[no] = 0
+                freq[no] += 1
+            return freq
+        
+        minHeap = []
+        maxHeap = []
+        freq = prepareFreqTable(nums)
+        
+        s = set(nums)
+        numsWithoutDups = list(s)
+        n = len(numsWithoutDups)
+        if n < 3:
+            return False
+        for i in range(3):
+            heapq.heappush(minHeap,numsWithoutDups[i])
+        
+        for i in range(n - 1,n - 4,-1):
+            heapq.heappush(maxHeap,-numsWithoutDups[i])
+        
+        print(str(minHeap)+" "+str(maxHeap))
+        loopRun = 3
+        while loopRun > 0:
+            minNo = heapq.heappop(minHeap)
+            maxNo = -heapq.heappop(maxHeap)
+            if minNo == maxNo:
+                if freq[minNo] < 2:
+                    return False
+            loopRun -= 1
+        return True

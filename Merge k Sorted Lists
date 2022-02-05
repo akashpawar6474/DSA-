@@ -1,0 +1,47 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def mergeKLists(self, lists: List[Optional[ListNode]]) -> Optional[ListNode]:
+        """
+        idea is very simple push all the heads to minHeap
+        take a loop untill minHeap is not empty
+            pop the top min node
+            add it to new list
+            if it has next element
+                then push that also into minHeap
+        
+        tc = O(klogk + nlogk) k = no of lists n = no of nodes in all lists
+        sc = O(k) for minHeap
+        """
+        import heapq
+        def pushAllHeads(minHeap,lists):
+            for head in lists:
+                if head is not None:
+                    heapq.heappush(minHeap,(head.val,head))
+                
+        if lists is None:
+            return []
+        
+        ListNode.__eq__ = lambda self,other : self.val == other.val
+        ListNode.__lt__ = lambda self,other : self.val < other.val
+        
+        minHeap = []
+        pushAllHeads(minHeap,lists)
+        ansHead = None
+        ansTail = None
+        
+        while minHeap:
+            nodeVal,node = heapq.heappop(minHeap)
+            if ansHead is None:
+                ansHead = node
+            else:
+                ansTail.next = node
+            ansTail = node
+            if node.next is not None:
+                heapq.heappush(minHeap,(node.next.val,node.next))
+        
+        return ansHead
+            

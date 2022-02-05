@@ -288,7 +288,8 @@ solutions to graze over
 286.  Gray Code => recursion based total algorithmic problem
 287.  Island Perimeter => simple dfs problem with some modification -- Google
 288.  Keys and Rooms => this is simple dfs problem - Google
-289.  
+289.  Merge k Sorted Lists => very simple problem with minHeap
+290.  
 
 
 

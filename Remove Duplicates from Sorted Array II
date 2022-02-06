@@ -15,3 +15,36 @@ class Solution:
                 nums[uniquePtr] = currEle
                 uniquePtr += 1
         return uniquePtr
+        
+    ------------------------------------------------------------------06 Feb 2022
+    class Solution:
+    def removeDuplicates(self, nums: List[int]) -> int:
+        """
+        [1,1,1,2,2,3]
+        unique ptr at 2nd idx
+        then graze from 2nd idx
+            if no at currIdx != no at uniquePtr - 2
+                then add currNo at uniquePtr
+                inc uniqueptr
+        [1,1,1,2,2,3]
+             ^
+               ^
+        [1,1,2,2,2,3]
+               up
+        [1,1,2,2,2,3]
+                 up
+        [1,1,2,2,3,3]
+                   up
+        clarifying question will be what if we have only two elements?
+        tc = O(n)
+        sc = O(1)
+        """
+        uniquePtr = 2
+        numsLen = len(nums)
+        for currIdx in range(2,numsLen):
+            currEle = nums[currIdx]
+            recentUniqueEle = nums[uniquePtr - 2]
+            if currEle != recentUniqueEle:
+                nums[uniquePtr] = currEle
+                uniquePtr += 1
+        return uniquePtr

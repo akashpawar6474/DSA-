@@ -53,6 +53,58 @@ class KthLargest:
         return self.minHeap[0]
 
 
-# Your KthLargest object will be instantiated and called as such:
-# obj = KthLargest(k, nums)
-# param_1 = obj.add(val)
+--------------------------------------------------------------------06 Feb 2022
+import heapq
+class KthLargest: 
+    def __init__(self, k: int, nums: List[int]):
+        """
+        [3, [4, 5, 8, 2]]
+        k == 3
+        if we sort the array 2,4,5,8
+        kth largest ele now is 4
+        
+        add(3) = [2,3,4,5,8] 3rd largest is still 4
+        add(5) = [2,3,4,5,5,8] now 3rd largest is 5 ==> indicating towards minHeap
+        add(10) = [2,3,4,5,5,8,10] still 3rd largest is 5 ==> fix it is minHeap
+        add(9) =  [2,3,4,5,5,8,9,10] now 3rd largest is 8 => pop the top if it is less than coming ele
+        add(4) = [2,3,4,4,5,5,8,9,10] now 3rd largest ele is 8 => no need to pop or top
+        
+        need to confirm do we need to store all ele is it req?
+        if not then we can have minHeap of k elements
+        
+        Idea is create minHeap
+        then push first k ele in minHeap
+        then for remaining ele if curr ele gt top then pop and push
+        else ignore
+        
+        tc = O(nlogk)
+        """
+        self.minHeap = []
+        self.k = k
+        numsLen = len(nums)
+        
+        for i in range(numsLen):
+            if not self.minHeap or i < k:
+                heapq.heappush(self.minHeap,nums[i])
+            elif self.minHeap[0] < nums[i]:
+                heapq.heappop(self.minHeap)
+                heapq.heappush(self.minHeap,nums[i])
+            
+
+    def add(self, val: int) -> int:
+        """
+        Edge case if heap is empty OR len of minHeap less than k
+        
+        While adding a ele
+        check if it is gt top ele if yes
+            then pop the top ele
+            then push curr ele
+        return top ele
+        tc = O(logk)
+        """
+        if not self.minHeap or len(self.minHeap) < self.k:
+            heapq.heappush(self.minHeap,val)
+        elif val > self.minHeap[0]:
+            heapq.heappop(self.minHeap)
+            heapq.heappush(self.minHeap,val)
+        return self.minHeap[0]

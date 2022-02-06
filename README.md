@@ -293,11 +293,11 @@ solutions to graze over
 291.  Find All Numbers Disappeared in an Array => this is simple cyclic sort problem -- Google
 292.  Split Array into Consecutive Subsequences => this is greedy problem with hashmap at each no check if can be included in prev subsequnce or can we create new subsequence
 293.  Delete Characters to Make Fancy String => two pointer will help us out -- Google Microsoft(OA)
-294.  Encode and Decode TinyURL => very simple problem using map
-295.  Largest Divisible Subset => this is dp problem cant able to solved using topdown but bottomup is be easy
-296.  Guess Number Higher or Lower => simple bs problem
-297.  Heaters => binary search problem with little modifications
-298.  
+294.  Encode and Decode TinyURL => very simple problem using map --Google
+295.  Largest Divisible Subset => this is dp problem cant able to solved using topdown but bottomup is be easy -- Google
+296.  Guess Number Higher or Lower => simple bs problem -- Google
+297.  Heaters => binary search problem with little modifications --Google
+298.  Find K Closest Elements => binary search problem with little observations -- Google
 
 
 

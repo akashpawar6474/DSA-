@@ -295,7 +295,8 @@ solutions to graze over
 293.  Delete Characters to Make Fancy String => two pointer will help us out -- Google Microsoft(OA)
 294.  Encode and Decode TinyURL => very simple problem using map
 295.  Largest Divisible Subset => this is dp problem cant able to solved using topdown but bottomup is be easy
-296.  
+296.  Guess Number Higher or Lower => simple bs problem
+297.  
 
 
 

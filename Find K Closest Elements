@@ -1,0 +1,39 @@
+class Solution:
+    def findClosestElements(self, arr: List[int], k: int, x: int) -> List[int]:
+        """
+        first of all we need to make some observations
+        
+        consider this range
+        left .......... mid ........ mid + k ....... right
+        
+        our task is to find out starting idx of output range
+        
+        if x <= arr[mid]
+            means means our end of op array cant lie beyound mid + k right?
+            so deduct right untill (mid + k)
+        if x >= arr[mid + k]
+            means our start can lie before mid
+            so update left to mid 
+        now as we know it lies bw mid and mid + k
+        so our task is
+        case 1: x - A[mid] < A[mid + k] - x, need to move window go left
+        -------x----A[mid]-----------------A[mid + k]----------
+
+        case 2: x - A[mid] < A[mid + k] - x, need to move window go left again
+        -------A[mid]----x-----------------A[mid + k]----------
+
+        case 3: x - A[mid] > A[mid + k] - x, need to move window go right
+        -------A[mid]------------------x---A[mid + k]----------
+
+        case 4: x - A[mid] > A[mid + k] - x, need to move window go right
+        -------A[mid]---------------------A[mid + k]----x------
+        """
+        left = 0
+        right = len(arr) - k
+        while left < right:
+            mid = (left + right) // 2
+            if x - arr[mid] > arr[mid + k] - x:
+                left = mid + 1
+            else:
+                right = mid    
+        return arr[left:left + k]

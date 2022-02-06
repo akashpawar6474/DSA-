@@ -1,0 +1,34 @@
+import math
+class Solution:
+    def findRadius(self, houses: List[int], heaters: List[int]) -> int:
+        """
+        Idea is for each house find out heater near by house
+        and take radius and keep track of max radius
+        
+        tc = O(mlogm + nlogm) => n => len of houses m = len of heaters
+        sc = O(m)
+        """
+        def findRadius(houseNo,heaters):
+            radiusWithLeftHeater = math.inf
+            radiusWithRightHeater = math.inf
+            start = 0
+            end = len(heaters) - 1
+            while start <= end:
+                mid = (start + end) // 2
+                heaterAtMid = heaters[mid]
+                if houseNo == heaterAtMid:
+                    return 0
+                if houseNo < heaterAtMid:
+                    radiusWithRightHeater = heaterAtMid - houseNo
+                    end = mid - 1
+                else:
+                    radiusWithLeftHeater = houseNo - heaterAtMid
+                    start = mid + 1
+            return min(radiusWithRightHeater,radiusWithLeftHeater)
+        
+        minRadius = -math.inf
+        heaters.sort()
+        for houseNo in houses:
+            radiusWithNearByHeater = findRadius(houseNo,heaters)
+            minRadius = max(minRadius,radiusWithNearByHeater)
+        return minRadius

@@ -294,8 +294,7 @@ solutions to graze over
 292.  Split Array into Consecutive Subsequences => this is greedy problem with hashmap at each no check if can be included in prev subsequnce or can we create new subsequence
 293.  Delete Characters to Make Fancy String => two pointer will help us out -- Google Microsoft(OA)
 294.  Encode and Decode TinyURL => very simple problem using map
-295.  Remove Duplicates from Sorted Array II => simulation based array problem with one pointer
-296.  
+295.  
 
 
 

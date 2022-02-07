@@ -298,6 +298,8 @@ solutions to graze over
 296.  Guess Number Higher or Lower => simple bs problem -- Google
 297.  Heaters => binary search problem with little modifications --Google
 298.  Find K Closest Elements => binary search problem with little observations -- Google
+299.  Word Break => brute force solution and dp map will work out --Google
+300.  
 
 
 

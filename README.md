@@ -299,7 +299,8 @@ solutions to graze over
 297.  Heaters => binary search problem with little modifications --Google
 298.  Find K Closest Elements => binary search problem with little observations -- Google
 299.  Word Break => brute force solution and dp map will work out --Google
-300.  
+300.  Decode String => this is classic stack problem with little thought process --Google
+301.  
 
 
 

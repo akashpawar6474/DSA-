@@ -300,7 +300,8 @@ solutions to graze over
 298.  Find K Closest Elements => binary search problem with little observations -- Google
 299.  Word Break => brute force solution and dp map will work out --Google
 300.  Decode String => this is classic stack problem with little thought process --Google
-301.  
+301.  Toeplitz Matrix => this is simulation based problem -- Google
+302.  
 
 
 

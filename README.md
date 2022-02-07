@@ -301,7 +301,8 @@ solutions to graze over
 299.  Word Break => brute force solution and dp map will work out --Google
 300.  Decode String => this is classic stack problem with little thought process --Google
 301.  Toeplitz Matrix => this is simulation based problem -- Google
-302.  
+302.  Count All Valid Pickup and Delivery Options => this is advanced permutations and combinations problem --Google
+303.  
 
 
 

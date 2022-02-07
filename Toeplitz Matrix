@@ -1,0 +1,52 @@
+class Solution:
+    def isToeplitzMatrix(self, matrix: List[List[int]]) -> bool:
+        """
+        How to graze matrix diagonally
+        0,0 0,1 0,2 0,3
+        1,0 1,1 1,2 1,3
+        2,0 2,1 2,2 2,3
+        
+        in first diagonal 2,0
+        in second diagonal 1,0 2,1
+        in third diagonal 0,0 1,1 2,2
+        in fourth diagonal 0,1 1,2 2,3
+        in fifth diagona 0,2 1,3
+        if sixth diagonal 0,3
+        
+        in m * n matrix we have 12 // 2 = 6 diagonals
+        
+        4 * 5 = 20 // 2 nope we cant determine no of diagonals like this
+        is it like grazing matrix in two parts
+        but how???
+        
+        can we do like graze over row
+        and for each col 
+            inc row and col by 1 
+            untill it is in bound
+                if it is diff than prev value then break out OR return False
+        then graze row from 1st idx and follow the same process
+        
+        in worst case we are visiting each cell at once
+        """
+        rows = len(matrix)
+        cols = len(matrix[0])
+        
+        for col in range(cols):
+            currRow = 1
+            currCol = col + 1
+            while currRow < rows and currCol < cols:
+                if matrix[currRow][currCol] != matrix[currRow - 1][currCol - 1]:
+                    return False
+                currRow += 1
+                currCol += 1
+        
+        for row in range(1,rows):
+            currRow = row + 1
+            currCol = 1
+            while currRow < rows and currCol < cols:
+                if matrix[currRow][currCol] != matrix[currRow - 1][currCol - 1]:
+                    return False
+                currRow += 1
+                currCol += 1
+        return True
+        

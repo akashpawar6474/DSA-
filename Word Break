@@ -1,0 +1,93 @@
+class Solution:
+    def wordBreak(self, s: str, wordDict: List[str]) -> bool:
+        """
+        "aaaaaaa"
+        ["aaaa","aaa"]
+        
+        Assumption => fn will return if we can break word into multiple set of words
+        
+        Main Logic 
+        Brute force idea is for each partition point
+        a|a|a|a|a|a|a
+        check if prefix is present if yes then recur for remaining string
+            if remaing string is also present then return True
+        else return False
+        
+        base case if we reached end then just return True as we matched everything
+        """
+        def topDown(s,dp,wordSet):
+            if s == "":
+                return True
+            if s in dp:
+                return dp[s]
+            n = len(s)
+            for i in range(n):
+                prefix = s[:i + 1]
+                suffix = s[i + 1:]
+                if prefix in wordSet and topDown(suffix,dp,wordSet):
+                    dp[prefix] = True
+                    return True
+            dp[s] = False
+            return False
+        
+        wordSet = set(wordDict)
+        dp = {}
+        return topDown(s,dp,wordSet)
+    def slidingWindow(self,s,wordDict):
+        """
+        s = "leetcode", wordDict = ["leet","code"]
+        
+        so above word can be made using words in dictionary
+        
+        s = "applepenapple", wordDict = ["apple","pen"]
+        
+        yes above word can be made using words in dictionary
+        
+        what is naive way to approach this problem?
+        is any ds is usefull here?
+        is any counting algo using hashmap works here?
+        
+        
+        brute force way is to graze over words each time
+        and check if that word is present in strign or not
+        
+        but if we go ahead with one word there might be answer with another word
+        
+        is it unbounded knapsack problem where we can take each word
+        multiple no of times
+        
+        calculating freq of string then all words doesnt work out
+        in follwing case like s = 'aaaaa' and wordDict = ['aaaaab','cc']
+        it should return False but freq logic will return true
+        
+        two pointers will not work here maybe
+        
+        I think sliding window can work here
+        we will move windowend 
+        if curr string in window present in word dict
+        then update windowstart to windowend + 1
+        at last if windowend  == windowstart thenr return true
+        
+        tc = O(n + n) + n for slicing string means each char sliced once and visited once at worst case
+        sc = O(m) => no of char in word dict
+        
+        Unfortunately this sliding window logic will break at this edge case
+        "aaaaaaa"
+        ["aaaa","aaa"]
+        
+        it will update windowStart when it found 3 a's
+        but our problem expect 4 a's to match at first
+        
+        otherwise this will word
+        """
+        wordsSet = set()
+        for word in wordDict:
+            wordsSet.add(word)
+        
+        windowStart = 0
+        n = len(s)
+        for windowEnd in range(n):
+            currWindowStr = s[windowStart:windowEnd + 1]
+            if currWindowStr in wordsSet:
+                windowStart = windowEnd + 1
+        return windowStart - 1 == windowEnd

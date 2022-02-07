@@ -1,0 +1,116 @@
+class Solution:
+    def decodeString(self, s: str) -> str:
+        """
+        Idea is using stack retrieve prev adjcent no and prev string
+        then attach curr string for prev adjcent no of times to prev string
+        
+        tc = O(n)
+        sc = O(n)
+        """
+        currString = ""
+        prevAdjcentNo = 0
+        decodedString = ""
+        st = []
+        
+        for ch in s:
+            if ch.isalpha():
+                currString += ch
+            elif ch.isdigit():
+                prevAdjcentNo = prevAdjcentNo * 10 + int(ch)
+            elif ch == '[':
+                st.append(prevAdjcentNo)
+                st.append(currString)
+                currString = ""
+                prevAdjcentNo = 0
+            elif ch == ']':
+                prevString = st.pop()
+                adjNo = st.pop()
+                currString = prevString + adjNo * currString
+        return currString
+    def firstTry(self,s):
+        """
+        lets take some examples to get more insights
+        "3[a]2[bc]"
+           ||  ||
+          aaa  bcbc
+          
+         "3[a2[c]]"
+            | ||
+          3[a cc]
+          accaccacc 3 times acc
+          
+          
+         "2[abc]3[cd]ef"
+            ||    ||  ||
+        abcabc  cdcd  ef
+          
+        it looks like we need to find out innermost square bracket
+        then go our layer by layer
+        
+        but how to get that innermost brace?
+        we have to return op string so we need to prepare it anyways
+        
+        is stack is useful?
+        if ch add to answer
+        if no then we have to find its associated closing bracket
+            and recursively process inner string
+            and add result of inner string multile times as no
+        
+        Assumption => given a alphanumeric string it returns decoded string
+        
+        Main logic => graze over string if not no
+                      then add to res string
+                      if no
+                            then find its inner string pass recur it
+                            add res of inner string to no times to curr res string
+        
+        base case if there is no char
+            return ""
+            
+        
+        Another stone to break is How to get inner string?
+        "3[a2[c]]"
+        
+        take counter as 1
+        and if it is opening bracket add 1
+        else add -1
+        whenever we get counter == 0
+            return that idx
+            
+        This logic will work for 0 to 9 integers only
+        will break our for other edgecases like 100[Leetcode]
+        
+        """
+        def getStringInBrackets(currIdx,s):
+            counter = 1
+            endingPtr = currIdx + 2
+            while counter != 0:
+                if s[endingPtr] == '[':
+                    counter += 1
+                elif s[endingPtr] == ']':
+                    counter -= 1
+                endingPtr += 1
+            return s[currIdx + 2:endingPtr - 1],endingPtr
+        
+        def recursiveApproach(s):
+            if s == "":
+                return ""
+            stLen = len(s)
+            decodedSt = ""
+            currIdx = 0
+            while currIdx < stLen:
+                if not s[currIdx].isnumeric():
+                    decodedSt += s[currIdx]
+                    currIdx += 1
+                else:
+                    stInCurrPairOfBrackets,nextCurrIdx = getStringInBrackets(currIdx,s)
+                    decodedStringForInnerString = recursiveApproach(stInCurrPairOfBrackets)
+                    multiple = int(s[currIdx])
+                    for i in range(multiple):
+                        decodedSt += decodedStringForInnerString
+                    currIdx = nextCurrIdx
+            return decodedSt
+        
+        return recursiveApproach(s)
+                    
+                

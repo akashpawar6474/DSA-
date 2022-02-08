@@ -303,7 +303,8 @@ solutions to graze over
 301.  Toeplitz Matrix => this is simulation based problem -- Google
 302.  Count All Valid Pickup and Delivery Options => this is advanced permutations and combinations problem --Google
 303.  Add Digits => simple simulation based problem
-304.  
+304.  First Bad Version => binary search problem
+305.  
 
 
 

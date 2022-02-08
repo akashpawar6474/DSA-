@@ -1,5 +1,14 @@
-
+class Solution:
     def addDigits(self, num: int) -> int:
+        """
+        this problem can be solved using digit root therom
+        take a look on wiki
+        
+        """
+        if num == 0:
+            return 0
+        return 1 + (num - 1) % 9
+    def bruteForce(self,num):
         """
         brute force is untill no is < 10 
         add it continiously

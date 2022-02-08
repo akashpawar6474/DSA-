@@ -1,0 +1,143 @@
+class Solution:
+    def numberToWords(self, num: int) -> str:
+        """
+        we will definitely need 3 maps
+        first is for 1 to 9 for unit integers
+        
+        then 2 to 9 for ten digit pronounciation
+        
+        10 to 19 as ten to nineteen
+        
+        base case if it is less than 10 then return directly
+        if second last ele is 1 then process last two no at once
+            and deduct the no
+        else process last digit
+            deduct
+            process second last
+                use second map add
+
+        proess 3rd last digit 
+        and append hundered to it
+        
+        345   =>  34    => 3
+        Five     Fourty   Hundered Three
+        
+        610   => 6
+        Ten     Hundered Ten
+        
+        999 => 99    => 9
+        Nine  Ninety Hundered Nine
+        
+        For first iteration add Nothing
+        for second iteration add Thousand
+        for third Iteration add Million
+        
+        Now how to implement the above logic for 3 no?
+        take the no
+        
+        And take position counter initially 0
+        if it is 1 then add Thousand
+        if it is 2 then add Million
+        if it is 3 then add Billion
+        while No > 0:
+            take last 3 digits
+            and update no
+            if counter 1 
+                then add Thousand to ansString
+            if counter 2 
+                then add Million to string
+            if counter 3
+                then add Billion
+                if secondLast ele is present and it is 1
+                    process it and deduct
+                else
+                    if last digit is not 0 and it is inside 1 to 9 deduct last digit
+                    if second last digit is present process second last digit
+                if 3rd digit is present 
+                    add Hundered to string and process it
+                    
+        100000
+            
+        """
+        def prepareUnitDigitMap(unitDigitMap):
+            unitDigitMap[0] = "Zero"
+            unitDigitMap[1] = "One"
+            unitDigitMap[2] = "Two"
+            unitDigitMap[3] = "Three"
+            unitDigitMap[4] = "Four"
+            unitDigitMap[5] = "Five"
+            unitDigitMap[6] = "Six"
+            unitDigitMap[7] = "Seven"
+            unitDigitMap[8] = "Eight"
+            unitDigitMap[9] = "Nine"
+            
+        def preparePowerTenMap(powerTenMap):
+            powerTenMap[1] = "Ten"
+            powerTenMap[2] = "Twenty"
+            powerTenMap[3] = "Thirty"
+            powerTenMap[4] = "Forty"
+            powerTenMap[5] = "Fifty"
+            powerTenMap[6] = "Sixty"
+            powerTenMap[7] = "Seventy"
+            powerTenMap[8] = "Eighty"
+            powerTenMap[9] = "Ninety"
+        
+        def prepareElevenToNineTeenMap(elevenToNineTeenMap):
+            elevenToNineTeenMap[10] = "Ten"
+            elevenToNineTeenMap[11] = "Eleven"
+            elevenToNineTeenMap[12] = "Twelve"
+            elevenToNineTeenMap[13] = "Thirteen"
+            elevenToNineTeenMap[14] = "Fourteen"
+            elevenToNineTeenMap[15] = "Fifteen"
+            elevenToNineTeenMap[16] = "Sixteen"
+            elevenToNineTeenMap[17] = "Seventeen"
+            elevenToNineTeenMap[18] = "Eighteen"
+            elevenToNineTeenMap[19] = "Nineteen"
+            
+        def preparePositionCounter(positionCounter):
+            positionCounter[1] = "Thousand"
+            positionCounter[2] = "Million"
+            positionCounter[3] = "Billion"
+        
+        from collections import deque
+
+        unitDigitMap = {}
+        powerTenMap = {}
+        elevenToNineTeenMap = {}
+        positionCounter = {}
+        prepareUnitDigitMap(unitDigitMap)
+        if num < 10:
+            return unitDigitMap[num]
+        preparePowerTenMap(powerTenMap)
+        prepareElevenToNineTeenMap(elevenToNineTeenMap)
+        preparePositionCounter(positionCounter)
+        pronounciation = deque()
+        counter = 0
+        
+        while num > 0:
+            lastThreeDigits = num % 1000
+            if lastThreeDigits > 0 and counter in positionCounter:
+                pronounciation.appendleft(positionCounter[counter])
+            if 10 <= lastThreeDigits % 100 <= 19:
+                pronounciation.appendleft(elevenToNineTeenMap[lastThreeDigits % 100])
+                lastThreeDigits = lastThreeDigits // 100
+            else:
+                if lastThreeDigits > 0 and 1 <= lastThreeDigits % 10 <= 9:
+                    lastDigit = lastThreeDigits % 10
+                    pronounciation.appendleft(unitDigitMap[lastDigit])
+                lastThreeDigits = lastThreeDigits // 10
+                if lastThreeDigits > 0 and 1 <= lastThreeDigits % 10 <= 9:
+                    secondLastDigit = lastThreeDigits % 10
+                    pronounciation.appendleft(powerTenMap[secondLastDigit])
+                lastThreeDigits = lastThreeDigits // 10
+            if lastThreeDigits > 0 and 1 <= lastThreeDigits % 10 <= 9:
+                pronounciation.appendleft("Hundred")
+                thirdLastDigit = lastThreeDigits % 10
+                pronounciation.appendleft(unitDigitMap[thirdLastDigit])
+            num = num // 1000
+            counter += 1        
+        pronounciation = list(pronounciation)
+        return ' '.join(pronounciation)
+
+        
+        

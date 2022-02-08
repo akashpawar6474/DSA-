@@ -1,0 +1,28 @@
+
+    def addDigits(self, num: int) -> int:
+        """
+        brute force is untill no is < 10 
+        add it continiously
+        
+        In worst case for 90 9's also 
+        digit sum will be 810
+        
+        so at max we will need 2 recursive calls for main function
+        and for digit sum fn it will have log(num base 10)
+        which will be definiely less than 9 steps in this case
+        """
+        def isOneDigit(num):
+            return num < 10
+        
+        def digitSum(num):
+            if num == 0:
+                return 0
+            return (num % 10) + digitSum(num // 10)
+        
+        def addDigitsCore(num):
+            if isOneDigit(num):
+                return num
+            currDigitSum = digitSum(num)
+            return addDigitsCore(currDigitSum)
+        
+        return addDigitsCore(num)

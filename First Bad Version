@@ -30,4 +30,29 @@ class Solution:
                 end = mid
         return start
                 
+ --------------------------------------------------------08 Feb 2022 
+ # The isBadVersion API is already defined for you.
+# def isBadVersion(version: int) -> bool:
+
+class Solution:
+    def firstBadVersion(self, n: int) -> int:
+        """
+        This is binary search problem
+        tc = O(logn)
+        sc = O(1)
+        1 5 mid = 3
+        4 5 mid 4
+        4 4 
+        """
+        start = 1
+        end = n
+        while start < end:
+            mid = (start + end) // 2
+            if not isBadVersion(mid):
+                start = mid + 1
+            else:
+                end = mid
+        return start
+        
+            
         

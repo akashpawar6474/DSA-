@@ -302,7 +302,8 @@ solutions to graze over
 300.  Decode String => this is classic stack problem with little thought process --Google
 301.  Toeplitz Matrix => this is simulation based problem -- Google
 302.  Count All Valid Pickup and Delivery Options => this is advanced permutations and combinations problem --Google
-303.  
+303.  Add Digits => simple simulation based problem
+304.  
 
 
 

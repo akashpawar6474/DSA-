@@ -1,0 +1,98 @@
+class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        """
+        Idea is to create freq table
+        
+        then graze over unique no which is keys in freq table
+        if k == 0
+            then we can say only duplicate ele can make pairs
+            eg. 1,1 
+            if any no freq > 1 and k == 0
+                inc count by 1
+            
+            a - b  = k
+            3 - 1 = 2
+            a = b + k
+            3 = 1 + 2
+            elif curr unique ele + k in map
+            means we found one more pair
+                inc the count
+        tc = O(2n) = O(n)
+        sc = O(n)
+        """
+        def prepareFreqTable(nums):
+            freq = {}
+            for no in nums:
+                if no not in freq:
+                    freq[no] = 0
+                freq[no] += 1
+            return freq
+        
+        freq = prepareFreqTable(nums)
+        pairs = 0
+        
+        for key,val in freq.items():
+            if k == 0 and val > 1:
+                pairs += 1
+            elif k > 0 and key + k in freq:
+                pairs += 1
+                
+        return pairs
+                
+            
+    def firstTry(self,nums):
+        """
+        Brute force is to generate all pairs and count
+        
+        
+        [3,1,4,1,5]
+        if we sort the array
+        
+        1 1 3 4 5
+        1 2 5 9 14   prefix sum doesnt make sense
+        
+        1 = 2
+        
+        |a - b| = k
+        a = k + b
+        a - k = b
+        
+        14 13 12 9 5 suffix sum nope doesnt makes sense 
+        
+        if they asked find one pair we would have easily done that
+        stack,queue,heap,bit manipulations
+        
+        
+        [1,2,3,4,5] k = 1
+        
+        1  3 6 10 15
+        1 = 1
+        2 = 1  count = 1
+        3 = 1  count = 2
+        4 = 1  count = 3
+        5 = 1  count = 4
+        
+        [1,3,1,5,4] k = 0
+        
+        1  4
+        
+        1 = 1
+        
+        It looks like take each ele
+        if currEle - k in map
+            count += ht[currEle - k]
+        ht[currEle] += 1
+        
+        is it like two sum?
+        """
+        ht = {}
+        n = len(nums)
+        count = 0
+        for i in range(n):
+            if abs(nums[i] - k) in ht:
+                count += ht[abs(nums[i] - k)]
+            if abs(nums[i]) not in ht:
+                ht[abs(nums[i])] = 0
+            ht[abs(nums[i])] += 1
+        return count
+                

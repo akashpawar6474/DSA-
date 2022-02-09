@@ -309,7 +309,8 @@ solutions to graze over
 307.  Find the maximum possible value of a[i] % a[j] over all pairs of i and j(sp - gfg) => maxMod problem finding largest and second largest and return mod
 308.  Check if array elements are consecutive(sp - gfg) => this is classic xor problem
 309.  Chocolate Distribution Problem(sp - gfg) => very simple sorting problem
-310.  
+310.  K-diff Pairs in an Array => this is haskmap problem
+311.  
 
 
 

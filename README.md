@@ -304,7 +304,8 @@ solutions to graze over
 302.  Count All Valid Pickup and Delivery Options => this is advanced permutations and combinations problem --Google
 303.  Add Digits => simple simulation based problem
 304.  Integer to English Words => only implementation based problem -- Google
-305.  
+305.  Merge two sorted arrays(sp - gfg) => simple two pointer problem
+306.  
 
 
 

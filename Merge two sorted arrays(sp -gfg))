@@ -1,0 +1,28 @@
+class Solution:
+    # @param A : tuple of integers
+    # @param B : tuple of integers
+    # @return a list of integers
+    def solve(self, A, B):
+        """
+        tc = O(n + m)
+        sc = O(n + m)
+        """
+        newArr = []
+        p1 = 0
+        p2 = 0
+        n = len(A)
+        m = len(B)
+        while p1 < n and p2 < m:
+            if A[p1] < B[p2]:
+                newArr.append(A[p1])
+                p1 += 1
+            else:
+                newArr.append(B[p2])
+                p2 += 1
+        while p1 < n:
+            newArr.append(A[p1])
+            p1 += 1
+        while p2 < m:
+            newArr.append(B[p2])
+            p2 += 1
+        return newArr

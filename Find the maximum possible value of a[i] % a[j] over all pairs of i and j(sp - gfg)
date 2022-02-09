@@ -1,0 +1,20 @@
+import math
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+        find largest and second largest ele
+        and return mod
+        """
+        s = set(A)
+        A = list(s)
+        largest = -math.inf
+        secondLargest = -math.inf
+        for i in range(len(A)):
+            if A[i] > largest:
+                secondLargest = largest
+                largest = A[i]
+            elif A[i] > secondLargest:
+                secondLargest = A[i]
+        return secondLargest % largest if secondLargest != -math.inf else 0

@@ -96,3 +96,42 @@ class Solution:
             ht[abs(nums[i])] += 1
         return count
                 
+   -------------------------------------------------------------09 Feb 2022
+   class Solution:
+    def findPairs(self, nums: List[int], k: int) -> int:
+        """
+        Idea is to create freq table
+        
+        then graze over unique no which is keys in freq table
+        if k == 0
+            then we can say only duplicate ele can make pairs
+            eg. 1,1 
+            if any no freq > 1 and k == 0
+                inc count by 1
+            
+            a - b = k
+            a - k = b
+            elif curr unique ele + k in map
+            means we found one more pair
+                inc the count
+        tc = O(2n) = O(n)
+        sc = O(n)
+        """
+        def prepareFreqTable(nums):
+            freq = {}
+            for no in nums:
+                if no not in freq:
+                    freq[no] = 0
+                freq[no] += 1
+            return freq
+        
+        freq = prepareFreqTable(nums)
+        pairs = 0
+        
+        for key,val in freq.items():
+            if k == 0 and val > 1:
+                pairs += 1
+            elif k > 0 and key - k in freq:
+                pairs += 1
+                
+        return pairs

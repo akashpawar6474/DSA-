@@ -1,0 +1,42 @@
+class Solution:
+    # @param A : list of integers
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        Idea is to sort packets array
+        and to get min diff bw two ele 
+        with idx diff of B 
+        [3, 4, 1, 9, 56, 7, 9, 12]
+
+        [1,3,4,7,9,9,12,56]
+
+         0 1 2 3 4 5  6 7
+
+         and we have to go upto 3rd idx as starting packets
+
+         8 - 5 = 3
+
+         our start packet will go grom 0 to len - boys
+        and cal curr diff A[i + B - 1] - A[i]
+        and keep track of mindiff
+
+        followup question?
+        what if boys are 0?
+
+        what if Arr is empty
+        tc = O(nlogn + n)
+        sc = O(n)
+        """
+        import math
+        if B == 0:
+            return 0
+        n = len(A)
+        if n == 0:
+            return 0
+        A.sort()
+        minDiff = math.inf
+        for i in range(n - B + 1):
+            currDiff = A[i + B - 1] - A[i]
+            minDiff = min(minDiff,currDiff)
+        return minDiff

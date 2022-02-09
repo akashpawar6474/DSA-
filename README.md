@@ -305,7 +305,7 @@ solutions to graze over
 303.  Add Digits => simple simulation based problem
 304.  Integer to English Words => only implementation based problem -- Google
 305.  Merge two sorted arrays(sp - gfg) => simple two pointer problem
-306.  
+306.  Kth Smallest Element(sp) => finding it using selection sort where k <<< log(n)  
 
 
 

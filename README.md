@@ -306,6 +306,8 @@ solutions to graze over
 304.  Integer to English Words => only implementation based problem -- Google
 305.  Merge two sorted arrays(sp - gfg) => simple two pointer problem
 306.  Kth Smallest Element(sp) => finding it using selection sort where k <<< log(n)  
+307.  Find the maximum possible value of a[i] % a[j] over all pairs of i and j(sp - gfg) => maxMod problem finding largest and second largest and return mod
+308.  
 
 
 

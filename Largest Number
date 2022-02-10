@@ -1,0 +1,46 @@
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        """
+        23, 234
+        
+        if we concatenate 
+        a + b => 23234
+        b + a => 23423
+        
+        means by putting b first we are getting max no
+        
+        90 908
+        
+        a + b => 90908
+        b + a => 90890
+        
+        here putting a first gives us maximum no 
+        so in merge function we can just check 
+        if int(a + b) > int(b + a):
+            return True means a will come first
+        else
+            return False means b will come first
+            
+        Area of interest is comparing two string numbers
+        tc = O(n ^ 2)
+        sc = constant
+        """
+        def compare(st1,st2):
+            aPlusb = str(st1) + str(st2)
+            bPlusa = str(st2) + str(st1)
+            return aPlusb > bPlusa
+        
+        def bubbleSort(nums):
+            n = len(nums)
+            for i in range(n):
+                for j in range(n - i - 1):
+                    if not compare(nums[j],nums[j + 1]):
+                        nums[j],nums[j + 1] = nums[j + 1],nums[j]
+        
+        bubbleSort(nums)
+        ansString = ''.join(str(x) for x in nums)
+        if int(ansString) == 0:
+            return "0"
+        return ansString
+        
+        

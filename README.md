@@ -310,7 +310,8 @@ solutions to graze over
 308.  Check if array elements are consecutive(sp - gfg) => this is classic xor problem
 309.  Chocolate Distribution Problem(sp - gfg) => very simple sorting problem
 310.  K-diff Pairs in an Array => this is haskmap problem
-311.  
+311.  Subarray Sum Equals K => imp prefix sum and hashmap problem
+312.  
 
 
 

@@ -1,0 +1,49 @@
+class Solution:
+    def subarraySum(self, nums: List[int], k: int) -> int:
+        """
+        Idea is prefix/running sum and hashmap
+        
+        1 1 1 k = 2
+        
+        1 2 3 
+        
+        if running sum == k 
+            inc count
+        if runningSUm - k in ht
+            count += ht[runningSUm- k]
+            
+        1 2 3 k = 3
+        
+        1 3 6
+         +1 +1
+         
+        [1,-1,0] k = 0
+         1  0 0
+        
+        
+        this is edge case
+        where at second position we get rs as 0 and 
+        at third position our running sum is also 0
+        and runningSum - k is also 0
+        
+        so we inc twice at 3rd idx
+        
+        
+         
+        tc = O(n)
+        sc = O(n)
+        """
+        numsLen = len(nums)
+        ht = {}
+        runningSum = 0
+        subarrays = 0
+        for i in range(numsLen):
+            runningSum += nums[i]
+            if runningSum == k:
+                subarrays += 1
+            if runningSum - k in ht:
+                subarrays += ht[runningSum - k]
+            if runningSum not in ht:
+                ht[runningSum] = 0
+            ht[runningSum] += 1
+        return subarrays

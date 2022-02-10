@@ -312,7 +312,8 @@ solutions to graze over
 310.  K-diff Pairs in an Array => this is haskmap problem
 311.  Subarray Sum Equals K => imp prefix sum and hashmap problem
 312.  Interval List Intersections => two pointer problem with necessary observations -- Google
-313.  
+313.  Largest Number => comparing two string no concatenation is area of interest here
+314.  
 
 
 

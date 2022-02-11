@@ -51,4 +51,38 @@ class Solution:
         ans = [point for (dist,point) in maxHeap]
         return ans
             
-            
+    -----------------------------------------------------------------------------11 Feb 2022 sorting approach
+    
+    class Solution:
+    def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+        """
+        so here idea is to create new array
+        and for each point cal euclidean distance
+        and store it as tuple in other array
+
+        then sort other array using euclidean distancea
+        and return first B points
+        
+        tc = O(n + nlogn + n)
+        sc = O(2n) => O(n)
+        """
+        def preparePointAndEuclideanDistMap(pointAndEuclideanDistMap):
+            n = len(points)
+            for i in range(n):
+                currPoint = points[i]
+                currPointEucliDist = (currPoint[0] ** 2) + (currPoint[1] ** 2)
+                pointAndEuclideanDistMap.append((currPoint,currPointEucliDist))
+                
+        def prepareAnswerFromMap(pointAndEuclideanDistMap,k):
+            ans = []
+            for i in range(k):
+                ans.append(pointAndEuclideanDistMap[i][0])
+            return ans  
+        
+        pointAndEuclideanDistMap = []
+        preparePointAndEuclideanDistMap(pointAndEuclideanDistMap)
+
+        pointAndEuclideanDistMap.sort(key = lambda x : x[1])
+        
+        return prepareAnswerFromMap(pointAndEuclideanDistMap,k)
+

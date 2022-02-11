@@ -73,3 +73,50 @@ class Solution:
                 break
                 
         return isValid
+        
+    ----------------------------------------------------------------------------------11 Feb 2022
+    class Solution:
+    def checkInclusion(self, s1: str, s2: str) -> bool:
+        """
+        idea is very simple
+        create map of first string
+        then try to match each char in map to curr sliding window in s2
+        
+        tc = O(n + m)
+        sc = O(n)
+        """
+        def prepareFreqTable(s1):
+            ht = {}
+            for ch in s1:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        
+        freq = prepareFreqTable(s1)
+        windowStart = 0
+        n = len(s1)
+        m = len(s2)
+        noOfMatchedChar = 0
+        isFound = False
+        for windowEnd in range(m):
+            chAtWindowEnd = s2[windowEnd]
+            if chAtWindowEnd in freq:
+                freq[chAtWindowEnd] -= 1
+                if freq[chAtWindowEnd] == 0:
+                    noOfMatchedChar += 1
+            
+            currWindowSize = windowEnd - windowStart + 1
+            if currWindowSize > n:
+                chAtWindowStart = s2[windowStart]
+                windowStart += 1
+                if chAtWindowStart in freq:
+                    if freq[chAtWindowStart] == 0:
+                        noOfMatchedChar -= 1
+                    freq[chAtWindowStart] += 1
+            
+            if noOfMatchedChar == len(freq):
+                isFound = True
+                break
+        
+        return isFound

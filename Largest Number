@@ -44,3 +44,59 @@ class Solution:
         return ansString
         
         
+    -----------------------------------------------------------11 Feb 2022 using merge sort
+    
+    class Solution:
+    # @param A : tuple of integers
+    # @return a strings
+    def largestNumber(self, A):
+        def mergeSort(A):
+            n = len(A)
+            if n <= 1:
+                return A
+            start = 0
+            end = n - 1
+            mid = (start + end) // 2
+            left = mergeSort(A[:mid + 1])
+            right = mergeSort(A[mid + 1:])
+            return merge(left,right)
+
+        def compare(no1,no2):
+            aPlusb = str(no1) + str(no2)
+            bPlusa = str(no2) + str(no1)
+            if int(aPlusb) > int(bPlusa):
+                return True
+            else:
+                return False
+
+        def merge(left,right):
+            n = len(left)
+            m = len(right)
+            p1 = 0
+            p2 = 0
+            sortedArr = []
+            while p1 < n and p2 < m:
+                if compare(left[p1],right[p2]):
+                    sortedArr.append(left[p1])
+                    p1 += 1
+                else:
+                    sortedArr.append(right[p2])
+                    p2 += 1
+            
+            while p1 < n:
+                sortedArr.append(left[p1])
+                p1 += 1
+            while p2 < m:
+                sortedArr.append(right[p2])
+                p2 += 1
+            return sortedArr
+        
+        A = list(A)
+        A = mergeSort(A)
+        ansStr = ''.join(str(x) for x in A)
+        if int(ansStr) == 0:
+            return "0"
+        return ansStr
+
+
+        

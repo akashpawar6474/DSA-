@@ -1,0 +1,46 @@
+class Solution:
+    def minIncrementForUnique(self, nums: List[int]) -> int:
+        """
+        [1 2 3 4 3 7]       4
+
+        what we can do is to sort the elements
+        [1, 1, 3]
+        then graze from 1st ele 
+        and if it is equal to prev 
+        then inc it by 1
+        and inc the count by 1 
+
+        [1 1 1 9 8]
+
+        [1 2 3 9 8]
+        here only two steps are required right?
+        but answer is 3
+
+        so first sort the array
+        then from first idx
+        if currele <= prevEle
+            steps += prevele - currEle + 1
+
+        2 4 9 7 2 5
+
+        2 2 4 5 7 9
+        
+        [3,2,1,2,1,7]
+        [1 1 2 2 3 7]
+         1 2 3 4 5 7
+         
+         if currEle <= prevEle                                         arr             count 
+         at 1st idx steps += (currEle - prevele + 1) => (1 - 1 + 1)  [1 2 2 2 3 7]       1
+         2nd  idx steps +=  (2 - 2 + 1)                              [1 2 3 2 3 7]       2
+         3rd idx steps += (3 - 2 + 1)        
+        tc = O(nlogn + n)
+        sc = O(n)
+        """
+        nums.sort()
+        n = len(nums)
+        steps = 0
+        for i in range(1,n):
+            if nums[i] <= nums[i - 1]:
+                steps += (nums[i - 1] - nums[i] + 1)
+                nums[i] = nums[i - 1] + 1
+        return steps

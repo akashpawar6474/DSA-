@@ -313,7 +313,8 @@ solutions to graze over
 311.  Subarray Sum Equals K => imp prefix sum and hashmap problem
 312.  Interval List Intersections => two pointer problem with necessary observations -- Google
 313.  Largest Number => comparing two string no concatenation is area of interest here
-314.  
+314.  Count Inversions in an array(sp -gfg) => this is same problem as reverse pairs can be solved using merge sort
+315.  
 
 
 

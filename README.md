@@ -316,7 +316,8 @@ solutions to graze over
 314.  Count Inversions in an array(sp -gfg) => this is same problem as reverse pairs can be solved using merge sort
 315.  Minimum Increment to Make Array Unique => sort the array then check prev element
 316.  Word Ladder => this is BFS graph problem
-317.  
+317.  Maximum Swap => preprocessing array by finding max no in right then swapping first idx which has max no in right
+318.  
 
 
 

@@ -1,0 +1,174 @@
+class Solution:
+    def maximumSwap(self, num: int) -> int:
+        """
+        0123
+        9298
+        for each digit find its max ele in right
+        2223
+        
+        then graze from left to right
+        for first ele who is not equal to its max ele
+            swap them and return
+        
+        tc = O(2 * n) =>O(n)
+        sc = O(n)
+        """
+        def findMaxDigitInRight(maxIdxArr,nums,maxIdxInRight):
+            n = len(nums)
+            for i in range(n - 2,-1,-1):
+                if nums[i] > nums[maxIdxInRight]:
+                    maxIdxInRight = i
+                maxIdxArr[i] = maxIdxInRight
+            
+                
+        nums = [int(x) for x in list(str(num))]
+        n = len(nums)
+        maxIdxArr = [0] * n
+        maxIdxArr[n - 1] = n - 1
+        maxIdxInRight = n - 1
+        
+        findMaxDigitInRight(maxIdxArr,nums,maxIdxInRight)
+        for i in range(n):
+            if nums[i] != nums[maxIdxArr[i]]:
+                nums[i],nums[maxIdxArr[i]] = nums[maxIdxArr[i]],nums[i]
+                break
+        
+        return int(''.join([str(x) for x in nums]))
+        
+    def secondTry(self,num):
+        """
+        987629
+        
+        so we have to go from left to right
+        if for any no we will find greatest digit in its right
+            if found just replace it and return
+        in above example for 2nd digit we have max digit than him in right
+        so find out and replace
+        
+        9289
+        for 2nd digit from left
+        we have max digit 9 in right so replace with it
+        """
+        numStr = list(str(num))
+        numStrLen = len(numStr)
+        
+        for i in range(numStrLen):
+            nextMaxDigitIdx = i
+            for j in range(i + 1,numStrLen):
+                if int(numStr[nextMaxDigitIdx]) <= int(numStr[j]):
+                    print(int(numStr[nextMaxDigitIdx]),int(numStr[j]))
+                    nextMaxDigitIdx = j
+            if nextMaxDigitIdx != i:
+                numStr[nextMaxDigitIdx],numStr[i] = numStr[i],numStr[nextMaxDigitIdx]
+                return ''.join(numStr)
+        return ''.join(numStr)
+                
+        
+    def firstTry(self,num):
+        """
+        Given a integer
+        
+        we can swap once
+        
+        and we have return max value if we get
+        
+        such kind of problems can be solved by taking lot of examples and understand
+        
+        2736
+            
+            7
+                    6
+                3
+        2
+        
+        if we swap 7 and 2 we get max no
+        
+        9973
+        
+        9   9
+                7
+                    3
+        no swap
+        
+        1234
+                        4
+                    3
+                2
+            1
+        swap 4 with 1 to get max
+        
+        
+        51582
+                        8
+        5           5
+                            2
+            1
+                
+        
+        81552
+        it looks like we have to find max digit
+        from 1st idx to last idx
+        and swap it with 0th idx
+        
+        Idea is to convert int to string
+        then ch array 
+        then find the max ele
+        replace it with 0th idx char
+        convert it to integer and return
+        
+        if num < 10
+            return num
+            
+        9869
+        Nope this will fail for this test case
+        
+        so it looks like we have to find out maxDigit from last
+        then replace it with first smallest digit than maxDigit
+        
+        Now find maxDigitIdx from back
+        if 0th idx has same maxDigitValue then return same no
+        else find idx of value smaller than maxDigit
+        and replace them and return
+        
+        
+        It is not like finding larget no from back
+        "98368"
+        
+        another edge case for this approach
+        """
+        def findMaxDigitIdx(chArr):
+            chArrLen = len(chArr)
+            maxIdx = chArrLen - 1
+            maxVal = int(chArr[-1])
+            for i in range(chArrLen - 2,-1,-1):
+                currDigit = int(chArr[i])
+                if currDigit > maxVal:
+                    maxVal = currDigit
+                    maxIdx = i
+            return maxIdx
+        
+        def findValLessThanMaxDigit(chArr,maxDigitIdx):
+            chArrLen = len(chArr)
+            targetIdx = -1
+            for i in range(maxDigitIdx):
+                if int(chArr[i]) < int(chArr[maxDigitIdx]):
+                    targetIdx = i
+                    break
+            return targetIdx
+            
+            
+
+        if num <= 11:
+            return num
+        chArr = list(str(num))
+        maxDigitIdx = findMaxDigitIdx(chArr)
+        print(maxDigitIdx)
+        if 0 <= maxDigitIdx - 1 and int(chArr[maxDigitIdx - 1]) == int(chArr[maxDigitIdx]):
+            return num
+        targetIdx = findValLessThanMaxDigit(chArr,maxDigitIdx)
+        print(targetIdx)
+        if targetIdx != -1:
+            chArr[targetIdx],chArr[maxDigitIdx] = chArr[maxDigitIdx],chArr[targetIdx]
+        return int(''.join(chArr))
+        
+        

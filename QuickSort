@@ -1,0 +1,37 @@
+class Solution:
+    # @param A : list of integers
+    # @return a list of integers
+    def solve(self, A):
+        """
+        first we will create getPivotIdxAndRearrange 
+        function which will set pivot ele at its correct place
+        and return pivout idx
+        
+        tc = O(n ^ 2)
+        sc = O(n)
+        """
+        def getPivotIdxAndRearrange(arr,st,end):
+            pivotEle = arr[st]
+            left = st + 1
+            right = end
+            while left <= right:
+                if arr[left] <= pivotEle:
+                    left += 1
+                elif arr[right] > pivotEle:
+                    right -= 1
+                else:
+                    arr[left],arr[right] = arr[right],arr[left]
+                    left += 1
+                    right -= 1
+            arr[st],arr[left - 1] = arr[left - 1],arr[st]
+            return left - 1
+        
+        def quickSort(arr,st,end):
+            if st >= end:
+                return
+            pivotIdx = getPivotIdxAndRearrange(arr,st,end)
+            quickSort(arr,st,pivotIdx - 1)
+            quickSort(arr,pivotIdx + 1,end)
+
+        quickSort(A,0,len(A) - 1)
+        return A

@@ -94,3 +94,30 @@ class Solution:
         n = len(nums)
         chooseNotChoose(nums,0,n,currPath,ans)
         return ans
+------------------------------------------------------------------------------13 Feb 2022
+class Solution:
+    def subsets(self, nums: List[int]) -> List[List[int]]:
+        ans = []
+        ans.append([])
+        for no in nums:
+            ansLen = len(ans)
+            for currIdx in range(ansLen):
+                newList = ans[currIdx].copy()
+                newList.append(no)
+                ans.append(newList)
+        return ans
+    
+    def recursive(self,nums):
+        def backtrack(nums,currIdx,currList,ansList):
+            if currIdx == len(nums):
+                ansList.append(currList.copy())
+                return
+            backtrack(nums,currIdx + 1,currList + [nums[currIdx]],ansList)
+            backtrack(nums,currIdx + 1,currList,ansList)
+        
+        currIdx = 0
+        currList = []
+        ansList = []
+        backtrack(nums,currIdx,currList,ansList)
+        return ansList
+                

@@ -317,7 +317,9 @@ solutions to graze over
 315.  Minimum Increment to Make Array Unique => sort the array then check prev element
 316.  Word Ladder => this is BFS graph problem
 317.  Maximum Swap => preprocessing array by finding max no in right then swapping first idx which has max no in right
-318.  
+318.  QuickSort => this is very good problem
+319.  Maximum & Minimum Magic(sp) => simple sorting problem
+
 
 
 

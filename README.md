@@ -319,6 +319,8 @@ solutions to graze over
 317.  Maximum Swap => preprocessing array by finding max no in right then swapping first idx which has max no in right
 318.  QuickSort => this is very good problem
 319.  Maximum & Minimum Magic(sp) => simple sorting problem
+320.  Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted(sp - gfg) = tried brute force and it worked not yet tried optimized one
+321.  
 
 
 

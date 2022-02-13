@@ -1,0 +1,69 @@
+class Solution:
+	# @param A : list of integers
+	# @return a list of integers
+	def subUnsort(self, A):
+        """
+        another try is to take a copy and sort the array
+        and check manually one by one
+          0  1  2   3   4   5   6   7   8   9   10  11
+        [ 1, 1, 10, 10, 15, 10, 15, 10, 10, 15, 10, 15 ]
+        [ 1, 1, 10, 10, 10, 10, 10, 10, 15, 15, 15, 15 ]
+
+        tc = O(nlogn + n)
+        sc = O(2n) => O(n)
+        """
+        temp = A.copy()
+        temp.sort()
+
+        left = 0
+        n = len(temp)
+        while left < n and temp[left] == A[left]:
+            left += 1
+        if left == n:
+            return [-1]
+        right = n - 1
+        while right > left and temp[right] == A[right]:
+            right -= 1
+        return [left,right]
+
+    def secondTry(self,A):
+        """
+        so if we find left then
+        graze from there and find out idx of no
+        gt value on left
+        """
+        n = len(A)
+        left = 0
+        while left < n - 1 and A[left] <= A[left + 1]:
+            left += 1
+        if left == n - 1:
+            return [-1]
+        right = left + 1
+        while right < n - 1 and A[right] < A[left]:
+            right += 1
+        return [left,right - 1]
+
+    def bruteForce(self,A):
+        """
+        idea is to use two pointers
+        moving in opposite directions
+
+        left will move untill next ele is gt curr
+        if left reached end 
+            then return [-1]
+        
+        else take right ptr from last
+        move it untill prev ele lt curr
+        at last return [left,right]
+        """
+        n = len(A)
+        left = 0
+        while left < n - 1 and A[left] <= A[left + 1]:
+            left += 1
+        if left == n - 1:
+            return [-1]
+        
+        right = n - 1
+        while right > 0 and A[right] >= A[right - 1]:
+            right -= 1
+        return [left,right]

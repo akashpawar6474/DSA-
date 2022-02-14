@@ -23,3 +23,24 @@ class Solution:
         dfs(root,0)
         return self.maxDepth
         
+-----------------------------------------------------------------14 Feb 2022
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+class Solution:
+    def maxDepth(self, root: Optional[TreeNode]) -> int:
+        """
+        we can do this by using an tree traversal
+        """
+        def postorder(root):
+            if root is None:
+                return 0
+            leftHeight = postorder(root.left)
+            rightHeight = postorder(root.right)
+            return max(leftHeight,rightHeight) + 1
+        
+        return postorder(root)
+            

@@ -5,3 +5,15 @@ class Solution:
         for i in range(n):
             uniqueEle = uniqueEle ^ nums[i]
         return uniqueEle
+----------------------------------------------------15 Feb 2022
+class Solution:
+    def singleNumber(self, nums: List[int]) -> int:
+        """
+        this is classic xor example
+        tc = O(n)
+        sc = O(1)
+        """
+        ans = 0
+        for no in nums:
+            ans = ans ^ no
+        return ans

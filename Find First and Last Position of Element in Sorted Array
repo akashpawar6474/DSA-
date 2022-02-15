@@ -31,3 +31,117 @@ class Solution:
         ans[0] = bs(0,n,nums,target,isLeft)
         ans[1] = bs(0,n,nums,target,not isLeft)
         return ans
+---------------------------------------------------------------------------15 Feb 2022
+class Solution:
+    def searchRange(self, nums: List[int], target: int) -> List[int]:
+        def binarySearch(nums,target,isLeftBoundary):
+            st = 0
+            end = len(nums) - 1
+            ans = -1
+            while st <= end:
+                mid = (st + end) // 2
+                if nums[mid] < target:
+                    st = mid + 1
+                elif nums[mid] > target:
+                    end = mid - 1
+                else:
+                    #means we found target
+                    if isLeftBoundary:
+                        ans = mid
+                        end = mid - 1
+                    else:
+                        ans = mid
+                        st = mid + 1
+            return ans
+        
+        leftBoundary = binarySearch(nums,target,True)
+        rightBoundary = binarySearch(nums,target,False)
+        return [leftBoundary,rightBoundary]
+        
+    def tryWithFloorAndCeil(self,nums,target):
+        """
+         0 1 2 3 4 5
+        [5,7,7,8,8,10]  target 8
+        
+        for finding left boundary which is 3
+        if ele at mid >= target
+            then shrink end boundary politely
+            as we will shrink end untill left boundary
+        elif mid < target then definitely it cant be answer of left boundary
+            
+        while st <= end:
+            mid = ..
+            if nums[mid] >= target:
+                end = mid
+            else:
+                st = mid + 1
+        
+        st  end  mid
+        0    5    2   inc start
+        3    5    4   dec end politely
+        3    4    3   dec end politely
+        3    3    3   here we are putting end value as 3 again 
+        3    3        which will create infinite loop
+        
+        so take st < end
+        while st < end:
+            mid = ..
+            if nums[mid] >= target:
+                end = mid
+            else:
+                st = mid + 1
+        return end // as left boundary
+                
+                
+        for finding right boundary which is 4
+        if ele at mid <= target:
+            then we shrink st boundary politely
+        elif ele at mid gt target then definitely it cant be answer for right boundary
+        
+        while st < end:
+            mid = ..
+            if nums[mid] <= target:
+                st = mid
+            else:
+                end = mid - 1
+        return st  // as right boundary
+        
+        Edge cases
+         0 1 2 3 4 5
+        [5,7,7,8,8,10] target 6
+        
+        finding left boundary
+        st  end   mid
+        0   5       2
+        0   2       1
+        0   1       0
+        1   1       break
+        
+        
+        """
+        def findLeftBoundary(nums,target):
+            #it gives floor idx
+            st = 0
+            end = len(nums) - 1
+            while st < end:
+                mid = (st + end) // 2
+                if nums[mid] < target:
+                    st = mid + 1
+                else:
+                    end = mid
+            return end
+        
+        def findRightBoundary(nums,target):
+            #it gives ceil idx
+            st = 0
+            end = len(nums) - 1
+            while st < end:
+                mid = (st + end) // 2
+                if nums[mid] > target:
+                    end = mid - 1
+                else:
+                    st = mid
+            return st
+        
+        print(findLeftBoundary(nums,target))
+            

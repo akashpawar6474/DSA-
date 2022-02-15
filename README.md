@@ -321,7 +321,8 @@ solutions to graze over
 319.  Maximum & Minimum Magic(sp) => simple sorting problem
 320.  Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted(sp - gfg) = tried brute force and it worked not yet tried optimized one
 321.  Find the sum of maximum difference possible from all subset of a given array(sp - gfg) => we have to sort the array then using two loops cal no of subsequces for each pair of smallest and largest ele 
-322.  
+322.  Floor in a Sorted Array(gfg) => returning end after simple binary search
+323.  
 
 
 

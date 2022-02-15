@@ -43,3 +43,45 @@ class Solution:
                 end = mid
             #print(str(st)+str(end)+str(mid))
         return st
+     -------------------------------------------------15 Feb 2022
+     class Solution:
+    def findPeakElement(self, nums: List[int]) -> int:
+        """
+        There can be 4 possibilites
+        
+        If we consider mid and mid + 1 elements
+        
+        mid - 1     mid + 1
+                mid         => mid cant be answer definetly
+
+                    mid + 1
+                mid         => mid cant be answer
+        mid - 1
+        
+        
+        mid - 1
+                mid             => mid can be answer
+                    mid + 1
+        
+                mid             => mid can be answer
+        mid - 1     mid + 1
+        
+        so in first two cases
+            we will move our start boundary to mid + 1
+        elif in last two cases
+            we will move our end boundary to mid
+            
+        return st or end as both are equal
+            
+        tc = O(logn)
+        sc = O(1)
+        """
+        st = 0
+        end = len(nums) - 1
+        while st < end:
+            mid = (st + end) // 2
+            if nums[mid] < nums[mid + 1]:
+                st = mid + 1
+            else:
+                end = mid
+        return st

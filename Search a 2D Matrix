@@ -104,4 +104,57 @@ class Solution:
                 break
         return isPresent
             
+  ----------------------------------------------------------------------16 Feb 2022
+  class Solution:
+    # @param A : list of list of integers
+    # @param B : integer
+    # @return an integer
+    def searchMatrix(self, A, B):
+        """
+        means matrix is sorted row and column wise
+        so brute force is to do linear search O(n * m) time
+        
+        then do search from top right corner
+        to bottom left corner so it will take O(n + m) time
+
+        another is to visualize matrix as array
+          [   
+            [5, 17, 100, 111]
+            [119, 120, 127, 131]    
+          ]      
+          rows = 2
+          cols = 4
+
+          for eg. if this is array 
+          then min idx = 0
+          max Idx = rows * cols - 1
+
+          for eg. 100 array idx can be 2
+          but how to represent it in row and col values
+          which is 0,2
+
+          st = 0
+          end = 2 * 4 - 1 => 7
+
+          assume our mid is 2 eventually after some iterations
+          now take array idx // cols = rowIdx
+                    array idx % cols = colIdx
+        tc = O(log(n * m))
+        sc = O(1)
+        """
+        rows = len(A)
+        cols = len(A[0])
+        start = 0
+        end = rows * cols - 1
+        while start <= end:
+            mid = (start + end) // 2
+            rowIdx = mid // cols
+            colIdx = mid % cols
+            if A[rowIdx][colIdx] == B:
+                return 1
+            if A[rowIdx][colIdx] < B:
+                start = mid + 1
+            else:
+                end = mid - 1
+        return 0
 

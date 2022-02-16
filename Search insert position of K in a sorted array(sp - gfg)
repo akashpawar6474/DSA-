@@ -1,0 +1,31 @@
+class Solution:
+    # @param A : list of integers
+    # @param B : integer
+    # @return an integer
+    def searchInsert(self, A, B):
+        """
+         0 1   2  3
+        [1, 3, 5, 8] target = 7
+        Start   end     mid
+        0       3       1
+        2       3       2
+        3       3       3
+        3       2       break
+
+        it is like finding ceil value
+        means finding insert position in sorted array
+        tc = O(logn)
+        sc = O(1)
+        """
+        n = len(A)
+        st = 0
+        end = n - 1
+        while st <= end:
+            mid = (st + end) // 2
+            if A[mid] == B:
+                return mid
+            if A[mid] < B:
+                st = mid + 1
+            else:
+                end = mid - 1
+        return st

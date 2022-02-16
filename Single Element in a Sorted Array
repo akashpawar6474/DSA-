@@ -50,3 +50,47 @@ class Solution:
         uniqueEleIdx = bs(start,end,nums)
         return nums[uniqueEleIdx]
                     
+   ------------------------------------------------------------------------------16 Feb 2022
+   class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+         0 1 2 3 4 5 6
+        [1,1,2,3,3,4,4]
+
+        If mid is evenIdx
+            if we are in left half
+                then next ele should be same
+                so move start = mid + 2
+            else if we are in right half   
+                next ele is different
+                    so shrink the right = mid - 1
+        if mid is at odd idx 
+            if we are in left half  
+                next ele is different   
+                    so shrink start = mid + 1
+            else in right half next ele is equal
+                so shrink right = mid - 1
+          0  1  2  3  4
+        [ 1, 1, 2, 2, 3 ]
+        start   end     mid mid + 1
+        0       4       2       3
+        4       4       4       5
+
+        """
+        start = 0
+        end = len(A) - 1
+        while start < end:
+            mid = (start + end) // 2
+            if mid & 1 == 0:
+                if A[mid] == A[mid + 1]:
+                    start = mid + 2
+                else:
+                    end = mid - 1
+            else:
+                if A[mid] != A[mid + 1]:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+        return A[start]

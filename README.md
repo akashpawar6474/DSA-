@@ -322,7 +322,8 @@ solutions to graze over
 320.  Find the Minimum length Unsorted Subarray, sorting which makes the complete array sorted(sp - gfg) = tried brute force and it worked not yet tried optimized one
 321.  Find the sum of maximum difference possible from all subset of a given array(sp - gfg) => we have to sort the array then using two loops cal no of subsequces for each pair of smallest and largest ele 
 322.  Floor in a Sorted Array(gfg) => returning end after simple binary search
-323.  
+323.  Search insert position of K in a sorted array(sp - gfg) => it is like finding ceil of target no and return start after doing normal bs
+324.  
 
 
 

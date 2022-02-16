@@ -323,7 +323,8 @@ solutions to graze over
 321.  Find the sum of maximum difference possible from all subset of a given array(sp - gfg) => we have to sort the array then using two loops cal no of subsequces for each pair of smallest and largest ele 
 322.  Floor in a Sorted Array(gfg) => returning end after simple binary search
 323.  Search insert position of K in a sorted array(sp - gfg) => it is like finding ceil of target no and return start after doing normal bs
-324.  
+324.  Swap Nodes in Pairs => simple recursion based problem
+325.  
 
 
 

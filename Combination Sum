@@ -36,3 +36,43 @@ class Solution:
         currPath = []
         backtrack(currIdx,candidates,n,target,ans,currPath)
         return ans
+----------------------------------------------------------------------------------------------------17 Feb 2022
+class Solution:
+    def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
+        """
+        Flow of execution is very simple
+        if we reached end and our target is 0
+        then add curr list to anslist
+        
+        if we reached end without target 0
+        then return inf
+        
+        if currNo is lteq target
+            then include it and recur
+            then pop it also
+        and in second possibility skip it
+        tc = O(2 ^ n)
+        
+        """
+        import math
+        def backtrack(candidates,target,currIdx,currList,ansList):
+            if currIdx == len(candidates):
+                if target == 0:
+                    ansList.append(currList[:])
+                    return
+            
+            if currIdx == len(candidates):
+                return
+            
+            if candidates[currIdx] <= target:
+                currList.append(candidates[currIdx])
+                backtrack(candidates,target - candidates[currIdx],currIdx,currList,ansList)
+                currList.pop()
+            
+            backtrack(candidates,target,currIdx + 1,currList,ansList)
+        
+        currIdx = 0
+        currList = []
+        ansList = []
+        backtrack(candidates,target,currIdx,currList,ansList)
+        return ansList

@@ -1,0 +1,44 @@
+class Solution:
+    # @param A : list of integers
+    # @param B : integer
+    # @return an integer
+    def solve(self, A, B):
+        """
+        first find the peak ele
+        if mid < mid + 1
+            start = mid + 1
+        else
+            end = mid
+        """
+        def findPeak(start,end,A):
+            while start < end:
+                mid = (start + end) // 2
+                if A[mid] < A[mid + 1]:
+                    start = mid + 1
+                else:
+                    end = mid
+            return start
+
+        def binarySearchAscending(start,end,A,target):
+            while start <= end:
+                mid = (start + end) // 2
+                if A[mid] == target:
+                    return mid
+                if A[mid] < target:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+            return -1
+
+        def binarySearchDescending(start,end,A,target):
+            while start <= end:
+                mid = (start + end) // 2
+                if A[mid] == target:
+                    return mid
+                if A[mid] < target:
+                    end = mid - 1
+                else:
+                    start = mid + 1
+            return -1
+        peakIdx = findPeak(0,len(A) - 1,A)
+        return max(binarySearchAscending(0,peakIdx,A,B),binarySearchDescending(peakIdx + 1,len(A) - 1,A,B))

@@ -22,3 +22,19 @@ class Solution:
             else:
                 end = mid - 1
         return ans
+--------------------------------------------------------------18 Feb 2022
+class Solution:
+    # @param A : integer
+    # @return an integer
+    def sqrt(self, A):
+        start = 0
+        end = A
+        ans = 0
+        while start <= end:
+            mid = (start + end) // 2
+            if mid * mid <= A:
+                ans = mid
+                start = mid + 1
+            else:
+                end = mid - 1
+        return ans

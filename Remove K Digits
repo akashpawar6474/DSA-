@@ -1,0 +1,45 @@
+class Solution:
+    def removeKdigits(self, num: str, k: int) -> str:
+        """
+        Idea is to use monotonic deque
+        graze over ele
+            loop untill deque is not empty AND last ele of deque is >= curr ele AND k > 0
+                pop item from deque
+                reduce k
+            add curr ele to deque
+        
+        now we will be having smallest no with k removals
+        inside the deque
+        
+        so skip the front 0's in deque
+        return char in deque
+        
+        tc = O(2n) as we are visiting each idx at most twice
+        sc= O(n)
+        """
+        from collections import deque
+        def prepareMonotonicDeque(num,k,q):
+            numLen = len(num)
+            for i in range(numLen):
+                while len(q) != 0 and q[-1] > num[i] and k > 0:
+                    q.pop()
+                    k -= 1
+                q.append(num[i])
+                
+            while k > 0:
+                q.pop()
+                k -= 1
+            return q
+        
+        def removeLeadingZeroes(q):
+            while len(q) > 1 and q[0] == '0':
+                q.popleft()
+            return q
+                
+        if len(num) == k:
+            return "0"
+        q = deque()
+        q = prepareMonotonicDeque(num,k,q)
+        q = removeLeadingZeroes(q)
+        newNumber = list(q)
+        return ''.join(newNumber)

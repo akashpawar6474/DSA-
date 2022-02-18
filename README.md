@@ -325,6 +325,8 @@ solutions to graze over
 323.  Search insert position of K in a sorted array(sp - gfg) => it is like finding ceil of target no and return start after doing normal bs
 324.  Swap Nodes in Pairs => simple recursion based problem
 325.  Remove K Digits => Very good problem with montonic stack or deque
+326.  Find an element in Bitonic array(sp - gfg) => very good binary search problem
+327.  
 
 
 

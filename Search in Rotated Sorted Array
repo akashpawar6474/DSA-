@@ -55,4 +55,28 @@ class Solution:
                 else:
                     end = mid - 1
         return ans
-                    
+  ------------------------------------------------------------18 Feb 2022
+  class Solution:
+    # @param A : tuple of integers
+    # @param B : integer
+    # @return an integer
+    def search(self, A, B):
+        start = 0
+        end = len(A) - 1
+        while start <= end:
+            mid = (start + end) // 2
+            if A[mid] == B:
+                return mid
+            if A[start] <= A[mid]:
+                #means ele from start to mid is sorted
+                if A[start] <= B <= A[mid - 1]:
+                    end = mid - 1
+                else:
+                    start = mid + 1
+            else:
+                #means ele from mid to end are sorted
+                if A[mid + 1] <= B <= A[end]:
+                    start = mid + 1
+                else:
+                    end = mid - 1
+        return -1

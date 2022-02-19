@@ -326,7 +326,9 @@ solutions to graze over
 324.  Swap Nodes in Pairs => simple recursion based problem
 325.  Remove K Digits => Very good problem with montonic stack or deque
 326.  Find an element in Bitonic array(sp - gfg) => very good binary search problem
-327.  
+327.  Special Integer(sp) => this is same problem like aggressive cows where we have to binary search and then cal for each mid if we can satify the condition VGP
+328.  
+
 
 
 

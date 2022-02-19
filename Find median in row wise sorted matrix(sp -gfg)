@@ -1,0 +1,55 @@
+from bisect import bisect_right
+class Solution:
+	# @param A : list of list of integers
+	# @return an integer
+	def findMedian(self, A):
+        def binSearch(matrix, min_el, max_el, cntElBeforeMed):
+            start = min_el
+            end = max_el
+            while start < end:
+                mid = start + ((end - start) // 2)
+                cnt = 0
+                for row in matrix:
+                    cnt += bisect_right(row, mid)
+                if cnt > cntElBeforeMed:
+                    end = mid
+                else:
+                    start = mid + 1
+            
+            return start
+    
+        def getMinMax(matrix):
+            min_el = float('inf')
+            max_el = float('-inf')
+            for row in matrix:
+                if min_el > row[0]:
+                    min_el = row[0]
+                if max_el < row[-1]:
+                    max_el = row[-1]
+        
+            return min_el, max_el
+    
+        matrix = A
+        rn = len(matrix)
+        cn = len(matrix[0])
+        cntElBeforeMed = (rn * cn) // 2
+        min_el, max_el = getMinMax(matrix)
+        return binSearch(matrix, min_el, max_el, cntElBeforeMed)
+
+    def minHeapSolution(self,A):
+        import heapq
+        minHeap = []
+
+        for i in range(len(A)):
+            heapq.heappush(minHeap,(A[i][0],0,A[i]))
+        
+        median = (len(A) * len(A[0]) + 1) // 2
+        while minHeap:
+            currEle,currIdxInRow,row = heapq.heappop(minHeap)
+            #print(currEle,median)
+            median -= 1
+            if median == 0:
+                return currEle
+            if currIdxInRow + 1 < len(row):
+                heapq.heappush(minHeap,(row[currIdxInRow + 1],currIdxInRow + 1,row))
+        return -1

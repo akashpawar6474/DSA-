@@ -1,0 +1,92 @@
+class Solution:
+	# @param A : list of integers
+	# @param B : integer
+	# @return an integer
+	def books(self, A, B):
+        """
+        A : [ 73, 58, 30, 72, 44, 78, 23, 9 ]
+        B : 5
+
+            [9,23,30,44,58,|72,73,78]
+                           +1       +1
+
+                        [9,23,30,|44,58,|72,73,78]
+                                +1  +1  +1
+
+                        [9,23,30,|44,58,|72,73,78]
+                                +1      +1 +1 +1 +1
+            start   end     mid
+            78      387     232
+            78      231     154
+            78      153     115
+            78      114     96
+            97      114     105
+
+
+        """
+        def check(A, B, x):
+            cnt=1
+            cursum=0
+            n=len(A)
+            for i in range(n):
+                if(cursum+A[i]>x):
+                    cnt+=1
+                    cursum=A[i]
+                    if(cnt>B):
+                        return 0
+                else:
+                    cursum+=A[i]
+            return 1
+
+        def isAllStudentsGetBooksWithMidAsPages(books,thresholdPages,B):
+            currPages = 0
+            occupiedStudents = 0
+            for pages in books:
+                currPages += pages
+                if currPages > thresholdPages:
+                    occupiedStudents += 1
+                    currPages = pages 
+            if 0 < currPages <= thresholdPages:
+                occupiedStudents += 1
+            return occupiedStudents <= B 
+
+        def firstTry(A,B):
+            A.sort()
+            start = A[-1]
+            tempSum = 0
+            for i in A:
+                tempSum += i
+            end = tempSum
+            ans = tempSum
+            while start <= end:
+                mid = (start + end) // 2
+                if isAllStudentsGetBooksWithMidAsPages(A,B,mid):
+                    ans = mid
+                    end = mid - 1
+                else:
+                    start = mid + 1
+            return ans
+
+        def yashTry(A,B):
+            sum=0
+            n=len(A)
+            if(n<B):
+                return -1;
+            sum=0
+            for i in A:
+                sum+=i
+            lo=max(A)
+            hi=sum
+            ans=sum
+            while(lo<=hi):
+                mid=(lo+hi)//2
+                
+                if(check(A,B,mid)):
+                    ans=min(ans,mid)
+                    hi=mid-1
+                else:
+                    lo=mid+1
+            return ans    
+
+        return yashTry(A,B)
+

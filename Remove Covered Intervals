@@ -1,0 +1,67 @@
+class Solution:
+    def removeCoveredIntervals(self, intervals: List[List[int]]) -> int:
+        """
+        tc = O(n ^ 2)
+        sc = O(n)
+        """
+        def isFirstOverlappedBySecond(first,second,intervals):
+            firstInterval = intervals[first]
+            secondInterval = intervals[second]
+            return firstInterval[0] <= secondInterval[0] and firstInterval[1] >= secondInterval[1]
+        
+        def isSecondOverlappedByFirst(first,second,intervals):
+            firstInterval = intervals[first]
+            secondInterval = intervals[second]
+            return firstInterval[0] >= secondInterval[0] and firstInterval[1] <= secondInterval[1]
+        
+        def isOvelaps(first,second,intervals,isIntervalVisited):
+            if isFirstOverlappedBySecond(first,second,intervals):
+                isIntervalVisited[second] = True
+                return True
+            if isSecondOverlappedByFirst(first,second,intervals):
+                isIntervalVisited[first] = True
+                return True
+            return False
+            
+        isIntervalVisited = [False for x in range(len(intervals))]
+        n = len(intervals)
+        count = 0
+        for i in range(n):
+            for j in range(n):
+                if i != j and isIntervalVisited[i] == False and isIntervalVisited[j] == False:
+                    if isOvelaps(i,j,intervals,isIntervalVisited):
+                        count += 1
+        return n - count
+                        
+        
+        
+    def secondTry(self,intervals):
+        def isOverlaps(firstInterval,secondInterval):
+            start = 0
+            end = 1
+            ifFirstOverlapsSecond = firstInterval[start] <= secondInterval[start] and firstInterval[end] >= secondInterval[end]
+            return ((secondInterval[start] <= firstInterval[start]) and (secondInterval[end] >= firstInterval[end])) or ()
+        
+        n = len(intervals)
+        overlappingIntervals = 0
+        for i in range(n):
+            for j in range(i + 1,n):
+                if isOverlaps(intervals[i],intervals[j]):
+                    overlappingIntervals += 1
+        return n - overlappingIntervals
+                    
+    def sortingSolution(self,intervals):
+        intervals.sort(key = lambda x : x[0])
+        start = 0
+        end = 1
+        n = len(intervals)
+        prevInterval = intervals[start]
+        overlappingIntervals = 0
+        for i in range(1,n):
+            currInterval = intervals[i]
+            if prevInterval[start] <= currInterval[start] and prevInterval[end] >= currInterval[end]:
+                overlappingIntervals += 1
+            else:
+                prevInterval = currInterval
+        return n - overlappingIntervals
+        

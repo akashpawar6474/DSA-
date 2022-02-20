@@ -329,6 +329,8 @@ solutions to graze over
 327.  Special Integer(sp) => this is same problem like aggressive cows where we have to binary search and then cal for each mid if we can satify the condition VGP
 328.  Remove Covered Intervals => simple brute force will work here
 329.  Find median in row wise sorted matrix(sp -gfg) => VIMP problem of binary search   
+330.  The painter’s partition problem(sp - gfg) => this is classic binary search problem like koko's bananas
+331.  
 
 
 

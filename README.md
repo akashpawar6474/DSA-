@@ -331,7 +331,8 @@ solutions to graze over
 329.  Find median in row wise sorted matrix(sp -gfg) => VIMP problem of binary search   
 330.  The painter’s partition problem(sp - gfg) => this is classic binary search problem like koko's bananas
 331.  Allocate minimum number of pages(sp - gfg) => same as aggresive cows but here my try is failed with exact same code 
-332.  
+332. Excel Sheet Column Number => simple problem
+333.  
 
 
 

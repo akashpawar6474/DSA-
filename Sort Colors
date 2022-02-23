@@ -36,5 +36,23 @@ class Solution:
                 instead of 1 at curr idx so just decrease high
                 """
                 high -= 1
-
-        
+-----------------------------------------------------------23 Feb 2022
+class Solution:
+    # @param A : list of integers
+    # @return a list of integers
+    def sortColors(self, A):
+        low = 0
+        mid = 0
+        high = len(A) - 1
+        while mid <= high:
+            if A[mid] == 0:
+                A[mid],A[low] = A[low],A[mid]
+                #print(A)
+                low += 1
+                mid += 1
+            elif A[mid] == 1:
+                mid += 1
+            else:
+                A[mid],A[high] = A[high],A[mid]
+                high -= 1
+        return A        

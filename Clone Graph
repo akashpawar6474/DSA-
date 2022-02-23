@@ -1,0 +1,38 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+class Solution:
+    def cloneGraph(self, node: 'Node') -> 'Node':
+        def bfs(root,ht):
+            from collections import deque
+            q = deque()
+            q.append(root)
+            ht = {}
+            ht[root] = Node(root.val)
+            while q:
+                top = q.popleft()
+                for nei in top.neighbors:
+                    if nei not in ht:
+                        q.append(nei)
+                        ht[nei] = Node(nei.val)
+                    ht[top].neighbors.append(ht[nei])
+            return ht[root]
+            
+        def dfs(root,ht):
+            ht[root] = Node(root.val)
+            for nei in root.neighbors:
+                if nei not in ht:
+                    dfs(nei,ht)
+                ht[root].neighbors.append(ht[nei])
+            return ht[root]
+        
+        if node is None:
+            return None
+        return dfs(node,{})
+                
+        

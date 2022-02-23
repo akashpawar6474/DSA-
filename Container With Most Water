@@ -1,0 +1,28 @@
+class Solution:
+    def maxArea(self, height: List[int]) -> int:
+        def calculate(height):
+            """
+            the problem is very simple
+            initialize two pointers at front and back
+            then update ptr with min height
+
+            as we wont get max ans with that height
+
+            tc = O(n)
+            sc = O(1)
+            """
+            left = 0
+            right = len(height) - 1
+            totalWater = 0
+            while left < right:
+                currHeight = min(height[left],height[right])
+                currWidth = right - left
+                currWater = currHeight * currWidth
+                totalWater = max(totalWater,currWater)
+                if height[left] < height[right]:
+                    left += 1
+                else:
+                    right -= 1
+            return totalWater
+        return calculate(height)
+        

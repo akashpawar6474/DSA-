@@ -333,7 +333,8 @@ solutions to graze over
 331.  Allocate minimum number of pages(sp - gfg) => same as aggresive cows but here my try is failed with exact same code 
 332. Excel Sheet Column Number => simple problem
 333.  Clone Graph => this is very simple problem can be solved using both bfs and dfs
-334.   
+334.  Find subarray with given sum | Set 1 (Nonnegative Numbers)(sp - gfg) => very easy sliding window problem
+335.  
 
 
 

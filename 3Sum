@@ -47,3 +47,71 @@ class Solution:
             newTarget = 0 - nums[first]
             findTriplet(first,newTarget,nums,ans)
         return ans
+    ------------------------------------------------23 Feb 2022
+    class Solution:
+	# @param A : list of integers
+	# @return a list of list of integers
+	def threeSum(self, A):
+        def findTriplet(first,newTarget,nums,ans):
+            n = len(nums)
+            second = first + 1
+            third = n - 1
+            while second < third:
+                eleAtSecond = nums[second]
+                eleAtThird = nums[third]
+                currTotal = eleAtSecond + eleAtThird
+                if currTotal == newTarget:
+                    triplet = [nums[first],nums[second],nums[third]]
+                    ans.append(triplet)
+                    second += 1
+                    third -= 1
+                    while second < third and nums[second] == nums[second - 1]:
+                        second += 1
+                    while second < third and nums[third] == nums[third + 1]:
+                        third -= 1
+                elif currTotal < newTarget:
+                    second += 1
+                else:
+                    third -= 1
+        
+        nums = A
+        nums.sort()
+        n = len(nums)
+        ans = []
+        for first in range(n - 2):
+            eleAtFirst = nums[first]
+            if first > 0 and eleAtFirst == nums[first - 1]:
+                continue
+            newTarget = 0 - nums[first]
+            findTriplet(first,newTarget,nums,ans)
+        return ans
+    def firstTry(self,A):
+        def twoPointers(firstIdx,A,triplets,target):
+            left = firstIdx + 1
+            right = len(A) - 1
+            while left < right:
+                currSum = A[left] + A[right]
+                if currSum == target:
+                    triplets.append([A[firstIdx],A[left],A[right]])
+                    left += 1
+                    right -= 1
+                    while left < right and A[left] == A[left - 1]:
+                        left += 1
+                    while left < right and A[right] == A[right + 1]:
+                        right -= 1
+                if currSum < target:
+                    left += 1
+                else:
+                    right -= 1
+            
+        n = len(A)
+        if n < 3:
+            return []
+        A.sort()
+        triplets = []
+        for i in range(n - 2):
+            if i > 0 and A[i] == A[i - 1]:
+                continue
+            newTarget = 0 - A[i]
+            twoPointers(i,A,triplets,newTarget)
+        return triplets

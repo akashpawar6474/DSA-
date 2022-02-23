@@ -335,7 +335,8 @@ solutions to graze over
 333.  Clone Graph => this is very simple problem can be solved using both bfs and dfs
 334.  Find subarray with given sum | Set 1 (Nonnegative Numbers)(sp - gfg) => very easy sliding window problem
 335.  Container With Most Water => Very good two pointer problem with some thought process
-336.  
+336.  Count of pairs with the given sum in sorted array(sp) => simple two pointer problem
+337.  
 
 
 

@@ -1,0 +1,58 @@
+class Solution:
+    def nthMagicalNumber(self, n: int, a: int, b: int) -> int:
+        """
+        a = 5
+        b = 7 
+        n = 3
+        
+        start = 5
+        end = 5 * 3 = 15
+        
+        elements    5 6 7 8 9 10 11 12 13 14 15
+        no of ele   1 1 2 2 2 3   3  3  3  3  4
+        leeq above
+        element
+        
+        ans should be 10
+        a = 2 b = 3 n = 4
+        
+        2 4 6 8 10
+        3 6 9
+        
+        
+        
+        2 3 4 6 8 9 10 
+        start end mid eleLeEqMid
+        2      8   5     3
+        6      8   7     4  cache mid as answer and go left as 7 is not present in array
+        6      6   6     4  cache mid as answer and go left
+        
+        how answer can be 6 ???
+        """
+        def gcd(a,b):
+            if b == 0:
+                return a
+            return gcd(b, a % b)
+        
+        def getEleLeEqToMid(a,b,mid,lcmOfBAndC):
+            return (mid // a) + (mid // b) - (mid // lcmOfBAndC)
+            
+        start = min(a,b)
+        end = min(a,b) * n
+        gcdOfBAndC = gcd(a,b)
+        lcmOfBAndC = (a * b) // gcdOfBAndC
+        ans = 0
+        while start <= end:
+            mid = (start + end) // 2
+            eleLeEqToMid = getEleLeEqToMid(a,b,mid,lcmOfBAndC)
+            #print(start,end,mid,eleLeEqToMid)
+            if eleLeEqToMid == n:
+                ans = mid
+                end = mid - 1
+            elif eleLeEqToMid > n:
+                end = mid - 1
+            else:
+                start = mid + 1
+        #print(ans)
+        return ans % (10 ** 9 + 7) 
+        

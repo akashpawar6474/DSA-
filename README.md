@@ -336,7 +336,8 @@ solutions to graze over
 334.  Find subarray with given sum | Set 1 (Nonnegative Numbers)(sp - gfg) => very easy sliding window problem
 335.  Container With Most Water => Very good two pointer problem with some thought process
 336.  Count of pairs with the given sum in sorted array(sp) => simple two pointer problem
-337.  
+337.  Nth Magical Number => this is classic binary search problem with some math
+338.  
 
 
 

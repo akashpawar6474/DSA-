@@ -1,0 +1,59 @@
+class Solution:
+    def compareVersion(self, version1: str, version2: str) -> int:
+        """
+        split the strings
+
+        if both are inbound
+            and not equal
+                if v1 chunk < v2 chunk
+                    return -1
+                else:
+                    return 1
+                
+        if v1ptr is still inbound
+            graze over remaing chunks
+            if any chunk is gt 0
+                return 1
+        if v2ptr is still inbound
+            graze over remaing chuks
+            if any chunk gt 0
+                return -1
+        
+        return 0
+        tc = O(max(n,m))
+        sc = O(n + m)
+        
+        """
+        v1List = version1.split(".")
+        v2List = version2.split(".")
+        
+        v1ptr = 0
+        v2ptr = 0
+        n = len(v1List)
+        m = len(v2List)
+        
+        while v1ptr < n and v2ptr < m:
+            v1Chunk = int(v1List[v1ptr])
+            v2Chunk = int(v2List[v2ptr])
+            if v1Chunk != v2Chunk:
+                if v1Chunk < v2Chunk:
+                    return -1
+                else:
+                    return 1
+            v1ptr += 1
+            v2ptr += 1
+        
+        while v1ptr < n:
+            v1Chunk = int(v1List[v1ptr])
+            if v1Chunk > 0:
+                return 1
+            v1ptr += 1
+            
+        while v2ptr < m:
+            v2Chunk = int(v2List[v2ptr])
+            if v2Chunk > 0:
+                return -1
+            v2ptr += 1
+        
+        return 0
+            

@@ -337,7 +337,8 @@ solutions to graze over
 335.  Container With Most Water => Very good two pointer problem with some thought process
 336.  Count of pairs with the given sum in sorted array(sp) => simple two pointer problem
 337.  Nth Magical Number => this is classic binary search problem with some math
-338.  
+338.  Compare Version Numbers => simple two pointer problem after splitting the strings
+339.  
 
 
 

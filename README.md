@@ -340,7 +340,9 @@ solutions to graze over
 338.  Compare Version Numbers => simple two pointer problem after splitting the strings
 339.  Pairs with given sum II(sp) => Very very good two pointer problem 
 340.  Minimize (max(A[i], B[j], C[k]) – min(A[i], B[j], C[k])) of three different sorted arrays(sp -gfg) => this is very interesting 3 pointers problem
-341.  
+341.  Another Count Rectangles(sp) => this is really simple two pointer problem
+342.  
+
 
 
 

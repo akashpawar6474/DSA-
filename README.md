@@ -342,7 +342,7 @@ solutions to graze over
 340.  Minimize (max(A[i], B[j], C[k]) – min(A[i], B[j], C[k])) of three different sorted arrays(sp -gfg) => this is very interesting 3 pointers problem
 341.  Another Count Rectangles(sp) => this is really simple two pointer problem
 342.  Find the closest pair from two sorted arrays(sp - gfg) => very good two pointer problem where two pointer moving in opposite directions in diff arrays
-343.  
+343.  3Sum Closest(sp - leetcode) => simple sorting then fix onepointer then do two pointers in remaining array
 
 
 

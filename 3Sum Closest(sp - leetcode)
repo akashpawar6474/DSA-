@@ -1,0 +1,38 @@
+class Solution:
+    def threeSumClosest(self, nums: List[int], target: int) -> int:
+        """
+        so sort the array first
+        then do 3 sum problem
+        tc = O(nlogn + n ^ 2)
+        """
+        import math
+        def findClosestSumToNewTarget(firstEleIdx,nums,target):
+            left = firstEleIdx + 1
+            right = len(nums) - 1
+            minDiff = math.inf
+            closestSum = 0
+            while left < right:
+                currSum = nums[left] + nums[right]
+                if currSum == target:
+                    return currSum
+                if abs(currSum - target) < minDiff:
+                    minDiff = abs(currSum - target)
+                    closestSum = currSum
+                if currSum < target:
+                    left += 1
+                else:
+                    right -= 1
+            return closestSum
+        
+        nums.sort()
+        n = len(nums)
+        minDiff = math.inf
+        ans = 0
+        for i in range(n - 2):
+            newTarget = target - nums[i]
+            currSum = nums[i] + findClosestSumToNewTarget(i,nums,newTarget)
+            currDiff = abs(target - currSum)
+            if currDiff < minDiff:
+                ans = currSum
+                minDiff = currDiff
+        return ans

@@ -338,7 +338,8 @@ solutions to graze over
 336.  Count of pairs with the given sum in sorted array(sp) => simple two pointer problem
 337.  Nth Magical Number => this is classic binary search problem with some math
 338.  Compare Version Numbers => simple two pointer problem after splitting the strings
-339.  
+339.  Pairs with given sum II(sp) => Very very good two pointer problem 
+
 
 
 

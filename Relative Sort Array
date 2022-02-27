@@ -1,0 +1,35 @@
+class Solution:
+    def relativeSortArray(self, arr1: List[int], arr2: List[int]) -> List[int]:
+        """
+        create freq table of first array
+        then graze over second array
+
+        if ele is present
+            then add it no of times as frequency
+        then create set of b array
+        and graze over first array
+        and if ele not in set
+        then append to answer list
+        """
+        def prepareMap(arr):
+            ht = {}
+            for no in arr:
+                if no not in ht:
+                    ht[no] = 0
+                ht[no] += 1
+            return ht
+        arr1.sort()
+        ht = prepareMap(arr1)
+        bset = set(arr2)
+        ans = []
+        for no in arr2:
+            if no in ht:
+                freq = ht[no]
+                while freq > 0:
+                    ans.append(no)
+                    freq -= 1
+        
+        for no in arr1:
+            if no not in bset:
+                ans.append(no)
+        return ans

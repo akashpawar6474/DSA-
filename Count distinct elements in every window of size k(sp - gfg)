@@ -1,0 +1,31 @@
+class Solution:
+	# @param A : list of integers
+	# @param B : integer
+	# @return a list of integers
+	def dNums(self, A, B):
+        """
+        idea is to use sliding window with hashtable
+        when currIdx gteq b - 1
+        from there add hashtable legth to answer array
+        """
+        ht = {}
+        windowStart = 0
+        windowLen = B 
+        n = len(A)
+        ans = []
+        for windowEnd in range(n):
+            eleAtWindowEnd = A[windowEnd]
+            if eleAtWindowEnd not in ht:
+                ht[eleAtWindowEnd] = 0
+            ht[eleAtWindowEnd] += 1
+            currWindowLen = windowEnd - windowStart + 1
+            if currWindowLen > windowLen:
+                eleAtWindowStart = A[windowStart]
+                windowStart += 1
+                if eleAtWindowStart in ht:
+                    ht[eleAtWindowStart] -= 1
+                    if ht[eleAtWindowStart] == 0:
+                        del ht[eleAtWindowStart]
+            if windowEnd >= B - 1:
+                ans.append(len(ht))
+        return ans

@@ -344,7 +344,8 @@ solutions to graze over
 342.  Find the closest pair from two sorted arrays(sp - gfg) => very good two pointer problem where two pointer moving in opposite directions in diff arrays
 343.  3Sum Closest(sp - leetcode) => simple sorting then fix onepointer then do two pointers in remaining array
 344.  Find if there is a subarray with 0 sum(sp - gfg) => this can be solved using set
-345.  
+345.  Largest Continuous Sequence Zero Sum(sp - interviewbit) => this can be solved using hashmap and running sum
+346.  
 
 
 

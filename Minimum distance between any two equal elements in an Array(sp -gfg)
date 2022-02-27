@@ -1,0 +1,21 @@
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        """
+        we can use hashmap here
+        if no in ht
+            keep track of min len
+        else add no and its starting idx into map
+        """
+        import math
+        ht = {}
+        n = len(A)
+        minLen = math.inf
+        for i in range(n):
+            if A[i] in ht:
+                currLen = i - ht[A[i]]
+                minLen = min(minLen,currLen)
+            else:
+                ht[A[i]] = i 
+        return minLen if minLen != math.inf else -1

@@ -348,6 +348,8 @@ solutions to graze over
 346.  Minimum distance between any two equal elements in an Array(sp -gfg) => this is very simple problme using hashtable
 347.  Relative Sort Array => very simple problem
 348.  Check if characters of a given string can be rearranged to form a palindrome(sp - gfg) => this is easy problem can be solved using hashmap and palindrome property
+349.  Count distinct elements in every window of size k(sp - gfg) => this is very easy sliding window and hashtable problem
+350.  
 
 
 

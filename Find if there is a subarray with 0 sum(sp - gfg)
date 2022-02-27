@@ -1,0 +1,14 @@
+class Solution:
+    # @param A : list of integers
+    # @return an integer
+    def solve(self, A):
+        runningSum = 0
+        s = set()
+        for no in A:
+            runningSum += no
+            if runningSum == 0:
+                return 1
+            if runningSum in s:
+                return 1
+            s.add(runningSum)
+        return 0

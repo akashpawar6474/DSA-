@@ -30,3 +30,25 @@ class Solution:
                 currEle += 1
             lcs = max(lcs,count)
         return lcs
+---------------------------------------------------27 feb 2022
+class Solution:
+    def longestConsecutive(self, nums: List[int]) -> int:
+        """
+        In worst case we are visiting array ele
+        only twice
+
+        tc = O(n)
+        sc = O(1)
+        """
+        s = set(nums)
+        maxSequence = 0
+        for no in nums:
+            if no - 1 in s:
+                continue
+            count = 1
+            currNo = no
+            while currNo + 1 in s:
+                count += 1
+                currNo += 1
+            maxSequence = max(maxSequence,count)
+        return maxSequence

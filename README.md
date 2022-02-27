@@ -345,7 +345,8 @@ solutions to graze over
 343.  3Sum Closest(sp - leetcode) => simple sorting then fix onepointer then do two pointers in remaining array
 344.  Find if there is a subarray with 0 sum(sp - gfg) => this can be solved using set
 345.  Largest Continuous Sequence Zero Sum(sp - interviewbit) => this can be solved using hashmap and running sum
-346.  
+346.  Minimum distance between any two equal elements in an Array(sp -gfg) => this is very simple problme using hashtable
+347.  
 
 
 

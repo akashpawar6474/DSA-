@@ -1,0 +1,31 @@
+class Solution:
+	# @param A : integer
+	# @return an integer
+	def colorful(self, A):
+        """
+        question is do we need to generate all the subsequences
+        that will take O(2 ^ n) time which is very costly
+
+        is it dp problem really?
+        3245
+        3 32 324 3245
+        2 24 245
+        4 45
+
+        convert no into string then string array
+        tc = O(n ^ 2)
+        sc = O(n ^ 2) 
+        there will be total n * (n + 1) / 2
+        """
+        products = set()
+        currProduct = 1
+        noStr = str(A)
+        n = len(noStr)
+        for left in range(n):
+            currProduct = 1
+            for right in range(left,n):
+                currProduct *= int(noStr[right])
+                if currProduct in products:
+                    return 0
+                products.add(currProduct)
+        return 1

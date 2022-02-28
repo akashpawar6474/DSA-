@@ -1,0 +1,49 @@
+class Solution:
+	# @param A : tuple of integers
+	# @param B : tuple of integers
+	# @param C : tuple of integers
+	# @return an integer
+	def minimize(self, A, B, C):
+        """
+        take 3 ptrs at start
+        take max
+
+        A = [1, 4, 10]
+        B = [2, 15, 20]
+        C = [10, 12]
+
+        A[i] = 10, B[j] = 15, C[j] = 12
+
+        abs(1-2),abs(2-10),abs(1-10)
+        max(1,8,9) = 9
+        move smaller no ahead
+        abs(4-2),abs(2-10),abs(4-10)
+        max(2,8,6) = 8
+        move smaller ptr ahead
+        abs(4-15),abs(15-10),abs(15-10)
+        max(11,5,5) = 11
+        abs(10-15),abs(10-10),abs(15-10)
+        max(5,0,5) = 5
+        if we increment first ptr now  then we will reach the end
+
+        tc = O(n + m + o)
+        sc = O(1)
+        """
+        import math
+        ptr1 = ptr2 = ptr3 = 0
+        aLen,bLen,cLen = len(A),len(B),len(C)
+        minAmongAllMax = math.inf
+        while ptr1 < aLen and ptr2 < bLen and ptr3 < cLen:
+            absOfAB = abs(A[ptr1] - B[ptr2])
+            absOfAC = abs(A[ptr1] - C[ptr3])
+            absOfBC = abs(B[ptr2] - C[ptr3])
+            maxAmongAllAbs = max(absOfAB,absOfAC,absOfBC)
+            minAmongAllMax = min(minAmongAllMax,maxAmongAllAbs)
+            if A[ptr1] <= B[ptr2] and A[ptr1] <= C[ptr3]:
+                ptr1 += 1
+            elif B[ptr2] <= A[ptr1] and B[ptr2] <= C[ptr3]:
+                ptr2 += 1
+            else:
+                ptr3 += 1
+        return minAmongAllMax
+

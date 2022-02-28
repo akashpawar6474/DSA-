@@ -349,7 +349,8 @@ solutions to graze over
 347.  Relative Sort Array => very simple problem
 348.  Check if characters of a given string can be rearranged to form a palindrome(sp - gfg) => this is easy problem can be solved using hashmap and palindrome property
 349.  Count distinct elements in every window of size k(sp - gfg) => this is very easy sliding window and hashtable problem
-350.  
+350.  Check if the product of every contiguous subsequence is different or not in a number(sp - gfg) => use two loops and use set to track products
+351.  
 
 
 

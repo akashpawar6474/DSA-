@@ -350,7 +350,8 @@ solutions to graze over
 348.  Check if characters of a given string can be rearranged to form a palindrome(sp - gfg) => this is easy problem can be solved using hashmap and palindrome property
 349.  Count distinct elements in every window of size k(sp - gfg) => this is very easy sliding window and hashtable problem
 350.  Check if the product of every contiguous subsequence is different or not in a number(sp - gfg) => use two loops and use set to track products
-351.  
+351.  Find three closest elements from given three sorted arrays(sp - gfg) => this is very simple proble taking 3 ptrs at start of arrays and moving smallest val ptr ahead
+352.  
 
 
 

@@ -1,0 +1,72 @@
+class Solution:
+    def countBits(self, n: int) -> List[int]:
+        """
+        this is mind blowing problem
+        in binary we can call 1 2 4 8 16 as offset values
+        
+        now lets take no from 1 to 15 
+        then parallely take set bits into them
+        
+        numbers  0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
+        set bits 0 1 1 2 1 2 2 3 1 2  2  3  2  3  3  4
+        offsets    ^ ^   ^       ^    
+        
+        setBits[1] = setBits[currNo - prevOffset] + 1 => setBits[1 - 1] + 1 = 1
+        setBits[2] = setBits[currNo - prevOffset] + 1 => setBits[2 - 2] + 1 = 2
+        setBits[3] = setBits[currNo - prevOffset] + 1 => setBits[3 - 2] + 1 = 2
+        setBits[4] = setBits[currNo - prevOffset] + 1 => setBits[4 - 4] + 1 = 1
+        setBits[5] = setBits[currNo - prevOffset] + 1 => setBits[5 - 4] + 1 = 2
+        setBits[6] = setBits[currNo - prevOffset] + 1 => setBits[6 - 4] + 1 = 2
+        setBits[7] = setBits[currNo - prevOffset] + 1 => setBits[7 - 4] + 1 = 3
+        setBits[8] = setBits[currNo - prevOffset] + 1 => setBits[8 - 8] + 1 = 1
+        setBits[9] = setBits[currNo - prevOffset] + 1 => setBits[9 - 8] + 1 = 2
+        setBits[10] = setBits[currNo - prevOffset] + 1 => setBits[10 - 8] + 1 = 2
+        setBits[11] = setBits[currNo - prevOffset] + 1 => setBits[11 - 8] + 1 = 3
+        setBits[12] = setBits[currNo - prevOffset] + 1 => setBits[12 - 8] + 1 = 2
+        setBits[13] = setBits[currNo - prevOffset] + 1 => setBits[13 - 8] + 1 = 3
+        setBits[14] = setBits[currNo - prevOffset] + 1 => setBits[14 - 8] + 1 = 3
+        setBits[15] = setBits[currNo - prevOffset] + 1 => setBits[15 - 8] + 1 = 4
+
+        so idea is take offset equal to 1
+        then graze over the numbers
+        
+        Now question is how to check if we reached offset?
+        multiply prev offset by 2 if it is equal to curr idx
+            then we reached offset so update it
+            
+        tc = O(n)
+        sc = constant
+        """
+        setBits = [0] * (n + 1)
+        latestOffset = 1
+        for currNo in range(1,n + 1):
+            if latestOffset * 2 == currNo:
+                latestOffset = currNo
+            setBits[currNo] = setBits[currNo - latestOffset] + 1
+        return setBits
+    
+    def firsttry(self,n):
+        """
+        Idea is to graze over all numbers
+        and for each no count set bits
+        
+        for each no in worst case
+        which is 10 ^ 9 Or 2 ^ 30
+        count set Bits fun will take 30 iterations at max
+        
+        so tc = O(n * 30) => O(n)
+        sc = constant
+        """
+        def countSetBits(no):
+            setBits = 0
+            while no > 0:
+                if no & 1 != 0:
+                    setBits += 1
+                no = no >> 1
+            return setBits
+        
+        ans = []
+        for currNo in range(n + 1):
+            setBits = countSetBits(currNo)
+            ans.append(setBits)
+        return ans

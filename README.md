@@ -353,7 +353,8 @@ solutions to graze over
 351.  Find three closest elements from given three sorted arrays(sp - gfg) => this is very simple proble taking 3 ptrs at start of arrays and moving smallest val ptr ahead
 352.  Counting Bits => this is very mind blowing problem with some observations
 353.  Is Subsequence => very simple two pointer problem
-354.  
+354.  Rectangles Counting(sp - codechef - codeforces) => this is observation based problem with some match is involved
+355.  
 
 
 

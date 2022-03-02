@@ -355,7 +355,7 @@ solutions to graze over
 353.  Is Subsequence => very simple two pointer problem
 354.  Rectangles Counting(sp - codechef - codeforces) => this is observation based problem with some match is involved
 355.  Count Right Triangles(sp) => this is also hashing and observation based math problem
-356.  
+356.  Common Elements(sp - after academy) => very important hashmap problem
 
 
 

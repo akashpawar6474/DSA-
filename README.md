@@ -352,7 +352,8 @@ solutions to graze over
 350.  Check if the product of every contiguous subsequence is different or not in a number(sp - gfg) => use two loops and use set to track products
 351.  Find three closest elements from given three sorted arrays(sp - gfg) => this is very simple proble taking 3 ptrs at start of arrays and moving smallest val ptr ahead
 352.  Counting Bits => this is very mind blowing problem with some observations
-353.  
+353.  Is Subsequence => very simple two pointer problem
+354.  
 
 
 

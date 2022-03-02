@@ -356,6 +356,8 @@ solutions to graze over
 354.  Rectangles Counting(sp - codechef - codeforces) => this is observation based problem with some match is involved
 355.  Count Right Triangles(sp) => this is also hashing and observation based math problem
 356.  Common Elements(sp - after academy) => very important hashmap problem
+357.  Replicating Substring(sp) => very good observation based hashmap problem
+358.  
 
 
 

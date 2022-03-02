@@ -354,7 +354,8 @@ solutions to graze over
 352.  Counting Bits => this is very mind blowing problem with some observations
 353.  Is Subsequence => very simple two pointer problem
 354.  Rectangles Counting(sp - codechef - codeforces) => this is observation based problem with some match is involved
-355.  
+355.  Count Right Triangles(sp) => this is also hashing and observation based math problem
+356.  
 
 
 

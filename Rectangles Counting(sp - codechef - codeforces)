@@ -1,0 +1,123 @@
+Given two arrays of integers A and B of size N each, where each pair (A[i], B[i]) for 0 <= i < N represents a unique point (x, y) in 2-D Cartesian plane.
+
+Find and return the number of unordered quadruplet (i, j, k, l) such that (A[i], B[i]), (A[j], B[j]), (A[k], B[k]) and (A[l], B[l]) form a rectangle with the rectangle having all the sides parallel to either x-axis or y-axis.
+
+
+
+Problem Constraints
+
+1 <= N <= 2000
+0 <= A[i], B[i] <= 109
+
+
+
+Input Format
+
+The first argument given is the integer array A.
+The second argument given is the integer array B.
+
+
+
+Output Format
+
+Return the number of unordered quadruplet that form a rectangle.
+
+
+
+Example Input
+
+Input 1:
+
+ A = [1, 1, 2, 2]
+ B = [1, 2, 1, 2]
+Input 1:
+
+ A = [1, 1, 2, 2, 3, 3]
+ B = [1, 2, 1, 2, 1, 2]
+
+
+Example Output
+
+Output 1:
+
+ 1
+Output 2:
+
+ 3
+
+
+Example Explanation
+
+Explanation 1:
+
+ All four given points make a rectangle. So, the answer is 1.
+Explanation 2:
+
+ 3 quadruplets which make a rectangle are: (1, 1), (2, 1), (2, 2), (1, 2)
+                                           (1, 1), (3, 1), (3, 2), (1, 2)
+                                           (2, 1), (3, 1), (3, 2), (2, 2)
+----------------------------------------------------------------------------------
+class Solution:
+    # @param A : list of integers
+    # @param B : list of integers
+    # @return an integer
+    def solve(self, A, B):
+        """
+        to fix any rectangle we need two diagonal points
+                (x1,y2)            x2,y2
+
+                x1,y1           (x2,y1) 
+            
+        here x1,y1 and x2,y2 is fixed so we just have to check if other two 
+        points are present there or not using hashmap
+
+        there are two edge case 
+        if we are fixing x1,y1 and x2,y2 then we are getting 1 rectangle
+        if we fix x2,y1 and x1,y2 then also we count same rectangle
+
+        so at last reduce count by 2
+
+        another edge case is 
+
+            3,4
+
+            3,2
+
+        this two are our fix points
+        x1 = 3 y1 = 2,x2 = 3,y2 = 4
+
+        so another two co-ordinates should be 
+        (x2,y1) = 3,2 and (x1,y2) = 3,4
+
+        so we will count rectangle as per our above logic which is not valid
+        so whenever x1 == x2 or y1 == y2
+        skip that as we can make rectangle if diagonal points are parallel to x or y axis
+        tc = O(n ^ 2) n = no of points
+        sc = O(n)
+        """
+        def pushPointsInMap(A,B):
+            s = set()
+            points = len(A)
+            for currPointIdx in range(points):
+                currPoint = (A[currPointIdx],B[currPointIdx])
+                s.add(currPoint)
+            return s 
+
+        s = pushPointsInMap(A,B)
+        points = len(A)
+        count = 0
+        for i in range(points):
+            x1 = A[i]
+            y1 = B[i]
+            for j in range(i + 1,points):
+                x2 = A[j]
+                y2 = B[j]
+                if x1 == x2 or y1 == y2:
+                    continue
+                thirdPoint = (x1,y2)
+                fourthPoint = (x2,y1)
+                if thirdPoint in s and fourthPoint in s:
+                    count += 1
+        return count // 2
+            
+

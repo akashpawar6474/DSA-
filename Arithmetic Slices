@@ -1,0 +1,40 @@
+class Solution:
+    def numberOfArithmeticSlices(self, nums: List[int]) -> int:
+        """
+        idea is to solve this using sliding window
+        we will also need answer variable
+        [1,3,5,7,9]
+        take windowstart at = 0
+        and windowend at 1 to end
+            add curr ele to window
+            count the diff
+            if it is not eq prev diff
+            then shift windowstart here and 
+                inc windowstart by 1
+            else diff is same
+            and windowlen gteq 3
+            then add windowlen - 3 + 1 to answer
+        
+        edge case if array has le 3 ele
+        then return 0
+        tc = O(n)
+        sc = O(1)
+        """
+        n = len(nums)
+        if n < 3:
+            return 0
+        windowStart = 0
+        windowEnd = 1
+        ans = 0
+        prevDiff = nums[windowEnd] - nums[windowStart]
+        while windowEnd < n:
+            currDiff = nums[windowEnd] - nums[windowEnd - 1]
+            if currDiff != prevDiff:
+                prevDiff = currDiff
+                windowStart = windowEnd - 1
+            else:
+                windowLen = windowEnd - windowStart + 1
+                if windowLen >= 3:
+                    ans += (windowLen - 3 + 1)
+            windowEnd += 1
+        return ans

@@ -357,7 +357,8 @@ solutions to graze over
 355.  Count Right Triangles(sp) => this is also hashing and observation based math problem
 356.  Common Elements(sp - after academy) => very important hashmap problem
 357.  Replicating Substring(sp) => very good observation based hashmap problem
-358.  
+358.  Arithmetic Slices => this is observation based sliding window problem
+359.  
 
 
 

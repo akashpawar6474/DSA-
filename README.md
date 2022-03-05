@@ -359,7 +359,8 @@ solutions to graze over
 357.  Replicating Substring(sp) => very good observation based hashmap problem
 358.  Arithmetic Slices => this is observation based sliding window problem
 359.  Delete and Earn => observation based problem
-360.  
+360.  Compare Sorted Subarrays(sp) => THIS is ONE of the BEST randomizatio,hashmap,prefix sum problem
+361.   
 
 
 

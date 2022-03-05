@@ -362,7 +362,8 @@ solutions to graze over
 360.  Compare Sorted Subarrays(sp) => THIS is ONE of the BEST randomizatio,hashmap,prefix sum problem
 361.  Count of cyclic permutations having XOR with other binary string as 0(sp - gfg) => this is very good problem can be solved using Rabin-Karp algo
 362.  Given a binary string, count number of substrings that start and end with 1(sp - gfg) => this can be solved by conuting freq and returning n * n + 1 // 2 BRAINTEASER
-363.  
+363.  Convert the string into palindrome string by changing only one character(sp - gfg) => simple two pointer observation based problem
+364.  
 
 
 

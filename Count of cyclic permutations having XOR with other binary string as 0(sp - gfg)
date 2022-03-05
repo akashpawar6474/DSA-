@@ -1,0 +1,57 @@
+class Solution:
+    # @param A : string
+    # @param B : string
+    # @return an integer
+    def solve(self, A, B):
+        """
+        Q.first question is how to get cyclic permutations?
+        0011
+        just append the string to integer
+        00110011
+        0011
+         0110
+          1100
+           1001
+        those are cyclic permutations
+
+        idea is to use rabin karp algorithm
+        when we have same string then it will have xor equal to 0
+        10011001
+         0011
+        m = len(A)
+        n = len(B)
+        tc = O(n)
+        sc = constant
+        """
+        B = B + B
+        mod = 10 ** 9 + 7
+        fw = 0
+        ft = 0
+        p = 4# we can take any value of p
+        n = len(B)
+        m = len(A)
+        count = 0
+        prevPowerVal = 1
+        for i in range(m):
+            fw = (fw + (int(A[i]) * (prevPowerVal))) % mod
+            ft = (ft + (int(B[i]) * (prevPowerVal))) % mod
+            prevPowerVal = (prevPowerVal * p) % mod
+        if fw == ft:
+            count += 1
+        start = 0
+        end = m
+        endPowerVal = (p ** end) % mod 
+        prevPowerVal = 1
+
+        while end < n - 1:
+            #now ele before start - 1 go out
+            #ele at end + 1 comes in
+            ft = (ft - (int(B[start]) * (prevPowerVal)) + (int(B[end]) * (endPowerVal))) % mod
+            fw = (fw * p) % mod
+            if fw == ft:
+                count += 1
+            start += 1
+            end += 1
+            prevPowerVal = (prevPowerVal * p) % mod
+            endPowerVal = (endPowerVal * p) % mod
+        return count

@@ -1,0 +1,88 @@
+Problem Description
+
+You are given a string A. Find the number of substrings that start and end with 'a'.
+
+
+
+Problem Constraints
+
+1 <= |A| <= 105
+
+String will have only lowercase English letters.
+
+
+
+Input Format
+
+Given the only argument is a String A.
+
+
+
+Output Format
+
+Return number of substrings that start and end with 'a'.
+
+
+
+Example Input
+
+Input 1:
+
+ A = "aab"
+Input 2:
+
+ A = "bcbc"
+
+
+Example Output
+
+Output 1:
+
+ 3
+Output 2:
+
+ 0
+
+
+Example Explanation
+
+Explanation 1:
+
+ Substrings that start and end with 'a' are:
+    1. "a"
+    2. "aa"
+    3. "a"
+Explanation 2:
+
+ There are no substrings that start and end with 'a'.
+ ---------------------------------------------
+ class Solution:
+    # @param A : string
+    # @return an integer
+    def solve(self, A):
+        """
+        idea is to count the frequency of a 
+        and do freq * (freq + 1) / 2
+        which will be substrings starting by a and ending by a 
+        tc = O(n)
+        sc = constnat
+        
+        if we dont want to calculate single char as substring then take
+        freq * (freq - 1) //2
+        """
+        freqOfA = 0
+        for ch in A:
+            if ch == 'a':
+                freqOfA += 1
+        return (freqOfA * (freqOfA + 1)) // 2
+        
+    def bruteForce(self,A):
+        """
+        aab
+        """
+        count = 0
+        for i in range(len(A)):
+            for j in range(i,len(A)):
+                if A[i] == A[j] == 'a':
+                    count += 1
+        return count

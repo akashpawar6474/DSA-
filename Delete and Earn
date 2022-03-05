@@ -1,0 +1,88 @@
+class Solution:
+    def deleteAndEarn(self, nums: List[int]) -> int:
+        """
+        calculate the frequency
+        then take unique no in sorted order
+            if prev no is not used
+                totalByAvoidingPrevNo = max(totalByAvoidingPrevNo,totalByUsingPrevNo)
+                totalByUsingPrevNo = currno * fre + max(totalByAvoidingPrevNo,totalByUsingPrevNo)
+            else if prev no is used
+                totalByAvoidingPrevNo = max(totalByAvoidingPrevNo,totalByUsingPrevNo)
+                totalByUsingPrevNo = currno * fre + totalByAvoidingPrevNo
+            prevNo = currno
+        
+        1 = 2
+        2 = 2
+        3 = 1
+        
+        avoiding using prev     total
+        0           0   -inf     0
+        0           2    1
+        2           4    2
+        4           5    3
+        
+                
+        """
+        def prepareMap(nums):
+            ht = {}
+            for no in nums:
+                if no not in ht:
+                    ht[no] = 0
+                ht[no] += 1
+            return ht
+    
+        ht = prepareMap(nums)
+        prevNo = -math.inf
+        totalByAvoidingPrevNo = totalByUsingPrevNo = 0
+        for currNo in sorted(ht.keys()):
+            if currNo - 1 == prevNo:
+                totalByAvoidingPrevNo,totalByUsingPrevNo = max(totalByAvoidingPrevNo,totalByUsingPrevNo),currNo * ht[currNo] + totalByAvoidingPrevNo
+            else:
+                totalByAvoidingPrevNo,totalByUsingPrevNo = max(totalByAvoidingPrevNo,totalByUsingPrevNo),currNo * ht[currNo] + max(totalByAvoidingPrevNo,totalByUsingPrevNo)
+            prevNo = currNo
+        return max(totalByAvoidingPrevNo,totalByUsingPrevNo)
+        
+                
+                
+                
+    def bruteForce(self,nums):
+        """
+        Idea is to create freq map
+        then push records in maxHeap
+        where first record is frequency and second is number itself in heap
+        
+        and we will need one set to determine
+        if prev or next no of curr no is added into answer or not
+        
+        tc = O(n + nlogn + nlogn)
+        sc = O(n)
+        """
+        import heapq
+        def prepareMap(nums):
+            ht = {}
+            for no in nums:
+                if no not in ht:
+                    ht[no] = 0
+                ht[no] += 1
+            return ht
+        
+        def pushInMaxHeap(ht):
+            maxHeap = []
+            for key,val in ht.items():
+                heapq.heappush(maxHeap,(-val,-key))
+            return maxHeap
+    
+        ht = prepareMap(nums)
+        maxHeap = pushInMaxHeap(ht)
+        usedNumbers = set()
+        ans = 0
+        while maxHeap:
+            freq,no = heapq.heappop(maxHeap)
+            freq = -1 * freq
+            no = -1 * no
+            if (no + 1) in usedNumbers or (no - 1) in usedNumbers:
+                continue
+            currTotal = no * freq
+            usedNumbers.add(no)
+            ans += currTotal
+        return ans

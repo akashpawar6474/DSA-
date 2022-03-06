@@ -1,0 +1,58 @@
+class Solution:
+    def minWindow(self, s: str, t: str) -> str:
+        """
+        idea is to prepare freq table of B 
+        first of all 
+        then graze over second string which is A
+        if ch at windowend is present in ht
+            then reduce the count
+            if count == 0
+                inc no of matched char
+        take a loop untill no of matched char gt len of ht
+            keep  track of window
+            and take char on windowstart
+            inc windowstart
+            if ch in ht
+                if it is 0
+                    then reduce no of matching char
+                inc the freq of char
+        at last return smallest window
+        """
+        def prepareMap(t):
+            ht = {}
+            for ch in t:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        
+        ht = prepareMap(t)
+        n = len(s)
+        windowStart = 0
+        minWindowLength = math.inf
+        noOfMatchedChar = 0
+        ansWindowStart = 0
+        
+        for windowEnd in range(n):
+            #step 1
+            chAtWindowEnd = s[windowEnd]
+            if chAtWindowEnd in ht:
+                ht[chAtWindowEnd] -= 1
+                if ht[chAtWindowEnd] == 0:
+                    noOfMatchedChar += 1
+            #step 2
+            while noOfMatchedChar >= len(ht):
+                currWindowLength = windowEnd - windowStart + 1
+                if currWindowLength < minWindowLength:
+                    ansWindowStart = windowStart
+                    minWindowLength = currWindowLength
+                chAtWindowStart = s[windowStart]
+                windowStart += 1
+                if chAtWindowStart in ht:
+                    if ht[chAtWindowStart] == 0:
+                        noOfMatchedChar -= 1
+                    ht[chAtWindowStart] += 1
+                    
+        if minWindowLength == math.inf:
+            return ""
+        return s[ansWindowStart : ansWindowStart + minWindowLength]

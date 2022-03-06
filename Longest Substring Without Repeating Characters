@@ -100,3 +100,30 @@ class Solution:
             currLen = windowEnd - windowStart + 1
             maxLen = max(maxLen,currLen)
         return maxLen
+        
+  ------------------------------------------------------------------------ 6 march 2022
+  class Solution:
+	# @param A : string
+	# @return an integer
+	def lengthOfLongestSubstring(self, A):
+        """
+        this is classic sliding window problem
+        along with the hashmpa
+        In hashmap we will keep track of 
+        ch and its previous latest idx
+        tc = O(n)
+        sc = O(n)
+        """
+        ht = {}
+        maxWindowLen = 0
+        windowStart = 0
+        for windowEnd in range(len(A)):
+            currCh = A[windowEnd]
+            if currCh in ht:
+                windowStart = max(windowStart,ht[currCh] + 1)
+            currWindowLen = windowEnd - windowStart + 1
+            ht[currCh] = windowEnd
+            maxWindowLen = max(maxWindowLen,currWindowLen)
+        return maxWindowLen
+
+

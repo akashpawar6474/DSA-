@@ -52,7 +52,49 @@ class Solution:
             if matchedCharCount == len(freq):
                 ans.append(windowStart)
         return ans
-                    
+   -----------------------------------------------------------------------
+   class Solution:
+    # @param A : string
+    # @param B : string
+    # @return an integer
+    def solve(self, A, B):
+        """
+        idea is to cal freq table of pattern first of all
+        then graze over second string
+        and find permutations in window
+        tc = O(m + n)
+        sc = O(m)
+        """
+        def prepareFreqTable(A):
+            ht = {}
+            for ch in A:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        ht = prepareFreqTable(A)
+        windowStart = 0
+        noOfMatchedChar = 0
+        n = len(B)
+        count = 0
+        for windowEnd in range(n):
+            chAtWindowEnd = B[windowEnd]
+            if chAtWindowEnd in ht:
+                ht[chAtWindowEnd] -= 1
+                if ht[chAtWindowEnd] == 0:
+                    noOfMatchedChar += 1
+            currWindowLen = windowEnd - windowStart + 1
+            if currWindowLen > len(A):
+                chAtWindowStart = B[windowStart]
+                windowStart += 1
+                if chAtWindowStart in ht:
+                    if ht[chAtWindowStart] == 0:
+                        noOfMatchedChar -= 1
+                    ht[chAtWindowStart] += 1
+            if noOfMatchedChar == len(ht):
+                count += 1
+        return count
+
 
                     
             

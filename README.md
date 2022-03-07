@@ -364,7 +364,7 @@ solutions to graze over
 362.  Given a binary string, count number of substrings that start and end with 1(sp - gfg) => this can be solved by conuting freq and returning n * n + 1 // 2 BRAINTEASER
 363.  Convert the string into palindrome string by changing only one character(sp - gfg) => simple two pointer observation based problem
 364.  Minimum Window Substring => using hashmap we can solve this problem we should shrink when we matched all characters
-365.  
+365.  Check if there exists a permutation of given string which doesn’t contain any monotonous substring(sp - gfg) => categorize char in odd even buckets then sort them append them and check if any consecutive char has same diff
 
 
 

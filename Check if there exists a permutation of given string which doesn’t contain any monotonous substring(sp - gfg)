@@ -1,0 +1,44 @@
+class Solution:
+    # @param A : string
+    # @return an integer
+    def solve(self, A):
+        """
+        abcd
+        0123
+
+        even ac 
+        odd bd
+        it can be rearranged as cadb
+
+        aab
+        001
+
+        even aa 
+        odd b
+        idea is to sort the characters
+        """
+        def anyMonotonousString(st):
+            n = len(st)
+            for currIdx in range(1,n):
+                if abs(ord(st[currIdx]) - ord(st[currIdx - 1])) == 1:
+                    return True
+            return False
+        def seperateOddAndEvenCharacters(A):
+            odd = ""
+            even = ""
+            for ch in A:
+                if ord(ch) & 1 == 0:
+                    even += ch
+                else:
+                    odd += ch
+            return odd,even
+
+        def sortString(st):
+            return ''.join(sorted(st))
+        
+        odd,even = seperateOddAndEvenCharacters(A)
+        odd = sortString(odd)
+        even = sortString(even)
+        if anyMonotonousString(even + odd):
+            return 0
+        return 1

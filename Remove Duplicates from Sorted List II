@@ -1,0 +1,95 @@
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        #this problem can be solved using simple ptr manipulations
+        #by making use of the fact that list is sorted
+        #               take a loop untill we have curr and next ele
+        #   if values are not same          if values are same move upto last instance of duplicate using while loop
+        #           ||                                  ||
+        #     just move forward             then move head to next 
+        #                                   for eg 3-3 - 4
+        #                                   head is on last 3 so move it forwar and connect prev to head
+        #take dummp ptr to keep track of head
+        dummy = prev = ListNode(0)
+        #attach dummy to head
+        dummy.next = head
+        while head and head.next:
+            #if vals are same
+            if head.val == head.next.val:
+                #move upto last instace of dups
+                while head and head.next and head.val == head.next.val:
+                    head = head.next
+                #now move head to one step forward
+                head = head.next
+                #attache prev to it
+                prev.next = head
+            #else values are not equal
+            #then just move forward
+            else:
+                prev = prev.next
+                head = head.next
+        return dummy.next
+    #tc = O(n)
+    #sc = constant
+    def recursive(self,head):
+        """
+        assumption
+        input is head 
+        and out put is linked list with unique memebers
+        
+        base case if head is None return head
+        
+        logic 
+        move newhead untill it has same value as head
+        1 2 2
+        
+        1 2 2 3
+        
+        1 1 1 2 3
+        
+        1 2 3 3 4 4 5
+        
+        1 2 3 3
+        
+        """
+        if head is None or head.next is None:
+            return head
+        curr = head
+        if (curr.val == curr.next.val):
+            while curr.next and curr.val == curr.next.val:
+                curr = curr.next
+            #If duplicates are at last
+            if curr.next is None:
+                return None
+            newHead = self.deleteDuplicates(curr.next)
+            return newHead
+        else:
+            head.next = self.deleteDuplicates(head.next)
+            return head
+        
+    def iterativeFailedTry(self,head):
+        if head is None and head.next is None:
+            return head
+        if head.next.next is None and head.val == head.next.val:
+            return None
+        curr = head.next
+        currPrev = head
+        prev = None
+        while curr:
+            if curr.val != currprev.val:
+                prev = currPrev
+                currPrev = curr
+                curr = curr.next
+            else:
+                while curr and curr.val == currPrev.val:
+                    curr = curr.next
+                prev.next = curr
+                currprev = curr
+        return head
+            
+            
+            

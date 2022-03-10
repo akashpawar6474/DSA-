@@ -366,7 +366,7 @@ solutions to graze over
 364.  Minimum Window Substring => using hashmap we can solve this problem we should shrink when we matched all characters
 365.  Check if there exists a permutation of given string which doesn’t contain any monotonous substring(sp - gfg) => categorize char in odd even buckets then sort them append them and check if any consecutive char has same diff
 366.  Remove Duplicates from Sorted List II =>THIS IS VERY TOUGH AND GOOD PROBLEM
-367.  
+367.  Palindrome Number => this is simple and mathematical based problem
 
 
 

@@ -1,0 +1,52 @@
+class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        """
+        Question is how to reverse the number without converting it to string?
+        eg 12 should be 21
+        first count digits
+               16 8 4 2 1
+        12 =    0 1 1 0 0
+        
+        Nope I dont think so
+        first count digits
+        then take power of backwards
+        
+        tc = O(log(10 ^ 9))
+        """
+        def countDigits(no):
+            count = 0
+            while no > 0:
+                no = no // 10
+                count += 1
+            return count
+        
+        if x == 0:
+            return True
+        if x < 0:
+            return False
+        
+        powerOfTen = countDigits(x) - 1
+        revNo = 0
+        originalNo = x
+        while x > 0:
+            currDigit = x % 10
+            x = x // 10
+            revNo += (currDigit * (10 ** powerOfTen))
+            powerOfTen -= 1
+        return revNo == originalNo
+        
+    def firstTry(self,x):
+        if x == 0:
+            return True
+        if x < 0 or x % 10 == 0:
+            return False
+        newNumber = 0
+        powerOfTen = 0
+        originalNumber = x
+        while x > 0:
+            currDigit = x % 10
+            x = x // 10
+            newNumber += (currDigit * (10 ** powerOfTen))
+            powerOfTen += 1
+        return newNumber == originalNumber
+            

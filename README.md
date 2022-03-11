@@ -368,7 +368,8 @@ solutions to graze over
 366.  Remove Duplicates from Sorted List II =>THIS IS VERY TOUGH AND GOOD PROBLEM
 367.  Palindrome Number => this is simple and mathematical based problem
 368.  Delete the Middle Node of a Linked List => this is easy problem
-369.  
+369.  Length of Last Word => very simple two pointer think backwards problem
+370.  
 
 
 

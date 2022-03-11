@@ -1,0 +1,19 @@
+class Solution:
+    def lengthOfLastWord(self, s: str) -> int:
+        """
+        Idea is to skip the spaces at last
+        then fix that ptr
+        
+        then from that ptr move left untill it is not equal to space
+        tc = O(n)
+        sc = constant
+        """
+        strLen = len(s)
+        endOfLastWord = strLen - 1
+        while s[endOfLastWord] == ' ':
+            endOfLastWord -= 1
+        startOfLastWord = endOfLastWord
+        while startOfLastWord > -1 and s[startOfLastWord] != ' ':
+            startOfLastWord -= 1
+        return endOfLastWord - startOfLastWord
+        

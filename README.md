@@ -367,6 +367,8 @@ solutions to graze over
 365.  Check if there exists a permutation of given string which doesn’t contain any monotonous substring(sp - gfg) => categorize char in odd even buckets then sort them append them and check if any consecutive char has same diff
 366.  Remove Duplicates from Sorted List II =>THIS IS VERY TOUGH AND GOOD PROBLEM
 367.  Palindrome Number => this is simple and mathematical based problem
+368.  Delete the Middle Node of a Linked List => this is easy problem
+369.  
 
 
 

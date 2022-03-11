@@ -49,4 +49,17 @@ class Solution:
             newNumber += (currDigit * (10 ** powerOfTen))
             powerOfTen += 1
         return newNumber == originalNumber
+ -------------------------------------------------------------------11 March 2022 optimized
+ class Solution:
+    def isPalindrome(self, x: int) -> bool:
+        originalNo = x
+        revNo = 0
+        if x < 0:
+            return 0
+        while x > 0:
+            currDigit = x % 10
+            revNo = (revNo * 10) + currDigit
+            x = x // 10
+        return revNo == originalNo
+        
             

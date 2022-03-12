@@ -373,7 +373,8 @@ solutions to graze over
 371.  Matrix Median(IB - gfg) => very good binary search problem  also be solved using minHeap 
 372.  Design HashSet => very simple problem
 373.  Design HashMap => very simple problem
-374.  
+374.  Top K Frequent Elements => this is very good minHeap problem
+375.  
 
 
 

@@ -127,3 +127,36 @@ class Solution:
             count -= k
             
         return newHead
+---------------------------------------------------------------------12 march 2022
+class Solution:
+    def reverseKGroup(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
+        
+        def getSize(head):
+            count = 0
+            curr = head
+            while curr:
+                count += 1
+                curr = curr.next
+            return count
+        
+        def reverseListCore(head,k):
+            count = getSize(head)
+            if count < k:
+                return head
+            
+            curr = head
+            placeHolderK = k
+            prev = None
+            while curr and placeHolderK > 0:
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+                placeHolderK -= 1
+            
+            head.next = reverseListCore(curr,k)
+            return prev
+        
+        if k == 1:
+            return head
+        return reverseListCore(head,k)

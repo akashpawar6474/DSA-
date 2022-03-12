@@ -370,7 +370,7 @@ solutions to graze over
 368.  Delete the Middle Node of a Linked List => this is easy problem
 369.  Length of Last Word => very simple two pointer think backwards problem
 370.  Reverse Linked List II => this is very good laboursome problem
-371.  
+371.  Matrix Median(IB - gfg) => very good binary search problem  also be solved using minHeap 
 
 
 

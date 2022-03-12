@@ -371,6 +371,8 @@ solutions to graze over
 369.  Length of Last Word => very simple two pointer think backwards problem
 370.  Reverse Linked List II => this is very good laboursome problem
 371.  Matrix Median(IB - gfg) => very good binary search problem  also be solved using minHeap 
+372.  Design HashSet => very simple problem
+373.  
 
 
 

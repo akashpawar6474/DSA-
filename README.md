@@ -369,7 +369,8 @@ solutions to graze over
 367.  Palindrome Number => this is simple and mathematical based problem
 368.  Delete the Middle Node of a Linked List => this is easy problem
 369.  Length of Last Word => very simple two pointer think backwards problem
-370.  
+370.  Reverse Linked List II => this is very good laboursome problem
+371.  
 
 
 

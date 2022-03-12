@@ -91,3 +91,41 @@ class Solution:
             curr = curr.next
             
         return ht[head] if head else None
+        
+       --------------------------------------------------- 12 March 2022
+
+class Solution:
+    def copyRandomList(self, head: 'Optional[Node]') -> 'Optional[Node]':
+        """
+        Brute force is to use extraa space and create hashmap of old and new nodes
+        Another way is to create dup list in the mid of original list
+        then update random ptrs
+        then extract duplicate list
+        """
+        if head is None:
+            return None
+        travInOriginal = head
+        while travInOriginal:
+            nextOfTravInOriginal = travInOriginal.next
+            newNode = Node(travInOriginal.val)
+            newNode.next = nextOfTravInOriginal
+            travInOriginal.next = newNode
+            travInOriginal = nextOfTravInOriginal
+        
+        travInOriginal = head
+        while travInOriginal:
+            if travInOriginal.random is not None:
+                travInOriginal.next.random = travInOriginal.random.next
+            travInOriginal = travInOriginal.next.next
+        
+        dummyHead = Node(-1)
+        curr = dummyHead
+        travInOriginal = head
+        while travInOriginal:
+            nextOfTravInOriginal = travInOriginal.next.next
+            curr.next = travInOriginal.next
+            curr = curr.next
+            travInOriginal.next = nextOfTravInOriginal
+            travInOriginal = travInOriginal.next
+        
+        return dummyHead.next

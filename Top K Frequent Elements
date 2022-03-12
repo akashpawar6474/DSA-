@@ -1,0 +1,40 @@
+import heapq
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        """
+        brute force is to create freq table
+        then sort the freq table on values
+        then return keys of last k values
+        
+        this is very simple problem
+        we need hashtable,minHeap to solve this problem
+        steps
+            1.create frequency table
+            2.graze over frequency table and add entries in minHeap
+            3.as soon as minHeap size increases than k then pop the top element
+            4.at last we will only remains with top k frequent elements in minHeap
+        tc = O(n + nlogk + k) =>O(nlogk)
+        sc = O(n + k + k) => O(n)
+        
+        In case order matters means more frequent ele should comes first then 
+        we have to sort the minHeap with freq first then with key
+        """
+        ht = {}
+        for i in range(len(nums)):
+            try:
+                ht[nums[i]] += 1
+            except:
+                ht[nums[i]] = 1
+        
+        minHeap = []
+        for key,value in ht.items():
+            heapq.heappush(minHeap,(value,key))
+            if len(minHeap) > k:
+                heapq.heappop(minHeap)
+        print(minHeap)
+        minHeap.sort(key = lambda x : (x[0],x[1]), reverse = True)
+        print(minHeap)
+        res = []
+        for items in minHeap:
+            res.append(items[1])
+        return res

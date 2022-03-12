@@ -30,3 +30,16 @@ class Solution:
             prev = curr
             curr = curr.next if curr else None
         return head
+------------------------------------------------------------12 march 2022
+class Solution:
+    def deleteDuplicates(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        if head is None or head.next is None:
+            return head
+        left = head
+        right = head.next
+        while right is not None:
+            while right and left.val == right.val:
+                right = right.next
+            left.next = right
+            left = right
+        return head

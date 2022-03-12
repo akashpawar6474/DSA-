@@ -1,0 +1,18 @@
+class MyHashSet:
+
+    def __init__(self):
+        """
+        we can use bst or array also
+        """
+        self.arr = [False] * ((10 ** 6) + 1)
+
+    def add(self, key: int) -> None:
+        self.arr[key] = True
+        
+
+    def remove(self, key: int) -> None:
+        self.arr[key] = False
+
+    def contains(self, key: int) -> bool:
+        return self.arr[key]
+        

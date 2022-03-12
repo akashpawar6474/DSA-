@@ -374,7 +374,8 @@ solutions to graze over
 372.  Design HashSet => very simple problem
 373.  Design HashMap => very simple problem
 374.  Top K Frequent Elements => this is very good minHeap problem
-375.  
+375.  Pascal's Triangle II => this is very simple problem
+376.  
 
 
 

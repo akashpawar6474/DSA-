@@ -53,3 +53,50 @@ class Solution:
         for currIdx in range(n):
             A[currIdx] = A[currIdx] % n
         
+-------------------------------------------------------13 march 2022
+class Solution:
+    def buildArray(self, nums: List[int]) -> List[int]:
+        """
+        [5,0,1,2,3,4]
+        [nums[nums[0]],nums[nums[1]],nums[nums[2]],nums[nums[3]],nums[nums[4]],nums[nums[5]]]
+        [nums[5],nums[0],nums[1],nums[2],nums[3],nums[4]]
+        [4,5,0,1,2,3]
+        
+        [5,0,1,2,3,4]
+        multiply by 6
+        [30,0,6,12,18,24]
+        add target number to product
+        [34,5,6,13,20,27]
+        now take mod with 6
+        [4,5,0,1,2,3]
+        
+        tc = O(3n) => O(n)
+        sc = O(1)
+        """
+        totalLen = len(nums)
+        
+        """
+        Step1 => multiply with targetLen
+        """
+        for currIdx in range(totalLen):
+            nums[currIdx] *= totalLen
+        
+        """
+        Step2 => add target no to product
+                a.get the original no
+                b.on that idx get target no
+                c.add that target no 
+        """
+        for currIdx in range(totalLen):
+            currIdxVal = nums[currIdx] // totalLen
+            targetIdxVal = nums[currIdxVal] // totalLen
+            nums[currIdx] += targetIdxVal
+        
+        """
+        Step3 => take mod and get original no
+        """
+        for currIdx in range(totalLen):
+            nums[currIdx] = nums[currIdx] % totalLen
+        
+        return nums
+            

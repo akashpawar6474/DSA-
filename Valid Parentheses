@@ -49,3 +49,22 @@ class Solution:
             else:
                 st.append(ch)
         return len(st) == 0
+------------------------------------------------------------------------------13 march 2022
+class Solution:
+    def isValid(self, s: str) -> bool:
+        st = []
+        ht = {}
+        ht[')'] = '('
+        ht[']'] = '['
+        ht['}'] = '{'
+        for ch in s:
+            if ch not in ht:
+                st.append(ch)
+            elif len(st) > 0:
+                top = st.pop()
+                if top != ht[ch]:
+                    return False
+            else:
+                return False
+        return len(st) == 0
+                

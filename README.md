@@ -375,7 +375,8 @@ solutions to graze over
 373.  Design HashMap => very simple problem
 374.  Top K Frequent Elements => this is very good minHeap problem
 375.  Pascal's Triangle II => this is very simple problem
-376.  
+376.  Sort List => this is very simple merge sort problem consist of finding center, merging two sorted list then recursion
+377.  
 
 
 

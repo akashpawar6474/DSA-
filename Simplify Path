@@ -1,0 +1,55 @@
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        """
+        "/home/...../hfd"
+        op = "/home/...../hfd"
+        
+        so we cant remove dots without any check
+        
+        
+        ip = "/home/.....///hfd"
+        op = "/home/...../hfd"
+        
+        more than one / should be converted to single one
+        if prev char is same and it is / then skip curr one
+        
+        
+        ip = "/home/.....///hfd//"
+        op = "/home/...../hfd"
+        
+        remove trailing slahes
+        trailing slahes should be removed
+        
+        ip = "///home/...//..///hfd//"
+        op = "/home/hfd"
+        
+        ip = "///home/..//...///hfd//"
+        op = "/.../hfd"
+        what is this?
+        
+        This is huge problem in thought process
+        Idea is to split the string first using delimitor as /
+        then if curr string is .. means we have to go up so
+        if stack is not empty then pop the top item as anyway we have to come up
+        for eg input is /India/MH/Latur//..///..//end// 
+        here in this example 
+        1.we will go in india
+        2.then we will go in MH
+        3.then we will go in latur
+        4. as of now we are in latur and it is .. so we need to go up in MH
+        5. we came in MH and still we have .. so go back again in india
+        6.now in india we are going inside end folder
+        
+        tc = O(2n) => O(n)
+        sc = O(n)
+        """
+        st = []
+        paths = path.split('/')
+        for currCommand in paths:
+            if currCommand == ".." and len(st) > 0:
+                st.pop()
+            elif currCommand not in [".","..",""]:
+                st.append(currCommand)
+        
+        return "/" + "/".join(st)
+        return ""

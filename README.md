@@ -377,7 +377,8 @@ solutions to graze over
 375.  Pascal's Triangle II => this is very simple problem
 376.  Sort List => this is very simple merge sort problem consist of finding center, merging two sorted list then recursion
 377.  Simplify Path => very good stack problem 
-378.  
+378.  Minimum Remove to Make Valid Parentheses => very good stack problem
+379.  
 
 
 

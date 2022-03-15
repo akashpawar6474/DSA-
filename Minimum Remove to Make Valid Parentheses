@@ -1,0 +1,33 @@
+class Solution:
+    def minRemoveToMakeValid(self, s: str) -> str:
+        """
+        Idea is to create boolean array
+        with all vaulues as true
+        
+        bool[i] = True => mean char at this idx will be present in ans string
+        and use stack to identify unbalanced paraenthesis
+        tc = O(3n)
+        sc = O(n)
+        """
+        st = []
+        n = len(s)
+        isCharInAns = [True] * n
+        for currIdx in range(n):
+            currCh = s[currIdx]
+            if currCh == '(':
+                st.append(currIdx)
+            if currCh == ')':
+                if len(st) == 0:
+                    isCharInAns[currIdx] = False
+                else:
+                    st.pop()
+        while len(st) > 0:
+            top = st.pop()
+            isCharInAns[top] = False
+        
+        ans = []
+        for currIdx in range(n):
+            if isCharInAns[currIdx] == True:
+                ans.append(s[currIdx])
+        return "".join(ans)
+        

@@ -1,0 +1,38 @@
+class Solution:
+    def reverseVowels(self, s: str) -> str:
+        """
+        this is two pinter problem
+        by default start will reside at first vowel
+        end will ride at last vowel
+        
+        if start is gt eq end then return st itself
+        else take a loop from start le end
+        swap curr char
+        and move start and end in their directions
+        tc = O(n)
+        sc = O(n)
+        """
+        def setStart(start,s,vowels):
+            while start < len(s) and s[start] not in vowels:
+                start += 1
+            return start
+        
+        def setEnd(end,s,vowels):
+            while end > -1 and s[end] not in vowels:
+                end -= 1
+            return end
+        
+        vowels = set(['a','e','i','o','u','A','E','I','O','U'])
+        
+        stArr = list(s)
+        start = setStart(0,s,vowels)
+        end = setEnd(len(s) - 1,s,vowels)
+        
+        if start >= end:
+            return s
+        
+        while start < end:
+            stArr[start],stArr[end] = stArr[end],stArr[start]
+            start = setStart(start + 1,s,vowels)
+            end = setEnd(end - 1,s,vowels)
+        return "".join(stArr)

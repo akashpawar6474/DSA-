@@ -378,7 +378,7 @@ solutions to graze over
 376.  Sort List => this is very simple merge sort problem consist of finding center, merging two sorted list then recursion
 377.  Simplify Path => very good stack problem 
 378.  Minimum Remove to Make Valid Parentheses => very good stack problem
-379.  
+379.  Reverse Vowels of a String => simpl imlementation  based two pointer problem
 
 
 

@@ -1,0 +1,36 @@
+class Solution:
+    def hammingDistance(self, x: int, y: int) -> int:
+        """
+        idea is to compare each bit 
+        and count
+        
+        how to get kth bit of number
+        
+        10011
+        if we want 2nd bit
+        then we should create mask of 1 << 2
+        means 
+        10011
+        00100
+        
+        if and of number and mask is 0
+        then bit is 0
+        else bit is 1
+        """
+        def getKthBit(num,k):
+            mask = 1 << k
+            if num & mask == 0:
+                return 0
+            else:
+                return 1
+        
+        count = 0
+        for k in range(31):
+            if getKthBit(x,k) != getKthBit(y,k):
+                count += 1
+        return count
+            
+        
+        
+        
+        

@@ -1,0 +1,30 @@
+class Solution:
+    def validateStackSequences(self, pushed: List[int], popped: List[int]) -> bool:
+        """
+        Idea is to have two pointer at both the arrays
+        take a loop untill both are less than their respective lengths
+            push ele from first array into stack
+            if they are not equal to ele on idx in second array
+            push curr ele in first array
+            
+            untill stack is not empty and top of stack is equal to curr ele in second array
+            move the ptr and pop the ele from the stack
+            
+        tc = O(n + n) => O(n)
+        sc = O(n)
+        """
+        st = []
+        pushPtr = popPtr = 0
+        n = len(pushed)
+        while pushPtr < n and popPtr < n:
+            while pushPtr < n and pushed[pushPtr] != popped[popPtr]:
+                st.append(pushed[pushPtr])
+                pushPtr += 1
+            if pushPtr < n:
+                st.append(pushed[pushPtr])
+                pushPtr += 1
+            
+            while len(st) > 0 and st[-1] == popped[popPtr]:
+                st.pop()
+                popPtr += 1
+        return pushPtr == popPtr == n

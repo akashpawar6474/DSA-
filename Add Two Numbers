@@ -65,4 +65,28 @@ class Solution:
             curr.next = ListNode(lastDigit)
             curr = curr.next
         return dummy.next
-        
+   ------------------------------------------------------------- 16 March 2022 WITHOUT DUMMY NODE
+   class Solution:
+	# @param A : head node of linked list
+	# @param B : head node of linked list
+	# @return the head node in the linked list
+	def addTwoNumbers(self, A, B):
+        carry = 0
+        ansList = None
+        curr = None
+        while A or B or carry:
+            if A:
+                carry += A.val
+                A = A.next
+            if B:
+                carry += B.val
+                B = B.next
+            lastDigit = carry % 10
+            carry = carry // 10
+            if ansList is None:
+                ansList = ListNode(lastDigit)
+                curr = ansList
+            else:
+                curr.next = ListNode(lastDigit)
+                curr = curr.next
+        return ansList

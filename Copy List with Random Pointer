@@ -129,7 +129,7 @@ class Solution:
             travInOriginal = travInOriginal.next
         
         return dummyHead.next
-------------------------------------------------------------------------------------- 16 March 2022
+------------------------------------------------------------------------------------- 16 March 2022 WITHOUT DUMMY NODE
 class Solution:
     # @param head, a RandomListNode
     # @return a RandomListNode
@@ -153,15 +153,20 @@ class Solution:
                 travInOriginal.next.random = travInOriginal.random.next
             travInOriginal = travInOriginal.next.next
         
-        dummyHead = RandomListNode(-1)
-        curr = dummyHead
+        copyHead = None
+        curr = None
         travInOriginal = head
         while travInOriginal:
             nextOfTravInOriginal = travInOriginal.next.next
-            curr.next = travInOriginal.next
-            curr = curr.next
+            if curr is None:
+                copyHead = travInOriginal.next 
+                curr = copyHead
+            else:
+                curr.next = travInOriginal.next
+                curr = curr.next
+
             travInOriginal.next = nextOfTravInOriginal
             travInOriginal = nextOfTravInOriginal
         
-        return dummyHead.next
+        return copyHead
         

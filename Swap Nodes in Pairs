@@ -31,3 +31,54 @@ class Solution:
         head.next.next = head
         head.next = self.swapPairs(headOfRemainingList)
         return newHead
+---------------------------------------------------------------------- 16 march 2022
+class Solution:
+    def swapPairs(self, head: Optional[ListNode]) -> Optional[ListNode]:
+        """
+        so use same approach of reversing k group nodes
+        here by default k is 2
+        """
+        def getSize(head):
+            curr = head
+            count = 0
+            while curr:
+                count += 1
+                curr = curr.next
+            return count
+        
+        size = getSize(head)
+        if size < 2:
+            return head
+        newHead = None
+        prev = None
+        curr = head
+        tailOne = None
+        tailTwo = head
+        while size >= 2:
+            for i in range(2):
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+            if newHead is None:
+                newHead = prev
+            elif tailOne is not None:
+                tailOne.next = prev
+            tailOne = tailTwo
+            tailTwo.next = curr
+            tailTwo = curr
+            prev = None
+            size -= 2
+        return newHead
+
+    def recursive(self,head):
+        """
+        it gives stack overflow if node size is big
+        """
+        if head is None or head.next is None:
+            return head
+        reversedListHead = self.swapPairs(head.next.next)
+        newHead = head.next
+        head.next.next = head
+        head.next = reversedListHead
+        return newHead

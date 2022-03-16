@@ -45,4 +45,42 @@ class Solution:
         mid = findMidNode(head)
         secondHead = reverse(mid.next)
         return compareLists(head,secondHead)
-                
+------------------------------------------------------------------- 16 March 2022
+class Solution:
+    def isPalindrome(self, head: Optional[ListNode]) -> bool:
+        """
+        1 2 2 1
+        or
+        1 3 1
+        here we need left centered mid
+        """
+        def reverseList(curr):
+            prev = None
+            while curr:
+                nxt = curr.next
+                curr.next = prev
+                prev = curr
+                curr = nxt
+            return prev
+        
+        def findMid(head):
+            slow = head
+            fast = head.next
+            while fast and fast.next:
+                slow = slow.next
+                fast = fast.next.next
+            return slow
+        
+        mid = findMid(head)
+        headOfRemainingList = mid.next
+        headOfReversedList = reverseList(headOfRemainingList)
+
+        while headOfReversedList:
+            if head.val != headOfReversedList.val:
+                return False
+            head = head.next
+            headOfReversedList = headOfReversedList.next
+        return True
+        
+
+

@@ -1,0 +1,22 @@
+class Solution:
+    def isPerfectSquare(self, num: int) -> bool:
+        """
+        it looks like simple binary search
+        where start eq 1 and end eq to num
+        the do bs and have a fun
+        
+        tc = O(log(num))
+        sc = constant
+        """
+        start = 1
+        end = num
+        while start <= end:
+            mid = (start + end) // 2
+            if mid * mid == num:
+                return True
+            elif mid * mid < num:
+                start = mid + 1
+            else:
+                end = mid - 1
+        return False
+        

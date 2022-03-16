@@ -382,7 +382,8 @@ solutions to graze over
 380.  Valid Perfect Square => simple as square root problem
 381.  Longest Palindrome => counting frequency and using palindrome property
 382.  Hamming Distance => simple bit manipulation problem
-383.  
+383.  Validate Stack Sequences => this is very simple stack problem
+384.  
 
 
 

@@ -129,3 +129,39 @@ class Solution:
             travInOriginal = travInOriginal.next
         
         return dummyHead.next
+------------------------------------------------------------------------------------- 16 March 2022
+class Solution:
+    # @param head, a RandomListNode
+    # @return a RandomListNode
+    def copyRandomList(self, head):
+        """
+        step1 = create copy list
+        step2 = arrange random ptrs
+        step3 = extract new list
+        """
+        travInOriginal = head
+        while travInOriginal:
+            nextOfTravInOriginal = travInOriginal.next
+            newNode = RandomListNode(travInOriginal.label)
+            travInOriginal.next = newNode
+            newNode.next = nextOfTravInOriginal
+            travInOriginal = nextOfTravInOriginal
+        
+        travInOriginal = head
+        while travInOriginal:
+            if travInOriginal.random:
+                travInOriginal.next.random = travInOriginal.random.next
+            travInOriginal = travInOriginal.next.next
+        
+        dummyHead = RandomListNode(-1)
+        curr = dummyHead
+        travInOriginal = head
+        while travInOriginal:
+            nextOfTravInOriginal = travInOriginal.next.next
+            curr.next = travInOriginal.next
+            curr = curr.next
+            travInOriginal.next = nextOfTravInOriginal
+            travInOriginal = nextOfTravInOriginal
+        
+        return dummyHead.next
+        

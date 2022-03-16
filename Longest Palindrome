@@ -1,0 +1,39 @@
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        """
+        idea is to calculate frequencies
+        then sort them in descending order
+        
+        then graze over them
+         if freq is odd reduce val by 1
+         and add the val to answer
+         
+         to make palindrome we need all
+         even characters
+         and one odd freq is possible
+         
+         so if it is first odd freq 
+         then add it else reduce
+        """
+        def prepareFreqMap(s):
+            ht = {}
+            for ch in s:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        
+        ht = prepareFreqMap(s)
+        isFirstOdd = True
+        ans = 0
+        for val in sorted(ht.values(),reverse = True):
+            if val & 1 != 0:
+                if isFirstOdd:
+                    ans += val
+                    isFirstOdd = False
+                else:
+                    ans += (val - 1)
+            else:
+                ans += val         
+     
+        return ans

@@ -114,3 +114,59 @@ class LRUCache:
 # obj = LRUCache(capacity)
 # param_1 = obj.get(key)
 # obj.put(key,value)
+
+-------------------------------------------------------- 16 March 2022
+class DllNode:
+    def __init__(self,key = 0,val = 0):
+        self.key = key
+        self.val = val
+        self.nxt = None
+        self.prev = None
+        
+class LRUCache:
+
+    def __init__(self, capacity: int):
+        self.ht = {}
+        self.capacity = capacity
+        self.head = DllNode(-1,-1)
+        self.tail = DllNode(-1,-1)
+        self.head.nxt = self.tail
+        self.tail.prev = self.head
+        
+    def removeTheNode(self,node):
+        nodeprev = node.prev
+        nodenext = node.nxt
+        nodeprev.nxt = nodenext
+        nodenext.prev = nodeprev
+        return node
+
+    def addNodeAtFirst(self,node):
+        node.nxt = self.head.nxt
+        self.head.nxt.prev = node
+        node.prev = self.head
+        self.head.nxt = node
+
+    def get(self, key: int) -> int:
+        if key not in self.ht:
+            return -1
+        node = self.ht[key]
+        self.removeTheNode(node)
+        self.addNodeAtFirst(node)
+        return node.val
+        
+
+    def put(self, key: int, value: int) -> None:
+        if key in self.ht:
+            self.ht[key].val = value
+            self.removeTheNode(self.ht[key])
+            self.addNodeAtFirst(self.ht[key])
+            return
+        currKeys = len(self.ht)
+        if currKeys >= self.capacity:
+            lastNode = self.tail.prev
+            self.removeTheNode(lastNode)
+            del self.ht[lastNode.key]
+        node = DllNode(key,value)
+        self.addNodeAtFirst(node)
+        self.ht[key] = node
+

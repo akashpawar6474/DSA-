@@ -379,6 +379,10 @@ solutions to graze over
 377.  Simplify Path => very good stack problem 
 378.  Minimum Remove to Make Valid Parentheses => very good stack problem
 379.  Reverse Vowels of a String => simpl imlementation  based two pointer problem
+380.  Valid Perfect Square => simple as square root problem
+381.  Longest Palindrome => counting frequency and using palindrome property
+382.  Hamming Distance => simple bit manipulation problem
+383.  
 
 
 

@@ -385,7 +385,7 @@ solutions to graze over
 383.  Validate Stack Sequences => this is very simple stack problem
 384.  Score of Parentheses =>this is critical problem to understand then figuring out recursive solution
 385.  Isomorphic Strings => THIS IS REALLY GOOD PROBLEM OF TWO HASHMAPS
-386.  
+386.  Third Maximum Number => very good proble with couple of edge cases 
 
 
 

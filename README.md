@@ -384,7 +384,8 @@ solutions to graze over
 382.  Hamming Distance => simple bit manipulation problem
 383.  Validate Stack Sequences => this is very simple stack problem
 384.  Score of Parentheses =>this is critical problem to understand then figuring out recursive solution
-385.  
+385.  Isomorphic Strings => THIS IS REALLY GOOD PROBLEM OF TWO HASHMAPS
+386.  
 
 
 

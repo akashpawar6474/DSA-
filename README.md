@@ -383,7 +383,8 @@ solutions to graze over
 381.  Longest Palindrome => counting frequency and using palindrome property
 382.  Hamming Distance => simple bit manipulation problem
 383.  Validate Stack Sequences => this is very simple stack problem
-384.  
+384.  Score of Parentheses =>this is critical problem to understand then figuring out recursive solution
+385.  
 
 
 

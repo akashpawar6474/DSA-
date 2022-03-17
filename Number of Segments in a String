@@ -1,0 +1,42 @@
+class Solution:
+    def countSegments(self, s: str) -> int:
+        """
+        Idea is to count spaces manually
+        edge cases is to first set endPtr by skipping space at end
+        
+        then skip spaces at first
+        move currptr untill it is less than endptr
+            move start ptr untill is is less than end ptr not equal to space
+            move start ptr untill it is equal to space
+            inc the count
+        
+        there is one more edge case if start > end means we string of spaces only so return 0
+        
+        tc = O(n)
+        sc = constant
+        """
+        def skipLeadingAndTrailingSpaces(s):
+            start = 0
+            end = len(s) - 1
+            while start < end + 1 and s[start] == ' ':
+                start += 1
+            while end > start - 1 and s[end] == ' ':
+                end -= 1
+            #move end to first char of last segment
+            while end > start and s[end] != ' ':
+                end -= 1
+            return start,end
+        
+        start,end = skipLeadingAndTrailingSpaces(s)
+        spaces = 0
+        while start < end:
+            while start < end and s[start] != ' ':
+                start += 1
+            while start < end and s[start] == ' ':
+                start += 1
+            spaces += 1
+            
+        if start > end:
+            return 0
+        return spaces + 1
+            

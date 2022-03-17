@@ -1,0 +1,165 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        """
+        Using two maps
+        firstToSecondStMap and secondToFirstStMap
+        """
+        firstToSecondStMap = {}
+        secondToFirstStMap = {}
+        n = len(s)
+        for currIdx in range(n):
+            firstStChar = s[currIdx]
+            secondStChar = t[currIdx]
+            if firstStChar in firstToSecondStMap and firstToSecondStMap[firstStChar] != secondStChar:
+                return False
+            elif secondStChar in secondToFirstStMap and secondToFirstStMap[secondStChar] != firstStChar:
+                return False
+            else:
+                #this is new mapping
+                firstToSecondStMap[firstStChar] = secondStChar
+                secondToFirstStMap[secondStChar] = firstStChar
+        return True
+    def fourthTry(self,s,t):
+        """
+        Now its time to understand what i isomorphic strings??\
+        is it using hashmap on run
+        
+        if curr char is present in map
+            and curr char in second string is diff from the value 
+            then return false
+        else
+            add pair into map
+            
+        "badc"
+        "baba"
+        
+        this will fail here
+        because we are not checking if b is getting assigned to 
+        
+        so we should have rev mapping map also
+        where we will map char of second string to first string
+        
+        if any of them is not compatible then return
+        """
+        ht = {}
+        n = len(s)
+        for currIdx in range(n):
+            currChInFirstSt = s[currIdx]
+            currChInSecondSt = t[currIdx]
+            if currChInFirstSt in ht and ht[currChInFirstSt] != currChInSecondSt:
+                return False
+            else:
+                ht[currChInFirstSt] = currChInSecondSt
+        return True
+                
+    def thirdTry(self,s,r):
+        """
+        I think we have to use orderedDict here
+        """
+        from collections import OrderedDict
+        
+        def prepareFreqMap(st):
+            ht = OrderedDict()
+            for ch in st:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        
+        freqMap1 = prepareFreqMap(s)
+        freqMap2 = prepareFreqMap(t)
+        
+        compareArray = []
+        for key,val in freqMap1.items():
+            compareArray.append(val)
+            
+        comparePtr = 0
+        for val in freqMap2.values():
+            if val != compareArray[comparePtr]:
+                return False
+            comparePtr += 1
+        return True
+            
+    def secondTry(self,s,t):
+        """
+        we missed to understand we have to preserve the order
+        and base case is if len i equal to 1
+        then directly return true
+        
+        then take two pointers at first index
+        while both not reached end
+            move first ptr untill it has same char at prev idx
+            move last ptr untill it has same char at prev idx
+            if both idx are not same then return false
+            and inc both of them
+        return True at last
+        
+        "badc"
+        "baba"
+        
+        will fail here
+        """
+        n = len(s)
+        m = len(t)
+        if n == m == 1:
+            return True
+        firstPtr = 1
+        secondPtr = 1
+        while firstPtr < n and secondPtr < m:
+            while firstPtr < n and s[firstPtr] == s[firstPtr - 1]:
+                firstPtr += 1
+            while secondPtr < m and t[secondPtr] == t[secondPtr - 1]:
+                secondPtr += 1
+            if firstPtr != secondPtr:
+                return False
+            firstPtr += 1
+            secondPtr += 1
+        return True
+    def firstTry(self,s,t):
+        """
+        Idea is to calculate freq of strings
+        then create another freq table of frequencies
+        
+        for eg = egghrr
+        e = 1
+        g = 2
+        h= 1
+        r = 2
+        
+        which should further modified to 
+        freq occurances
+        1 = 2
+        2 = 1
+        
+        primary freq table => store freq of characters
+        secondary freq table => store freq of frequencies
+        
+        then compare secondary freq tables
+        """
+        def preparePrimaryFreqMaps(st):
+            ht = {}
+            for ch in st:
+                if ch not in ht:
+                    ht[ch] = 0
+                ht[ch] += 1
+            return ht
+        
+        def prepareSecondaryFreqMaps(ht):
+            secondaryHt = {}
+            for val in ht.values():
+                if val not in secondaryHt:
+                    secondaryHt[val] = 0
+                secondaryHt[val] += 1
+            return secondaryHt
+        
+        primaryFreqMap1 = preparePrimaryFreqMaps(s)
+        primaryFreqMap2 = preparePrimaryFreqMaps(t)
+        
+        secondaryFreqMap1 = prepareSecondaryFreqMaps(primaryFreqMap1)
+        secondaryFreqMap2 = prepareSecondaryFreqMaps(primaryFreqMap2)
+        
+        for key,val in secondaryFreqMap1.items():
+            if secondaryFreqMap2[key] != val:
+                print(secondaryFreqMap2[key],secondaryFreqMap1[key])
+                return False
+        return True

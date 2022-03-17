@@ -1,0 +1,38 @@
+class Solution:
+    def thirdMax(self, nums: List[int]) -> int:
+        """
+        3 3 1 3 1 2 2 2
+        Idea is to use the variables to get the maximums
+        
+        couple of additional and condition can save linear space
+        here edge case is
+        3 2 1 3 2 1
+        
+        in this example after third iteration
+        firstMax,secondMax and thirdmax will be 3 2 1
+        but at 4th iteration in second or third elif 3 can get assigned to third or second max 
+        so add those conditions
+        and for 5th iteration 2 can get assigned as third max so add that and condition in second elif
+        
+        tc = O(n)
+        sc = constant
+        """
+        import math
+        firstMax = -math.inf
+        secondMax = -math.inf
+        thirdMax = -math.inf
+        
+        for no in nums:
+            if no > firstMax:
+                thirdMax = secondMax
+                secondMax = firstMax
+                firstMax = no
+            elif no > secondMax and no != firstMax:
+                thirdMax = secondMax
+                secondMax = no
+            elif no > thirdMax and no != firstMax and no != secondMax:
+                thirdMax = no
+                
+        return thirdMax if thirdMax != -math.inf else firstMax
+                
+        

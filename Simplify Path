@@ -53,3 +53,14 @@ class Solution:
         
         return "/" + "/".join(st)
         return ""
+------------------------------------------------20 march 2022
+class Solution:
+    def simplifyPath(self, path: str) -> str:
+        paths = path.split('/')
+        st = []
+        for cmd in paths:
+            if len(st) > 0 and cmd == '..':
+                st.pop()
+            elif cmd not in ['.','..','']:
+                st.append(cmd)
+        return "/" + "/".join(st)

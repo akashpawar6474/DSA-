@@ -67,4 +67,19 @@ class Solution:
             else:
                 return False
         return len(st) == 0
-                
+  -----------------------------------------------------------------------------20 march 2022
+  class Solution:
+    def isValid(self, s: str) -> bool:
+        st = []
+        ht = {}
+        ht[']'] = '['
+        ht[')'] = '('
+        ht['}'] = '{'
+        for ch in s:
+            if ch not in ht:
+                st.append(ch)
+            else:
+                if len(st) == 0 or st[-1] != ht[ch]:
+                    return False
+                st.pop()
+        return len(st) == 0

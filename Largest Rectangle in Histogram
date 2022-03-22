@@ -145,5 +145,52 @@ class Solution:
             currArea = currHeight * currWidth
             maxArea = max(maxArea,currArea)
         return maxArea
+   -------------------------------------------------------------------------------- 22 March 2022
+   class Solution:
+    def largestRectangleArea(self, heights: List[int]) -> int:
+        """
+        Idea is to find prev and next smallest element and use the formula thats all
+        
+        tc = O(n + n + n)
+        sc = O(2n)
+        """ 
+        def getNextSmallestBarIdx(heights):
+            n = len(heights)
+            nextSmallestBarIdx = [n] * n
+            stack = []
+            for currIdx in range(n):
+                while len(stack) > 0 and heights[stack[-1]] > heights[currIdx]:
+                    top = stack.pop()
+                    nextSmallestBarIdx[top] = currIdx
+                stack.append(currIdx)
+            return nextSmallestBarIdx
+        
+        def getPrevSmallestBarIdx(heights):
+            n = len(heights)
+            prevSmallestBarIdx = [-1] * n
+            stack = []
+            for currIdx in range(n - 1,-1,-1):
+                while len(stack) > 0 and heights[stack[-1]] > heights[currIdx]:
+                    top = stack.pop()
+                    prevSmallestBarIdx[top] = currIdx
+                stack.append(currIdx)
+            return prevSmallestBarIdx
+        
+        def getMaxRectangleArea(heights,nextSmallestBarIdx,prevSmallestBarIdx):
+            maxArea = 0
+            n = len(heights)
+            print(nextSmallestBarIdx,prevSmallestBarIdx)
+            for currIdx in range(n):
+                currHeight = heights[currIdx]
+                currWidth = nextSmallestBarIdx[currIdx] - prevSmallestBarIdx[currIdx] - 1
+                print(currWidth)
+                currArea = currHeight * currWidth
+                maxArea = max(maxArea,currArea)
+            return maxArea
+        
+        nextSmallestBarIdx = getNextSmallestBarIdx(heights)
+        prevSmallestBarIdx = getPrevSmallestBarIdx(heights)
+        return getMaxRectangleArea(heights,nextSmallestBarIdx,prevSmallestBarIdx)
+        
         
         

@@ -28,3 +28,24 @@ class Solution:
             if currIdx >= k - 1:
                 ans.append(nums[q[0]])
         return ans
+------------------------------------------------------------------27 march 2022
+class Solution:
+	# @param A : tuple of integers
+	# @param B : integer
+	# @return a list of integers
+	def slidingMaximum(self, A, B):
+		from collections import deque
+		q = deque()
+		n = len(A)
+		if B > len(A):
+			return max(A)
+		ans = []
+		for currIdx in range(n):
+			if len(q) > 0 and q[0] == currIdx - B:
+				q.popleft()
+			while len(q) > 0 and A[q[-1]] < A[currIdx]:
+				q.pop()
+			q.append(currIdx)
+			if currIdx >= B - 1:
+				ans.append(A[q[0]])
+		return ans

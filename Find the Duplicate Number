@@ -65,3 +65,39 @@ class Solution:
                 ans = nums[currIdx] 
                 break
         return ans
+---------------------------------------------------------------------------29 march 2022
+class Solution:
+    def findDuplicate(self, nums: List[int]) -> int:
+        """
+        other one is slow and fast ptr
+        tc = O(n)
+        sc = O(1)
+        """
+        slow = nums[0]
+        fast = nums[nums[0]]
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[nums[fast]]
+        fast = 0
+        while slow != fast:
+            slow = nums[slow]
+            fast = nums[fast]
+        return fast
+    
+    def usingCyclicSort(self,nums):
+        def cyclicSort(nums):
+            currIdx = 0
+            n = len(nums)
+            while currIdx < n:
+                valAtCurrIdx = nums[currIdx]
+                if nums[currIdx] != nums[valAtCurrIdx - 1]:
+                    nums[currIdx],nums[valAtCurrIdx - 1] = nums[valAtCurrIdx - 1],nums[currIdx]
+                else:
+                    currIdx += 1
+            
+            for currIdx in range(n):
+                if nums[currIdx] != currIdx + 1:
+                    return nums[currIdx]
+            return n
+        
+        return cyclicSort(nums)

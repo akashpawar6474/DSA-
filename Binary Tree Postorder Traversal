@@ -45,3 +45,34 @@ class Solution:
         ans = []
         recursive(root,ans)
         return ans
+----------------------------------------------------------------------30 march 2022
+# Definition for a  binary tree node
+# class TreeNode:
+#	def __init__(self, x):
+#		self.val = x
+#		self.left = None
+#		self.right = None
+
+class Solution:
+	# @param A : root node of tree
+	# @return a list of integers
+	def postorderTraversal(self, A):
+        """
+                1
+            2       3
+            preorder = 1 2 3
+            rev preorder = 1 3 2
+            rev(rev preorder)  2 3 1
+        """
+        st = []
+        postOrder = []
+        st.append(A)
+        while st:
+            top = st.pop()
+            postOrder.append(top.val)
+            if top.left:
+                st.append(top.left)
+            if top.right:
+                st.append(top.right)
+        postOrder.reverse()
+        return postOrder

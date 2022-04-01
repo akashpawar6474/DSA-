@@ -29,3 +29,31 @@ class Solution:
                     q.append(front.right)
             ans.append(currLevel)
         return ans
+-----------------------------------------------------------1 april 2022
+# Definition for a  binary tree node
+# class TreeNode:
+#	def __init__(self, x):
+#		self.val = x
+#		self.left = None
+#		self.right = None
+
+class Solution:
+	# @param A : root node of tree
+	# @return a list of list of integers
+	def levelOrder(self, A):
+        from collections import deque
+        q = deque()
+        q.append(A)
+        ans = []
+        while q:
+            currLevel = []
+            size = len(q)
+            for i in range(size):
+                top = q.popleft()
+                currLevel.append(top.val)
+                if top.left:
+                    q.append(top.left)
+                if top.right:
+                    q.append(top.right)
+            ans.append(currLevel)
+        return ans

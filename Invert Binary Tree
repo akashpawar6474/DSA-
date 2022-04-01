@@ -85,3 +85,14 @@ class Solution:
         root.right = self.invertTree(root.left)
         root.left = self.invertTree(cacheRightSubtree)
         return root
+-------------------------------------------------------------------------1 april 2022
+class Solution:
+	# @param A : root node of tree
+	# @return the root node in the tree
+	def invertTree(self, A):
+        if A is None:
+            return None
+        rightSubtree = A.right
+        A.right = self.invertTree(A.left)
+        A.left = self.invertTree(rightSubtree)
+        return A

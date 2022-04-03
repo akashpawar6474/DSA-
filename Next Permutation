@@ -115,3 +115,50 @@ class Solution:
             nums[idxOfNoGtBp],nums[bp] = nums[bp],nums[idxOfNoGtBp]
             #now reverse from range of bp + 1 to end
             reverse(bp + 1,n - 1,nums)
+            
+     --------------------------------------------------------------------------------- 4 april 2022
+     class Solution:
+    def nextPermutation(self, nums: List[int]) -> None:
+        """
+        Do not return anything, modify nums in-place instead.
+        first find the breaking point from last
+        then find then greter ele than breaking point
+        and replace them then reverse
+        
+        TC = O(N)
+        SC = O(1)
+        """
+        def reverse(nums,start,end):
+            while start < end:
+                nums[start],nums[end] = nums[end],nums[start]
+                start += 1
+                end -= 1
+            
+        def findBreakingPoint(nums):
+            n = len(nums)
+            for currIdx in range(n - 2,-1,-1):
+                if nums[currIdx] < nums[currIdx + 1]:
+                    return currIdx
+            return -1
+        
+        def getEleGtBreakingPoint(nums,bpIdx):
+            n = len(nums)
+            for currIdx in range(n - 1,bpIdx,-1):
+                if nums[currIdx] > nums[bpIdx]:
+                    return currIdx
+            return -1
+        
+        #STEP 1
+        breakingPoint = findBreakingPoint(nums)
+        
+        if breakingPoint == -1: #STEP 1 (EDGE CASE) IF ARR IS ALREADY REVERSE
+            reverse(nums,0,len(nums) - 1)
+        else:
+            #STEP 2
+            eleGTBreakingPoint = getEleGtBreakingPoint(nums,breakingPoint)
+            #STEP 3
+            nums[breakingPoint],nums[eleGTBreakingPoint] = nums[eleGTBreakingPoint],nums[breakingPoint]
+            #STEP 4
+            reverse(nums,breakingPoint + 1,len(nums) - 1)
+            
+        

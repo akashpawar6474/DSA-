@@ -61,3 +61,53 @@ class Solution:
                 rightVal = rightIteratorGet(rightStack)
         
         return False
+      ----------------------------------------------------------  6 april 2022
+
+class Solution:
+	# @param A : root node of tree
+	# @param B : integer
+	# @return an integer
+	def t2Sum(self, A, B):
+        """
+        we will use bst iterators here
+        """
+        def pushInLeftStack(leftStack,root):
+            curr = root
+            while curr:
+                leftStack.append(curr)
+                curr = curr.left
+            
+        def getFromLeftStack(leftStack):
+            top = leftStack.pop()
+            curr = top.right
+            pushInLeftStack(leftStack,curr)
+            return top
+
+        def pushInRightStack(rightStack,root):
+            curr = root
+            while curr:
+                rightStack.append(curr)
+                curr = curr.right
+        
+        def getFromRightStack(rightStack):
+            top = rightStack.pop()
+            curr = top.left
+            pushInRightStack(rightStack,curr)
+            return top
+
+        leftStack = []
+        rightStack = []
+        pushInLeftStack(leftStack,A)
+        pushInRightStack(rightStack,A)
+        start = getFromLeftStack(leftStack).val
+        end = getFromRightStack(rightStack).val
+        while start < end:
+            currTotal = start + end
+            if currTotal == B:
+                return 1
+            if currTotal < B:
+                start = getFromLeftStack(leftStack).val
+            else:
+                end = getFromRightStack(rightStack).val
+        return 0
+

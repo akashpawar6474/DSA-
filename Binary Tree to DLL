@@ -90,3 +90,40 @@ class Solution:
         tail = None
         convert(root,head,tail)
         return head
+----------------------------------------------------- 6 april 2022
+
+class Solution:
+    # @param A : root node of tree
+    # @return the root node in the tree
+    def solve(self, A):
+        def traverse(root):
+            if root is None:
+                return None
+            if root.left:
+                leftNode = traverse(root.left)
+                while leftNode.right:
+                    leftNode = leftNode.right
+                leftNode.right = root
+                root.left = leftNode
+            if root.right:
+                rightNode = traverse(root.right)
+                while rightNode.left:
+                    rightNode = rightNode.left
+                rightNode.left = root
+                root.right = rightNode
+            return root
+        
+        def getHeadAndTail(root):
+            head = root
+            tail = root
+            while head.left:
+                head = head.left
+            while tail.right:
+                tail = tail.right
+            return head,tail
+        
+        root = traverse(A)
+        head,tail = getHeadAndTail(root)
+        tail.right = head
+        head.prev = tail
+        return head

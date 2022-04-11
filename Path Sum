@@ -28,3 +28,27 @@ class Solution:
             return True
         targetSum -= root.val
         return self.hasPathSum(root.left,targetSum) or self.hasPathSum(root.right,targetSum)
+----------------------------------------------------------------------------------------------------- 11 april 2022
+    def __init__(self):
+        self.isPathSum = False
+        self.path = []
+        
+    def hasPathSum(self, root: Optional[TreeNode], targetSum: int) -> bool:
+        def isLeaf(root):
+            return root is not None and root.left is None and root.right is None
+
+        def preorder(root,target):
+            if root is None:
+                return
+            self.path.append(root.val)
+            if isLeaf(root):
+                currSum = sum(self.path)
+                if currSum == target:
+                    self.isPathSum = True
+            else:
+                preorder(root.left,target)
+                preorder(root.right,target)
+            self.path.pop()
+        
+        preorder(root,targetSum)
+        return self.isPathSum

@@ -71,3 +71,19 @@ class Solution:
                 horizontalPtr = horizontalPtr.next
             verticalPtr = verticalPtr.left
         return root
+--------------------------------------------------------------------- 12 april 2022
+    def connect(self, root: 'Optional[Node]') -> 'Optional[Node]':
+        """
+        this is perfect binary tree so we can have one horizonatal and one vertical ptr
+        """
+        vertical = root
+        while vertical:
+            horizontal = vertical
+            while horizontal:
+                if horizontal.left:
+                    horizontal.left.next = horizontal.right
+                if horizontal.right and horizontal.next:
+                    horizontal.right.next = horizontal.next.left
+                horizontal = horizontal.next
+            vertical = vertical.left
+        return root

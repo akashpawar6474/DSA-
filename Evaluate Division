@@ -43,3 +43,80 @@ class Solution:
             source,target = queries[i]
             res.append(dfs(source,target,graph,set(),1.0))
         return res
+--------------------------------------------------------------------------------------------30 april 2022
+import math
+class Solution:
+    def calcEquation(self, equations: List[List[str]], values: List[float], queries: List[List[str]]) -> List[float]:
+        """
+        first of we have to construct a graph
+        if a to b is 2.0
+        then b to a is 1 / 2.0
+        
+        for each query find the path
+        first thing how to represent char as nodes
+        second thing how to get count of nodes to create graph
+        
+        if we use ord function to get the int 
+        then it doesnt makes sense because we can have nodes as bc or cd
+        
+        Given data is edges and weights?
+        can we construct graph from it?
+        can we use hash table
+        
+        yeah maybe we can use that
+        where key is string and value will be list
+        of nei and weight
+        
+        so this will be the directed graph
+        
+        tc = O(E + Q * V) E = edges, V = vertices, Q = queries 
+        sc = O(V + E)
+        """
+        def prepareGraph(equations,values):
+            eqLen = len(equations)
+            graph = {}
+            for idx in range(eqLen):
+                x,y = equations[idx]
+                weight = values[idx]
+                if x not in graph:
+                    graph[x] = []
+                graph[x].append((y,weight))
+                if y not in graph:
+                    graph[y] = []
+                graph[y].append((x,1 / weight))
+            return graph
+        
+        def dfs(source,target,graph,visited,cost):
+            if source == target:
+                return 1
+            if source in visited:
+                return math.inf
+            visited.add(source)
+            for nei,wei in graph[source]:
+                costFromNei = dfs(nei,target,graph,visited,cost)
+                if  costFromNei != math.inf:
+                    cost = costFromNei * wei
+                    return cost
+                
+            return math.inf
+                
+                    
+        graph = prepareGraph(equations,values)
+        ans = []
+        for x,y in queries:
+            if x not in graph and y not in graph:
+                ans.append(-1.00000)
+            elif x not in graph or y not in graph:
+                ans.append(-1.00000)
+            elif x == y:
+                ans.append(1.00000)
+            else:
+                visited = set()
+                cost = dfs(x,y,graph,visited,1)
+                if cost == math.inf:
+                    ans.append(-1.00000)
+                else:
+                    ans.append(cost)
+        return ans
+
+        

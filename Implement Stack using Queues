@@ -32,3 +32,34 @@ class MyStack:
 
     def empty(self) -> bool:
         return len(self.queue) == 0
+        
+   ------------------------------------------------------------- 05 May 2022
+   class MyStack:
+
+    def __init__(self):
+        """
+        Take a single queue
+        after each push pop first n - 1 elements
+        and add it to queue again
+        """
+        from collections import deque
+        self.queue = deque()
+
+    def push(self, x: int) -> None:
+        self.queue.append(x)
+        qLen = len(self.queue)
+        for ele in range(qLen - 1):
+            front = self.queue.popleft()
+            self.queue.append(front)
+
+    def pop(self) -> int:
+        return self.queue.popleft()
+
+    def top(self) -> int:
+        return self.queue[0]
+        
+
+    def empty(self) -> bool:
+        return len(self.queue) == 0
+
+

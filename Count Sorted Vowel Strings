@@ -18,3 +18,69 @@ class Solution:
             for j in range(3,-1,-1):
                 dp[j] += dp[j + 1]
         return sum(dp)
+----------------------------------------------------------------------------- 11 may 2022
+class Solution:
+    def __init__(self):
+        self.totalVowelStrings = 0
+        
+    def countVowelStrings(self, n: int) -> int:  
+        """
+        just take pen and paper
+        
+        we will prepare table
+        
+        n       a   e   i   o   u (no of strings starting with this prefix)
+        1       1   1   1   1   1
+        
+        for n = 2, last vowel will only have 1 string starting with it
+        for n = 2, second last vowel will have 2 strings
+        for n = 2, third last vowel will have 3 strings
+        and so on
+        
+        2       5   4   3   2   1
+        
+        for n = 3, last vowel will only have 1 string starting with it
+        for n = 3, second last vowel will have 3 strings prefixStrings[o] = prefixString[o] + prefixString[u]
+        for n = 3, third last vowel will have 6 strings prefixStrings[i] = prefixStrings[i] + prefixStrings[o]
+        and so on
+        
+        so we can see the dependency here
+        
+        tc = O(n)
+        sc = O(1)
+        """
+        if n == 1:
+            return 5
+        prefixStrings = [1] * 5
+        for currLen in range(1,n):
+            for idx in range(3,-1,-1):
+                prefixStrings[idx] = prefixStrings[idx] + prefixStrings[idx + 1]
+        
+        return sum(prefixStrings)
+    def recursiveSolution(self,n):
+        def backtrack(vowels,currIdx,currList,k,ans,dp):
+            if len(currList) == k:
+                ans.append(''.join(currList))
+                self.totalVowelStrings += 1
+                return 1
+            if currIdx == len(vowels):
+                return 0
+            strings = 0
+            currChar = vowels[currIdx]
+            currList.append(currChar)
+            strings += backtrack(vowels,currIdx,currList,k,ans,dp)
+            currList.pop()
+            strings += backtrack(vowels,currIdx + 1,currList,k,ans,dp)
+            return strings
+            
+                
+        vowels = ['a','e','i','o','u']
+        k = n
+        currIdx = 0
+        currList = []
+        ans = []
+        dp = {}
+        count = backtrack(vowels,currIdx,currList,k,ans,dp)
+        print(ans)
+        return count
+        #return self.totalVowelStrings #len(ans)

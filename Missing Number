@@ -46,3 +46,47 @@ class Solution:
         
         return originalXor ^ arrXor
             
+------------------------------------------------------------------------------------------------------- 28 may 2022
+class Solution:
+    def missingNumber(self, nums: List[int]) -> int:
+        """
+        using cyclic sort
+        place all no at its correct idx
+        means 0 at 0 and 1 at 1 and so on..
+        """
+        def cyclicSort(nums):
+            n = len(nums)
+            currPtr = 0
+            while currPtr < n:
+                valAtCurrPtr = nums[currPtr]
+                if valAtCurrPtr < n and nums[currPtr] != nums[valAtCurrPtr]:
+                    nums[currPtr],nums[valAtCurrPtr] = nums[valAtCurrPtr],nums[currPtr]
+                else:
+                    currPtr += 1
+        
+        def checkMissingNo(nums):
+            n = len(nums)
+            for idx in range(n):
+                if nums[idx] != idx:
+                    return idx
+            return n
+        cyclicSort(nums)
+        return checkMissingNo(nums)
+    
+    def usingXor(self,nums):
+        """
+        we can do xor of array
+        then do xor of range 0 to n
+        then return xor of both of them
+        """
+        n = len(nums)
+        arrayXor = 0
+        for no in nums:
+            arrayXor ^= no
+        
+        rangeXor = 0
+        for no in range(0,n + 1):
+            rangeXor ^= no
+            
+        return arrayXor ^ rangeXor
+        

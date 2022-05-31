@@ -19,3 +19,95 @@ class Solution:
         if sign == True:
             ans = -1 * ans
         return ans if ans <= (2 ** 31) - 1 else (2 ** 31) - 1
+------------------------------------------------------------------------------------31 may 2022
+class Solution:
+    def divide(self, dividend: int, divisor: int) -> int:
+        """
+        		16 8 4 2 1
+        14       0 1 1 1 0
+
+        if divide by 2 it become 7 means right shift by 1 only
+        if divide by 4 it becomes 3 which is correct
+        if we divide by 3 then it should be 4 means it should be => 0 0 1 0 0
+
+
+        13       0 1 1 0 1
+        if we divide by 2 then it will be 6
+        if we divide by 3 then it will be 00100
+        if we divide by 4 then it will be 3
+
+        what is brute force?
+        we have dividend and divisor
+        brute force is subtract divisor from dividend untill dividend is less than divisor or 0
+        and return the count how many times we have subtracted divisor
+
+
+        so problem with this solution we are reducing it linearly
+        can we speed up the process?
+
+        yes what we will do we will multipy divisor by 2
+        each time and will see if current multiple of divisor is less than dividend
+            then go ahead and multiply by 2 once again so using this we are reducing time to log2(dividend)
+
+        else
+            we will repeat the process
+
+        assume dividend is 13 and divisor is 3
+        then we will start from 6 and we will assume we have initial quotient as 1
+
+        then while dividend >= divisor << 1:
+                #inc the divisor => means multiply by 2 => or left shift by 1
+                #inc the quotient => this is also multiply by 2
+
+        step 1 => 13 >= 6 => divisor and quotient will become 6 and 2
+        step 2 => 13 >= 12 => divisor and quotient will become 12 and 4
+        step 3 => 14 >= 24 => so condition will break
+        then reduce multiplied divisor from then dividend
+        and add the quotient to answer
+        """
+        def bruteForce(dividend,divisor):
+            noOfSubtractions = 0
+            while dividend >= divisor:
+                dividend -= divisor
+                noOfSubtractions += 1
+            return noOfSubtractions
+        """
+        Now we only want to speed up the process of subtraction by multiplying divisor by 2
+        
+        dividend = 29
+        divisor = 5
+        step1 => 29 >= 5 => so come inside
+                a) 29 >= 10 => increasingDivisor becomes 10 and current quotient becomes 2
+                b) 29 >= 20 => increasingDivisor becomes 20 and current quotient becomes 4
+                c) 29 >= 40 => condition will fail reduce 20 from 29 and add 4 to final quotient
+                
+        step2 => 9 >= 5
+                a) 9 >= 10 condition fail here itself so reduce 5 from 9 and add current quotient which is 1 to final quotient
+            
+        step 3 => 4 >= 5 => final condition will also fail
+        then return final quotient
+        
+        """
+        def logarithmic(dividend, divisor):
+            finalQuotient = 0
+            while dividend >= divisor:
+                increasingDivisor = divisor
+                currentQuotient = 1
+                while dividend >= (increasingDivisor << 1):
+                    currentQuotient = currentQuotient << 1
+                    increasingDivisor = increasingDivisor << 1
+                finalQuotient += currentQuotient
+                dividend -= increasingDivisor
+            return finalQuotient
+        
+        
+        isPositiveAns = (dividend > 0 and divisor > 0) or (divisor < 0 and dividend < 0)
+        #ans = bruteForce(abs(dividend),abs(divisor))
+        ans = logarithmic(abs(dividend), abs(divisor))
+        if not isPositiveAns:
+            return -ans
+        return min(ans,(2 ** 31) - 1)
+        
+        
+        
+        

@@ -127,3 +127,40 @@ class Solution:
         return maxWindowLen
 
 
+---------------------------------------------------------------------------------- 10 june 2022
+class Solution:
+    def lengthOfLongestSubstring(self, s: str) -> int:
+        """
+        Idea is to use the hashmap
+        whenever current char is present in the map
+            then update the windowstart to curr char previous idx  + 1
+        then update the currchar with curridx
+        then take the windowsize 
+        and keep track of windowsize with maximum
+        
+        there is edge case
+        if string is like this abba
+        so at 2nd idx our currstart will come to 2nd idx
+        but still in the map we have a = 0 and b = 2
+        then when we go on 3rd idx
+        then we should not update windowstart to 1 
+        
+        Means we should not stretch windowstart to backside
+        so while updating windowStart we will take maximum between
+        
+        windowStart and curr char previous idx + 1
+        tc = O(n)
+        sc = O(n)
+        """
+        windowStart = 0
+        ht = {}
+        maxWindowSize = 0
+        for windowEnd in range(len(s)):
+            currCh = s[windowEnd]
+            if currCh in ht:
+                prevIdxOfCurrChar = ht[currCh]
+                windowStart = max(windowStart, prevIdxOfCurrChar + 1)
+            ht[currCh] = windowEnd
+            windowSize = windowEnd - windowStart + 1
+            maxWindowSize = max(maxWindowSize, windowSize)
+        return maxWindowSize

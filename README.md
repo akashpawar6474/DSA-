@@ -387,6 +387,8 @@ solutions to graze over
 385.  Isomorphic Strings => THIS IS REALLY GOOD PROBLEM OF TWO HASHMAPS
 386.  Third Maximum Number => very good proble with couple of edge cases 
 387.  Number of Segments in a String => very good problem with two pointers
+388.  Minimum Deletions to Make String Balanced => this is same problem as max consecutive ones..
+389.  
 
 
 

@@ -1,0 +1,13 @@
+class Solution:
+    def minimumDeletions(self, s: str) -> int:
+        bCount = 0
+        ans = 0
+        for ch in s:
+            if ch == 'b':
+                bCount += 1
+            elif bCount > 0:
+                ans += 1
+                bCount -= 1
+        
+        return ans
+        
